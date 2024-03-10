@@ -1,0 +1,31 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsdoc/recommended-typescript-error",
+    "standard-with-typescript",
+    "prettier"
+  ],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["react", "react-hooks"],
+  "rules": {
+    "@typescript-eslint/strict-boolean-expressions": 0,
+    "jsdoc/no-types": 0
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}
