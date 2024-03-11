@@ -47,12 +47,14 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextAuthProvider>
             <QueryProvider>
-              <div className="flex min-h-screen flex-col">
-                <BluetickHeader />
-                <main className="flex-1">{children}</main>
-                <Footer />
-                <Toaster />
-              </div>
+              <main className="flex-1">
+                <div className="flex min-h-screen flex-col">
+                  <BluetickHeader />
+                  {children}
+                  <Footer />
+                  <Toaster />
+                </div>
+              </main>
             </QueryProvider>
           </NextAuthProvider>
         </ThemeProvider>
