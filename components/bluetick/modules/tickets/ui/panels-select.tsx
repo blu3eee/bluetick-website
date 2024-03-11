@@ -120,7 +120,7 @@ const MultiSelectPanels: React.FC<MultiSelectPanelsProps> = ({
               ))
             ) : (
               <CommandItem className="aria-selected:bg-accent/50">
-                No roles found
+                No panel found
               </CommandItem>
             )}
           </CommandGroup>

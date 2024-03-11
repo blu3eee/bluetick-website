@@ -77,7 +77,11 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
         ) : (
           <div className="w-full">
             <Table>
-              <TableCaption>A list of your reaction panels.</TableCaption>
+              <TableCaption>
+                {panels.length === 0
+                  ? 'No panel found'
+                  : 'A list of your reaction panels.'}
+              </TableCaption>
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[128px]">Channel</TableHead>
