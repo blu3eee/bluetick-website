@@ -53,8 +53,8 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
             </QueryProvider>
           </NextAuthProvider>
         </ThemeProvider>
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }
