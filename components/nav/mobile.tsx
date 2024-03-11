@@ -95,7 +95,7 @@ export function MobileNav({
             }
           })}
         </nav>
-        {children}
+        <div onClick={onClose}>{children}</div>
       </div>
     </div>
   );
