@@ -41,15 +41,19 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
   const [selectedTeam, setSelectedTeam] =
     React.useState<TicketSupportTeamDetails | null>(null);
 
-  React.useEffect(() => {
-    if (data) {
-      setTeams(data);
-      setSelectedTeam(
-        data.find((team) => team.name === selectedTeam?.name ?? `Default`) ??
-          data[0]
-      );
-    }
-  }, [data]);
+  React.useEffect(
+    () => {
+      if (data) {
+        setTeams(data);
+        setSelectedTeam(
+          data.find((team) => team.name === selectedTeam?.name ?? `Default`) ??
+            data[0]
+        );
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data]
+  );
 
   const { data: members, isLoading: isLoadingMembers } = useFetchGuildMembers(
     BLUETICK_BOT_ID,
@@ -190,7 +194,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
         return;
       }
 
-      const { data, status } = await apiInstance.post<{
+      const { data } = await apiInstance.post<{
         data: TicketSupportTeamDetails | null;
       }>(`${ROUTES.TICKET_SUPPORT_TEAMS}`, {
         botID: BLUETICK_BOT_ID,
@@ -233,7 +237,9 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
             }}
           />
           <Button
-            onClick={() => handleAddTeam().catch(() => {})}
+            onClick={() => {
+              handleAddTeam().catch(() => {});
+            }}
             disabled={newTeamName === ''}
           >
             Add new
