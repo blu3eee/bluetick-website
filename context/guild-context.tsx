@@ -2,6 +2,7 @@
 import { apiInstance } from '@/config/bluetick';
 import { useGuildData } from '@/hooks/api/discord/guild';
 import { useFetchGuildChannels } from '@/hooks/api/discord/guild-channels';
+import useMutualGuilds from '@/hooks/api/discord/mutual-guilds';
 import {
   BotGuildConfig,
   UpdateGuildConfig,
@@ -10,7 +11,9 @@ import {
   DiscordGuild,
   DiscordPartialGuildChannel,
 } from '@/types/bluetick/discord';
+import { useRouter } from 'next/navigation';
 import React, { createContext, useState } from 'react';
+import { toast } from 'sonner';
 
 interface GuildContextValue {
   discordGuild: DiscordGuild | null;
@@ -55,6 +58,25 @@ export const GuildContextProvider = ({
 
   const { channels: guildChannels, isLoading: isLoadingGuildChannels } =
     useFetchGuildChannels(botId, serverId);
+
+  const { mutualGuilds, loadingState: isLoadingMutualGuilds } =
+    useMutualGuilds();
+
+  const router = useRouter();
+  React.useEffect(() => {
+    if (isLoadingMutualGuilds === 'completed') {
+      if (
+        mutualGuilds &&
+        mutualGuilds.filter((server) => server.id === serverId).length === 0
+      ) {
+        router.push('/servers');
+        toast.error('Invalid server request');
+      } else if (!mutualGuilds) {
+        router.push('/servers');
+        toast.error('Invalid to load your available servers');
+      }
+    }
+  }, [isLoadingMutualGuilds]);
 
   const [discordGuildState, setDiscordGuildState] =
     useState<DiscordGuild | null>(null);

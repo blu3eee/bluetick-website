@@ -16,6 +16,15 @@ export const BluetickContext = createContext<BluetickContextValue>({
   error: null,
 });
 
+/**
+ * `BluetickProvider` fetches and provides Bluetick bot details to its children via `BluetickContext`.
+ * It manages the state for bot details, loading status, and any potential errors during data fetching.
+ * This component should wrap parts of the application that require access to Bluetick bot details.
+ *
+ * @param {Object} props - The props object.
+ * @param {React.ReactNode} props.children - The children components that will consume the context.
+ * @returns {React.ReactElement} A context provider component that supplies bot details, loading state, and error information to its children.
+ */
 export const BluetickProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
