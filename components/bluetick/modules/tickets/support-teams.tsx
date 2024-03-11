@@ -94,7 +94,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
         const response = await apiInstance.patch(
           `${ROUTES.TICKET_SUPPORT_TEAMS}/${selectedTeam.id}`,
           {
-            roles: [...selectedTeam.users, selectedMember.user.id],
+            users: [...selectedTeam.users, selectedMember.user.id],
           }
         );
         if (response.status === 200 || response.status === 201) {
@@ -109,6 +109,52 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
       }
     } catch (e) {
       toast.error('An error happened while trying to update staff team.');
+    }
+  };
+
+  const handleDeleteUser = async (id: string): Promise<void> => {
+    try {
+      if (selectedTeam) {
+        const response = await apiInstance.patch(
+          `${ROUTES.TICKET_SUPPORT_TEAMS}/${selectedTeam.id}`,
+          {
+            users: selectedTeam.users.filter((userId) => userId !== id),
+          }
+        );
+        if (response.status === 200 || response.status === 201) {
+          await refetch();
+          toast.success(`[Team: ${selectedTeam.name}] User removed`);
+        } else {
+          toast.error(`[Team: ${selectedTeam.name}] Failed to remove user`);
+        }
+      } else {
+        toast.error('No team selected');
+      }
+    } catch (e) {
+      toast.error('An error happened while trying to update staff team.');
+    }
+  };
+
+  const handleDeleteRole = async (id: string): Promise<void> => {
+    try {
+      if (selectedTeam) {
+        const response = await apiInstance.patch(
+          `${ROUTES.TICKET_SUPPORT_TEAMS}/${selectedTeam.id}`,
+          {
+            roles: selectedTeam.roles.filter((roleId) => roleId !== id),
+          }
+        );
+        if (response.status === 200 || response.status === 201) {
+          await refetch();
+          toast.success(`[Team: ${selectedTeam.name}] Role removed`);
+        } else {
+          toast.error(`[Team: ${selectedTeam.name}] Failed to remove role`);
+        }
+      } else {
+        toast.error('No team selected');
+      }
+    } catch (e) {
+      toast.error('An error happened while trying to update staff team roles.');
     }
   };
 
@@ -229,6 +275,9 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                       <Icons.close
                         size={24}
                         className="rounded-lg hover:bg-secondary p-1 cursor-pointer"
+                        onClick={() => {
+                          handleDeleteRole(roleId).catch(() => {});
+                        }}
                       />
                     </div>
                   );
@@ -324,8 +373,18 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                 {selectedTeam.users.map((userId, index) => {
                   const mem = members?.find((m) => m.user.id === userId);
                   return (
-                    <div key={index} className="p-1 rounded-lg">
+                    <div
+                      key={index}
+                      className="px-2 py-1 rounded-lg bg-background flex items-center gap-2"
+                    >
                       {mem ? `@${mem.user.username}` : `<@${userId}>`}
+                      <Icons.close
+                        size={24}
+                        className="rounded-lg hover:bg-secondary p-1 cursor-pointer"
+                        onClick={() => {
+                          handleDeleteUser(userId).catch(() => {});
+                        }}
+                      />
                     </div>
                   );
                 })}
