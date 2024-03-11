@@ -69,7 +69,7 @@ const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
             <Table>
               <TableCaption>
                 {panels.length === 0
-                  ? 'Empty list'
+                  ? 'No panel found'
                   : 'A list of your multi-reactions panels.'}
               </TableCaption>
               <TableHeader>
@@ -82,6 +82,7 @@ const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
               </TableHeader>
+
               <TableBody>
                 {panels.map((panel) => (
                   <TableRow key={panel.id}>

@@ -16,7 +16,7 @@ const TicketSystem = ({
 }): JSX.Element => {
   return (
     <ModulePageTemplate flag={GUILD_MODULES.WELCOME} label="Ticket System">
-      <Tabs defaultValue="panels">
+      <Tabs defaultValue="settings">
         <TabsList className="flex flex-wrap h-fit w-fit mb-2">
           <TabsTrigger value="settings">General Settings</TabsTrigger>
           <TabsTrigger value="panels">Reaction Panels</TabsTrigger>

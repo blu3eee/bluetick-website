@@ -69,14 +69,16 @@ const ModulePageTemplate: React.FC<TemplateProps> = ({
         <div className="flex items-center space-x-2">
           <Switch
             checked={isModuleEnabled()}
-            id="disable-module"
+            id="module-toggle"
             onClick={() => {
               handleToggleModule().catch((e) => {
                 console.error(e);
               });
             }}
           />
-          <Label htmlFor="disable-module">Module disabled</Label>
+          <Label htmlFor="module-toggle">
+            Module {isModuleEnabled() ? 'Enabled' : 'Disabled'}
+          </Label>
         </div>
       </div>
       {children}

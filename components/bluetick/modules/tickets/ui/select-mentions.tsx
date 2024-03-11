@@ -123,7 +123,7 @@ const SelectMentions: React.FC<SelectMentionsProps> = ({
             }}
             placeholder="Search roles..."
           />
-          <CommandGroup>
+          <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
             <CommandItem
               key={'ticket-opener'}
               className="flex aria-selected:bg-accent/50 items-center gap-2"

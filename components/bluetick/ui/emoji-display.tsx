@@ -18,6 +18,7 @@ export const DisplayCustomEmoji: React.FC<DisplayCustomEmojiProps> = ({
       width={150}
       height={150}
       className={cn('w-6 h-6', className)}
+      priority
     />
   );
 };
