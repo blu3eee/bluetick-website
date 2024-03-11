@@ -6,12 +6,15 @@ import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
 import type { TicketSupportTeamDetails } from '@/types/bluetick/db/tickets';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Popover, PopoverTrigger } from '@/components/ui/popover';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import { CheckIcon, ChevronsUpDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useFetchGuildMembers } from '@/hooks/api/discord/guild-members';
 import type { DiscordGuildMember, DiscordRole } from '@/types/bluetick/discord';
-import { PopoverContent } from '@radix-ui/react-popover';
 import {
   Command,
   CommandEmpty,
@@ -23,6 +26,7 @@ import { cn } from '@/lib/utils';
 import { GuildContext } from '@/context/guild-context';
 import { toast } from 'sonner';
 import { Icons } from '@/components/icons';
+import { Input } from '@/components/ui/input';
 
 const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
   const { discordGuild, isLoading } = useContext(GuildContext);
@@ -39,10 +43,13 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
 
   React.useEffect(() => {
     if (data) {
-      setTeams(teams);
-      setSelectedTeam(data.find((team) => team.name === `Default`) ?? data[0]);
+      setTeams(data);
+      setSelectedTeam(
+        data.find((team) => team.name === selectedTeam?.name ?? `Default`) ??
+          data[0]
+      );
     }
-  }, [data, teams]);
+  }, [data]);
 
   const { data: members, isLoading: isLoadingMembers } = useFetchGuildMembers(
     BLUETICK_BOT_ID,
@@ -62,6 +69,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
         toast.error('No role selected');
         return;
       }
+
       if (selectedTeam) {
         const response = await apiInstance.patch(
           `${ROUTES.TICKET_SUPPORT_TEAMS}/${selectedTeam.id}`,
@@ -100,7 +108,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
         if (response.status === 200 || response.status === 201) {
           await refetch();
           toast.success(
-            `[Team: ${selectedTeam.name}] Role @${selectedMember.user.username} added`
+            `[Team: ${selectedTeam.name}] User @${selectedMember.user.username} added`
           );
           setSelectedMember(null);
         }
@@ -158,15 +166,87 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
     }
   };
 
+  const [newTeamName, setNewTeamName] = React.useState('');
+
+  const handleAddTeam = async (): Promise<void> => {
+    try {
+      if (newTeamName === '') {
+        toast.error('Invalid team name: empty');
+        return;
+      }
+
+      if (newTeamName.toLowerCase() === 'default') {
+        toast.error('Invalid team name: cannot use name Default');
+        return;
+      }
+
+      if (
+        teams.find(
+          (team) =>
+            team.name.trim().toLowerCase() === newTeamName.trim().toLowerCase()
+        )
+      ) {
+        toast.error('Invalid team name: existed team name');
+        return;
+      }
+
+      const { data, status } = await apiInstance.post<{
+        data: TicketSupportTeamDetails | null;
+      }>(`${ROUTES.TICKET_SUPPORT_TEAMS}`, {
+        botID: BLUETICK_BOT_ID,
+        guildID: serverId,
+        name: newTeamName,
+        roles: [],
+        users: [],
+      });
+      const newTeam = data.data;
+      if (newTeam) {
+        console.log('created team data', newTeam);
+        await refetch();
+        toast.success(`Team added: ${newTeamName}`);
+        setNewTeamName('');
+      } else {
+        toast.error(`Failed to add new team`);
+      }
+    } catch (e) {
+      toast.error('An error happened while trying to create new staff team.');
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4">
+      <div className="rounded-lg bg-secondary p-4 flex flex-col gap-2 w-full">
+        <Label
+          id="new-team-input"
+          className="uppercase text-red-400 font-semibold"
+        >
+          Add a new staff team
+        </Label>
+        <div className="flex items-center gap-2">
+          <Input
+            id="new-team-input"
+            placeholder="New team name"
+            className="w-fit"
+            value={newTeamName}
+            onChange={(e) => {
+              setNewTeamName(e.target.value);
+            }}
+          />
+          <Button
+            onClick={() => handleAddTeam().catch(() => {})}
+            disabled={newTeamName === ''}
+          >
+            Add new
+          </Button>
+        </div>
+      </div>
       <div className="rounded-lg bg-secondary p-4 flex flex-col gap-2 w-full">
         <Label className="uppercase text-red-400 font-semibold">
           Manage teams
         </Label>
         <div className="flex gap-2 items-center w-full">
           {isLoadingTeams || !data || !selectedTeam ? (
-            <Skeleton className="w-1/2 h-8 bg-background" />
+            <Skeleton className="w-full h-8 bg-background" />
           ) : (
             <Popover>
               <PopoverTrigger asChild>
@@ -175,6 +255,36 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                   <ChevronsUpDown size={16} />
                 </div>
               </PopoverTrigger>
+              <PopoverContent className="w-full p-0">
+                <Command>
+                  <CommandInput
+                    placeholder="Search team..."
+                    className="h-9 w-full"
+                  />
+                  <CommandEmpty>No team found</CommandEmpty>
+                  <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+                    {teams.map((team) => (
+                      <CommandItem
+                        key={team.id}
+                        id={team.name}
+                        value={team.name}
+                        onSelect={(teamName) => {
+                          const newSelectedTeam = teams.find(
+                            (team) => team.name === teamName
+                          );
+                          if (newSelectedTeam) {
+                            setSelectedTeam(newSelectedTeam);
+                            toast.info(`Team ${teamName} selected`);
+                          }
+                        }}
+                        className="w-full"
+                      >
+                        {team.name}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </Command>
+              </PopoverContent>
             </Popover>
           )}
           <Button
@@ -210,38 +320,42 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                       />
                       <CommandEmpty>No role found</CommandEmpty>
                       <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
-                        {discordGuild.roles.map((role) => (
-                          <CommandItem
-                            key={role.id}
-                            value={`${role.id}_${role.name.toLowerCase()}`}
-                            onSelect={(currentValue) => {
-                              const selectedValue = discordGuild.roles.find(
-                                (option) =>
-                                  `${option.id}_${option.name}`.toLowerCase() ===
-                                  currentValue
-                              );
-                              if (selectedValue) {
-                                setSelectedRole(
-                                  selectedRole &&
-                                    selectedValue.id === selectedRole.id
-                                    ? null
-                                    : selectedValue
+                        {discordGuild.roles
+                          .filter(
+                            (role) => !selectedTeam?.roles.includes(role.id)
+                          )
+                          .map((role) => (
+                            <CommandItem
+                              key={role.id}
+                              value={`${role.id}_${role.name.toLowerCase()}`}
+                              onSelect={(currentValue) => {
+                                const selectedValue = discordGuild.roles.find(
+                                  (option) =>
+                                    `${option.id}_${option.name}`.toLowerCase() ===
+                                    currentValue
                                 );
-                              }
-                            }}
-                            className="w-full"
-                          >
-                            {role.name}
-                            <CheckIcon
-                              className={cn(
-                                'ml-auto h-4 w-4',
-                                selectedRole && selectedRole.id === role.id
-                                  ? 'opacity-100'
-                                  : 'opacity-0'
-                              )}
-                            />
-                          </CommandItem>
-                        ))}
+                                if (selectedValue) {
+                                  setSelectedRole(
+                                    selectedRole &&
+                                      selectedValue.id === selectedRole.id
+                                      ? null
+                                      : selectedValue
+                                  );
+                                }
+                              }}
+                              className="w-full"
+                            >
+                              {role.name}
+                              <CheckIcon
+                                className={cn(
+                                  'ml-auto h-4 w-4',
+                                  selectedRole && selectedRole.id === role.id
+                                    ? 'opacity-100'
+                                    : 'opacity-0'
+                                )}
+                              />
+                            </CommandItem>
+                          ))}
                       </CommandGroup>
                     </Command>
                   </PopoverContent>
