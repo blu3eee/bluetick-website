@@ -11,6 +11,7 @@ import { MutualServers } from '@/components/bluetick/servers/servers';
 import { useSession } from 'next-auth/react';
 import { Callout } from '@/components/callout';
 import { Skeleton } from '@/components/ui/skeleton';
+import { toast } from 'sonner';
 
 const BotsPage = (): JSX.Element => {
   const { data: session, status } = useSession();
@@ -42,6 +43,19 @@ const BotsPage = (): JSX.Element => {
     );
   }
 
+  const copyToClipboard = () => {
+    navigator.clipboard
+      .writeText(discordUser.id)
+      .then(() => {
+        // Handle successful copy action (e.g., show a toast notification)
+        console.log('ID copied to clipboard!');
+      })
+      .catch((err) => {
+        // Handle errors (e.g., clipboard permissions denied)
+        console.error('Failed to copy ID:', err);
+      });
+  };
+
   const { user: discordUser } = session;
   return (
     <div className="flex flex-col gap-2 items-center mx-4">
@@ -54,7 +68,7 @@ const BotsPage = (): JSX.Element => {
           width={200}
         />
         <div className="flex flex-col w-full gap-2">
-          <div className="flex flex-row w-full items-center justify-between">
+          <div className="flex flex-col md:flex-row w-full items-start md:items-center justify-between gap-2">
             <div className="flex flex-col">
               <div className={`font-bold text-3xl ${poppinsFont.className}`}>
                 {discordUser.global_name ?? discordUser.username}
@@ -63,7 +77,15 @@ const BotsPage = (): JSX.Element => {
                 @{discordUser.username}
               </div>
             </div>
-            <Button variant="outline" className="gap-2">
+            <Button
+              variant="link"
+              className="gap-2 text-red-400 hover:text-red-400/70"
+              size={'sm'}
+              onClick={() => {
+                copyToClipboard();
+                toast.info('Copied your user ID');
+              }}
+            >
               <Copy />
               Copy ID
             </Button>
