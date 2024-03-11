@@ -100,7 +100,7 @@ const MultiSelectPanels: React.FC<MultiSelectPanelsProps> = ({
         className="p-2"
       >
         <Command>
-          <CommandGroup>
+          <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
             {options.length > 0 ? (
               options.map((panel) => (
                 <CommandItem
