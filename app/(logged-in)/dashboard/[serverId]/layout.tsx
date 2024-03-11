@@ -1,6 +1,7 @@
 // /app/bluetick/(logged-in)/dashboard/[serverId]/layout.tsx
 import { BLUETICK_BOT_ID } from '@/config/bluetick';
 import { GuildContextProvider } from '@/context/guild-context';
+import type { Metadata } from 'next';
 import React from 'react';
 
 interface GuildLayoutProps {
@@ -9,6 +10,11 @@ interface GuildLayoutProps {
     serverId: string;
   };
 }
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'Bluetick - All in one discord bot',
+};
 
 /**
  * GuildLayout provides a context wrapper for the guild dashboard.
