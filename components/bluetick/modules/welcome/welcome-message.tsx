@@ -64,7 +64,11 @@ const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ serverId }) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <TypeAndChannel initType={type} serverId={serverId} setType={setType} />
+      <TypeAndChannel
+        type={guildWelcome.message.type ?? type}
+        serverId={serverId}
+        setType={setType}
+      />
       <div className="bg-secondary rounded-lg p-4 w-full">
         <Label className="text-sm text-gray-500">
           * All fields are optional

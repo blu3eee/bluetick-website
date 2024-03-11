@@ -2,7 +2,11 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { getBotAvatarURL, getUserAvatarURL } from '@/lib/helper';
+import {
+  getBotAvatarURL,
+  getBotInviteURL,
+  getUserAvatarURL,
+} from '@/lib/helper';
 import { LogoutButton } from './auth-buttons';
 import { useParams, usePathname } from 'next/navigation';
 import { Separator } from '../ui/separator';
@@ -17,6 +21,7 @@ import {
 import { Skeleton } from '../ui/skeleton';
 import { useSession } from 'next-auth/react';
 import { BluetickContext } from '@/context/bluetick-context';
+import { BLUETICK_BOT_ID } from '@/config/bluetick';
 
 export const SidebarContent = (): JSX.Element => {
   const { data: session } = useSession();
@@ -88,9 +93,11 @@ export const SidebarContent = (): JSX.Element => {
             <span className="font-bold">
               {botDetails.username}#{botDetails.discriminator}
             </span>
-            <span className="border rounded-lg mt-1 text-center hover:bg-gray-500/50 cursor-pointer w-fit px-4 py-1 font-semibold text-sm">
-              Invite bot
-            </span>
+            <a href={getBotInviteURL(botDetails.botID ?? BLUETICK_BOT_ID)}>
+              <span className="border rounded-lg mt-1 text-center hover:bg-gray-500/50 cursor-pointer w-fit px-4 py-1 font-semibold text-sm">
+                Invite bot
+              </span>
+            </a>
           </div>
         </div>
       ) : null}
@@ -103,7 +110,7 @@ export const SidebarContent = (): JSX.Element => {
             className={cn(
               'flex w-full items-center rounded-md p-2 hover:underline gap-4',
               {
-                'bg-muted': pathname === `/bluetick/${item.href}`,
+                'bg-muted': pathname === `/${item.href}`,
               }
             )}
           >

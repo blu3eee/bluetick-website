@@ -39,7 +39,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
   return (
     <div className="flex flex-col gap-2 bg-secondary p-4 rounded-lg justify-between">
       <div className="flex flex-col gap-2">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
           <div className="text-lg font-semibold">{props.name}</div>
           <Switch
             size="xs"
@@ -50,6 +50,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
                 console.log(e);
               });
             }}
+            className="self-end sm:self-start"
           />
         </div>
         <div className="text-gray-500 text-sm">{props.description}</div>

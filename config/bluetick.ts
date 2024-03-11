@@ -10,6 +10,10 @@ export const bluetickConfig: SiteConfig = {
       title: 'khainguyen.dev',
       href: 'https://khainguyen.dev',
     },
+    {
+      title: 'About',
+      href: '/about',
+    },
   ],
 };
 
