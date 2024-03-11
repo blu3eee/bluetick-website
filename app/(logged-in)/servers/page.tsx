@@ -43,7 +43,7 @@ const BotsPage = (): JSX.Element => {
     );
   }
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (): void => {
     navigator.clipboard
       .writeText(discordUser.id)
       .then(() => {
