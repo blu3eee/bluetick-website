@@ -72,8 +72,8 @@ const BotsPage = (): JSX.Element => {
           className="rounded-full"
           src={getUserAvatarURL(discordUser)}
           alt="user avatar"
-          height={200}
-          width={200}
+          height={150}
+          width={150}
         />
         <div className="flex flex-col w-full gap-2">
           <div className="flex flex-col md:flex-row w-full items-start md:items-center justify-between gap-2">
