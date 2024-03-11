@@ -10,23 +10,15 @@ import { ChannelSelect } from '../../ui/channel-select';
 import { Skeleton } from '@/components/ui/skeleton';
 
 const TypeAndChannel: React.FC<{
-  initType: string;
+  type: string;
   serverId: string;
   setType: (new_val: string) => void;
-}> = ({ initType, serverId, setType }) => {
+}> = ({ type: initType, serverId, setType }) => {
   const { channels, isLoadingChannels } = useContext(GuildContext);
-  const {
-    data: guildWelcome,
-    isLoading,
-    refetch,
-  } = useFetchGuildWelcome(BLUETICK_BOT_ID, serverId);
-  const [messageType, setMessageType] = React.useState(initType ?? 'Message');
-
-  React.useEffect(() => {
-    if (!isLoading && guildWelcome) {
-      setMessageType(guildWelcome.message.type ?? 'Message');
-    }
-  }, [isLoading, guildWelcome]);
+  const { data: guildWelcome, refetch } = useFetchGuildWelcome(
+    BLUETICK_BOT_ID,
+    serverId
+  );
 
   const handleChange = async (newType: string): Promise<void> => {
     // Send the patch request to update the message type
@@ -38,7 +30,6 @@ const TypeAndChannel: React.FC<{
       );
       if (response.status === 200) {
         setType(newType);
-        setMessageType(newType);
         await refetch();
         toast.success(`Message type set to ${newType} successful`);
       } else {
@@ -81,7 +72,7 @@ const TypeAndChannel: React.FC<{
               console.error('Failed to handle radio group change', e);
             });
           }}
-          defaultValue={messageType}
+          defaultValue={initType}
           className="flex flex-wrap gap-4 mt-4 justify-between"
         >
           <div className="flex items-center space-x-2">
@@ -114,7 +105,6 @@ const TypeAndChannel: React.FC<{
               onSelect={(id) => {
                 handleChannelSelect(id).catch((error) => {
                   console.error('Failed to handle select channel', error);
-                  // Handle the error appropriately
                 });
               }}
             />
