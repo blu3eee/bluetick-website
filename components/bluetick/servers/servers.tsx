@@ -8,9 +8,10 @@ import { Callout } from '@/components/callout';
 import Image from 'next/image';
 
 export const MutualServers = (): JSX.Element => {
-  const { mutualGuilds, isLoading, error } = useMutualGuilds();
+  const { mutualGuilds, loadingState: isLoading, error } = useMutualGuilds();
   const router = useRouter();
-  if (isLoading) {
+
+  if (isLoading !== 'completed') {
     return (
       <div className="flex flex-wrap w-full h-full gap-4 p-8 items-center justify-center">
         <Skeleton className="rounded-lg w-60 h-60" />
@@ -51,6 +52,7 @@ export const MutualServers = (): JSX.Element => {
               alt="server icon"
               width={150}
               height={150}
+              priority
             />
             <div className="text-lg mt-2">{guild.name}</div>
           </div>

@@ -6,14 +6,16 @@ import { useSession } from 'next-auth/react';
 const useMutualGuilds = () => {
   const { data: session } = useSession();
   const [mutualGuilds, setMutualGuilds] = useState<DiscordGuild[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [loadingState, setLoadingState] = useState<
+    'init' | 'loading' | 'completed'
+  >('init');
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchMutualGuilds = async () => {
       if (!session || !session.user) return;
 
-      setIsLoading(true);
+      setLoadingState('init');
       setError(null);
 
       try {
@@ -25,14 +27,14 @@ const useMutualGuilds = () => {
         console.error('Error fetching mutual guilds:', err);
         setError('Failed to fetch mutual guilds');
       } finally {
-        setIsLoading(false);
+        setLoadingState('completed');
       }
     };
 
     fetchMutualGuilds();
   }, [session]);
 
-  return { mutualGuilds, isLoading, error };
+  return { mutualGuilds, loadingState, error };
 };
 
 export default useMutualGuilds;

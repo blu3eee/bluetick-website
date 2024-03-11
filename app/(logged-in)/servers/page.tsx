@@ -36,11 +36,19 @@ const BotsPage = (): JSX.Element => {
   }
 
   if (!session || !session.user) {
-    return (
-      <div className="flex h-screen w-full items-center justify-center">
-        <Callout>Invalid Request</Callout>
-      </div>
-    );
+    if (status !== 'loading') {
+      return (
+        <div className="flex h-screen w-full items-center justify-center">
+          <Callout>Invalid Request</Callout>
+        </div>
+      );
+    } else {
+      return (
+        <div className="flex h-fit w-full items-center justify-center">
+          <Skeleton className="w-full h-12" />
+        </div>
+      );
+    }
   }
 
   const copyToClipboard = (): void => {
