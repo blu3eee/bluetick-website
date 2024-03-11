@@ -15,6 +15,8 @@ import { RefreshCcw } from 'lucide-react';
 import { AddResponseDialog } from './add-dialog';
 import type { MessageInfoDetails } from '@/types/bluetick';
 import DeleteDialog from './delete-dialog';
+import EditResponseDialog from './edit-dialog';
+import { toast } from 'sonner';
 
 interface AutoResListProps {
   serverId: string;
@@ -88,9 +90,40 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
 
   const handleDelete = async (): Promise<void> => {
     try {
+      const { data } = await apiInstance.delete<{ message: string }>(
+        `${ROUTES.AUTO_RESPONSE}/${selected[0].id}`
+      );
+      if (data.message) {
+        toast.success(data.message);
+
+        setSelected([]);
+      } else {
+        toast.error(`Failed to delete`);
+      }
       await refetch();
     } catch (e) {
-      console.error('Error deleting autores objects:', e);
+      toast.error('An error happened while trying to delete autores');
+    }
+  };
+
+  const handleSubmitUpdate = async (
+    id: number,
+    trigger: string,
+    response: MessageInfoDetails
+  ): Promise<void> => {
+    try {
+      const { data } = await apiInstance.patch<{ data: AutoResponseDetails }>(
+        `${ROUTES.AUTO_RESPONSE}/${id}`,
+        { trigger, response }
+      );
+      if (data.data) {
+        toast.success(`Auto response updated [trigger: ${data.data.trigger}]`);
+      } else {
+        toast.error(`Failed to update auto-response`);
+      }
+      await refetch();
+    } catch (e) {
+      toast.error('An error happened while trying to update autores');
     }
   };
 
@@ -125,6 +158,14 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
           >
             Select
           </Button>
+          {selected.length === 1 && (
+            <EditResponseDialog
+              init={selected[0]}
+              onSubmitUpdate={(id, trigger, msg) => {
+                handleSubmitUpdate(id, trigger, msg).catch(() => {});
+              }}
+            />
+          )}
           {(selectMode || selected.length > 0) && (
             <>
               <Button
@@ -137,7 +178,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
               </Button>
             </>
           )}
-          {selected.length > 0 && (
+          {selected.length === 1 && (
             <DeleteDialog
               selected={selected}
               onDelete={() => {
