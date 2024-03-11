@@ -59,7 +59,7 @@ const ModulePageTemplate: React.FC<TemplateProps> = ({
         >
           <a
             className="flex gap-2 items-center text-red-400 hover:text-red-400/80 cursor-pointer "
-            href={`/bluetick/dashboard/${params.serverId}/modules`}
+            href={`/dashboard/${params.serverId}/modules`}
           >
             <LayoutPanelLeft />
             Modules

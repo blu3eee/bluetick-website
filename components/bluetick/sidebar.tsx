@@ -110,7 +110,7 @@ export const SidebarContent = (): JSX.Element => {
             className={cn(
               'flex w-full items-center rounded-md p-2 hover:underline gap-4',
               {
-                'bg-muted': pathname === `/bluetick/${item.href}`,
+                'bg-muted': pathname === `/${item.href}`,
               }
             )}
           >
