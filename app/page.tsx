@@ -10,12 +10,12 @@ const Page = (): JSX.Element => {
       <div
         className={`bg-secondary flex flex-col items-center justify-center py-8 text-2xl font-semibold gap-4`}
       >
-        <span className={poppinsFont.className}>
+        <p className={cn('text-center', poppinsFont.className)}>
           Ticket Bot, Server Managing Bot, Entertainment Bot.
-        </span>
+        </p>
         <span
           className={cn(
-            'font-bold text-3xl text-blue-500 uppercase',
+            'font-bold text-3xl text-blue-500 uppercase text-center',
             rubikFont.className
           )}
         >
