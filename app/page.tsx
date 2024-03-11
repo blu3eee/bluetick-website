@@ -1,3 +1,5 @@
+import HeroNavButtons from '@/components/home/hero-nav-buttons';
+import { cn } from '@/lib/utils';
 import { poppinsFont, rubikFont } from '@/styles/fonts';
 import React from 'react';
 
@@ -5,6 +7,21 @@ const Page = (): JSX.Element => {
   return (
     <div>
       <HeroSection />
+      <div
+        className={`bg-secondary flex flex-col items-center justify-center py-8 text-2xl font-semibold gap-4`}
+      >
+        <span className={poppinsFont.className}>
+          Ticket Bot, Server Managing Bot, Entertainment Bot.
+        </span>
+        <span
+          className={cn(
+            'font-bold text-3xl text-blue-500 uppercase',
+            rubikFont.className
+          )}
+        >
+          Bluetick is all
+        </span>
+      </div>
     </div>
   );
 };
@@ -36,6 +53,7 @@ const HeroSection = (): JSX.Element => {
           and more, manage your Discord with ease and anticipate even greater
           features on the horizon.
         </p>
+        <HeroNavButtons />
       </div>
     </section>
   );
