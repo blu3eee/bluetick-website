@@ -35,7 +35,7 @@ export const SidebarContent = (): JSX.Element => {
       href: string;
       icon: LucideIcon;
       label: string;
-      hidden: boolean;
+      show: boolean;
     }>
   >([]);
 
@@ -45,19 +45,19 @@ export const SidebarContent = (): JSX.Element => {
         href: 'servers',
         icon: Server,
         label: 'Servers',
-        hidden: false,
+        show: true,
       },
       {
         href: `dashboard/${params?.serverId}`,
         icon: LayoutDashboard,
         label: 'Dashboard',
-        hidden: pathname === '/servers',
+        show: pathname.startsWith('/dashboard'),
       },
       {
         href: `dashboard/${params?.serverId}/modules`,
         icon: Package,
         label: 'Modules',
-        hidden: pathname === '/servers',
+        show: pathname.startsWith('/dashboard'),
       },
     ];
 
@@ -102,7 +102,7 @@ export const SidebarContent = (): JSX.Element => {
         </div>
       ) : null}
       {sidebarNavItems
-        .filter((item) => !item.hidden)
+        .filter((item) => item.show)
         .map((item) => (
           <Link
             key={item.href}
