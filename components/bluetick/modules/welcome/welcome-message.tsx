@@ -10,6 +10,10 @@ import MessageForm from '../../ui/message-form';
 import { Skeleton } from '@/components/ui/skeleton';
 import type { MessageInfoDetails } from '@/types/bluetick';
 import { toast } from 'sonner';
+import {
+  PlaceholdersHelpBox,
+  type PlaceholderProps,
+} from '../../ui/placeholder';
 
 interface WelcomeMessageProps {
   serverId: string;
@@ -24,7 +28,6 @@ const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ serverId }) => {
 
   React.useEffect(() => {
     if (guildWelcome) {
-      // eslint-disable react-hooks/exhaustive-deps
       setType(guildWelcome.message.type ?? 'Message');
     }
     // eslint-disable react-hooks/exhaustive-deps
@@ -79,13 +82,53 @@ const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ serverId }) => {
           onSave={(msg) => {
             handleSaveWelcomeMessages(msg).catch((error) => {
               console.error('Failed to save welcome message', error);
-              // Handle the error appropriately
             });
           }}
         />
+      </div>
+      <div className="bg-secondary rounded-lg p-4 w-full">
+        <PlaceholdersHelpBox placeholders={welcomePlaceholders} />
       </div>
     </div>
   );
 };
 
 export default WelcomeMessage;
+
+const welcomePlaceholders: PlaceholderProps[] = [
+  {
+    name: '{user}',
+    description: 'The mention of the user calling the command.',
+    example: 'Hello {user}!',
+  },
+  {
+    name: '{avatar}',
+    description: 'The avatar of the user.',
+    example: 'Have a look at {username} avatar! {avatar}',
+  },
+  {
+    name: '{username}',
+    description: 'The username of the user.',
+    example: 'Hello {username}!',
+  },
+  {
+    name: '{server}',
+    description: 'The server name',
+  },
+  {
+    name: '{server-icon}',
+    description: 'The server icon',
+  },
+  {
+    name: '{channel}',
+    description: 'The channel name',
+  },
+  {
+    name: '{everyone}',
+    description: '@everyone',
+  },
+  {
+    name: '{here}',
+    description: '@here',
+  },
+];
