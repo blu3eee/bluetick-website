@@ -66,6 +66,10 @@ const MessageForm: React.FC<MessageFormProps> = ({
   };
 
   React.useEffect(() => {
+    setMessage((prev) => ({ ...prev, type }));
+  }, [type]);
+
+  React.useEffect(() => {
     if (onChange) {
       onChange(message);
     }
