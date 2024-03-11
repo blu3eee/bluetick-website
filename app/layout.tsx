@@ -50,10 +50,10 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
               <BluetickHeader />
               <main className="flex min-h-screen flex-col">{children}</main>
               <Toaster />
+              <Footer />
             </QueryProvider>
           </NextAuthProvider>
         </ThemeProvider>
-        <Footer />
       </body>
     </html>
   );
