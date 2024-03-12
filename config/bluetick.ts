@@ -6,10 +6,10 @@ export const bluetickConfig: SiteConfig = {
   description: '- Multi Discord Bots Manager',
   href: '/',
   mainNav: [
-    {
-      title: 'khainguyen.dev',
-      href: 'https://khainguyen.dev',
-    },
+    // {
+    //   title: 'khainguyen.dev',
+    //   href: 'https://khainguyen.dev',
+    // },
     {
       title: 'About',
       href: '/about',
