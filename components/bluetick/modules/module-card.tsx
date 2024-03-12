@@ -94,21 +94,22 @@ export const guildModules: ModuleCardProps[] = [
   },
   {
     name: 'Ticket System',
-    description: 'Create welcome messages with various options.',
+    description:
+      'System to creatededicated channels or threads tailored to serve various purposes based on your needs',
     navigateTo: 'ticket-system',
     flag: GuildModules.TICKET,
   },
-  {
-    name: 'Autoroles',
-    description:
-      'Enables auto roles on join, timed auto roles, and joinable ranks.',
-    navigateTo: 'auto-roles',
-    flag: GuildModules.AUTOROLES,
-  },
-  {
-    name: 'Action Logs',
-    description: 'Customizable log of events that happen in the server.',
-    navigateTo: 'action-logs',
-    flag: GuildModules.ACTION_LOGS,
-  },
+  // {
+  //   name: 'Autoroles',
+  //   description:
+  //     'Enables auto roles on join, timed auto roles, and joinable ranks.',
+  //   navigateTo: 'auto-roles',
+  //   flag: GuildModules.AUTOROLES,
+  // },
+  // {
+  //   name: 'Action Logs',
+  //   description: 'Customizable log of events that happen in the server.',
+  //   navigateTo: 'action-logs',
+  //   flag: GuildModules.ACTION_LOGS,
+  // },
 ];
