@@ -10,6 +10,7 @@ import NextAuthProvider from '@/context/next-auth';
 import { QueryProvider } from '@/context/query';
 import BluetickHeader from '@/components/bluetick/header';
 import { Footer } from '@/components/footer';
+import { Analytics } from '@vercel/analytics/react';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
             <QueryProvider>
               <BluetickHeader />
               <main className="flex min-h-screen flex-col">{children}</main>
+              <Analytics />
               <Toaster />
               <Footer />
             </QueryProvider>
