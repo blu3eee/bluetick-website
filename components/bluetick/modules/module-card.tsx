@@ -99,13 +99,13 @@ export const guildModules: ModuleCardProps[] = [
     navigateTo: 'ticket-system',
     flag: GuildModules.TICKET,
   },
-  // {
-  //   name: 'Autoroles',
-  //   description:
-  //     'Enables auto roles on join, timed auto roles, and joinable ranks.',
-  //   navigateTo: 'auto-roles',
-  //   flag: GuildModules.AUTOROLES,
-  // },
+  {
+    name: 'Autoroles',
+    description:
+      'Enables auto roles on join, timed auto roles, and joinable ranks.',
+    navigateTo: 'auto-roles',
+    flag: GuildModules.AUTOROLES,
+  },
   // {
   //   name: 'Action Logs',
   //   description: 'Customizable log of events that happen in the server.',
