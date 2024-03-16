@@ -6,6 +6,7 @@ import DiscordProvider from 'next-auth/providers/discord';
 // https://discord.com/developers/docs/topics/oauth2#shared-resources-oauth2-scopes
 const scopes = ['identify', 'guilds'].join(' ');
 
+const DISCORD_DEV_ID = process.env.NEXT_PUBLIC_DEV_ID ?? '';
 const DISCORD_CLIENT_ID = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID ?? '';
 const DISCORD_CLIENT_SECRET =
   process.env.NEXT_PUBLIC_DISCORD_DISCORD_CLIENT_SECRET ?? '';
@@ -30,6 +31,9 @@ const handler = NextAuth({
       session.accessToken = String(token.accessToken);
       if (token.profile) {
         session.user = token.profile as DiscordUser & { image?: string };
+        session.developerMode =
+          (token.profile as DiscordUser & { image?: string }).id ===
+          DISCORD_DEV_ID;
       }
       return session;
     },
