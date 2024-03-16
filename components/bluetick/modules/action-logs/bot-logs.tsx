@@ -30,13 +30,6 @@ const BotLogs: React.FC<ServerIdProps> = ({ serverId }) => {
 
   const [isUpdating, setIsUpdating] = React.useState(false);
 
-  React.useEffect(() => {
-    if (setting) {
-      setIsUpdating(true);
-      setIsUpdating(false);
-    }
-  }, [setting, refetch]);
-
   return (
     <div className="flex flex-col gap-4">
       {isLoading || !setting ? (
