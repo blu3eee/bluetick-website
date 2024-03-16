@@ -113,3 +113,82 @@ export interface TicketSupportTeamDetails {
   roles: string[];
   users: string[];
 }
+
+export interface TicketDetails {
+  id: number;
+  bot: BotDetails;
+  guild: GuildDetails;
+  userID: string;
+  openedTime: number;
+  panelID: number;
+  channelID?: string;
+  status?: string;
+  notificationMessageID?: string;
+  transcriptChannelID?: string;
+  transcriptMessageID?: string;
+}
+
+export type CreateTicketDto = {
+  panelID: number;
+  userID: string;
+};
+
+export type UpdateTicketDto = {
+  channelID?: string;
+  userID?: string;
+  status?: string;
+  notificationMessageID?: string;
+  transcriptChannelID?: string;
+  transcriptMessageID?: string;
+};
+
+export type TicketTranscriptDetails = {
+  generated: number;
+  guildInfo: {
+    guildID: string;
+    name: string;
+    iconURL: string;
+  };
+  opener: {
+    id: string;
+    name: string;
+    avatarURL: string;
+  } | null;
+  threadInfo: {
+    threadID: string;
+    name: string;
+  };
+  usersInfo: {
+    [id: string]: {
+      name: string;
+      avatarURL: string;
+      bot: boolean;
+    };
+  };
+  messagesInfo: {
+    userID: string;
+    content: string;
+    embeds: {
+      title: string | null;
+      url: string | null;
+      author: {
+        name: string;
+        iconURL: string | undefined;
+      } | null;
+      description: string | null;
+      footer: {
+        text: string;
+        iconURL: string | undefined;
+      } | null;
+      thumbnailURL: string;
+      imageURL: string;
+      timestamp: string | null;
+      color: string | null;
+    }[];
+    attachments: {
+      name: string;
+      url: string;
+    }[];
+    timestamp: number;
+  }[];
+};
