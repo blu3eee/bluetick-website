@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
+
 import {
   Command,
   CommandEmpty,
@@ -43,18 +43,18 @@ export const ChannelSelect: React.FC<ChannelSelectProps> = ({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
+        <div
           aria-expanded={open}
-          className="justify-between w-full"
+          className="flex items-center justify-between w-full px-4 py-2 border rounded-lg cursor-pointer hover:bg-background border-foreground/50 text-foreground"
         >
-          {value
-            ? options.find((c) => `${c.id}_${c.name.toLowerCase()}` === value)
-                ?.name
-            : 'Select channel...'}
+          {value ? (
+            options.find((c) => `${c.id}_${c.name.toLowerCase()}` === value)
+              ?.name
+          ) : (
+            <span className="text-foreground/50">Select channel...</span>
+          )}
           <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-80" />
-        </Button>
+        </div>
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
