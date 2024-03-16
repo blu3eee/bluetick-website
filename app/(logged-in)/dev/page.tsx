@@ -9,18 +9,22 @@ import { useRouter } from 'next/navigation';
 import React, { useContext } from 'react';
 import { toast } from 'sonner';
 
-const DevPage = () => {
+const DevPage = (): JSX.Element => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  React.useEffect(() => {
-    if (status === 'loading' || !session) {
-      return;
-    }
-    if (!session.developerMode) {
-      router.push('/');
-      toast.info(`Invalid page request`);
-    }
-  }, [session, status]);
+  React.useEffect(
+    () => {
+      if (status === 'loading' || !session) {
+        return;
+      }
+      if (!session.developerMode) {
+        router.push('/');
+        toast.info(`Invalid page request`);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [session, status]
+  );
 
   const { botDetails, isLoading: isLoadingBot } = useContext(BluetickContext);
 
