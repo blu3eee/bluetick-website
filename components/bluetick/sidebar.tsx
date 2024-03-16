@@ -22,6 +22,7 @@ import { Skeleton } from '../ui/skeleton';
 import { useSession } from 'next-auth/react';
 import { BluetickContext } from '@/context/bluetick-context';
 import { BLUETICK_BOT_ID } from '@/config/bluetick';
+import { Button } from '../ui/button';
 
 export const SidebarContent = (): JSX.Element => {
   const { data: session } = useSession();
@@ -141,6 +142,11 @@ export const SidebarContent = (): JSX.Element => {
         )}
         <LogoutButton />
       </div>
+      {session.developerMode && (
+        <a href="/dev">
+          <Button className="w-full">Developer Mode</Button>
+        </a>
+      )}
     </div>
   );
 };

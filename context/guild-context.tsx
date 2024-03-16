@@ -11,6 +11,7 @@ import {
   DiscordGuild,
   DiscordPartialGuildChannel,
 } from '@/types/bluetick/discord';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React, { createContext, useState } from 'react';
 import { toast } from 'sonner';
@@ -63,7 +64,12 @@ export const GuildContextProvider = ({
     useMutualGuilds();
 
   const router = useRouter();
+  const { data: session, status } = useSession();
   React.useEffect(() => {
+    if (status === 'loading' || session?.developerMode) {
+      return;
+    }
+
     if (isLoadingMutualGuilds === 'completed') {
       if (
         mutualGuilds &&
@@ -76,7 +82,7 @@ export const GuildContextProvider = ({
         toast.error('Invalid to load your available servers');
       }
     }
-  }, [isLoadingMutualGuilds]);
+  }, [isLoadingMutualGuilds, status, session]);
 
   const [discordGuildState, setDiscordGuildState] =
     useState<DiscordGuild | null>(null);
