@@ -106,10 +106,10 @@ export const guildModules: ModuleCardProps[] = [
     navigateTo: 'auto-roles',
     flag: GuildModules.AUTOROLES,
   },
-  // {
-  //   name: 'Action Logs',
-  //   description: 'Customizable log of events that happen in the server.',
-  //   navigateTo: 'action-logs',
-  //   flag: GuildModules.ACTION_LOGS,
-  // },
+  {
+    name: 'Action Logs',
+    description: 'Customizable log of events that happen in the server.',
+    navigateTo: 'action-logs',
+    flag: GuildModules.ACTION_LOGS,
+  },
 ];
