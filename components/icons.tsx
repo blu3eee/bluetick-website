@@ -25,6 +25,7 @@ import {
   type IconNode as LucideIcon,
   Coffee,
   Linkedin,
+  Download,
   // eslint-disable-next-line import/no-duplicates
 } from 'lucide-react';
 // eslint-disable-next-line import/no-duplicates
@@ -55,6 +56,7 @@ export const Icons = {
   moon: Moon,
   laptop: Laptop,
   linkedIn: Linkedin,
+  download: Download,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

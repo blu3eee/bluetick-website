@@ -113,3 +113,90 @@ export interface TicketSupportTeamDetails {
   roles: string[];
   users: string[];
 }
+
+export interface TicketDetails {
+  id: number;
+  bot: BotDetails;
+  guild: GuildDetails;
+  userID: string;
+  openedTime: number;
+  panelID: number;
+  channelID?: string;
+  status?: string;
+  notificationMessageID?: string;
+  transcriptChannelID?: string;
+  transcriptMessageID?: string;
+}
+
+export type CreateTicketDto = {
+  panelID: number;
+  userID: string;
+};
+
+export type UpdateTicketDto = {
+  channelID?: string;
+  userID?: string;
+  status?: string;
+  notificationMessageID?: string;
+  transcriptChannelID?: string;
+  transcriptMessageID?: string;
+};
+
+export type TicketTranscriptDetails = {
+  generated: number;
+  guildInfo: {
+    guildID: string;
+    name: string;
+    iconURL: string;
+  };
+  opener: {
+    id: string;
+    name: string;
+    avatarURL: string;
+  } | null;
+  threadInfo: {
+    threadID: string;
+    name: string;
+  };
+  usersInfo: {
+    [id: string]: TranscriptUser;
+  };
+  messagesInfo: TranscriptMessage[];
+};
+
+export interface TranscriptMessage {
+  userID: string;
+  content: string;
+  embeds: TranscriptEmbed[];
+  attachments: TranscriptAttachment[];
+  timestamp: number;
+}
+
+export interface TranscriptEmbed {
+  title: string | null;
+  url: string | null;
+  author: {
+    name: string;
+    iconURL: string | undefined;
+  } | null;
+  description: string | null;
+  footer: {
+    text: string;
+    iconURL: string | undefined;
+  } | null;
+  thumbnailURL: string;
+  imageURL: string;
+  timestamp: string | null;
+  color: string | null;
+}
+
+export interface TranscriptAttachment {
+  name: string;
+  url: string;
+}
+
+export interface TranscriptUser {
+  name: string;
+  avatarURL: string;
+  bot: boolean;
+}

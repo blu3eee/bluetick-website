@@ -20,6 +20,8 @@ import { GuildContext } from '@/context/guild-context';
 import EditPanelDialog from './ui/edit-panel';
 import CreatePanelForm from './ui/create-panel';
 
+import { useRouter } from 'next/navigation';
+
 const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
   const { data, refetch, isLoading } = useFetchTicketPanels(
     BLUETICK_BOT_ID,
@@ -29,7 +31,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
   const [panels, setPanels] = React.useState<TicketPanelDetails[]>([]);
 
   const { channels, isLoadingChannels } = useContext(GuildContext);
-
+  const router = useRouter();
   React.useEffect(
     () => {
       if (!isLoading) {
@@ -57,6 +59,30 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
       await refetch();
     } else {
       toast.error('Failed to delete ticket panel.');
+    }
+  };
+
+  const handeResendPanel = async (id: number): Promise<void> => {
+    try {
+      const { data } = await apiInstance.post<{
+        data: { message: string; url: string };
+      }>(`${ROUTES.TICKET_PANELS}/send/${id}`);
+      if (data.data) {
+        const resData = data.data;
+        toast.success(resData.message, {
+          action: {
+            label: <div>See message</div>,
+            onClick: () => {
+              toast.success('Redirecting you to Discord');
+              router.push(resData.url);
+            },
+          },
+        });
+      } else {
+        toast.error(`Failed to resend ticket panel message`);
+      }
+    } catch {
+      toast.error(`An error happened while trying to resend the panel`);
     }
   };
 
@@ -118,10 +144,18 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                     </TableCell>
                     <TableCell>{panel.button.text ?? '[none]'}</TableCell>
                     <TableCell className="flex justify-end items-center gap-2">
+                      <div
+                        className="text-white px-2 py-1 rounded-md font-semibold bg-background hover:bg-background/50 cursor-pointer border"
+                        onClick={() => {
+                          handeResendPanel(panel.id).catch((e) => {});
+                        }}
+                      >
+                        Resend
+                      </div>
                       <EditPanelDialog
                         panel={panel}
                         trigger={
-                          <div className="text-white px-2 py-1 rounded-md font-semibold bg-blue-500">
+                          <div className="text-white px-2 py-1 rounded-md font-semibold bg-blue-500 hover:bg-blue-400">
                             Edit
                           </div>
                         }
@@ -132,7 +166,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                         }}
                       />
                       <div
-                        className="text-white px-2 py-1 rounded-md font-semibold bg-destructive cursor-pointer"
+                        className="text-white px-2 py-1 rounded-md font-semibold bg-destructive cursor-pointer hover:bg-destructive/90"
                         onClick={() => {
                           handleDeletePanel(panel.id).catch((e) => {
                             console.log(e);

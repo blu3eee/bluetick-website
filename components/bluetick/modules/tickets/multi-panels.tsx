@@ -19,6 +19,7 @@ import { toast } from 'sonner';
 import EditMultiPanelDialog from './ui/edit-multi-panel';
 import { GuildContext } from '@/context/guild-context';
 import CreateMultiPanelForm from './ui/create-multi-panel';
+
 const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
   const {
     data,
@@ -46,8 +47,25 @@ const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
       toast.error('Failed to delete multi-reactions ticket panel.');
     }
   };
+
   const handleCreatePanel = async (): Promise<void> => {
     await refetch();
+  };
+
+  const handeResendPanel = async (id: number): Promise<void> => {
+    try {
+      const { data } = await apiInstance.post<{
+        data: { message: string; url: string };
+      }>(`${ROUTES.TICKET_MULTI_PANELS}/send/${id}`);
+      if (data.data) {
+        const resData = data.data;
+        toast.success(resData.message);
+      } else {
+        toast.error(`Failed to resend ticket panel message`);
+      }
+    } catch {
+      toast.error(`An error happened while trying to resend the panel`);
+    }
   };
 
   return (
@@ -114,6 +132,14 @@ const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                     </TableCell>
 
                     <TableCell className="flex justify-end items-center gap-2">
+                      <div
+                        className="text-white px-2 py-1 rounded-md font-semibold bg-background hover:bg-background/50 cursor-pointer border"
+                        onClick={() => {
+                          handeResendPanel(panel.id).catch((e) => {});
+                        }}
+                      >
+                        Resend
+                      </div>
                       <EditMultiPanelDialog
                         panel={panel}
                         trigger={
