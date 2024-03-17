@@ -4,14 +4,14 @@ import React from 'react';
 const convertToHtml = (text: string): string => {
   const md = markdownit({
     // Enable HTML tags in source
-    html: false,
+    html: true,
 
     // Use '/' to close single tags (<br />).
     // This is only for full CommonMark compatibility.
     xhtmlOut: false,
 
     // Convert '\n' in paragraphs into <br>
-    breaks: false,
+    breaks: true,
 
     // CSS language prefix for fenced blocks. Can be
     // useful for external highlighters.

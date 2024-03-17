@@ -19,7 +19,7 @@ import { toast } from 'sonner';
 import { GuildContext } from '@/context/guild-context';
 import EditPanelDialog from './ui/edit-panel';
 import CreatePanelForm from './ui/create-panel';
-import { Button } from '@/components/ui/button';
+
 import { useRouter } from 'next/navigation';
 
 const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {

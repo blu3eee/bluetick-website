@@ -159,36 +159,44 @@ export type TicketTranscriptDetails = {
     name: string;
   };
   usersInfo: {
-    [id: string]: {
-      name: string;
-      avatarURL: string;
-      bot: boolean;
-    };
+    [id: string]: TranscriptUser;
   };
-  messagesInfo: {
-    userID: string;
-    content: string;
-    embeds: {
-      title: string | null;
-      url: string | null;
-      author: {
-        name: string;
-        iconURL: string | undefined;
-      } | null;
-      description: string | null;
-      footer: {
-        text: string;
-        iconURL: string | undefined;
-      } | null;
-      thumbnailURL: string;
-      imageURL: string;
-      timestamp: string | null;
-      color: string | null;
-    }[];
-    attachments: {
-      name: string;
-      url: string;
-    }[];
-    timestamp: number;
-  }[];
+  messagesInfo: TranscriptMessage[];
 };
+
+export interface TranscriptMessage {
+  userID: string;
+  content: string;
+  embeds: TranscriptEmbed[];
+  attachments: TranscriptAttachment[];
+  timestamp: number;
+}
+
+export interface TranscriptEmbed {
+  title: string | null;
+  url: string | null;
+  author: {
+    name: string;
+    iconURL: string | undefined;
+  } | null;
+  description: string | null;
+  footer: {
+    text: string;
+    iconURL: string | undefined;
+  } | null;
+  thumbnailURL: string;
+  imageURL: string;
+  timestamp: string | null;
+  color: string | null;
+}
+
+export interface TranscriptAttachment {
+  name: string;
+  url: string;
+}
+
+export interface TranscriptUser {
+  name: string;
+  avatarURL: string;
+  bot: boolean;
+}
