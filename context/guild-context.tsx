@@ -52,9 +52,9 @@ export const GuildContextProvider = ({
   botId: string;
 }) => {
   const {
-    guildData,
+    data: guildData,
     isLoading,
-    refetchGuildData: refetchData,
+    refetch: refetchData,
   } = useGuildData(serverId, botId);
 
   const { channels: guildChannels, isLoading: isLoadingGuildChannels } =
