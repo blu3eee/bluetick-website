@@ -55,7 +55,7 @@ export const GuildContextProvider = ({
     data: guildData,
     isLoading,
     refetch: refetchData,
-  } = useGuildData(serverId, botId);
+  } = useGuildData(botId, serverId);
 
   const { channels: guildChannels, isLoading: isLoadingGuildChannels } =
     useFetchGuildChannels(botId, serverId);

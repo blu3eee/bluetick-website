@@ -23,7 +23,7 @@ export const fetchGuildData = async (botId: string, serverId: string) => {
   return { guildInfo, guildConfig };
 };
 
-export const useGuildData = (serverId: string, botId: string) => {
+export const useGuildData = (botId: string, serverId: string) => {
   return useQuery(
     ['guildData', botId, serverId],
     () => fetchGuildData(botId, serverId),

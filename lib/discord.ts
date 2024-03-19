@@ -17,7 +17,7 @@ export function replaceIds(
   const roleIdPattern = /<@&(\d+)>/g;
   const emojiIdPattern = /<(a?):([^:]+):(\d+)>/g;
   const pingStyle =
-    'background: rgb(34.5%,39.6%,65%);border-radius:2px;font-weight:500;';
+    'background: rgb(34.5%,39.6%,55%);border-radius:2px;font-weight:500;padding:0px 2px 0px 2px;';
   return text
     .replace(userIdPattern, (match, userId) => {
       const user = users[userId];
@@ -28,7 +28,7 @@ export function replaceIds(
     .replace(channelIdPattern, (match, channelId) => {
       const channel = channels?.[channelId];
       return `<span style="${pingStyle}cursor:pointer;">#${
-        channel?.name ?? channelId
+        channel?.name ?? (channels ? `deleted-channel` : channelId)
       }</span>`;
     })
     .replace(roleIdPattern, (match, roleId) => {

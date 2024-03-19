@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BLUETICK_BOT_ID } from '@/config/bluetick';
 import { useGuildData } from '@/hooks/api/discord/guild';
+import { useQueryGuildChannels } from '@/hooks/api/discord/guild-channels';
 import { useFetchTicketTranscript } from '@/hooks/api/tickets/transcript';
 import { cn, intToHexColor } from '@/lib/utils';
 import { rubikFont } from '@/styles/fonts';
@@ -136,9 +137,13 @@ const Discord: React.FC<{ transcript: TicketTranscriptDetails }> = ({
   transcript,
 }) => {
   const { data: guild, isLoading } = useGuildData(
-    transcript.guildInfo.guildID,
-    BLUETICK_BOT_ID
+    BLUETICK_BOT_ID,
+    transcript.guildInfo.guildID
   );
+
+  const { data: channels, isLoading: isLoadingChannels } =
+    useQueryGuildChannels(BLUETICK_BOT_ID, transcript.guildInfo.guildID);
+
   return (
     <div className="flex flex-col gap-2 bg-[#38343c] rounded-lg text-white">
       <div className="p-2">
@@ -160,7 +165,7 @@ const Discord: React.FC<{ transcript: TicketTranscriptDetails }> = ({
         </div>
       </div>
       <Separator className="bg-white/70" />
-      {isLoading || !guild ? (
+      {isLoading || !guild || isLoadingChannels || !channels ? (
         <Skeleton className="w-full h-36" />
       ) : (
         <Messages
@@ -175,6 +180,15 @@ const Discord: React.FC<{ transcript: TicketTranscriptDetails }> = ({
             };
             return acc;
           }, {})}
+          channels={channels.reduce<Record<string, { name: string }>>(
+            (acc, role) => {
+              acc[role.id] = {
+                name: role.name,
+              };
+              return acc;
+            },
+            {}
+          )}
         />
       )}
     </div>

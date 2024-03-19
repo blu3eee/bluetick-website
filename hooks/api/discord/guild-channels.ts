@@ -23,3 +23,16 @@ export function useFetchGuildChannels(botID: string, guildID: string) {
 
   return { channels: data, isLoading, error };
 }
+
+export function useQueryGuildChannels(botID: string, guildID: string) {
+  return useQuery(
+    ['guildChannels', botID, guildID],
+    () => fetchGuildChannels(botID, guildID),
+    {
+      enabled: !!botID && !!guildID, // Only run the query if botID and guildID are truthy
+      select: (channels) => {
+        return channels;
+      },
+    }
+  );
+}
