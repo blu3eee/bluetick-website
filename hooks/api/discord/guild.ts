@@ -23,14 +23,12 @@ export const fetchGuildData = async (botId: string, serverId: string) => {
   return { guildInfo, guildConfig };
 };
 
-export const useGuildData = (serverId: string, botId: string) => {
-  const { data, isLoading, refetch } = useQuery(
+export const useGuildData = (botId: string, serverId: string) => {
+  return useQuery(
     ['guildData', botId, serverId],
     () => fetchGuildData(botId, serverId),
     {
       enabled: !!serverId && !!botId, // Only run the query if serverId and botId are truthy
     }
   );
-
-  return { guildData: data, isLoading, refetchGuildData: refetch };
 };

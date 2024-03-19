@@ -5,7 +5,7 @@ import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
 interface Props {
   messages: TranscriptMessage[];
   users: Record<string, { name: string; avatarURL: string }>;
-  roles?: Record<string, { name: string }>;
+  roles?: Record<string, { name: string; color?: string }>;
   channels?: Record<string, { name: string }>;
 }
 

@@ -12,3 +12,17 @@ import { twMerge } from 'tailwind-merge';
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));
 }
+
+/**
+ * Converts an integer representation of a hexadecimal color code into a string usable in CSS.
+ * @param {number} intColor - The integer representation of the color.
+ * @returns {string} The CSS hexadecimal color string.
+ */
+export function intToHexColor(intColor: number): string {
+  // Convert the integer to a hexadecimal string
+  let hexColor = intColor.toString(16);
+  // Ensure the hexadecimal string is 6 characters long, padding with zeros if necessary
+  hexColor = hexColor.padStart(6, '0');
+  // Prefix with '#' to make it usable in CSS
+  return `#${hexColor}`;
+}
