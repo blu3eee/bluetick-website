@@ -26,12 +26,11 @@ const ImageViewer: React.FC<Props> = ({ src }) => {
       <Image
         src={src}
         alt=""
-        className="h-auto max-w-full rounded-lg cursor-pointer"
+        className="h-auto max-w-full rounded-lg cursor-pointer max-h-[400px]" // Add max-height here
         onClick={handleImageClick}
         width={200}
         height={200}
         layout="responsive"
-        priority
       />
       {isHovered && (
         <a href={src} target="_blank" rel="noreferrer">
@@ -59,6 +58,7 @@ const ImageViewer: React.FC<Props> = ({ src }) => {
               width={1920}
               height={1080}
               objectFit="contain"
+              className="max-h-[80vh] max-w-[80vw]"
             />
           </div>
         </div>
