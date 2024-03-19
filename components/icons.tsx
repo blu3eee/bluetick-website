@@ -26,6 +26,7 @@ import {
   Coffee,
   Linkedin,
   Download,
+  FileArchive,
   // eslint-disable-next-line import/no-duplicates
 } from 'lucide-react';
 // eslint-disable-next-line import/no-duplicates
@@ -64,9 +65,10 @@ export const Icons = {
   download: Download,
   fileText: FileText,
   check: Check,
+  zip: FileArchive,
+  pdf: ({ ...props }: LucideProps) => <PdfSVG {...props} />,
   gitHub: ({ ...props }: LucideProps) => <GithubSVG {...props} />,
   facebook: ({ ...props }: LucideProps) => <FacebookSVG {...props} />,
   instagram: ({ ...props }: LucideProps) => <InstagramSVG {...props} />,
   twitter: ({ ...props }: LucideProps) => <TwitterSVG {...props} />,
-  pdf: ({ ...props }: LucideProps) => <PdfSVG {...props} />,
 };

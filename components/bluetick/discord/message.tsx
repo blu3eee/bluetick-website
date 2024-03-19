@@ -6,6 +6,7 @@ import React from 'react';
 import DiscordEmbed from './embed';
 import ImageGallery from '../../custom-ui/images-galery';
 import Image from 'next/image';
+import { Icons } from '@/components/icons';
 
 const DiscordMessage: React.FC<{
   author: { name: string; avatarURL: string };
@@ -66,6 +67,30 @@ const DiscordMessage: React.FC<{
             />
           </div>
         )}
+        {message.attachments
+          .filter((a) => !isValidImageUrl(a.url))
+          .map((attachment) => (
+            <a
+              href={attachment.url}
+              className="group/file relative bg-[#2B2D31aa] border-2 border-[#2B2D31] rounded-md p-2 mt-1 flex items-center gap-2 max-w-[400px]"
+            >
+              <div className="w-6 h-6">
+                {attachment.name.includes('.doc') ? (
+                  <Icons.fileText />
+                ) : attachment.name.includes('.pdf') ? (
+                  <Icons.pdf />
+                ) : attachment.name.includes('.zip') ? (
+                  <Icons.zip />
+                ) : (
+                  <Icons.page />
+                )}
+              </div>
+              <span className="text-sm text-blue-500">{attachment.name}</span>
+              <div className="opacity-0 group-hover/file:opacity-100 absolute right-[-10px] rounded-md bg-[#38343c] border-2 border-[#2B2D31] p-1">
+                <Icons.download size={16} />
+              </div>
+            </a>
+          ))}
       </div>
     </div>
   );
