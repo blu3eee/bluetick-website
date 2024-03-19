@@ -69,8 +69,9 @@ const DiscordMessage: React.FC<{
         )}
         {message.attachments
           .filter((a) => !isValidImageUrl(a.url))
-          .map((attachment) => (
+          .map((attachment, i) => (
             <a
+              key={i}
               href={attachment.url}
               className="group/file relative bg-[#2B2D31aa] border-2 border-[#2B2D31] rounded-md p-2 mt-1 flex items-center gap-2 max-w-[400px]"
             >

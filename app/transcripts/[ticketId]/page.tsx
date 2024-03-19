@@ -40,31 +40,35 @@ const Page = ({
     });
 
   const router = useRouter();
-  React.useEffect(() => {
-    // Redirect if the user is not logged in
-    // if (status !== 'loading' && !isLoggedIn) {
-    //   signIn('discord', {
-    //     callbackUrl: `/transcripts/${params.ticketId}`,
-    //   }).catch(() => {
-    //     toast.error('Failed to initiate log in with Discord');
-    //   });
-    //   return;
-    // }
+  React.useEffect(
+    () => {
+      // Redirect if the user is not logged in
+      // if (status !== 'loading' && !isLoggedIn) {
+      //   signIn('discord', {
+      //     callbackUrl: `/transcripts/${params.ticketId}`,
+      //   }).catch(() => {
+      //     toast.error('Failed to initiate log in with Discord');
+      //   });
+      //   return;
+      // }
 
-    if (transcriptStatus === 'success' && !ticketData) {
-      toast.error(`Unavailable ticket transcript`);
-      router.push('/'); // Adjust the path as needed for your error handling or fallback page
-      return;
-    }
-
-    // Redirect if the ticket data loading is finished and no data is found
-    if (transcriptStatus !== 'loading' && !ticketData) {
-      if (transcriptStatus === 'error') {
+      if (transcriptStatus === 'success' && !ticketData) {
+        toast.error(`Unavailable ticket transcript`);
         router.push('/'); // Adjust the path as needed for your error handling or fallback page
-        toast.error(`You are not allowed to view this transcript`);
+        return;
       }
-    }
-  }, [status, transcriptStatus, ticketData]);
+
+      // Redirect if the ticket data loading is finished and no data is found
+      if (transcriptStatus !== 'loading' && !ticketData) {
+        if (transcriptStatus === 'error') {
+          router.push('/'); // Adjust the path as needed for your error handling or fallback page
+          toast.error(`You are not allowed to view this transcript`);
+        }
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [status, transcriptStatus, ticketData]
+  );
 
   if (status === 'loading') {
     return <Skeleton className="w-full h-36" />;
