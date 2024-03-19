@@ -1,6 +1,7 @@
 'use client';
 
 import Messages from '@/components/bluetick/discord/messages';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BLUETICK_BOT_ID } from '@/config/bluetick';
@@ -9,10 +10,11 @@ import { useFetchTicketTranscript } from '@/hooks/api/tickets/transcript';
 import { cn, intToHexColor } from '@/lib/utils';
 import { rubikFont } from '@/styles/fonts';
 import type { TicketTranscriptDetails } from '@/types/bluetick/db/tickets';
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { toast } from 'sonner';
 
 const Page = ({
   params,
@@ -37,21 +39,59 @@ const Page = ({
     });
 
   const router = useRouter();
-  React.useEffect(
-    () => {
-      if (transcriptStatus !== 'loading' && !ticketData) {
-        if (transcriptStatus === 'error') {
-          router.push('/');
-        }
+  React.useEffect(() => {
+    // Redirect if the user is not logged in
+    // if (status !== 'loading' && !isLoggedIn) {
+    //   signIn('discord', {
+    //     callbackUrl: `/transcripts/${params.ticketId}`,
+    //   }).catch(() => {
+    //     toast.error('Failed to initiate log in with Discord');
+    //   });
+    //   return;
+    // }
+
+    if (transcriptStatus === 'success' && !ticketData) {
+      toast.error(`Unavailable ticket transcript`);
+      router.push('/'); // Adjust the path as needed for your error handling or fallback page
+      return;
+    }
+
+    // Redirect if the ticket data loading is finished and no data is found
+    if (transcriptStatus !== 'loading' && !ticketData) {
+      if (transcriptStatus === 'error') {
+        router.push('/'); // Adjust the path as needed for your error handling or fallback page
+        toast.error(`You are not allowed to view this transcript`);
       }
-      // console.log(ticketData);
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [transcriptStatus, ticketData]
-  );
+    }
+  }, [status, transcriptStatus, ticketData]);
 
   if (status === 'loading') {
     return <Skeleton className="w-full h-36" />;
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <div className="flex w-full h-[70vh] items-center justify-center">
+        <div className="flex flex-row h-24 gap-8 items-center justify-center">
+          <h2 className="text-3xl font-bold">401</h2>
+          <Separator orientation="vertical" />
+          <div className="flex flex-col items-center justify-center gap-3">
+            <p>Log in to see transcript</p>
+            <Button
+              onClick={() => {
+                signIn('discord', {
+                  callbackUrl: `/transcripts/${params.ticketId}`,
+                }).catch(() => {
+                  toast.error('Failed to initiate log in with Discord');
+                });
+              }}
+            >
+              Login
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -59,7 +99,7 @@ const Page = ({
       {transcriptStatus === 'loading' ? (
         <Skeleton className="w-full h-36" />
       ) : !ticketData ? (
-        <div>cannot load ticket data</div>
+        <div>Loading...</div>
       ) : (
         <div className="flex flex-col gap-2">
           <div className="rounded-lg bg-secondary p-4 flex items-center gap-4 font-semibold">
