@@ -15,15 +15,23 @@ const DiscordMessage: React.FC<{
   roles?: Record<string, { name: string }>;
   channels?: Record<string, { name: string }>;
 }> = ({ author, message, users, displayUser = true, roles, channels }) => {
+  const messageTime = new Date(message.timestamp);
   return (
-    <div className="px-2 flex gap-2 hover:bg-[#4b484f] h-fit">
-      <Image
-        src={author.avatarURL}
-        alt={author.name}
-        width={30}
-        height={30}
-        className={displayUser ? `rounded-full h-fit mt-1` : 'opacity-0'}
-      />
+    <div className="group px-2 flex gap-2 hover:bg-[#4b484f] h-fit">
+      {displayUser ? (
+        <Image
+          src={author.avatarURL}
+          alt={author.name}
+          width={30}
+          height={30}
+          className={`rounded-full h-fit mt-1`}
+        />
+      ) : (
+        <span className="w-[30px] text-xs font-bold text-gray-300 opacity-0 group-hover:opacity-100 mt-1">
+          {(messageTime.getHours() % 12).toString().padStart(2, '0')}:
+          {messageTime.getMinutes().toString().padStart(2, '0')}
+        </span>
+      )}
       <div className="flex flex-col justify-center">
         {displayUser && (
           <div className="flex gap-2 items-center">

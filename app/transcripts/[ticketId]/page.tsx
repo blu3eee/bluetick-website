@@ -102,7 +102,7 @@ const Page = ({
         <div>Loading...</div>
       ) : (
         <div className="flex flex-col gap-2">
-          <div className="rounded-lg bg-secondary p-4 flex items-center gap-4 font-semibold">
+          <div className="rounded-lg bg-secondary p-4 flex items-center gap-4 font-semibold text-sm">
             This transcript was generated at{' '}
             {new Date(ticketData.generated * 1000).toLocaleString()}
           </div>
