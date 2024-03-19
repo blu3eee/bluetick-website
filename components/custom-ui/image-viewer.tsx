@@ -31,6 +31,7 @@ const ImageViewer: React.FC<Props> = ({ src }) => {
         width={200}
         height={200}
         layout="responsive"
+        priority
       />
       {isHovered && (
         <a href={src} target="_blank" rel="noreferrer">

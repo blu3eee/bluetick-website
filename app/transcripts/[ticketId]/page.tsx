@@ -3,19 +3,21 @@
 import Messages from '@/components/bluetick/discord/messages';
 import { Separator } from '@/components/ui/separator';
 import { Skeleton } from '@/components/ui/skeleton';
+import { BLUETICK_BOT_ID } from '@/config/bluetick';
+import { useGuildData } from '@/hooks/api/discord/guild';
 import { useFetchTicketTranscript } from '@/hooks/api/tickets/transcript';
-import { cn } from '@/lib/utils';
+import { cn, intToHexColor } from '@/lib/utils';
 import { rubikFont } from '@/styles/fonts';
 import type { TicketTranscriptDetails } from '@/types/bluetick/db/tickets';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const Page = ({
   params,
 }: {
   params: {
-    serverId: string;
     ticketId: string;
   };
 }): JSX.Element => {
@@ -34,13 +36,20 @@ const Page = ({
       enabled: isLoggedIn && !!userId && !!ticketIdNumber,
     });
 
-  React.useEffect(() => {
-    if (transcriptStatus !== 'loading' && !ticketData) {
-      // router.push('/');
-      return;
-    }
-    console.log(ticketData);
-  }, [transcriptStatus, ticketData]);
+  const router = useRouter();
+  React.useEffect(
+    () => {
+      if (transcriptStatus !== 'loading' && !ticketData) {
+        if (transcriptStatus === 'error') {
+          router.push('/');
+        }
+      }
+      // console.log(ticketData);
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [transcriptStatus, ticketData]
+  );
+
   if (status === 'loading') {
     return <Skeleton className="w-full h-36" />;
   }
@@ -86,6 +95,10 @@ export default Page;
 const Discord: React.FC<{ transcript: TicketTranscriptDetails }> = ({
   transcript,
 }) => {
+  const { data: guild, isLoading } = useGuildData(
+    transcript.guildInfo.guildID,
+    BLUETICK_BOT_ID
+  );
   return (
     <div className="flex flex-col gap-2 bg-[#38343c] rounded-lg text-white">
       <div className="p-2">
@@ -107,10 +120,23 @@ const Discord: React.FC<{ transcript: TicketTranscriptDetails }> = ({
         </div>
       </div>
       <Separator className="bg-white/70" />
-      <Messages
-        messages={transcript.messagesInfo}
-        users={transcript.usersInfo}
-      />
+      {isLoading || !guild ? (
+        <Skeleton className="w-full h-36" />
+      ) : (
+        <Messages
+          messages={transcript.messagesInfo}
+          users={transcript.usersInfo}
+          roles={guild.guildInfo.roles.reduce<
+            Record<string, { name: string; color: string }>
+          >((acc, role) => {
+            acc[role.id] = {
+              name: role.name,
+              color: intToHexColor(role.color),
+            };
+            return acc;
+          }, {})}
+        />
+      )}
     </div>
   );
 };

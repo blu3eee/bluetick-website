@@ -16,13 +16,13 @@ const DiscordMessage: React.FC<{
   channels?: Record<string, { name: string }>;
 }> = ({ author, message, users, displayUser = true, roles, channels }) => {
   return (
-    <div className="px-2 flex gap-2 hover:bg-[#4b484f] py-1">
+    <div className="px-2 flex gap-2 hover:bg-[#4b484f] h-fit">
       <Image
         src={author.avatarURL}
         alt={author.name}
-        width={50}
-        height={50}
-        className={displayUser ? `rounded-full h-fit` : `opacity-0`} // Assuming you want circular avatars
+        width={30}
+        height={30}
+        className={displayUser ? `rounded-full h-fit mt-1` : 'opacity-0'}
       />
       <div className="flex flex-col justify-center">
         {displayUser && (
@@ -34,7 +34,7 @@ const DiscordMessage: React.FC<{
           </div>
         )}
         {message.content && (
-          <span>
+          <span className="text-md">
             <RenderHtmlContent
               text={replaceIds(message.content, users, roles, channels)}
             />
@@ -50,11 +50,13 @@ const DiscordMessage: React.FC<{
           />
         ))}
         {message.attachments && (
-          <ImageGallery
-            urls={message.attachments
-              .filter((a) => isValidImageUrl(a.url))
-              .map((a) => a.url)}
-          />
+          <div className="max-w-[720px]">
+            <ImageGallery
+              urls={message.attachments
+                .filter((a) => isValidImageUrl(a.url))
+                .map((a) => a.url)}
+            />
+          </div>
         )}
       </div>
     </div>

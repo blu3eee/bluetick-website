@@ -27,7 +27,7 @@ const DiscordEmbed: React.FC<DiscordEmbedProps> = ({
     >
       <div className="bg-[#2B2D31] ml-1 px-3 py-2 rounded-tr-sm rounded-br-sm flex flex-col justify-between min-h-8">
         <div className="flex justify-between w-full">
-          {/* left part */}
+          {/* left column */}
           <div className="flex-1 flex flex-col">
             {/* author */}
             {embed.author && (
@@ -53,7 +53,7 @@ const DiscordEmbed: React.FC<DiscordEmbedProps> = ({
               <Link
                 className={cn(
                   'flex items-center font-bold my-1',
-                  embed.title
+                  embed.url
                     ? 'underline cursor-pointer hover:text-foreground/80'
                     : ''
                 )}
@@ -72,7 +72,7 @@ const DiscordEmbed: React.FC<DiscordEmbedProps> = ({
               </div>
             )}
           </div>
-          {/* right one */}
+          {/* right column */}
           {embed.thumbnailURL && isValidImageUrl(embed.thumbnailURL) && (
             <div className="ml-2">
               <Image
