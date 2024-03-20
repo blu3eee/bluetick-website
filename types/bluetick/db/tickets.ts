@@ -200,3 +200,10 @@ export interface TranscriptUser {
   avatarURL: string;
   bot: boolean;
 }
+
+export enum TICKET_STATUS {
+  OPEN = 'Open',
+  CLOSED = 'Closed',
+  CHANNEL_DELETED = 'Thread deleted',
+  PROCESSING = 'processing',
+}
