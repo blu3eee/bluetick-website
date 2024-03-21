@@ -31,6 +31,9 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
   } = useFetchGuildTickets(BLUETICK_BOT_ID, serverId);
 
   const [filterStatus, setFilterStatus] = React.useState('');
+  const [closingTicketId, setClosingTicketId] = React.useState<number | null>(
+    null
+  ); // State to track the closing ticket
 
   const { data: session } = useSession();
 
@@ -71,6 +74,8 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
   };
 
   const handleCloseTicket = async (id: number): Promise<void> => {
+    setClosingTicketId(id); // Set the loading state to the current ticket ID
+
     try {
       const res = await runningBotsInstance.post<{ message: string }>(
         '/tickets/close',
@@ -90,6 +95,8 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
     } catch (e) {
       console.log(e);
       toast.error(`An error happened while trying to close ticket`);
+    } finally {
+      setClosingTicketId(null); // Reset the loading state regardless of the request outcome
     }
   };
 
@@ -193,17 +200,19 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
                         )}
                       {ticket.status === TICKET_STATUS.OPEN &&
                         ticket.channelID && (
-                          <div
-                            className="bg-blue-500 text-white rounded-md p-1 hover:bg-blue-400 cursor-pointer"
+                          <Button
+                            size={'sm'}
+                            variant={'red'}
                             onClick={() => {
                               handleCloseTicket(ticket.id).catch((e) => {});
                             }}
+                            disabled={closingTicketId === ticket.id} // Disable button for the ticket being processed
+                            className="w-fit"
                           >
-                            Close{' '}
-                            <span className="hidden md:inline-flex">
-                              ticket
-                            </span>
-                          </div>
+                            {closingTicketId === ticket.id
+                              ? 'Closing...'
+                              : 'Close Ticket'}
+                          </Button>
                         )}
                     </TableCell>
                   </TableRow>
