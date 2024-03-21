@@ -18,10 +18,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { runningBotsInstance } from '@/config/running-bots';
 import { useSession } from 'next-auth/react';
+import PaginatePages from '@/components/custom-ui/paginate-pages';
+
+const limit = 10;
 
 const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
   const {
@@ -33,7 +37,10 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
   const [filterStatus, setFilterStatus] = React.useState('');
   const [closingTicketId, setClosingTicketId] = React.useState<number | null>(
     null
-  ); // State to track the closing ticket
+  );
+
+  // pagination
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   const { data: session } = useSession();
 
@@ -62,9 +69,15 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
     },
   ];
 
-  const filterTickets = tickets.filter((ticket) =>
-    filterStatus !== '' ? ticket.status === filterStatus : true
-  );
+  const filterTickets = tickets
+    .filter((ticket) =>
+      filterStatus !== '' ? ticket.status === filterStatus : true
+    )
+    .sort((a, b) => b.id - a.id); // Sort tickets from newest to oldest
+
+  const totalPages = Math.ceil(filterTickets.length / limit);
+  const startIndex = (currentPage - 1) * limit;
+  const selectedTickets = filterTickets.slice(startIndex, startIndex + limit);
 
   // Handle clicking on a radio button
   const handleRadioValueChange = (val: string): void => {
@@ -172,6 +185,7 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
             </TableCaption>
             <TableHeader>
               <TableRow>
+                {/* <TableHead className="w-fit px-0"></TableHead> */}
                 <TableHead className="w-[128px]">#</TableHead>
                 <TableHead>Opener</TableHead>
                 <TableHead>Status</TableHead>
@@ -179,46 +193,72 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filterTickets
-                .filter((ticket) => ticket.status)
-                .map((ticket) => (
-                  <TableRow key={ticket.id}>
-                    <TableCell className="font-medium">{ticket.id}</TableCell>
-                    <TableCell>{ticket.userID}</TableCell>
-                    <TableCell>{ticket.status}</TableCell>
-                    <TableCell className="flex justify-end items-center gap-2">
-                      {ticket.status === TICKET_STATUS.CLOSED &&
-                        ticket.transcriptMessageID && (
-                          <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href={`/transcripts/${ticket.id}`}
-                            className="bg-blue-500 text-white rounded-md p-1 hover:bg-blue-400"
-                          >
-                            Transcript
-                          </a>
-                        )}
-                      {ticket.status === TICKET_STATUS.OPEN &&
-                        ticket.channelID && (
+              {selectedTickets.map((ticket) => (
+                <TableRow key={ticket.id}>
+                  {/* <TableCell className="px-0 flex justify-center items-center">
+                    <input
+                      type="checkbox"
+                      checked={selectedIds.includes(ticket.id)}
+                      // onChange={() => toggleTicketSelection(ticket.id)}
+                    />
+                  </TableCell> */}
+                  <TableCell className="font-medium">{ticket.id}</TableCell>
+                  <TableCell>{ticket.userID}</TableCell>
+                  <TableCell>{ticket.status}</TableCell>
+                  <TableCell className="flex justify-end items-center gap-2">
+                    {ticket.status === TICKET_STATUS.CLOSED &&
+                      ticket.transcriptMessageID && (
+                        <a
+                          target="_blank"
+                          rel="noreferrer"
+                          href={`/transcripts/${ticket.id}`}
+                          className="bg-blue-500 text-white rounded-md hover:bg-blue-400"
+                        >
                           <Button
                             size={'sm'}
-                            variant={'red'}
-                            onClick={() => {
-                              handleCloseTicket(ticket.id).catch((e) => {});
-                            }}
-                            disabled={closingTicketId === ticket.id} // Disable button for the ticket being processed
-                            className="w-fit"
+                            variant={'blue'}
+                            className="w-fit p-1 h-fit"
                           >
-                            {closingTicketId === ticket.id
-                              ? 'Closing...'
-                              : 'Close Ticket'}
+                            Transcript
                           </Button>
-                        )}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                        </a>
+                      )}
+                    {ticket.status === TICKET_STATUS.OPEN &&
+                      ticket.channelID && (
+                        <Button
+                          size={'sm'}
+                          variant={'red'}
+                          onClick={() => {
+                            handleCloseTicket(ticket.id).catch((e) => {});
+                          }}
+                          disabled={closingTicketId === ticket.id} // Disable button for the ticket being processed
+                          className="w-fit p-1  h-fit"
+                        >
+                          {closingTicketId === ticket.id ? (
+                            'Closing...'
+                          ) : (
+                            <span>
+                              Close{' '}
+                              <span className="hidden md:inline-flex">
+                                ticket
+                              </span>
+                            </span>
+                          )}
+                        </Button>
+                      )}
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
+          {/* Pagination Controls */}
+          <PaginatePages
+            currentPage={currentPage}
+            totalPages={totalPages}
+            setCurrentPage={(page) => {
+              setCurrentPage(page);
+            }}
+          />
         </div>
       </div>
     </div>
