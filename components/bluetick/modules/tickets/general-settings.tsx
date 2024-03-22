@@ -124,10 +124,13 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
             </Label>
             <Input
               id="per-user-limit"
+              type="number"
+              min={1}
+              max={10}
               name="perUserTicketLimit"
               value={setting.perUserTicketLimit}
               onChange={handleSettingChange}
-              className="w-fit"
+              className="w-fit min-w-[100px]"
             />
           </div>
           <div className="flex flex-col gap-4 w-fit">
@@ -135,7 +138,7 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
               htmlFor="allowUserToCloseTickets"
               className="text-xs font-bold text-gray-500 uppercase"
             >
-              PER USER SIMULTANEOUS TICKET LIMIT
+              ALLOW USER TO CLOSE TICKETS
             </Label>
             <div className="flex items-center gap-4">
               <Switch

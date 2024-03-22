@@ -21,6 +21,7 @@ import EditPanelDialog from './ui/edit-panel';
 import CreatePanelForm from './ui/create-panel';
 
 import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 
 const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
   const { data, refetch, isLoading } = useFetchTicketPanels(
@@ -111,7 +112,9 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
               <TableHeader>
                 <TableRow>
                   <TableHead className="w-[128px]">Channel</TableHead>
-                  <TableHead>Panel Title</TableHead>
+                  <TableHead className="hidden md:table-cell">
+                    Panel Title
+                  </TableHead>
                   <TableHead>Panel Button</TableHead>
                   <TableHead className="text-right">Actions</TableHead>
                 </TableRow>
@@ -139,25 +142,25 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                           : panel.channelID}
                       </a>
                     </TableCell>
-                    <TableCell>
+                    <TableCell className="hidden md:table-cell">
                       {panel.message?.embed?.title ?? 'empty title'}
                     </TableCell>
                     <TableCell>{panel.button.text ?? '[none]'}</TableCell>
                     <TableCell className="flex justify-end items-center gap-2">
-                      <div
-                        className="text-white px-2 py-1 rounded-md font-semibold bg-background hover:bg-background/50 cursor-pointer border"
+                      <Button
+                        size={'xs'}
                         onClick={() => {
                           handeResendPanel(panel.id).catch((e) => {});
                         }}
                       >
                         Resend
-                      </div>
+                      </Button>
                       <EditPanelDialog
                         panel={panel}
                         trigger={
-                          <div className="text-white px-2 py-1 rounded-md font-semibold bg-blue-500 hover:bg-blue-400">
+                          <Button size={'xs'} variant={'blue'}>
                             Edit
-                          </div>
+                          </Button>
                         }
                         refetch={() => {
                           refetch().catch((e) => {
@@ -165,8 +168,9 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                           });
                         }}
                       />
-                      <div
-                        className="text-white px-2 py-1 rounded-md font-semibold bg-destructive cursor-pointer hover:bg-destructive/90"
+                      <Button
+                        size={'xs'}
+                        variant={'red'}
                         onClick={() => {
                           handleDeletePanel(panel.id).catch((e) => {
                             console.log(e);
@@ -174,7 +178,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                         }}
                       >
                         Delete
-                      </div>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

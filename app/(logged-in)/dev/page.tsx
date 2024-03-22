@@ -1,46 +1,25 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BLUETICK_BOT_ID } from '@/config/bluetick';
 import { BluetickContext } from '@/context/bluetick-context';
 import { useFetchBotGuilds } from '@/hooks/api/discord/bot-guilds';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+
 import React, { useContext } from 'react';
-import { toast } from 'sonner';
 
 const DevPage = (): JSX.Element => {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  React.useEffect(
-    () => {
-      if (status === 'loading' || !session) {
-        return;
-      }
-      if (!session.developerMode) {
-        router.push('/');
-        toast.info(`Invalid page request`);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [session, status]
-  );
-
   const { botDetails, isLoading: isLoadingBot } = useContext(BluetickContext);
 
   const { data: guilds, isLoading: isLoadingGuilds } =
     useFetchBotGuilds(BLUETICK_BOT_ID);
-
-  if (status === 'loading' || !session) {
-    return <Skeleton className="w-full h-36" />;
-  }
 
   if (isLoadingBot || !botDetails) {
     return <div>Loading bot Info</div>;
   }
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       {isLoadingGuilds || !guilds ? (
         <Skeleton className="w-full h-36" />
       ) : (
@@ -65,6 +44,11 @@ const DevPage = (): JSX.Element => {
           </div>
         </div>
       )}
+      <a href="/dev/playground">
+        <Button size={'sm'} variant={'warning'}>
+          Playground
+        </Button>
+      </a>
     </div>
   );
 };

@@ -24,6 +24,7 @@ import { toast } from 'sonner';
 import { runningBotsInstance } from '@/config/running-bots';
 import { useSession } from 'next-auth/react';
 import PaginatePages from '@/components/custom-ui/paginate-pages';
+import CloseInactiveTicketsButton from './ui/inactive-tickets-close';
 
 const limit = 10;
 
@@ -84,6 +85,8 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
     // Check if the clicked value is the same as the current filterStatus
     // If so, clear the filterStatus (deselect). Otherwise, update to the new value.
     setFilterStatus((currentStatus) => (currentStatus === val ? '' : val));
+    // Reset the current page to page 1
+    setCurrentPage(1);
   };
 
   const handleCloseTicket = async (id: number): Promise<void> => {
@@ -102,14 +105,19 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
       if (res.status === 200) {
         toast.success(res.data.message);
         await refetchTickets();
+        if (currentPage > totalPages) {
+          setCurrentPage(totalPages > 1 ? totalPages : 1);
+        }
       } else {
         toast.error(`Failed to close ticket`);
       }
     } catch (e) {
-      console.log(e);
+      // console.log(e);
       toast.error(`An error happened while trying to close ticket`);
     } finally {
-      setClosingTicketId(null); // Reset the loading state regardless of the request outcome
+      setTimeout(() => {
+        setClosingTicketId(null); // Reset the loading state regardless of the request outcome
+      }, 300);
     }
   };
 
@@ -165,6 +173,7 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
           >
             Clear filter
           </Button>
+          <CloseInactiveTicketsButton />
           {/* {filterStatus === 'Open' && (
             <Button
               size={'sm'}
