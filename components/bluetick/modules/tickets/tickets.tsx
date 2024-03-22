@@ -35,11 +35,16 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
     refetch: refetchTickets,
   } = useFetchGuildTickets(BLUETICK_BOT_ID, serverId);
 
-  React.useEffect(() => {
-    if (tickets && currentPage > totalPages) {
-      setCurrentPage(totalPages > 1 ? totalPages : 1);
-    }
-  }, [tickets]);
+  React.useEffect(
+    () => {
+      if (tickets && currentPage > totalPages) {
+        setCurrentPage(totalPages > 1 ? totalPages : 1);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [tickets]
+  );
+
   const [filterStatus, setFilterStatus] = React.useState('');
   const [closingTicketId, setClosingTicketId] = React.useState<number | null>(
     null
