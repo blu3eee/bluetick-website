@@ -3,7 +3,7 @@ import { Label } from '../ui/label';
 import { Button } from '../ui/button';
 import { toast } from 'sonner';
 
-const ToastPlayground = () => {
+const ToastPlayground = (): JSX.Element => {
   const toastContent = {
     title: 'Event has been created',
     content: {
