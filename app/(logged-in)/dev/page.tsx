@@ -1,5 +1,4 @@
 'use client';
-import ToastPlayground from '@/components/dev/toaster-playground';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';

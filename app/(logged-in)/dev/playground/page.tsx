@@ -2,7 +2,7 @@
 import React from 'react';
 import ToastPlayground from '@/components/dev/toaster-playground';
 
-const PlaygroundPage = () => {
+const PlaygroundPage = (): JSX.Element => {
   return (
     <div>
       <ToastPlayground />
