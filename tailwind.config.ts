@@ -52,6 +52,45 @@ const config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+        success: {
+          DEFAULT: '#06d6a0',
+          dark: '#bf3959',
+          light: '#38deb3',
+          foreground: {
+            DEFAULT: '#000000',
+            dark: '#ffffff',
+          },
+        },
+        error: {
+          DEFAULT: '#ef476f',
+          dark: '#05ab80',
+          light: '#f26c8c',
+          foreground: {
+            DEFAULT: '#ffffff',
+            dark: '#ffffff',
+            light: '#000000',
+          },
+        },
+        warning: {
+          DEFAULT: '#ffd166',
+          dark: '#cca752',
+          light: '#ffda85',
+          foreground: {
+            DEFAULT: '#000000',
+            dark: '#ffffff',
+            light: '#000000',
+          },
+        },
+        info: {
+          DEFAULT: '#118ab2',
+          dark: '#0e6e8e',
+          light: '#41a1c1',
+          foreground: {
+            DEFAULT: '#ffffff',
+            dark: '#ffffff',
+            light: '#000000',
+          },
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -72,6 +111,8 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
+      transparent: 'transparent',
+      current: 'currentColor',
     },
   },
   plugins: [require('tailwindcss-animate')],
