@@ -94,7 +94,7 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
     <div className="flex flex-col gap-4">
       <CollapsibleFields label="Ticket properties" defaultOpen={true}>
         <div className="flex flex-col gap-4 pl-6">
-          <div className="flex flex-col lg:flex-row gap-4">
+          <div className="flex flex-wrap gap-4">
             <div className="flex flex-col gap-2 w-fit">
               <Label className="uppercase font-semibold text-gray-500 text-xs">
                 Ticket Panel Channel
