@@ -35,6 +35,11 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
     refetch: refetchTickets,
   } = useFetchGuildTickets(BLUETICK_BOT_ID, serverId);
 
+  React.useEffect(() => {
+    if (tickets && currentPage > totalPages) {
+      setCurrentPage(totalPages > 1 ? totalPages : 1);
+    }
+  }, [tickets]);
   const [filterStatus, setFilterStatus] = React.useState('');
   const [closingTicketId, setClosingTicketId] = React.useState<number | null>(
     null
@@ -105,9 +110,6 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
       if (res.status === 200) {
         toast.success(res.data.message);
         await refetchTickets();
-        if (currentPage > totalPages) {
-          setCurrentPage(totalPages > 1 ? totalPages : 1);
-        }
       } else {
         toast.error(`Failed to close ticket`);
       }
