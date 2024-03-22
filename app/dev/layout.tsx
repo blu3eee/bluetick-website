@@ -1,5 +1,6 @@
 'use client';
 import { Skeleton } from '@/components/ui/skeleton';
+import { BluetickProvider } from '@/context/bluetick-context';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -30,7 +31,11 @@ const Layout = ({ children }: Props): JSX.Element => {
   if (status === 'loading' || !session) {
     return <Skeleton className="w-full h-36" />;
   }
-  return <div>{children}</div>;
+  return (
+    <BluetickProvider>
+      <div className="p-4">{children}</div>
+    </BluetickProvider>
+  );
 };
 
 export default Layout;

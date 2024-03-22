@@ -1,4 +1,5 @@
 'use client';
+import VercelData from '@/components/dev/vercel-analytics';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -49,6 +50,7 @@ const DevPage = (): JSX.Element => {
           Playground
         </Button>
       </a>
+      <VercelData />
     </div>
   );
 };
