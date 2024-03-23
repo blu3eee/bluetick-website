@@ -218,7 +218,17 @@ const Description = (): JSX.Element => {
         reliability & scalability. 🚀 Streamline communication, boost
         engagement!
       </p>
-      <div className="flex flex-col justify-start gap-2 mt-2">
+      <div className="flex items-center justify-start gap-2 mt-2">
+        <Button
+          size={'sm'}
+          variant={'warning'}
+          disabled
+          className="w-fit gap-2"
+        >
+          <ArrowLeft className="hidden md:block" />
+          <ArrowDown className="block md:hidden" />
+          See how it works{' '}
+        </Button>
         <AnimatedButton
           size={'sm'}
           variant={'info'}
@@ -238,16 +248,6 @@ const Description = (): JSX.Element => {
         >
           Set this up
         </AnimatedButton>
-        <Button
-          size={'sm'}
-          variant={'warning'}
-          disabled
-          className="w-fit gap-2"
-        >
-          <ArrowLeft className="hidden md:block" />
-          <ArrowDown className="block md:hidden" />
-          Interact with the panel to see how it works
-        </Button>
       </div>
     </div>
   );
