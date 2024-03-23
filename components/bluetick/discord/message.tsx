@@ -28,7 +28,7 @@ const DiscordMessage: React.FC<{
           className={`rounded-full h-fit mt-1`}
         />
       ) : (
-        <span className="w-[30px] text-xs font-bold text-gray-300 opacity-0 group-hover:opacity-100 mt-1">
+        <span className="w-[30px] text-xs font-bold text-gray-400 opacity-0 group-hover:opacity-100 mt-1">
           {(messageTime.getHours() % 12).toString().padStart(2, '0')}:
           {messageTime.getMinutes().toString().padStart(2, '0')}
         </span>
@@ -37,7 +37,7 @@ const DiscordMessage: React.FC<{
         {displayUser && (
           <div className="flex gap-2 items-center">
             <span className="font-semibold">{author.name}</span>
-            <span className="font-semibold text-sm text-foreground/70">
+            <span className="font-semibold text-sm text-gray-400">
               {new Date(message.timestamp).toLocaleString()}
             </span>
           </div>

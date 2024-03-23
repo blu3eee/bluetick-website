@@ -5,21 +5,25 @@ import { Button, type ButtonProps } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { signIn, signOut } from 'next-auth/react';
 import { toast } from 'sonner';
+import AnimatedButton from '../motions/animated-button';
 
 interface LoginButtonProps {
   children?: React.ReactNode;
   className?: string;
   variant?: 'default' | 'outline' | 'ghost' | 'link' | 'secondary';
+  animated?: boolean;
 }
 
 export const LoginButton: React.FC<LoginButtonProps & ButtonProps> = ({
   children,
   className,
   variant,
+  animated = false,
   ...props
 }): JSX.Element => {
+  const ButtonComp = animated ? AnimatedButton : Button;
   return (
-    <Button
+    <ButtonComp
       onClick={() => {
         signIn('discord', { callbackUrl: '/servers' }).catch(() => {
           toast.error('Failed to initiate log in with Discord');
@@ -30,7 +34,7 @@ export const LoginButton: React.FC<LoginButtonProps & ButtonProps> = ({
       {...props}
     >
       {children ?? 'Login with Discord'}
-    </Button>
+    </ButtonComp>
   );
 };
 
