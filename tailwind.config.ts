@@ -91,6 +91,9 @@ const config = {
             light: '#000000',
           },
         },
+        discord: {
+          DEFAULT: '#2B2D31',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

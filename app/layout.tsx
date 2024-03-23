@@ -12,6 +12,7 @@ import BluetickHeader from '@/components/bluetick/header';
 import { Footer } from '@/components/footer';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { BluetickProvider } from '@/context/bluetick-context';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -48,37 +49,39 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextAuthProvider>
-            <QueryProvider>
-              <Analytics />
-              <SpeedInsights />
-              <BluetickHeader />
-              <main className="flex min-h-screen flex-col">{children}</main>
-              <Toaster
-                toastOptions={{
-                  duration: 3000,
-                  unstyled: true,
-                  classNames: {
-                    title: 'text-sm font-bold',
-                    description: 'text-xs text-zinc-900',
-                    toast: cn(defaultToast, 'bg-[#2B2D31]'),
-                    success: cn(
-                      defaultToast,
-                      'bg-success text-success-foreground'
-                    ),
-                    error: cn(defaultToast, 'bg-error text-error-foreground'),
-                    warning: cn(
-                      defaultToast,
-                      'bg-warning text-warning-foreground'
-                    ),
-                    info: cn(defaultToast, 'bg-info text-info-foreground'),
-                    actionButton: 'bg-zinc-400',
-                    cancelButton: 'bg-blue-500',
-                    closeButton: 'bg-lime-400',
-                  },
-                }}
-              />
-              <Footer />
-            </QueryProvider>
+            <BluetickProvider>
+              <QueryProvider>
+                <Analytics />
+                <SpeedInsights />
+                <BluetickHeader />
+                <main className="flex min-h-screen flex-col">{children}</main>
+                <Toaster
+                  toastOptions={{
+                    duration: 3000,
+                    unstyled: true,
+                    classNames: {
+                      title: 'text-sm font-bold',
+                      description: 'text-xs text-zinc-900',
+                      toast: cn(defaultToast, 'bg-[#2B2D31]'),
+                      success: cn(
+                        defaultToast,
+                        'bg-success text-success-foreground'
+                      ),
+                      error: cn(defaultToast, 'bg-error text-error-foreground'),
+                      warning: cn(
+                        defaultToast,
+                        'bg-warning text-warning-foreground'
+                      ),
+                      info: cn(defaultToast, 'bg-info text-info-foreground'),
+                      actionButton: 'bg-zinc-400',
+                      cancelButton: 'bg-blue-500',
+                      closeButton: 'bg-lime-400',
+                    },
+                  }}
+                />
+                <Footer />
+              </QueryProvider>
+            </BluetickProvider>
           </NextAuthProvider>
         </ThemeProvider>
       </body>
