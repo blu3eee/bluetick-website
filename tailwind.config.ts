@@ -92,7 +92,7 @@ const config = {
           },
         },
         discord: {
-          DEFAULT: '#2B2D31',
+          DEFAULT: '#38343c',
         },
       },
       borderRadius: {
