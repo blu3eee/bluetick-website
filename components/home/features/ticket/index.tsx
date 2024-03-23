@@ -291,26 +291,47 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
             <CornerDownRight size={16} />
             ticket-support-0
           </div>
-          {curChannels.slice(-3).map((channel) => (
-            <motion.div
-              key={channel.name}
-              layoutId={`ticket-${channel.name}`}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              initial="hidden"
-              animate="visible"
-              className="ml-3 text-[#99aab5] flex items-center gap-1 font-semibold text-md flex items-center"
-            >
-              {channel.isThread ? (
+          {curChannels
+            .filter((c) => c.isThread)
+            .slice(-3)
+            .map((channel) => (
+              <motion.div
+                key={channel.name}
+                layoutId={`ticket-${channel.name}`}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                initial="hidden"
+                animate="visible"
+                className={
+                  'ml-3 text-discord-gray flex items-center gap-1 font-semibold text-md flex items-center'
+                }
+              >
                 <CornerDownRight size={16} />
-              ) : (
+                {channel.name}
+              </motion.div>
+            ))}
+
+          {curChannels
+            .filter((c) => !c.isThread)
+            .slice(-3)
+            .map((channel) => (
+              <motion.div
+                key={channel.name}
+                layoutId={`ticket-${channel.name}`}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+                initial="hidden"
+                animate="visible"
+                className="ml-2 font-semibold text-md flex items-center text-discord-gray gap-1"
+              >
                 <Hash size={16} />
-              )}
-              {channel.name}
-            </motion.div>
-          ))}
+                {channel.name}
+              </motion.div>
+            ))}
         </div>
       </div>
     </div>
@@ -321,13 +342,12 @@ const Description = (): JSX.Element => {
   const router = useRouter();
   const { data, status } = useSession();
   return (
-    <div className="w-full text-sm px-2 md:px-8 text-start md:text-end">
-      <FeatureLabel text="Ticket System" />
-      <p className="text-foreground/80">
-        🎟️ Customize our slick Ticket System for seamless support! Create
-        dedicated topic channels - members open tickets with ease. Built for
-        reliability & scalability. 🚀 Streamline communication, boost
-        engagement!
+    <div className="w-full text-sm px-2 text-start md:text-end">
+      <FeatureLabel text="Ticket System 🎟️" />
+      <p className="text-foreground/80 mt-4">
+        Customize our slick Ticket System for seamless support! Create dedicated
+        topic channels - members open tickets with ease. Built for reliability &
+        scalability. 🚀 Streamline communication, boost engagement!
       </p>
       <div className="flex items-center justify-start gap-2 mt-2">
         <Button

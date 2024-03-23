@@ -3,6 +3,7 @@ import React from 'react';
 import WelcomeFeature from './welcome';
 import TicketFeature from './ticket';
 import AnimatedElement from './animated-feature';
+import AutoResFeature from './auto-res';
 
 const FeaturesDemo = (): JSX.Element => {
   return (
@@ -12,6 +13,9 @@ const FeaturesDemo = (): JSX.Element => {
       </AnimatedElement>
       <AnimatedElement>
         <TicketFeature />
+      </AnimatedElement>
+      <AnimatedElement>
+        <AutoResFeature />
       </AnimatedElement>
     </section>
   );

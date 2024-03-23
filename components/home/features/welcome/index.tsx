@@ -84,13 +84,13 @@ const WelcomeFeature = (): JSX.Element => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4">
-      <div className="w-full text-sm  px-2 md:px-8">
-        <FeatureLabel text="Welcome New Members" />
-        <p className="text-foreground/80">
-          👋 Welcome newbies with our custom greeting! As server admin,
-          personalize the message to introduce rules, activities & vibe. Roll
-          out the 🚀 red carpet with a warm hello tailored to your unique
-          community. Keep it fresh - update anytime!
+      <div className="w-full text-sm  px-2">
+        <FeatureLabel text="Welcome New Members 👋" />
+        <p className="text-foreground/80  mt-4">
+          Welcome newbies with our custom greeting! As server admin, personalize
+          the message to introduce rules, activities & vibe. Roll out the 🚀 red
+          carpet with a warm hello tailored to your unique community. Keep it
+          fresh - update anytime!
         </p>
         <div className="flex justify-end gap-2 mt-2">
           <AnimatedButton
