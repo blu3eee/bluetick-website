@@ -56,6 +56,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-plugin-jsdoc": "^48.2.1",
+    "framer-motion": "^11.0.20",
     "lucide-react": "^0.344.0",
     "markdown-it": "^14.0.0",
     "mdast-util-toc": "^7.0.0",
