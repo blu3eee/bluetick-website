@@ -70,7 +70,6 @@ const WelcomeFeature = (): JSX.Element => {
 
   const lastMessageRef = React.useRef<HTMLDivElement | null>(null);
 
-  const router = useRouter();
   const { data, status } = useSession();
   React.useEffect(() => {
     if (lastMessageRef.current) {
@@ -81,6 +80,8 @@ const WelcomeFeature = (): JSX.Element => {
       });
     }
   }, [messages]);
+
+  const router = useRouter();
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-4">
@@ -97,9 +98,17 @@ const WelcomeFeature = (): JSX.Element => {
             size={'sm'}
             variant={'info'}
             onClick={() => {
-              signIn('discord', { callbackUrl: '/servers' }).catch(() => {
-                toast.error('Failed to initiate log in with Discord');
-              });
+              if (status === 'loading') {
+                toast.error('This is still loading');
+              } else {
+                if (data) {
+                  router.push('/servers');
+                } else {
+                  signIn('discord', { callbackUrl: '/servers' }).catch(() => {
+                    toast.error('Failed to initiate log in with Discord');
+                  });
+                }
+              }
             }}
           >
             Set this up
