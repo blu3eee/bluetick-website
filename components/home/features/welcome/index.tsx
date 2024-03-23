@@ -9,8 +9,9 @@ import { subDays } from 'date-fns';
 import DiscordMessage from '@/components/bluetick/discord/message';
 import { motion } from 'framer-motion';
 import AnimatedButton from '@/components/motions/animated-button';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const WelcomeFeature = (): JSX.Element => {
   const { isLoading, botDetails } = useContext(BluetickContext);
@@ -67,6 +68,7 @@ const WelcomeFeature = (): JSX.Element => {
 
   const lastMessageRef = React.useRef<HTMLDivElement | null>(null);
 
+  const { data, status } = useSession();
   React.useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({
@@ -76,6 +78,8 @@ const WelcomeFeature = (): JSX.Element => {
       });
     }
   }, [messages]);
+
+  const router = useRouter();
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-4">
@@ -92,9 +96,17 @@ const WelcomeFeature = (): JSX.Element => {
             size={'sm'}
             variant={'info'}
             onClick={() => {
-              signIn('discord', { callbackUrl: '/servers' }).catch(() => {
-                toast.error('Failed to initiate log in with Discord');
-              });
+              if (status === 'loading') {
+                toast.error('This is still loading');
+              } else {
+                if (data) {
+                  router.push('/servers');
+                } else {
+                  signIn('discord', { callbackUrl: '/servers' }).catch(() => {
+                    toast.error('Failed to initiate log in with Discord');
+                  });
+                }
+              }
             }}
           >
             Set this up
