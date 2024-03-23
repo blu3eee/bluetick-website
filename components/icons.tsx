@@ -23,7 +23,6 @@ import {
   User,
   X,
   type IconNode as LucideIcon,
-  Coffee,
   Linkedin,
   Download,
   FileArchive,
@@ -36,11 +35,12 @@ import FacebookSVG from './svgs/facebook';
 import InstagramSVG from './svgs/instagram';
 import TwitterSVG from './svgs/twitter';
 import PdfSVG from './svgs/pdf';
+import PandaLogoSVG from './svgs/panda';
 
 export type Icon = LucideIcon;
 
 export const Icons = {
-  logo: Coffee,
+  logo: ({ ...props }: LucideProps) => <PandaLogoSVG {...props} />,
   close: X,
   spinner: Loader2,
   chevronLeft: ChevronLeft,
