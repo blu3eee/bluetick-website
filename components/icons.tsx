@@ -36,6 +36,7 @@ import InstagramSVG from './svgs/instagram';
 import TwitterSVG from './svgs/twitter';
 import PdfSVG from './svgs/pdf';
 import PandaLogoSVG from './svgs/panda';
+import GIFSVG from './svgs/gif';
 
 export type Icon = LucideIcon;
 
@@ -66,6 +67,7 @@ export const Icons = {
   fileText: FileText,
   check: Check,
   zip: FileArchive,
+  gif: ({ ...props }: LucideProps) => <GIFSVG {...props} />,
   pdf: ({ ...props }: LucideProps) => <PdfSVG {...props} />,
   gitHub: ({ ...props }: LucideProps) => <GithubSVG {...props} />,
   facebook: ({ ...props }: LucideProps) => <FacebookSVG {...props} />,
