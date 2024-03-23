@@ -12,6 +12,8 @@ import AnimatedButton from '@/components/motions/animated-button';
 import { signIn, useSession } from 'next-auth/react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { poppinsFont } from '@/styles/fonts';
 
 const WelcomeFeature = (): JSX.Element => {
   const { isLoading, botDetails } = useContext(BluetickContext);
@@ -124,7 +126,14 @@ const WelcomeFeature = (): JSX.Element => {
       </div>
 
       <div className="w-full rounded-lg bg-discord p-4">
-        <div className="text-warning uppercase font-semibold">Discord Demo</div>
+        <div
+          className={cn(
+            'text-warning uppercase font-semibold',
+            poppinsFont.className
+          )}
+        >
+          Discord Demo
+        </div>
         <div className="max-h-[300px] overflow-auto">
           {isLoading || !botDetails ? (
             <Skeleton className="w-full h-12" />

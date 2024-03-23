@@ -4,7 +4,6 @@ import DataBox from './analytics/data-box';
 import type { VercelDataCategories } from '@/types/vercel';
 import type { DateRange } from 'react-day-picker';
 import { DatePickerWithRange } from '../ui/date-picker';
-import { formatISO } from 'date-fns';
 import { Button } from '../ui/button';
 
 const VercelData = (): JSX.Element => {
@@ -85,10 +84,8 @@ const VercelData = (): JSX.Element => {
             className={`${i < 2 ? 'md:col-span-3' : 'md:col-span-2'}`}
           >
             <DataBox
-              fromDateTime={formatISO(
-                dataDateRange.from ?? new Date(2024, 2, 10)
-              )}
-              toDateTime={formatISO(dataDateRange.to ?? new Date())}
+              fromDateTime={dataDateRange.from ?? new Date(2024, 2, 10)}
+              toDateTime={dataDateRange.to ?? new Date()}
               {...dataCategory}
             />
           </div>

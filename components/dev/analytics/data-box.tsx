@@ -8,13 +8,13 @@ import { flag, name } from 'country-emoji';
 const DataBox: React.FC<{
   label: string;
   category: VercelDataCategories;
-  fromDateTime: string;
-  toDateTime: string;
+  fromDateTime: Date;
+  toDateTime: Date;
 }> = ({ label, category, fromDateTime, toDateTime }) => {
   const {
     isLoading,
     error,
-    data: pathsResponse,
+    data: dataResponse,
   } = useFetchVercelDataCategory(category, fromDateTime, toDateTime);
 
   if (isLoading)
@@ -25,7 +25,7 @@ const DataBox: React.FC<{
       </div>
     );
 
-  if (error || !pathsResponse) return <div>Error loading data for {label}</div>;
+  if (error || !dataResponse) return <div>Error loading data for {label}</div>;
 
   return (
     <div
@@ -41,7 +41,7 @@ const DataBox: React.FC<{
       </div>
       <div className="overflow-auto px-2">
         <div className="flex flex-col gap-1 py-2">
-          {pathsResponse.data.map((data, i) => (
+          {dataResponse.data.map((data, i) => (
             <div
               key={i}
               className=" rounded-lg px-4 py-1 flex items-center justify-between text-sm gap-8"

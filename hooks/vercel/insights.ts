@@ -1,27 +1,29 @@
 import { useQuery } from 'react-query';
 import { PROJECT_ID, vercelInsightsInstance } from '@/config/vercel-data';
 import { VercelDataResponse } from '@/types/vercel';
+import { formatISO } from 'date-fns';
 
 const fetchVercelDataCategory = async (
   category: string,
-  fromDateTime: string,
-  toDateTime: string
+  fromDateTime: Date,
+  toDateTime: Date
 ): Promise<VercelDataResponse> => {
   // Encode the date times
-  const encodedFromDateTime = encodeURIComponent(fromDateTime);
-  const encodedToDateTime = encodeURIComponent(toDateTime);
+  const encodedFromDateTime = encodeURIComponent(formatISO(fromDateTime));
+  const encodedToDateTime = encodeURIComponent(formatISO(toDateTime));
   console.log(encodedFromDateTime, encodedToDateTime);
   const response = await vercelInsightsInstance.get(
     `${category}?environment=production&filter=%7B%7D&from=${encodedFromDateTime}&limit=250&projectId=${PROJECT_ID}&to=${encodedToDateTime}`
   );
+  console.log(response);
   return response.data;
 };
 
 // path, referrer, country, os_name, client_name
 export const useFetchVercelDataCategory = (
   category: 'path' | 'referrer' | 'country' | 'os_name' | 'client_name',
-  fromDateTime: string,
-  toDateTime: string
+  fromDateTime: Date,
+  toDateTime: Date
 ) => {
   return useQuery(
     [`fetchVercelData`, category, fromDateTime, toDateTime],

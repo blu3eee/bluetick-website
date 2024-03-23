@@ -54,7 +54,7 @@ const config = {
         },
         success: {
           DEFAULT: '#06d6a0',
-          dark: '#bf3959',
+          dark: '#05ab80',
           light: '#38deb3',
           foreground: {
             DEFAULT: '#000000',
@@ -63,7 +63,7 @@ const config = {
         },
         error: {
           DEFAULT: '#ef476f',
-          dark: '#05ab80',
+          dark: '#bf3959',
           light: '#f26c8c',
           foreground: {
             DEFAULT: '#ffffff',
