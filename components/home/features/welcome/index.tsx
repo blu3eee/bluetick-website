@@ -5,7 +5,6 @@ import { BluetickContext } from '@/context/bluetick-context';
 import { Skeleton } from '@/components/ui/skeleton';
 import { getBotAvatarURL } from '@/lib/helper';
 import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
-import { subDays } from 'date-fns';
 import DiscordMessage from '@/components/bluetick/discord/message';
 import { motion } from 'framer-motion';
 import AnimatedButton from '@/components/motions/animated-button';
@@ -24,7 +23,7 @@ const WelcomeFeature = (): JSX.Element => {
       content: 'Hello <@1>!',
       embeds: [],
       attachments: [],
-      timestamp: subDays(new Date(), 1).valueOf(),
+      timestamp: new Date(2024, 0, 1).valueOf(),
     },
   ]);
 
@@ -84,7 +83,7 @@ const WelcomeFeature = (): JSX.Element => {
   const router = useRouter();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4">
       <div className="w-full text-sm  px-2 md:px-8">
         <FeatureLabel text="Welcome New Members" />
         <p className="text-foreground/80">

@@ -15,15 +15,30 @@ import { getBotAvatarURL } from '@/lib/helper';
 import { Button } from '@/components/ui/button';
 import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowLeft, Bug, Mail } from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowLeft,
+  Bug,
+  ChevronDown,
+  CornerDownRight,
+  Hash,
+  Mail,
+} from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 
 const TicketFeature = (): JSX.Element => {
+  const [channels, setChannels] = React.useState<
+    Record<string, { name: string }>
+  >({});
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 m-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4">
       <div className="block md:hidden">
         <Description />
+        <ChannelsDisplay channels={channels} />
       </div>
-      <div className="w-full rounded-lg bg-discord p-4">
+      <div className="w-full rounded-lg bg-discord p-4 text-white h-fit">
         <div
           className={cn(
             'text-warning uppercase font-semibold',
@@ -32,10 +47,11 @@ const TicketFeature = (): JSX.Element => {
         >
           Ticket Panel Channel
         </div>
-        <TicketDemo />
+        <TicketDemo channels={channels} setChannels={setChannels} />
       </div>
       <div className="hidden md:block">
         <Description />
+        <ChannelsDisplay channels={channels} />
       </div>
     </div>
   );
@@ -43,7 +59,24 @@ const TicketFeature = (): JSX.Element => {
 
 export default TicketFeature;
 
-const TicketDemo = (): JSX.Element => {
+interface TicketDemoProps {
+  channels: Record<string, { name: string }>;
+  setChannels: React.Dispatch<
+    React.SetStateAction<
+      Record<
+        string,
+        {
+          name: string;
+        }
+      >
+    >
+  >;
+}
+
+const TicketDemo: React.FC<TicketDemoProps> = ({
+  channels,
+  setChannels,
+}): JSX.Element => {
   const { isLoading, botDetails } = useContext(BluetickContext);
   // Generate a random user ID from 1 to 3
 
@@ -79,10 +112,6 @@ const TicketDemo = (): JSX.Element => {
       });
     }
   }, [messages]);
-
-  const [channels, setChannels] = React.useState<
-    Record<string, { name: string }>
-  >({});
 
   const handleCreateTicket = (panel: string): void => {
     // randomize the opened dummy user
@@ -185,7 +214,7 @@ const TicketDemo = (): JSX.Element => {
           <motion.div
             key={index}
             layoutId={`ticket-open-${counter + 1}`}
-            className="mt-1"
+            className="mt-1 "
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
@@ -206,11 +235,93 @@ const TicketDemo = (): JSX.Element => {
   );
 };
 
+interface ChannelsDisplayProps {
+  channels: Record<string, { name: string }>;
+}
+
+const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
+  channels,
+}): JSX.Element => {
+  const [curChannels, setCurChannels] = React.useState<
+    Array<{ name: string; isThread: boolean }>
+  >([]);
+  const [isThread, setIsThread] = React.useState(true);
+  React.useEffect(
+    () => {
+      const newChannels = Array.from(Object.entries(channels).values());
+      const newChannel = newChannels[newChannels.length - 1];
+      if (newChannel) {
+        setCurChannels((prev) => [
+          ...prev,
+          { name: newChannel[1].name, isThread },
+        ]);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [channels]
+  );
+
+  return (
+    <div className="flex flex-col mt-4 gap-2">
+      <div className="flex items-center gap-2">
+        <Label className="uppercase font-semibold text-info">
+          Ticket Channel Mode
+        </Label>
+        <Switch
+          size={'xs'}
+          checked={isThread}
+          onClick={() => {
+            setIsThread(!isThread);
+          }}
+        />
+        <span>{isThread ? `Thread Channel` : 'Text Channel'}</span>
+      </div>
+      <div className="bg-discord text-white rounded-lg px-3 py-4 max-h-[320px] overflow-auto">
+        {/* category */}
+        <div className="flex items-center gap-2 text-xs font-bold text-[#99aab5] uppercase">
+          <ChevronDown size={14} />
+          Ticket Category
+        </div>
+        <div className="ml-4 mt-1 ">
+          <div className="font-semibold text-md flex items-center gap-1 rounded-lg px-2 py-1 bg-[#99aab522]">
+            <Hash size={16} />
+            ticket-panel-channel
+          </div>
+          <div className="ml-3 text-[#99aab5] flex items-center gap-1 font-semibold text-md flex items-center">
+            <CornerDownRight size={16} />
+            ticket-support-0
+          </div>
+          {curChannels.slice(-3).map((channel) => (
+            <motion.div
+              key={channel.name}
+              layoutId={`ticket-${channel.name}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              initial="hidden"
+              animate="visible"
+              className="ml-3 text-[#99aab5] flex items-center gap-1 font-semibold text-md flex items-center"
+            >
+              {channel.isThread ? (
+                <CornerDownRight size={16} />
+              ) : (
+                <Hash size={16} />
+              )}
+              {channel.name}
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Description = (): JSX.Element => {
   const router = useRouter();
   const { data, status } = useSession();
   return (
-    <div className="w-full text-sm  px-2 md:px-8">
+    <div className="w-full text-sm px-2 md:px-8 text-start md:text-end">
       <FeatureLabel text="Ticket System" />
       <p className="text-foreground/80">
         🎟️ Customize our slick Ticket System for seamless support! Create
@@ -227,7 +338,7 @@ const Description = (): JSX.Element => {
         >
           <ArrowLeft className="hidden md:block" />
           <ArrowDown className="block md:hidden" />
-          See how it works{' '}
+          See how it works
         </Button>
         <AnimatedButton
           size={'sm'}

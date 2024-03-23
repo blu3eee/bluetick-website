@@ -9,8 +9,8 @@ const Page = (): JSX.Element => {
     <div>
       <HeroSection />
       <BluetickIsAll />
-      <BotCountries />
       <FeaturesDemo />
+      <BotCountries />
     </div>
   );
 };

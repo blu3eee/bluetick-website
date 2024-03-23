@@ -37,7 +37,7 @@ const BotCountries = (): JSX.Element => {
     <div className="flex flex-col items-center justify-center py-4 bg-secondary/70 px-2">
       <span
         className={cn(
-          'text-lg uppercase font-bold text-warning text-center',
+          'text-lg uppercase font-bold text-info text-center',
           poppinsFont.className
         )}
       >
