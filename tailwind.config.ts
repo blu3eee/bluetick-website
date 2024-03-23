@@ -93,6 +93,9 @@ const config = {
         },
         discord: {
           DEFAULT: '#38343c',
+          gray: {
+            DEFAULT: '#99aab5',
+          },
         },
       },
       borderRadius: {
