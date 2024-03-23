@@ -34,7 +34,7 @@ const BotCountries = (): JSX.Element => {
   const secondRowData = dataResponse.data.slice(3);
 
   return (
-    <div className="flex flex-col items-center justify-center py-4 bg-secondary/70">
+    <div className="flex flex-col items-center justify-center py-4 bg-secondary/70 px-2">
       <span
         className={cn(
           'text-lg uppercase font-bold text-warning text-center',
@@ -44,7 +44,7 @@ const BotCountries = (): JSX.Element => {
         SPECIAL THANKS TO OUR USERS FROM ALL AROUND THE WORLD
       </span>
       {/* First row */}
-      <div className="flex flex-wrap gap-2 items-center justify-center p-2">
+      <div className="flex flex-wrap gap-2 items-center justify-center">
         {firstRowData.map((data) => (
           <span key={data.key} className="text-4xl">
             {flag(data.key) ?? data.key}
@@ -52,7 +52,7 @@ const BotCountries = (): JSX.Element => {
         ))}
       </div>
       {/* Second row */}
-      <div className="flex flex-wrap gap-2 items-center justify-center p-2">
+      <div className="flex flex-wrap gap-2 items-center justify-center">
         {secondRowData.map((data) => (
           <span key={data.key} className="text-4xl">
             {flag(data.key) ?? data.key}
