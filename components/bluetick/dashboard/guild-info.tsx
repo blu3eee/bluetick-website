@@ -5,8 +5,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import { getGuildIconURL } from '@/lib/helper';
 import { Copy } from 'lucide-react';
-import Image from 'next/image';
 import { rubikFont } from '@/styles/fonts';
+import ImageWithFallback from '@/components/custom-ui/image-with-fallback';
 
 export const GuildInfo = (): JSX.Element => {
   const { discordGuild, isLoading, channels, isLoadingChannels } =
@@ -28,12 +28,13 @@ export const GuildInfo = (): JSX.Element => {
   return (
     <div className="flex flex-col gap-4 rounded-lg border px-6 py-4 bg-secondary w-full max-w-[1024px]">
       <div className="flex gap-8 items-center w-full">
-        <Image
+        <ImageWithFallback
           className="rounded-lg"
           src={getGuildIconURL(discordGuild)}
           alt="guild avt"
           width={150}
           height={150}
+          fallbackSrc="/discord/discord.png"
         />
         <div className="flex flex-col gap-1 w-full">
           <span className={`text-xl font-semibold ${rubikFont.className}`}>

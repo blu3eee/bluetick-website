@@ -5,10 +5,10 @@ import { getBotInviteURL, getGuildIconURL } from '@/lib/helper';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useRouter } from 'next/navigation';
 import { Callout } from '@/components/callout';
-import Image from 'next/image';
 import { BluetickContext } from '@/context/bluetick-context';
 import { BLUETICK_BOT_ID } from '@/config/bluetick';
 import { Button } from '@/components/ui/button';
+import ImageWithFallback from '@/components/custom-ui/image-with-fallback';
 
 export const MutualServers = (): JSX.Element => {
   const { botDetails, isLoading: isLoadingBluetick } =
@@ -52,26 +52,31 @@ export const MutualServers = (): JSX.Element => {
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 w-full gap-2">
-      {mutualGuilds.map((guild) => (
-        <div
-          key={guild.id}
-          className="flex flex-col items-center justify-center cursor-pointer mb-4"
-          onClick={() => {
-            handleServerClick(guild.id);
-          }}
-        >
-          <Image
-            className="rounded-lg aspect-square h-[128px]"
-            src={getGuildIconURL(guild)}
-            alt="server icon"
-            width={150}
-            height={150}
-            priority
-          />
-          <div className="text-lg mt-2">{guild.name}</div>
-        </div>
-      ))}
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 w-full gap-2 place-items-center	">
+      {mutualGuilds.map((guild) => {
+        return (
+          <div
+            key={guild.id}
+            className="flex flex-col items-center justify-center cursor-pointer mb-4 bg-secondary hover:bg-secondary/70 px-4 py-2 rounded-lg w-fit"
+            onClick={() => {
+              handleServerClick(guild.id);
+            }}
+          >
+            <ImageWithFallback
+              className="rounded-lg max-h-[128px]"
+              src={getGuildIconURL(guild)}
+              alt="server icon"
+              width={150}
+              height={150}
+              priority
+              fallbackSrc="/discord/discord.png"
+            />
+            <div className="text-md mt-2 font-semibold text-center truncate">
+              {guild.name}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
