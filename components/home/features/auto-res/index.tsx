@@ -150,16 +150,11 @@ const AutoResFeature = (): JSX.Element => {
           >
             Set this up
           </AnimatedButton>
-          <AnimatedButton
-            size={'sm'}
-            variant={'warning'}
-            className="gap-2"
-            disabled
-          >
+          <Button size={'sm'} variant={'warning'} className="gap-2" disabled>
             Send a message
             <ArrowRight className="hidden md:block" size={16} />
             <ArrowDown className="block md:hidden" size={16} />
-          </AnimatedButton>
+          </Button>
         </div>
       </div>
 

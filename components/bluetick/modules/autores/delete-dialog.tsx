@@ -1,27 +1,17 @@
 import type { AutoResponseDetails } from '@/types/bluetick/db/autores';
 import React from 'react';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { useMediaQuery } from '@/hooks/use-media-query';
+
 import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
+  ResponsiveModal,
+  ResponsiveModalClose,
+  ResponsiveModalContent,
+  ResponsiveModalDescription,
+  ResponsiveModalFooter,
+  ResponsiveModalHeader,
+  ResponsiveModalTitle,
+  ResponsiveModalTrigger,
+} from '@/components/custom-ui/responsive-modal';
 interface DeleteDialogProps {
   selected: AutoResponseDetails[];
   onDelete: () => void;
@@ -41,70 +31,17 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   onCancel,
 }) => {
   const [open, setOpen] = React.useState(false);
-  const isDesktop = useMediaQuery('(min-width: 768px)');
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger>
-          <Button
-            size={'sm'}
-            variant={'destructive'}
-            className="px-2 rounded-lg"
-          >
-            Delete
-          </Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Delete Confirmation</DialogTitle>
-            <DialogDescription className="flex flex-col gap-2">
-              Please confirm that you want to auto-responder
-              {selected.length > 1 && 's'} with trigger
-              {selected.length > 1 && 's'} below:
-              <div className="font-semibold text-foreground">
-                {selected.map((e, index) => (
-                  <span key={index}>- {e.trigger}</span>
-                ))}
-              </div>
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose className="flex items-center gap-2">
-              {onCancel && (
-                <Button
-                  size={'sm'}
-                  variant={'secondary'}
-                  className="px-2 rounded-lg"
-                  onClick={onCancel}
-                >
-                  Cancel
-                </Button>
-              )}
-              <Button
-                size={'sm'}
-                variant={'destructive'}
-                className="px-2 rounded-lg"
-                onClick={onDelete}
-              >
-                Confirm
-              </Button>
-            </DialogClose>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    );
-  }
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger>
+    <ResponsiveModal open={open} onOpenChange={setOpen}>
+      <ResponsiveModalTrigger>
         <Button size={'sm'} variant={'destructive'} className="px-2 rounded-lg">
           Delete
         </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="text-left">
-          <DrawerTitle>Delete Confirmation</DrawerTitle>
-          <DrawerDescription>
+      </ResponsiveModalTrigger>
+      <ResponsiveModalContent>
+        <ResponsiveModalHeader>
+          <ResponsiveModalTitle>Delete Confirmation</ResponsiveModalTitle>
+          <ResponsiveModalDescription className="flex flex-col gap-2">
             Please confirm that you want to auto-responder
             {selected.length > 1 && 's'} with trigger
             {selected.length > 1 && 's'} below:
@@ -113,35 +50,32 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
                 <span key={index}>- {e.trigger}</span>
               ))}
             </div>
-          </DrawerDescription>
-        </DrawerHeader>
-
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <div className="gap-2 flex flex-col items-center justify-end">
+          </ResponsiveModalDescription>
+        </ResponsiveModalHeader>
+        <ResponsiveModalFooter>
+          <ResponsiveModalClose className="flex items-center gap-2">
+            {onCancel && (
               <Button
                 size={'sm'}
-                variant={'destructive'}
-                className="px-2 rounded-lg w-full"
-                onClick={onDelete}
+                variant={'secondary'}
+                className="px-2 rounded-lg"
+                onClick={onCancel}
               >
-                Confirm
+                Cancel
               </Button>
-              {onCancel && (
-                <Button
-                  size={'sm'}
-                  variant={'secondary'}
-                  className="w-full"
-                  onClick={onCancel}
-                >
-                  Cancel
-                </Button>
-              )}
-            </div>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+            )}
+            <Button
+              size={'sm'}
+              variant={'destructive'}
+              className="px-2 rounded-lg"
+              onClick={onDelete}
+            >
+              Confirm
+            </Button>
+          </ResponsiveModalClose>
+        </ResponsiveModalFooter>
+      </ResponsiveModalContent>
+    </ResponsiveModal>
   );
 };
 

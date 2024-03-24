@@ -7,7 +7,7 @@ import {
   getBotInviteURL,
   getUserAvatarURL,
 } from '@/lib/helper';
-import { LogoutButton } from './auth-buttons';
+import { LoginButton, LogoutButton } from './auth-buttons';
 import { useParams, usePathname } from 'next/navigation';
 import { Separator } from '../ui/separator';
 import Link from 'next/link';
@@ -25,7 +25,7 @@ import { BLUETICK_BOT_ID } from '@/config/bluetick';
 import { Button } from '../ui/button';
 
 export const SidebarContent = (): JSX.Element => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const { botDetails, isLoading: isLoadingBluetick } =
     useContext(BluetickContext);
 
@@ -66,7 +66,7 @@ export const SidebarContent = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  if (!session || !session.user) {
+  if (status === 'loading') {
     return (
       <div className="w-full flex flex-col gap-4 p-4">
         <Skeleton className="h-12 w-full" />
@@ -75,10 +75,18 @@ export const SidebarContent = (): JSX.Element => {
       </div>
     );
   }
-  const { user: discordUser } = session;
 
+  if (!session || !session.user) {
+    return (
+      <div>
+        <LoginButton />
+      </div>
+    );
+  }
+
+  const { user: discordUser } = session;
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 overflow-y-auto">
       {isLoadingBluetick ? (
         <Skeleton className="h-12 w-full" />
       ) : botDetails ? (
