@@ -7,7 +7,7 @@ import AutoResFeature from './auto-res';
 
 const FeaturesDemo = (): JSX.Element => {
   return (
-    <section className="w-full px-2 sm:px-4 md:px-6 lg:px-12 xl:px-24 flex flex-col gap-4 md:gap-8 py-4">
+    <section className="w-full px-2 sm:px-4 md:px-6 lg:px-12 xl:px-24 flex flex-col gap-4 md:gap-8 lg:gap-12 xl:gap-24 py-4">
       <AnimatedElement>
         <WelcomeFeature />
       </AnimatedElement>
