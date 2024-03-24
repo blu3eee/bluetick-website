@@ -90,15 +90,16 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
 
   const handleDelete = async (): Promise<void> => {
     try {
-      const { data } = await apiInstance.delete<{ message: string }>(
+      const { data } = await apiInstance.delete<{ data: { message: string } }>(
         `${ROUTES.AUTO_RESPONSE}/${selected[0].id}`
       );
-      if (data.message) {
-        toast.success(data.message);
+      if (data.data.message) {
+        toast.success(data.data.message);
 
         setSelected([]);
       } else {
         toast.error(`Failed to delete`);
+        setSelected([]);
       }
       await refetch();
     } catch (e) {

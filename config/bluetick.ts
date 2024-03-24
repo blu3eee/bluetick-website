@@ -6,13 +6,17 @@ export const bluetickConfig: SiteConfig = {
   description: '- Multi Discord Bots Manager',
   href: '/',
   mainNav: [
-    // {
-    //   title: 'khainguyen.dev',
-    //   href: 'https://khainguyen.dev',
-    // },
     {
       title: 'About',
       href: '/about',
+    },
+    {
+      title: 'Help',
+      href: 'https://docs.bluetick.khainguyen.dev/en',
+    },
+    {
+      title: 'Discord Support',
+      href: 'https://discord.gg/sAjhq7SjZg',
     },
   ],
 };

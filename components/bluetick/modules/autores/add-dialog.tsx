@@ -50,14 +50,14 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
       <DialogTrigger>
         <Button>Add response</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[1024px] h-3/4  overflow-y-auto">
+      <DialogContent className="max-w-[1024px] h-3/4">
         <DialogHeader>
           <DialogTitle>Add new response</DialogTitle>
           <DialogDescription>
             Add a new auto-response for your guild
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-2 flex w-full">
+        <div className="flex flex-col gap-2 flex w-full overflow-y-auto">
           <div className="flex w-full gap-2">
             <div className="w-full bg-secondary rounded-lg px-2 py-3 flex flex-col gap-2">
               <Label htmlFor="trigger">Trigger</Label>
@@ -99,9 +99,17 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="submit" size={'sm'} onClick={handleCreateSubmit}>
-              Create
-            </Button>
+            <div className="grid grid-cols-2 gap-2">
+              <Button size={'sm'}>Cancel</Button>
+              <Button
+                type="submit"
+                variant={'success'}
+                size={'sm'}
+                onClick={handleCreateSubmit}
+              >
+                Create
+              </Button>
+            </div>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
