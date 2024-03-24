@@ -19,6 +19,7 @@ import { toast } from 'sonner';
 import EditMultiPanelDialog from './ui/edit-multi-panel';
 import { GuildContext } from '@/context/guild-context';
 import CreateMultiPanelForm from './ui/create-multi-panel';
+import { Button } from '@/components/ui/button';
 
 const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
   const {
@@ -107,7 +108,7 @@ const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                     <TableCell className="font-medium">
                       <a
                         href={`https://discord.com/channels/${serverId}/${panel.channelID}`}
-                        className="px-2 py-1 bg-gray-600 rounded-md"
+                        className="px-2 py-1 bg-discord/70 text-white rounded-md"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -132,20 +133,21 @@ const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                     </TableCell>
 
                     <TableCell className="flex justify-end items-center gap-2">
-                      <div
-                        className="text-white px-2 py-1 rounded-md font-semibold bg-background hover:bg-background/50 cursor-pointer border"
+                      <Button
+                        size={'xs'}
+                        variant={'warning'}
                         onClick={() => {
                           handeResendPanel(panel.id).catch((e) => {});
                         }}
                       >
                         Resend
-                      </div>
+                      </Button>
                       <EditMultiPanelDialog
                         panel={panel}
                         trigger={
-                          <div className="text-white px-2 py-1 rounded-md font-semibold bg-blue-500">
+                          <Button size={'xs'} variant={'info'}>
                             Edit
-                          </div>
+                          </Button>
                         }
                         refetch={() => {
                           refetch().catch((e) => {
@@ -153,8 +155,9 @@ const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                           });
                         }}
                       />
-                      <div
-                        className="text-white px-2 py-1 rounded-md font-semibold bg-destructive cursor-pointer"
+                      <Button
+                        size={'xs'}
+                        variant={'error'}
                         onClick={() => {
                           handleDeletePanel(panel.id).catch((e) => {
                             console.error(e);
@@ -162,7 +165,7 @@ const MultiReactionsPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                         }}
                       >
                         Delete
-                      </div>
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

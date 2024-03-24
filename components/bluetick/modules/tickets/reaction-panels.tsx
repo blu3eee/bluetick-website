@@ -125,7 +125,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                     <TableCell className="font-medium">
                       <a
                         href={`https://discord.com/channels/${serverId}/${panel.channelID}`}
-                        className="px-2 py-1 bg-gray-600 rounded-md"
+                        className="px-2 py-1 bg-discord/70 text-white rounded-md"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -149,6 +149,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                     <TableCell className="flex justify-end items-center gap-2">
                       <Button
                         size={'xs'}
+                        variant={'warning'}
                         onClick={() => {
                           handeResendPanel(panel.id).catch((e) => {});
                         }}
@@ -158,7 +159,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                       <EditPanelDialog
                         panel={panel}
                         trigger={
-                          <Button size={'xs'} variant={'blue'}>
+                          <Button size={'xs'} variant={'info'}>
                             Edit
                           </Button>
                         }
@@ -170,7 +171,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                       />
                       <Button
                         size={'xs'}
-                        variant={'red'}
+                        variant={'error'}
                         onClick={() => {
                           handleDeletePanel(panel.id).catch((e) => {
                             console.log(e);
