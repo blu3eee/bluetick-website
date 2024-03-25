@@ -13,10 +13,13 @@ const ImageWithFallback = (props: ImageWithFallbackProps): JSX.Element => {
     <Image
       src={imgSrc}
       alt={alt}
-      {...rest}
+      width={150}
+      height={150}
+      priority
       onError={() => {
         setImgSrc(fallbackSrc);
       }}
+      {...rest}
     />
   );
 };

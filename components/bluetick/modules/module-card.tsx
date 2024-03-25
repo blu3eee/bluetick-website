@@ -1,3 +1,4 @@
+import { Icons } from '@/components/icons';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Switch } from '@/components/ui/switch';
 import { GuildContext } from '@/context/guild-context';
@@ -39,7 +40,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
   return (
     <div className="flex flex-col gap-2 bg-secondary p-4 rounded-lg justify-between">
       <div className="flex flex-col gap-2">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between">
+        <div className="flex flex-col justify-between gap-2">
           <div className="text-lg font-semibold">{props.name}</div>
           <Switch
             size="xs"
@@ -50,17 +51,29 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
                 console.log(e);
               });
             }}
-            className="self-end sm:self-start"
+            className="self-end"
           />
         </div>
         <div className="text-gray-500 text-sm">{props.description}</div>
       </div>
-      <a
-        href={`/dashboard/${config.guild.guildID}/modules/${props.navigateTo}`}
-        className="bg-background text-foreground px-2 py-1 w-fit rounded-lg border text-sm self-end hover:bg-red-400/80 focus:bg-red-400/80"
-      >
-        Settings
-      </a>
+      <div className="flex items-center gap-1 justify-end">
+        <a
+          href={`https://docs.bluetick.khainguyen.dev/en/dashboard/${props.navigateTo}`}
+          className="bg-warning text-warning-foreground hover:bg-warning-light focus:bg-warning-light/80 px-2 py-1 w-fit rounded-lg border text-sm self-end flex gap-1 items-center font-medium"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Icons.help size={16} />
+          Help
+        </a>
+        <a
+          href={`/dashboard/${config.guild.guildID}/modules/${props.navigateTo}`}
+          className="bg-info text-info-foreground hover:bg-info-light focus:bg-info-light/80 px-2 py-1 w-fit rounded-lg border text-sm self-end flex items-center gap-1 font-medium"
+        >
+          <Icons.settings size={16} />
+          Settings
+        </a>
+      </div>
     </div>
   );
 };
@@ -89,16 +102,23 @@ export const guildModules: ModuleCardProps[] = [
   {
     name: 'Autoresponder',
     description: 'Automatically respond to text triggers.',
-    navigateTo: 'autoresponder',
+    navigateTo: 'auto-responder',
     flag: GuildModules.AUTO_RESPONSE,
   },
   {
     name: 'Ticket System',
     description:
-      'System to creatededicated channels or threads tailored to serve various purposes based on your needs',
+      'System to create dedicated channels or threads tailored to serve various purposes based on your needs',
     navigateTo: 'ticket-system',
     flag: GuildModules.TICKET,
   },
+  // {
+  //   name: 'Twitch',
+  //   description:
+  //     'System to creatededicated channels or threads tailored to serve various purposes based on your needs',
+  //   navigateTo: 'twitch',
+  //   flag: GuildModules.TWITCH,
+  // },
   {
     name: 'Autoroles',
     description:
