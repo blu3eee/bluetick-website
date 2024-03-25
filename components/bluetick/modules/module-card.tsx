@@ -56,7 +56,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
         </div>
         <div className="text-gray-500 text-sm">{props.description}</div>
       </div>
-      <div className="flex items-center gap-1 justify-end">
+      <div className="flex flex-wrap items-center gap-1 justify-end">
         <a
           href={`https://docs.bluetick.khainguyen.dev/en/dashboard/${props.navigateTo}`}
           className="bg-warning text-warning-foreground hover:bg-warning-light focus:bg-warning-light/80 px-2 py-1 w-fit rounded-lg border text-sm self-end flex gap-1 items-center font-medium"
