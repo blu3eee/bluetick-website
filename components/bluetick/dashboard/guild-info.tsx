@@ -11,6 +11,7 @@ import ImageWithFallback from '@/components/custom-ui/image-with-fallback';
 export const GuildInfo = (): JSX.Element => {
   const { discordGuild, isLoading, channels, isLoadingChannels } =
     useContext(GuildContext);
+
   if (isLoading || !discordGuild)
     return (
       <div className="w-full">
@@ -25,6 +26,7 @@ export const GuildInfo = (): JSX.Element => {
         </div>
       </div>
     );
+
   return (
     <div className="flex flex-col gap-4 rounded-lg border px-6 py-4 bg-secondary w-full max-w-[1024px]">
       <div className="flex gap-8 items-center w-full">

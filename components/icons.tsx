@@ -26,10 +26,9 @@ import {
   Linkedin,
   Download,
   FileArchive,
-  // eslint-disable-next-line import/no-duplicates
+  ChevronsUpDown,
+  type LucideProps,
 } from 'lucide-react';
-// eslint-disable-next-line import/no-duplicates
-import type { LucideProps } from 'lucide-react';
 import GithubSVG from './svgs/github';
 import FacebookSVG from './svgs/facebook';
 import InstagramSVG from './svgs/instagram';
@@ -67,6 +66,7 @@ export const Icons = {
   fileText: FileText,
   check: Check,
   zip: FileArchive,
+  select: ChevronsUpDown,
   gif: ({ ...props }: LucideProps) => <GIFSVG {...props} />,
   pdf: ({ ...props }: LucideProps) => <PdfSVG {...props} />,
   gitHub: ({ ...props }: LucideProps) => <GithubSVG {...props} />,
