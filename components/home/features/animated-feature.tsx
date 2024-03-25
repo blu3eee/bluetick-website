@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 const variants = {
   hidden: {
@@ -15,14 +16,17 @@ const animationConfig = {
   viewport: { once: true },
 };
 
-const AnimatedElement: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => (
+const AnimatedElement: React.FC<{
+  id?: string;
+  className?: string;
+  children: React.ReactNode;
+}> = ({ id, className, children }) => (
   <motion.div
     initial="hidden"
     whileInView="visible"
+    id={id}
+    className={cn('max-w-[1400px] mx-auto', className)}
     {...animationConfig}
-    className="max-w-[1400px] mx-auto"
   >
     {children}
   </motion.div>
