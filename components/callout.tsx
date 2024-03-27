@@ -36,7 +36,7 @@ export function Callout({
         'my-6 flex items-center rounded-md border border-l-4 p-4',
         {
           'border-red-900 bg-red-50 text-black': type === 'danger',
-          'border-yellow-900 bg-yellow-50 text-black': type === 'warning',
+          'border-warning-light text-foreground': type === 'warning',
         },
         className
       )}
