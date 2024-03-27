@@ -52,7 +52,7 @@ const DisplayNotificationMessage: React.FC<Props> = ({
                       streamerDetails
                     ),
                     url: replacePlaceholders(
-                      message.embed.titleURL ?? '',
+                      message.embed.url ?? '',
                       streamerDetails
                     ),
                     description: replacePlaceholders(

@@ -35,7 +35,7 @@ export interface EmbedDetails {
   message?: string;
   color?: string;
   title?: string;
-  titleURL?: string;
+  url?: string;
   author?: string;
   authorURL?: string;
   image?: string;

@@ -182,12 +182,13 @@ const MessageForm: React.FC<MessageFormProps> = ({
                 />
               </div>
               <div className="w-full">
-                <Label htmlFor="titleURL">Title URL</Label>
+                <Label htmlFor="url">Title URL</Label>
+
                 <Input
-                  id="titleURL"
-                  name="titleURL"
+                  id="url"
+                  name="url"
                   placeholder="Title URL"
-                  value={message.embed?.titleURL ?? ''}
+                  value={message.embed?.url ?? ''}
                   onChange={handleEmbedChange}
                 />
               </div>
