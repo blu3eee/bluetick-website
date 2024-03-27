@@ -109,6 +109,23 @@ const TwitchDev = (): JSX.Element => {
     }
   };
 
+  const handleTestGoLive = async (user: TwitchUser) => {
+    try {
+      const response = await twitchInstance.post('/streams/test/online', {
+        userId: user.id ?? '',
+      });
+      console.log(response.status);
+      if (response.status === 200) {
+        toast.success('Streamer is live!');
+      } else {
+        toast.error(`An error happened while trying to go live`);
+      }
+    } catch (e) {
+      console.log('Error testing go live');
+      console.error(e);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2 bg-secondary rounded-lg p-4">
@@ -195,7 +212,7 @@ const TwitchDev = (): JSX.Element => {
             <Label className="text-twitch uppercase font-semibold">
               Watching
             </Label>
-            <div className="flex flex-wrap items-center">
+            <div className="flex flex-wrap items-center gap-2">
               <Button
                 variant={'error'}
                 size={'sm'}
@@ -204,6 +221,15 @@ const TwitchDev = (): JSX.Element => {
                 }}
               >
                 Unwatch this user
+              </Button>
+              <Button
+                variant={'twitch'}
+                size={'sm'}
+                onClick={() => {
+                  handleTestGoLive(selected).catch((e) => {});
+                }}
+              >
+                Test Go Live!
               </Button>
             </div>
             <TwitchUserDisplay {...selected} />

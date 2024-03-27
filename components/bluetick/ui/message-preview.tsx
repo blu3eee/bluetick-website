@@ -92,19 +92,16 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                     <Link
                       className={cn(
                         'flex items-center font-bold my-1',
-                        message.embed.titleURL
+                        message.embed.url
                           ? 'underline cursor-pointer hover:text-foreground/80'
                           : ''
                       )}
                       href={replacePlaceholders(
-                        message.embed.titleURL &&
+                        message.embed.url &&
                           isValidUrl(
-                            replacePlaceholders(
-                              message.embed.titleURL,
-                              placeholders
-                            )
+                            replacePlaceholders(message.embed.url, placeholders)
                           )
-                          ? message.embed.titleURL
+                          ? message.embed.url
                           : '',
                         placeholders
                       )}

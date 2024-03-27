@@ -42,7 +42,7 @@ const SearchAndAdd: React.FC<Props> = ({ refetch }) => {
       message: '',
       color: '#6441a5',
       title: '{streamTitle}',
-      titleURL: '{streamLink}',
+      url: '{streamLink}',
       author: '{streamer} is live!',
       authorURL: '{streamerAvatar}',
       image: '{streamPreview}',
