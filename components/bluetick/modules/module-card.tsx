@@ -112,13 +112,13 @@ export const guildModules: ModuleCardProps[] = [
     navigateTo: 'ticket-system',
     flag: GuildModules.TICKET,
   },
-  // {
-  //   name: 'Twitch',
-  //   description:
-  //     'System to creatededicated channels or threads tailored to serve various purposes based on your needs',
-  //   navigateTo: 'twitch',
-  //   flag: GuildModules.TWITCH,
-  // },
+  {
+    name: 'Twitch',
+    description:
+      'Send notifications when you favorite Twitch users/streamers go live',
+    navigateTo: 'twitch',
+    flag: GuildModules.TWITCH,
+  },
   {
     name: 'Autoroles',
     description:
