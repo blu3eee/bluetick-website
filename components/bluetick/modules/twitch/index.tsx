@@ -22,7 +22,7 @@ const TwitchComponent = (): JSX.Element => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Callout type="warning">This feature is still in experimental</Callout>
+      <Callout type="warning">This feature is still experimental</Callout>
       <WatchersList
         watchers={watchers}
         refetch={() => {
