@@ -109,7 +109,7 @@ const TwitchDev = (): JSX.Element => {
     }
   };
 
-  const handleTestGoLive = async (user: TwitchUser) => {
+  const handleTestGoLive = async (user: TwitchUser): Promise<void> => {
     try {
       const response = await twitchInstance.post('/streams/test/online', {
         userId: user.id ?? '',
