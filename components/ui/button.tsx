@@ -25,6 +25,7 @@ const buttonVariants = cva(
         error: 'bg-error text-error-foreground hover:bg-error-light',
         success: 'bg-success text-success-foreground hover:bg-success-light',
         warning: 'bg-warning text-warning-foreground hover:bg-warning-light',
+        twitch: 'bg-twitch text-twitch-foreground hover:bg-twitch-secondary',
       },
       size: {
         default: 'h-10 px-4 py-2',

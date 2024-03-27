@@ -45,11 +45,21 @@ const DevPage = (): JSX.Element => {
           </div>
         </div>
       )}
-      <a href="/dev/playground">
-        <Button size={'sm'} variant={'warning'}>
-          Playground
-        </Button>
-      </a>
+      <div className="flex items-center gap-2">
+        <a href="/dev/playground">
+          <Button size={'sm'} variant={'warning'}>
+            Playground
+          </Button>
+        </a>
+        <a href="/dev/twitch">
+          <Button
+            size={'sm'}
+            className="bg-twitch text-twitch-foreground hover:bg-twitch-secondary focus:bg-twitch-secondary transition ease-in-out duration-200"
+          >
+            Twitch
+          </Button>
+        </a>
+      </div>
       <VercelData />
     </div>
   );

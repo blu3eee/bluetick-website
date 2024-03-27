@@ -97,6 +97,11 @@ const config = {
             DEFAULT: '#99aab5',
           },
         },
+        twitch: {
+          DEFAULT: '#6441a5',
+          secondary: '#392E5C',
+          foreground: { DEFAULT: '#ffffff' },
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

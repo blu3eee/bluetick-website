@@ -26,3 +26,16 @@ export function intToHexColor(intColor: number): string {
   // Prefix with '#' to make it usable in CSS
   return `#${hexColor}`;
 }
+
+export const replacePlaceholders = (
+  text: string,
+  valuesMap: Record<string, string>
+): string => {
+  let resultText = text;
+  for (const [placeholder, value] of Object.entries(valuesMap)) {
+    // Using a global regex to replace all instances of the placeholder
+    const regex = new RegExp(`{${placeholder}}`, 'g');
+    resultText = resultText.replace(regex, value);
+  }
+  return resultText;
+};
