@@ -33,6 +33,7 @@ interface MessageFormProps {
   initButton?: ButtonInfoDetails;
   buttonEmojis?: DiscordPartialEmoji[];
   onButtonChange?: (button: ButtonInfoDetails) => void;
+  placeholders?: Record<string, string>;
 }
 
 const MessageForm: React.FC<MessageFormProps> = ({
@@ -45,6 +46,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   initButton,
   buttonEmojis,
   onButtonChange,
+  placeholders,
 }): JSX.Element => {
   const [message, setMessage] = useState<MessageInfoDetails>(initialMessage);
   const [button, setButton] = useState<ButtonInfoDetails>(
@@ -374,6 +376,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
           type={type}
           message={message}
           buttons={initButton ? [button] : undefined}
+          placeholders={placeholders}
         />
       )}
     </div>

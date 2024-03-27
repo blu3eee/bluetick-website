@@ -1,7 +1,7 @@
 import { RenderHtmlContent } from '@/components/custom-ui/styled-text';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
+import { cn, replacePlaceholders } from '@/lib/utils';
 import { isValidImageUrl, isValidUrl } from '@/lib/validators';
 import type { ButtonInfoDetails, MessageInfoDetails } from '@/types/bluetick';
 import Image from 'next/image';
@@ -13,12 +13,14 @@ interface MessagePreviewProps {
   type: string;
   message: MessageInfoDetails;
   buttons?: ButtonInfoDetails[];
+  placeholders?: Record<string, string>;
 }
 
 const MessagePreview: React.FC<MessagePreviewProps> = ({
   message,
   type,
   buttons,
+  placeholders = {},
 }) => {
   return (
     <div>
@@ -37,13 +39,15 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
         </div>
         {type !== 'Embed' && message.content && (
           <div className="flex my-1 text-sm flex flex-col">
-            {message.content.split('\n').map((line, index) => {
-              return (
-                <span key={index}>
-                  <RenderHtmlContent text={line} />
-                </span>
-              );
-            })}
+            {replacePlaceholders(message.content, placeholders)
+              .split('\n')
+              .map((line, index) => {
+                return (
+                  <span key={index}>
+                    <RenderHtmlContent text={line} />
+                  </span>
+                );
+              })}
           </div>
         )}
         {/* whole embed */}
@@ -63,7 +67,10 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                         isValidImageUrl(message.embed.authorURL) && (
                           <div className="w-[25px] h-[25px]">
                             <Image
-                              src={message.embed.authorURL}
+                              src={replacePlaceholders(
+                                message.embed.authorURL,
+                                placeholders
+                              )}
                               alt="thumbnail"
                               height={100}
                               width={100}
@@ -72,7 +79,10 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                           </div>
                         )}
                       <div className="text-sm font-semibold">
-                        {message.embed.author}
+                        {replacePlaceholders(
+                          message.embed.author,
+                          placeholders
+                        )}
                       </div>
                     </div>
                   )}
@@ -86,36 +96,48 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                           ? 'underline cursor-pointer hover:text-foreground/80'
                           : ''
                       )}
-                      href={
+                      href={replacePlaceholders(
                         message.embed.titleURL &&
-                        isValidUrl(message.embed.titleURL)
+                          isValidUrl(
+                            replacePlaceholders(
+                              message.embed.titleURL,
+                              placeholders
+                            )
+                          )
                           ? message.embed.titleURL
-                          : ''
-                      }
+                          : '',
+                        placeholders
+                      )}
                     >
-                      {message.embed.title}
+                      {replacePlaceholders(message.embed.title, placeholders)}
                     </Link>
                   )}
 
                   {/* description */}
                   {message.embed?.description && (
                     <div className="flex my-1 text-sm flex flex-col">
-                      {message.embed.description
+                      {replacePlaceholders(
+                        message.embed.description,
+                        placeholders
+                      )
                         .split('\n')
                         .map((line, index) => (
-                          <p key={index}>
-                            <RenderHtmlContent text={line} />
-                          </p>
+                          <RenderHtmlContent key={index} text={line} />
                         ))}
                     </div>
                   )}
                 </div>
                 {/* right one */}
                 {message.embed.thumbnail &&
-                  isValidImageUrl(message.embed.thumbnail) && (
+                  isValidImageUrl(
+                    replacePlaceholders(message.embed.thumbnail, placeholders)
+                  ) && (
                     <div className="ml-2">
                       <Image
-                        src={message.embed.thumbnail}
+                        src={replacePlaceholders(
+                          message.embed.thumbnail,
+                          placeholders
+                        )}
                         alt="thumbnail"
                         height={100}
                         width={150}
@@ -125,24 +147,35 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                   )}
               </div>
 
-              {message.embed.image && isValidImageUrl(message.embed.image) && (
-                <div className="w-full my-1 overflow-hidden">
-                  <Image
-                    src={message.embed.image}
-                    alt="image"
-                    height={250}
-                    width={250}
-                    className="w-full h-auto rounded-md object-cover max-h-[256px] w-auto"
-                  />
-                </div>
-              )}
+              {message.embed.image &&
+                isValidImageUrl(
+                  replacePlaceholders(message.embed.image, placeholders)
+                ) && (
+                  <div className="w-full my-1 overflow-hidden">
+                    <Image
+                      src={replacePlaceholders(
+                        message.embed.image,
+                        placeholders
+                      )}
+                      alt="image"
+                      height={250}
+                      width={250}
+                      className="w-full h-auto rounded-md object-cover max-h-[256px] w-auto"
+                    />
+                  </div>
+                )}
               {message.embed.footer && (
                 <div className="flex items-center gap-2 my-1">
                   {message.embed.footerURL &&
-                    isValidImageUrl(message.embed.footerURL) && (
+                    isValidImageUrl(
+                      replacePlaceholders(message.embed.footerURL, placeholders)
+                    ) && (
                       <div className="w-[24px] h-[24px]">
                         <Image
-                          src={message.embed.footerURL}
+                          src={replacePlaceholders(
+                            message.embed.footerURL,
+                            placeholders
+                          )}
                           alt="footer icon"
                           height={250}
                           width={250}
