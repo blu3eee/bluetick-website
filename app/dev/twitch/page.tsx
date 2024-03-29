@@ -126,6 +126,23 @@ const TwitchDev = (): JSX.Element => {
     }
   };
 
+  const handleTestGoOffline = async (user: TwitchUser): Promise<void> => {
+    try {
+      const response = await twitchInstance.post('/streams/test/offline', {
+        userId: user.id ?? '',
+      });
+      console.log(response.status);
+      if (response.status === 200) {
+        toast.success('Streamer is offline.');
+      } else {
+        toast.error(`An error happened while trying to go offline`);
+      }
+    } catch (e) {
+      console.log('Error testing go offline');
+      console.error(e);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-2 bg-secondary rounded-lg p-4">
@@ -230,6 +247,15 @@ const TwitchDev = (): JSX.Element => {
                 }}
               >
                 Test Go Live!
+              </Button>
+              <Button
+                variant={'twitch'}
+                size={'sm'}
+                onClick={() => {
+                  handleTestGoOffline(selected).catch((e) => {});
+                }}
+              >
+                Test Go Offline
               </Button>
             </div>
             <TwitchUserDisplay {...selected} />
