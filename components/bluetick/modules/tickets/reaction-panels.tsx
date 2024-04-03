@@ -22,6 +22,7 @@ import CreatePanelForm from './ui/create-panel';
 
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import DeletePanelDialog from './ui/delete-panel';
 
 const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
   const { data, refetch, isLoading } = useFetchTicketPanels(
@@ -169,17 +170,19 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                           });
                         }}
                       />
-                      <Button
-                        size={'xs'}
-                        variant={'error'}
-                        onClick={() => {
+                      <DeletePanelDialog
+                        trigger={
+                          <Button size={'xs'} variant={'error'}>
+                            Delete
+                          </Button>
+                        }
+                        onSubmit={() => {
                           handleDeletePanel(panel.id).catch((e) => {
                             console.log(e);
                           });
                         }}
-                      >
-                        Delete
-                      </Button>
+                        panelId={panel.id}
+                      />
                     </TableCell>
                   </TableRow>
                 ))}
