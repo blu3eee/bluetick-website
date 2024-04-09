@@ -188,6 +188,13 @@ export interface TranscriptEmbed {
   imageURL: string;
   timestamp: string | null;
   color: string | null;
+  fields?: Array<EmbedFields>;
+}
+
+export interface EmbedFields {
+  name: string;
+  value: string;
+  inline?: boolean;
 }
 
 export interface TranscriptAttachment {

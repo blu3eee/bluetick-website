@@ -10,7 +10,7 @@ import { BLUETICK_BOT_ID } from '@/config/bluetick';
 import { GuildContext } from '@/context/guild-context';
 import WatchersList from './watchers-list';
 import type { TwitchUser } from '@/types/twitch';
-import { Callout } from '@/components/callout';
+import { images } from '@/config/images';
 
 const TwitchComponent = (): JSX.Element => {
   const { discordGuild } = useContext(GuildContext);
@@ -22,7 +22,7 @@ const TwitchComponent = (): JSX.Element => {
 
   return (
     <div className="flex flex-col gap-2">
-      <Callout type="warning">This feature is still experimental</Callout>
+      {/* <Callout type="warning">This feature is still experimental</Callout> */}
       <WatchersList
         watchers={watchers}
         refetch={() => {
@@ -56,9 +56,7 @@ export const generateTwitchPlaceholders = (
     streamLink: `https://twitch.tv/${streamer.name}`,
     streamer: streamer.displayName,
     streamerAvatar: streamer.profilePictureUrl ?? '/discord/discord.png',
-    streamPreview:
-      streamer.offlinePlaceholderUrl ??
-      'https://static1.anpoimages.com/wordpress/wp-content/uploads/2022/08/Twitch-Hero.jpg',
+    streamPreview: streamer.offlinePlaceholderUrl ?? images.twitchLive,
   };
 };
 
