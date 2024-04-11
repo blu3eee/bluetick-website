@@ -32,14 +32,15 @@ const VercelData = (): JSX.Element => {
       category: 'client_name',
     },
   ];
+  const today = new Date();
 
   const [dataDateRange, setDataDateRange] = React.useState<DateRange>({
-    from: new Date(2024, 2, 10),
+    from: new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()),
     to: new Date(),
   });
 
   const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
-    from: new Date(2024, 2, 10),
+    from: new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()),
     to: new Date(),
   });
 

@@ -15,7 +15,7 @@ const BotCountries = (): JSX.Element => {
     data: dataResponse,
   } = useFetchVercelDataCategory(
     'country',
-    new Date(2024, 2, 10),
+    new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()),
     new Date(today.getFullYear(), today.getMonth(), today.getDate())
   );
 
