@@ -11,11 +11,11 @@ const fetchVercelDataCategory = async (
   // Encode the date times
   const encodedFromDateTime = encodeURIComponent(formatISO(fromDateTime));
   const encodedToDateTime = encodeURIComponent(formatISO(toDateTime));
-  console.log(encodedFromDateTime, encodedToDateTime);
+  // console.log(encodedFromDateTime, encodedToDateTime);
   const response = await vercelInsightsInstance.get(
     `${category}?environment=production&filter=%7B%7D&from=${encodedFromDateTime}&limit=250&projectId=${PROJECT_ID}&to=${encodedToDateTime}`
   );
-  console.log(response);
+  // console.log(response);
   return response.data;
 };
 
