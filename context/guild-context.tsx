@@ -1,20 +1,20 @@
-'use client';
-import { apiInstance } from '@/config/bluetick';
-import { useGuildData } from '@/hooks/api/discord/guild';
-import { useFetchGuildChannels } from '@/hooks/api/discord/guild-channels';
-import useMutualGuilds from '@/hooks/api/discord/mutual-guilds';
+"use client";
+import { apiInstance } from "@/config/bluetick";
+import { useGuildData } from "@/hooks/api/discord/guild";
+import { useFetchGuildChannels } from "@/hooks/api/discord/guild-channels";
+import useMutualGuilds from "@/hooks/api/discord/mutual-guilds";
 import {
-  BotGuildConfig,
-  UpdateGuildConfig,
-} from '@/types/bluetick/db/guild-config';
+  type BotGuildConfig,
+  type UpdateGuildConfig,
+} from "@/types/bluetick/db/guild-config";
 import {
-  DiscordGuild,
-  DiscordPartialGuildChannel,
-} from '@/types/bluetick/discord';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import React, { createContext, useState } from 'react';
-import { toast } from 'sonner';
+  type DiscordGuild,
+  type DiscordPartialGuildChannel,
+} from "@/types/bluetick/discord";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import React, { createContext, useState } from "react";
+import { toast } from "sonner";
 
 interface GuildContextValue {
   discordGuild: DiscordGuild | null;
@@ -50,7 +50,7 @@ export const GuildContextProvider = ({
   children: React.ReactNode;
   serverId: string;
   botId: string;
-}) => {
+}): React.ReactElement => {
   const {
     data: guildData,
     isLoading,
@@ -65,24 +65,28 @@ export const GuildContextProvider = ({
 
   const router = useRouter();
   const { data: session, status } = useSession();
-  React.useEffect(() => {
-    if (status === 'loading' || session?.developerMode) {
-      return;
-    }
-
-    if (isLoadingMutualGuilds === 'completed') {
-      if (
-        mutualGuilds &&
-        mutualGuilds.filter((server) => server.id === serverId).length === 0
-      ) {
-        router.push('/servers');
-        toast.error('Invalid server request');
-      } else if (!mutualGuilds) {
-        router.push('/servers');
-        toast.error('Invalid to load your available servers');
+  React.useEffect(
+    () => {
+      if (status === "loading" || session?.developerMode) {
+        return;
       }
-    }
-  }, [isLoadingMutualGuilds, status, session]);
+
+      if (isLoadingMutualGuilds === "completed") {
+        if (
+          mutualGuilds &&
+          mutualGuilds.filter((server) => server.id === serverId).length === 0
+        ) {
+          router.push("/servers");
+          toast.error("Invalid server request");
+        } else if (!mutualGuilds) {
+          router.push("/servers");
+          toast.error("Invalid to load your available servers");
+        }
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isLoadingMutualGuilds, status, session],
+  );
 
   const [discordGuildState, setDiscordGuildState] =
     useState<DiscordGuild | null>(null);
@@ -105,10 +109,10 @@ export const GuildContextProvider = ({
   React.useEffect(() => {
     if (guildChannels) {
       const textChannels = guildChannels.filter(
-        (channel) => channel.type === 0
+        (channel) => channel.type === 0,
       );
       const voiceChannels = guildChannels.filter(
-        (channel) => channel.type === 2
+        (channel) => channel.type === 2,
       );
       const categories = guildChannels.filter((channel) => channel.type === 4);
       setGuildChannelsState({
@@ -118,10 +122,12 @@ export const GuildContextProvider = ({
       });
     }
   }, [guildChannels]);
-  const updateConfig = async (updateDto: UpdateGuildConfig) => {
-    let { data } = await apiInstance.patch<{ data: BotGuildConfig }>(
+  const updateConfig = async (
+    updateDto: UpdateGuildConfig,
+  ): Promise<boolean> => {
+    const { data } = await apiInstance.patch<{ data: BotGuildConfig }>(
       `/guilds-config/${botId}/${serverId}`,
-      updateDto
+      updateDto,
     );
 
     if (data.data) {
@@ -139,7 +145,9 @@ export const GuildContextProvider = ({
     isLoading,
     channels: guildChannelsState,
     isLoadingChannels: isLoadingGuildChannels,
-    refetchGuildData: refetchData,
+    refetchGuildData: () => {
+      refetchData().catch((e) => {});
+    },
     updateConfig,
   };
 

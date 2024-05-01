@@ -1,4 +1,4 @@
-export type ProjectInfo = {
+export interface ProjectInfo {
   name: string;
   time: string;
   role?: string;
@@ -11,4 +11,4 @@ export type ProjectInfo = {
   };
   resume_points?: string[];
   team_of?: number;
-};
+}

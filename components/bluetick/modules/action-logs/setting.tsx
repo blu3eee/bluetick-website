@@ -1,14 +1,14 @@
-'use client';
-import React from 'react';
+"use client";
+import React from "react";
 
-import { ROUTES, apiInstance } from '@/config/bluetick';
-import { Label } from '@/components/ui/label';
-import { Checkbox } from '@/components/ui/checkbox';
+import { ROUTES, apiInstance } from "@/config/bluetick";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 
-import { toast } from 'sonner';
-import type { GuildLogSettingDetails } from '@/types/bluetick/db/bot-logs/logs-settings';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { toast } from "sonner";
+import type { GuildLogSettingDetails } from "@/types/bluetick/db/bot-logs/logs-settings";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const LogSetting: React.FC<{
   setting: GuildLogSettingDetails;
@@ -47,15 +47,15 @@ const LogSetting: React.FC<{
         await refetch();
         toast.success(
           `Specified channel logs ${
-            data.data.specifyChannels ? 'enabled' : 'disabled'
-          }`
+            data.data.specifyChannels ? "enabled" : "disabled"
+          }`,
         );
       } else {
         toast.error(`Failed to update logs setting`);
       }
     } catch (e) {
       console.error(e);
-      toast.error('An error happened while trying to update logs setting');
+      toast.error("An error happened while trying to update logs setting");
     } finally {
       setTimeout(() => {
         setIsUpdating(false); // End updating
@@ -74,7 +74,7 @@ const LogSetting: React.FC<{
       toast.success(`New account age updated to ${newAccountAge} days`);
     } catch (error) {
       console.error(error);
-      toast.error('Failed to update new account age');
+      toast.error("Failed to update new account age");
     } finally {
       setIsUpdating(false);
       await refetch();
@@ -117,7 +117,7 @@ const LogSetting: React.FC<{
             }}
             disabled={isUpdating || newAccountAge === setting.newAccountAge}
             id="update-button" // Add CSS classes as needed
-            variant={'red'}
+            variant={"red"}
           >
             Update
           </Button>

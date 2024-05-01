@@ -1,6 +1,6 @@
-import { Icons } from '@/components/icons';
-import Image from 'next/image';
-import React from 'react';
+import { Icons } from "@/components/icons";
+import Image from "next/image";
+import React from "react";
 
 interface Props {
   src: string;

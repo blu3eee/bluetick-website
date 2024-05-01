@@ -1,7 +1,7 @@
-import ModulePageTemplate from '@/components/bluetick/modules/module-page-template';
-import { GUILD_MODULES } from '@/config/bluetick';
-import React from 'react';
-import WelcomeMessage from '@/components/bluetick/modules/welcome/welcome-message';
+import ModulePageTemplate from "@/components/bluetick/modules/module-page-template";
+import { GUILD_MODULES } from "@/config/bluetick";
+import React from "react";
+import WelcomeMessage from "@/components/bluetick/modules/welcome/welcome-message";
 
 const Welcome = ({
   params,

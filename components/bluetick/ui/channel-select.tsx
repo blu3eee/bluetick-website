@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 
 import {
   Command,
@@ -10,14 +10,14 @@ import {
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { CheckIcon, ChevronDown } from 'lucide-react';
-import type { DiscordPartialGuildChannel } from '@/types/bluetick/discord';
+} from "@/components/ui/popover";
+import { CheckIcon, ChevronDown } from "lucide-react";
+import type { DiscordPartialGuildChannel } from "@/types/bluetick/discord";
 
 interface ChannelSelectProps {
   options: DiscordPartialGuildChannel[];
@@ -31,7 +31,7 @@ export const ChannelSelect: React.FC<ChannelSelectProps> = ({
   onSelect,
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
   React.useEffect(() => {
     const selectedValue = options.find((option) => option.id === initChannelId);
@@ -72,10 +72,10 @@ export const ChannelSelect: React.FC<ChannelSelectProps> = ({
                   const selectedValue = options.find(
                     (option) =>
                       `${option.id}_${option.name}`.toLowerCase() ===
-                      currentValue
+                      currentValue,
                   );
                   if (selectedValue) {
-                    setValue(currentValue === value ? '' : currentValue);
+                    setValue(currentValue === value ? "" : currentValue);
                     onSelect(selectedValue.id);
                   }
                   setOpen(false);
@@ -85,10 +85,10 @@ export const ChannelSelect: React.FC<ChannelSelectProps> = ({
                 {channel.name}
                 <CheckIcon
                   className={cn(
-                    'ml-auto h-4 w-4',
+                    "ml-auto h-4 w-4",
                     value === `${channel.id}_${channel.name.toLowerCase()}`
-                      ? 'opacity-100'
-                      : 'opacity-0'
+                      ? "opacity-100"
+                      : "opacity-0",
                   )}
                 />
               </CommandItem>

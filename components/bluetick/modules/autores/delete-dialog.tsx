@@ -1,6 +1,6 @@
-import type { AutoResponseDetails } from '@/types/bluetick/db/autores';
-import React from 'react';
-import { Button } from '@/components/ui/button';
+import type { AutoResponseDetails } from "@/types/bluetick/db/autores";
+import React from "react";
+import { Button } from "@/components/ui/button";
 
 import {
   ResponsiveModal,
@@ -11,7 +11,7 @@ import {
   ResponsiveModalHeader,
   ResponsiveModalTitle,
   ResponsiveModalTrigger,
-} from '@/components/custom-ui/responsive-modal';
+} from "@/components/custom-ui/responsive-modal";
 interface DeleteDialogProps {
   selected: AutoResponseDetails[];
   onDelete: () => void;
@@ -34,7 +34,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   return (
     <ResponsiveModal open={open} onOpenChange={setOpen}>
       <ResponsiveModalTrigger>
-        <Button size={'sm'} variant={'destructive'} className="px-2 rounded-lg">
+        <Button size={"sm"} variant={"destructive"} className="px-2 rounded-lg">
           Delete
         </Button>
       </ResponsiveModalTrigger>
@@ -43,8 +43,8 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
           <ResponsiveModalTitle>Delete Confirmation</ResponsiveModalTitle>
           <ResponsiveModalDescription className="flex flex-col gap-2">
             Please confirm that you want to auto-responder
-            {selected.length > 1 && 's'} with trigger
-            {selected.length > 1 && 's'} below:
+            {selected.length > 1 && "s"} with trigger
+            {selected.length > 1 && "s"} below:
             <div className="font-semibold text-foreground">
               {selected.map((e, index) => (
                 <span key={index}>- {e.trigger}</span>
@@ -56,8 +56,8 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
           <ResponsiveModalClose className="flex items-center gap-2">
             {onCancel && (
               <Button
-                size={'sm'}
-                variant={'secondary'}
+                size={"sm"}
+                variant={"secondary"}
                 className="px-2 rounded-lg"
                 onClick={onCancel}
               >
@@ -65,8 +65,8 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
               </Button>
             )}
             <Button
-              size={'sm'}
-              variant={'destructive'}
+              size={"sm"}
+              variant={"destructive"}
               className="px-2 rounded-lg"
               onClick={onDelete}
             >

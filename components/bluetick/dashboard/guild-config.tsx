@@ -1,27 +1,27 @@
-'use client';
-import { Button } from '@/components/ui/button';
+"use client";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import { GuildContext } from '@/context/guild-context';
-import type { UpdateGuildConfig } from '@/types/bluetick/db/guild-config';
-import React, { useContext, useState } from 'react';
-import { toast } from 'sonner';
-import ISO6391 from 'iso-639-1';
-import { Icons } from '@/components/icons';
+} from "@/components/ui/dropdown-menu";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { GuildContext } from "@/context/guild-context";
+import type { UpdateGuildConfig } from "@/types/bluetick/db/guild-config";
+import React, { useContext, useState } from "react";
+import { toast } from "sonner";
+import ISO6391 from "iso-639-1";
+import { Icons } from "@/components/icons";
 
-const availableLocales = ['en', 'vi'];
+const availableLocales = ["en", "vi"];
 const GuildConfig = (): JSX.Element => {
   const { config, isLoading, refetchGuildData, updateConfig } =
     useContext(GuildContext);
-  const [prefix, setPrefix] = useState('');
-  const [locale, setLocale] = useState('en');
+  const [prefix, setPrefix] = useState("");
+  const [locale, setLocale] = useState("en");
   const [showSaveButton, setShowSaveButton] = useState(false);
 
   React.useEffect(() => {
@@ -41,16 +41,16 @@ const GuildConfig = (): JSX.Element => {
     updateConfig({ locale })
       .then((updated) => {
         if (updated) {
-          toast.success('Bot locale and language updated', {
+          toast.success("Bot locale and language updated", {
             description: `Locale is set to \`${ISO6391.getName(locale)}\``,
           });
           setShowSaveButton(false);
         } else {
-          toast.error('Failed to update bot locale');
+          toast.error("Failed to update bot locale");
         }
       })
       .catch(() => {
-        toast.error('Failed to update bot locale');
+        toast.error("Failed to update bot locale");
       });
   };
 
@@ -63,19 +63,19 @@ const GuildConfig = (): JSX.Element => {
       updateConfig(updateData)
         .then((updated) => {
           if (updated) {
-            toast('Bot config updated', {
+            toast("Bot config updated", {
               description: `Command prefix is set to \`${prefix}\``,
             });
             setShowSaveButton(false);
           } else {
-            toast('Failed to update bot config');
+            toast("Failed to update bot config");
           }
         })
         .catch(() => {});
 
       // Optionally, you can refetch the guild configuration after a successful update
     } catch (error) {
-      console.error('Error updating guild config:', error);
+      console.error("Error updating guild config:", error);
     }
   };
 
@@ -115,7 +115,7 @@ const GuildConfig = (): JSX.Element => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
-                variant={'outline'}
+                variant={"outline"}
                 size="sm"
                 className="relative h-10 mt-1 p-4 hover:bg-primary/50 w-full text-start flex items-center justify-between w-fit gap-4"
               >

@@ -7,9 +7,9 @@ import {
   ResponsiveModalHeader,
   ResponsiveModalTitle,
   ResponsiveModalTrigger,
-} from '@/components/custom-ui/responsive-modal';
-import { Button } from '@/components/ui/button';
-import React from 'react';
+} from "@/components/custom-ui/responsive-modal";
+import { Button } from "@/components/ui/button";
+import React from "react";
 
 interface Props {
   panelId: number;
@@ -39,9 +39,9 @@ const DeletePanelDialog: React.FC<Props> = ({ panelId, trigger, onSubmit }) => {
         </div>
         <ResponsiveModalFooter>
           <ResponsiveModalClose className="flex gap-2 self-end">
-            <Button variant={'secondary'}>Cancel</Button>
+            <Button variant={"secondary"}>Cancel</Button>
             <Button
-              variant={'warning'}
+              variant={"warning"}
               onClick={() => {
                 onSubmit();
               }}

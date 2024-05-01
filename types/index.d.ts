@@ -1,4 +1,4 @@
-export type NavMenu = {
+export interface NavMenu {
   title: string;
   items: NavItem[];
 
@@ -8,15 +8,15 @@ export type NavMenu = {
     image?: string;
     content: string;
   };
-};
+}
 
-export type NavItem = {
+export interface NavItem {
   title: string;
   href: string;
   description?: string;
   disabled?: boolean;
   image?: string;
-};
+}
 
 export type MainNavItem = NavItem | NavMenu;
 
@@ -36,16 +36,16 @@ export type SidebarNavItem = {
     }
 );
 
-export type MyInfo = {
+export interface MyInfo {
   links: {
     github: string;
     linkedIn: string;
   };
-};
+}
 
-export type SiteConfig = {
+export interface SiteConfig {
   name: string;
   description: string;
   href: string;
   mainNav: MainNavItem[];
-};
+}

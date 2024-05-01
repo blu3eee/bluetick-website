@@ -1,5 +1,5 @@
-import { SidebarWrapped } from '@/components/bluetick/sidebar';
-import React from 'react';
+import { SidebarWrapped } from "@/components/bluetick/sidebar";
+import React from "react";
 
 interface ServersLayoutProps {
   children: React.ReactNode;

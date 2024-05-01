@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -8,15 +8,15 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-import React from 'react';
-import MessageTypesRadioGroup from '../../ui/message-types';
-import MessageForm from '../../ui/message-form';
-import type { MessageInfoDetails } from '@/types/bluetick';
-import { toast } from 'sonner';
+import React from "react";
+import MessageTypesRadioGroup from "../../ui/message-types";
+import MessageForm from "../../ui/message-form";
+import type { MessageInfoDetails } from "@/types/bluetick";
+import { toast } from "sonner";
 
 interface AddResponseDialogProps {
   onSubmit: (trigger: string, response: MessageInfoDetails) => void;
@@ -26,19 +26,19 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
   onSubmit,
 }) => {
   const [response, setResponse] = React.useState<MessageInfoDetails>({
-    type: 'Message',
+    type: "Message",
   });
 
-  const [trigger, setTrigger] = React.useState('');
+  const [trigger, setTrigger] = React.useState("");
 
   const handleCreateSubmit = (): void => {
     if (!trigger) {
-      toast.error('Your response trigger is empty');
+      toast.error("Your response trigger is empty");
       return;
     }
 
     if (!response.embed && !response.content) {
-      toast.error('Your response content and embed are empty');
+      toast.error("Your response content and embed are empty");
       return;
     }
 
@@ -75,7 +75,7 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
               <Label htmlFor="message-type">Message Type</Label>
               <div className="px-2">
                 <MessageTypesRadioGroup
-                  initType={response.type ?? 'Message'}
+                  initType={response.type ?? "Message"}
                   onValueChange={(newValue) => {
                     setResponse((prev) => ({
                       ...prev,
@@ -88,9 +88,9 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
           </div>
           <div className="w-full bg-secondary rounded-lg px-4 py-3 flex flex-col gap-2">
             <MessageForm
-              type={response.type ?? 'Message'}
+              type={response.type ?? "Message"}
               initialMessage={response}
-              disabledEmbedFields={['footer']}
+              disabledEmbedFields={["footer"]}
               onChange={(newRes) => {
                 setResponse(newRes);
               }}
@@ -100,11 +100,11 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
         <DialogFooter>
           <DialogClose asChild>
             <div className="grid grid-cols-2 gap-2">
-              <Button size={'sm'}>Cancel</Button>
+              <Button size={"sm"}>Cancel</Button>
               <Button
                 type="submit"
-                variant={'success'}
-                size={'sm'}
+                variant={"success"}
+                size={"sm"}
                 onClick={handleCreateSubmit}
               >
                 Create

@@ -1,7 +1,7 @@
-'use client';
-import { ChannelSelect } from '@/components/bluetick/ui/channel-select';
-import { CollapsibleFields } from '@/components/bluetick/ui/collapsible-fields';
-import MessageForm from '@/components/bluetick/ui/message-form';
+"use client";
+import { ChannelSelect } from "@/components/bluetick/ui/channel-select";
+import { CollapsibleFields } from "@/components/bluetick/ui/collapsible-fields";
+import MessageForm from "@/components/bluetick/ui/message-form";
 import {
   Dialog,
   DialogHeader,
@@ -10,23 +10,23 @@ import {
   DialogContent,
   DialogFooter,
   DialogClose,
-} from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import { GuildContext } from '@/context/guild-context';
-import { useFetchGuildTicketSupportTeams } from '@/hooks/api/tickets/teams';
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { GuildContext } from "@/context/guild-context";
+import { useFetchGuildTicketSupportTeams } from "@/hooks/api/tickets/teams";
 import type {
   TicketPanelDetails,
   UpdateTicketPanelDto,
-} from '@/types/bluetick/db/tickets';
+} from "@/types/bluetick/db/tickets";
 
-import React, { useContext } from 'react';
-import SelectMentions from './select-mentions';
-import { NamingScheme } from './naming-scheme';
-import SupportTeamSelect from './team-select';
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
-import { ROUTES, apiInstance } from '@/config/bluetick';
+import React, { useContext } from "react";
+import SelectMentions from "./select-mentions";
+import { NamingScheme } from "./naming-scheme";
+import SupportTeamSelect from "./team-select";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { ROUTES, apiInstance } from "@/config/bluetick";
 
 interface EditPanelDialogProps {
   panel: TicketPanelDetails;
@@ -50,45 +50,45 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
   const handleUpdate = async (): Promise<void> => {
     const missings: string[] = [];
     if (form.button && !form.button.text) {
-      missings.push('panel button text');
+      missings.push("panel button text");
     }
-    if (form.channelID && form.channelID === '') {
-      missings.push('panel channel');
+    if (form.channelID && form.channelID === "") {
+      missings.push("panel channel");
     }
-    if (form.message?.embed?.title === '') {
-      missings.push('panel message title');
+    if (form.message?.embed?.title === "") {
+      missings.push("panel message title");
     }
-    if (form.namingScheme && form.namingScheme === '') {
-      missings.push('naming scheme');
+    if (form.namingScheme && form.namingScheme === "") {
+      missings.push("naming scheme");
     }
 
     if (missings.length > 0) {
-      toast.error(`Missing fields:\n${missings.join(', ')}`);
+      toast.error(`Missing fields:\n${missings.join(", ")}`);
       return;
     }
 
     // send request to create panel here
     const response = await apiInstance.patch(
       `/${ROUTES.TICKET_PANELS}/${panel.id}`,
-      form
+      form,
     );
 
     if (response.status === 200 || response.status === 201) {
-      toast.success('Ticket panel updated.');
+      toast.success("Ticket panel updated.");
       if (refetch) {
         refetch();
       }
     } else {
-      toast.error('Failed to update ticket panel.');
+      toast.error("Failed to update ticket panel.");
     }
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>{trigger ?? 'Edit'}</DialogTrigger>
+      <DialogTrigger>{trigger ?? "Edit"}</DialogTrigger>
       <DialogContent className="max-w-[1024px] h-3/4 overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            Edit ticket panel: (id){' '}
+            Edit ticket panel: (id){" "}
             <span className="text-blue-500">{panel.id}</span>
           </DialogTitle>
         </DialogHeader>
@@ -122,7 +122,7 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
                   {!isLoadingChannels && channels ? (
                     <ChannelSelect
                       options={channels.categories}
-                      initChannelId={panel.ticketCategory ?? ''}
+                      initChannelId={panel.ticketCategory ?? ""}
                       onSelect={(newId: string) => {
                         setForm((prev) => ({
                           ...prev,
@@ -195,9 +195,9 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
           <CollapsibleFields label="Panel Message" defaultOpen={true}>
             <div className="pl-6">
               <MessageForm
-                type={'Embed'}
+                type={"Embed"}
                 initialMessage={panel.message}
-                disabledEmbedFields={['footer']}
+                disabledEmbedFields={["footer"]}
                 buttonEmojis={discordGuild?.emojis}
                 onChange={(newMsg) => {
                   setForm((prev) => ({
@@ -218,9 +218,9 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
           <CollapsibleFields label="Panel Message">
             <div className="pl-6">
               <MessageForm
-                type={'Embed and Text'}
+                type={"Embed and Text"}
                 initialMessage={panel.welcomeMessage}
-                disabledEmbedFields={['footer']}
+                disabledEmbedFields={["footer"]}
                 onChange={(newMsg) => {
                   setForm((prev) => ({
                     ...prev,
@@ -236,7 +236,7 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
             <Button
               onClick={() => {
                 handleUpdate().catch(() => {
-                  console.error('failed to handle update');
+                  console.error("failed to handle update");
                 });
               }}
             >

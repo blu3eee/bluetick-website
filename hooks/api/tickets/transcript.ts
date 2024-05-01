@@ -1,16 +1,16 @@
-import { useQuery } from 'react-query';
-import { ROUTES, apiInstance } from '@/config/bluetick';
-import type { TicketTranscriptDetails } from '@/types/bluetick/db/tickets';
+import { type UseQueryResult, useQuery } from "react-query";
+import { ROUTES, apiInstance } from "@/config/bluetick";
+import type { TicketTranscriptDetails } from "@/types/bluetick/db/tickets";
 
 const fetchTicketTranscript = async (
   ticketID: number,
-  requestedUserID: string
+  requestedUserID: string,
 ): Promise<TicketTranscriptDetails> => {
   const response = await apiInstance.post(
     `/${ROUTES.TICKETS}/${ticketID}/transcript`,
     {
       requestedUserID,
-    }
+    },
   );
   return response.data.data;
 };
@@ -18,13 +18,13 @@ const fetchTicketTranscript = async (
 export const useFetchTicketTranscript = (
   ticketID: number,
   requestedUserID: string,
-  options = {} // Add an options parameter to pass custom configurations like 'enabled'
-) => {
+  options = {}, // Add an options parameter to pass custom configurations like 'enabled'
+): UseQueryResult<TicketTranscriptDetails, Error> => {
   return useQuery<TicketTranscriptDetails, Error>(
-    ['ticketTranscript', ticketID, requestedUserID],
-    () => fetchTicketTranscript(ticketID, requestedUserID),
+    ["ticketTranscript", ticketID, requestedUserID],
+    async () => await fetchTicketTranscript(ticketID, requestedUserID),
     {
       ...options, // Spread the options to use 'enabled' and any other React Query options
-    }
+    },
   );
 };

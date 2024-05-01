@@ -1,16 +1,16 @@
-import { ChannelSelect } from '@/components/bluetick/ui/channel-select';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import { GuildContext } from '@/context/guild-context';
-import { useFetchTicketPanels } from '@/hooks/api/tickets/reaction-panels';
-import type { CreateTicketMultiPanelDto } from '@/types/bluetick/db/tickets';
-import React, { useContext } from 'react';
-import MultiSelectPanels from './panels-select';
-import MessageForm from '@/components/bluetick/ui/message-form';
-import { toast } from 'sonner';
-import { Button } from '@/components/ui/button';
-import { SquarePen } from 'lucide-react';
+import { ChannelSelect } from "@/components/bluetick/ui/channel-select";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import { GuildContext } from "@/context/guild-context";
+import { useFetchTicketPanels } from "@/hooks/api/tickets/reaction-panels";
+import type { CreateTicketMultiPanelDto } from "@/types/bluetick/db/tickets";
+import React, { useContext } from "react";
+import MultiSelectPanels from "./panels-select";
+import MessageForm from "@/components/bluetick/ui/message-form";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { SquarePen } from "lucide-react";
 
 interface CreateMultiPanelProps {
   serverId: string;
@@ -24,8 +24,8 @@ const CreateMultiPanelForm: React.FC<CreateMultiPanelProps> = ({
   const [form, setForm] = React.useState<CreateTicketMultiPanelDto>({
     botID: BLUETICK_BOT_ID,
     guildID: serverId,
-    channelID: '',
-    message: { type: 'Embed and Text', content: '' },
+    channelID: "",
+    message: { type: "Embed and Text", content: "" },
     panelsIDs: [],
   });
 
@@ -33,38 +33,38 @@ const CreateMultiPanelForm: React.FC<CreateMultiPanelProps> = ({
 
   const { data: panels, isLoading: isLoadingPanels } = useFetchTicketPanels(
     BLUETICK_BOT_ID,
-    serverId
+    serverId,
   );
 
   const handleCreateSubmit = async (): Promise<void> => {
     try {
       console.log(form);
       const missings: string[] = [];
-      if (form.channelID === '') {
-        missings.push('panel channel');
+      if (form.channelID === "") {
+        missings.push("panel channel");
       }
-      if (!form.message.embed || form.message.embed?.title === '') {
-        missings.push('panel title');
+      if (!form.message.embed || form.message.embed?.title === "") {
+        missings.push("panel title");
       }
       if (form.panelsIDs.length < 2) {
-        missings.push('select at least 2 panels');
+        missings.push("select at least 2 panels");
       }
       if (missings.length !== 0) {
-        toast.error(`Missing fields: ${missings.join(', ')}`);
+        toast.error(`Missing fields: ${missings.join(", ")}`);
         return;
       }
       const response = await apiInstance.post(
         `${ROUTES.TICKET_MULTI_PANELS}`,
-        form
+        form,
       );
 
       if (response.status === 200 || response.status === 201) {
-        toast.success('New multi-reactions ticket panel created.');
+        toast.success("New multi-reactions ticket panel created.");
         handleCreatePanel();
       }
     } catch (e) {
       toast.error(
-        'An error happened while trying to create new multi-reactions ticket panel'
+        "An error happened while trying to create new multi-reactions ticket panel",
       );
     }
   };
@@ -81,7 +81,7 @@ const CreateMultiPanelForm: React.FC<CreateMultiPanelProps> = ({
               message: msg,
             }));
           }}
-          disabledEmbedFields={['footer']}
+          disabledEmbedFields={["footer"]}
         />
       </div>
       <div className="flex flex-col md:flex-row gap-2 items-start md:items:center ">
@@ -92,7 +92,7 @@ const CreateMultiPanelForm: React.FC<CreateMultiPanelProps> = ({
           {!isLoadingChannels && channels ? (
             <ChannelSelect
               options={channels.textChannels}
-              initChannelId={''}
+              initChannelId={""}
               onSelect={(newId: string) => {
                 setForm((prev) => ({
                   ...prev,
@@ -126,7 +126,7 @@ const CreateMultiPanelForm: React.FC<CreateMultiPanelProps> = ({
       </div>
       <div>
         <Button
-          size={'sm'}
+          size={"sm"}
           onClick={() => {
             handleCreateSubmit().catch((e) => {
               console.log(e);

@@ -1,6 +1,6 @@
-import React from 'react';
-import { Icons } from '@/components/icons';
-import { Label } from '@radix-ui/react-dropdown-menu';
+import React from "react";
+import { Icons } from "@/components/icons";
+import { Label } from "@radix-ui/react-dropdown-menu";
 
 export interface PlaceholderProps {
   name: string;
@@ -14,13 +14,13 @@ const Placeholder: React.FC<PlaceholderProps> = ({
   example,
 }): JSX.Element => {
   const placeholderStyle = {
-    color: '#c1234f',
-    fontFamily: 'monospace',
+    color: "#c1234f",
+    fontFamily: "monospace",
   };
 
   return (
     <div>
-      <span style={placeholderStyle}>{name}</span> - {description}{' '}
+      <span style={placeholderStyle}>{name}</span> - {description}{" "}
       {example && (
         <>
           Eg: <span style={placeholderStyle}>{example}</span>

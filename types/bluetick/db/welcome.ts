@@ -1,16 +1,16 @@
-import { MessageInfoDetails } from '..';
-import { BotDetails } from './bot';
-import { GuildDetails } from './guild';
+import { type MessageInfoDetails } from "..";
+import { type BotDetails } from "./bot";
+import { type GuildDetails } from "./guild";
 
-export type BotGuildWelcomeDetails = {
+export interface BotGuildWelcomeDetails {
   id: number;
   bot: BotDetails;
   guild: GuildDetails;
   channelID: string;
   message: MessageInfoDetails;
-};
+}
 
-export type UpdateBotGuildWelcomeDetails = {
+export interface UpdateBotGuildWelcomeDetails {
   channelID?: string;
   message?: MessageInfoDetails;
-};
+}

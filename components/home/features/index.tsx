@@ -1,10 +1,10 @@
-'use client';
-import React from 'react';
-import WelcomeFeature from './welcome';
-import TicketFeature from './ticket';
-import AnimatedElement from './animated-feature';
-import AutoResFeature from './auto-res';
-import TwitchFeature from './twitch';
+"use client";
+import React from "react";
+import WelcomeFeature from "./welcome";
+import TicketFeature from "./ticket";
+import AnimatedElement from "./animated-feature";
+import AutoResFeature from "./auto-res";
+import TwitchFeature from "./twitch";
 
 const FeaturesDemo = (): JSX.Element => {
   return (

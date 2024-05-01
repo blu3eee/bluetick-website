@@ -1,23 +1,23 @@
-import TwitchUserDisplay from '@/components/dev/twitch/user';
-import { Badge } from '@/components/ui/badge';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import { secondaryStyle } from '@/config/site';
-import { BluetickContext } from '@/context/bluetick-context';
-import { useFetchTwitchUsers } from '@/hooks/twitch/users';
-import { cn } from '@/lib/utils';
-import type { TwitchUser } from '@/types/twitch';
-import type { TwitchWatcherDetails } from '@/types/twitch/watcher';
-import React, { useContext } from 'react';
-import DisplayNotificationMessage from './display-noti';
-import EditNotificationDialog from './edit-dialog';
-import type { MessageInfoDetails } from '@/types/bluetick';
-import { generateTwitchPlaceholders } from '.';
-import { toast } from 'sonner';
-import { ChannelSelect } from '@/components/bluetick/ui/channel-select';
-import { GuildContext } from '@/context/guild-context';
-import { apiInstance } from '@/config/bluetick';
-import { Button } from '@/components/ui/button';
+import TwitchUserDisplay from "@/components/dev/twitch/user";
+import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { secondaryStyle } from "@/config/site";
+import { BluetickContext } from "@/context/bluetick-context";
+import { useFetchTwitchUsers } from "@/hooks/twitch/users";
+import { cn } from "@/lib/utils";
+import type { TwitchUser } from "@/types/twitch";
+import type { TwitchWatcherDetails } from "@/types/twitch/watcher";
+import React, { useContext } from "react";
+import DisplayNotificationMessage from "./display-noti";
+import EditNotificationDialog from "./edit-dialog";
+import type { MessageInfoDetails } from "@/types/bluetick";
+import { generateTwitchPlaceholders } from ".";
+import { toast } from "sonner";
+import { ChannelSelect } from "@/components/bluetick/ui/channel-select";
+import { GuildContext } from "@/context/guild-context";
+import { apiInstance } from "@/config/bluetick";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   watchers: TwitchWatcherDetails[] | undefined;
@@ -55,7 +55,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
         }))
         .filter((item) => item.user !== undefined)
         .map(
-          (item) => item as { watcher: TwitchWatcherDetails; user: TwitchUser }
+          (item) => item as { watcher: TwitchWatcherDetails; user: TwitchUser },
         );
 
       setWatchUsers(combined);
@@ -68,7 +68,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
 
   const handleUpdateMessage = async (
     id: number,
-    message: MessageInfoDetails
+    message: MessageInfoDetails,
   ): Promise<void> => {
     try {
       const response = await apiInstance.patch<{
@@ -85,14 +85,14 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
       }
     } catch (e) {
       toast.error(
-        `An error happened while trying to update live notification message`
+        `An error happened while trying to update live notification message`,
       );
     }
   };
 
   const handleUpdateChannel = async (
     id: number,
-    channelId: string
+    channelId: string,
   ): Promise<void> => {
     try {
       const response = await apiInstance.patch<{
@@ -109,7 +109,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
       }
     } catch (e) {
       toast.error(
-        `An error happened while trying to update notification channel`
+        `An error happened while trying to update notification channel`,
       );
     }
   };
@@ -127,7 +127,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
       }
     } catch (e) {
       toast.error(
-        `An error happened while trying to update notification channel`
+        `An error happened while trying to update notification channel`,
       );
     }
   };
@@ -154,8 +154,8 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
                 key={index}
                 variant={
                   selectedWatcher?.user.id === watchUser.user.id
-                    ? 'default'
-                    : 'outline'
+                    ? "default"
+                    : "outline"
                 }
                 className="cursor-pointer border-twitch"
                 onClick={() => {
@@ -171,14 +171,14 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
       {selectedWatcher && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
           <div className="flex flex-col gap-2">
-            <div className={cn(secondaryStyle, 'flex flex-col gap-2 h-fit')}>
+            <div className={cn(secondaryStyle, "flex flex-col gap-2 h-fit")}>
               <div className="flex flex-wrap justify-between gap-2 items-center">
                 <Label className="text-twitch uppercase font-semibold">
                   Twitch Watcher
                 </Label>
                 <Button
-                  size={'sm'}
-                  variant={'error'}
+                  size={"sm"}
+                  variant={"error"}
                   onClick={() => {
                     handleUnwatch(selectedWatcher.watcher.id).catch((e) => {});
                   }}
@@ -191,7 +191,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
                 showBgImage={false}
               />
             </div>
-            <div className={cn(secondaryStyle, 'flex flex-col gap-2 h-fit')}>
+            <div className={cn(secondaryStyle, "flex flex-col gap-2 h-fit")}>
               <Label className="text-twitch uppercase font-semibold">
                 Live Notification Channel
               </Label>
@@ -203,14 +203,14 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
                   options={channels.textChannels}
                   onSelect={(id) => {
                     handleUpdateChannel(selectedWatcher.watcher.id, id).catch(
-                      (e) => {}
+                      (e) => {},
                     );
                   }}
                 />
               )}
             </div>
           </div>
-          <div className={cn(secondaryStyle, 'flex flex-col gap-2 col-span-2')}>
+          <div className={cn(secondaryStyle, "flex flex-col gap-2 col-span-2")}>
             <Label className="text-twitch uppercase font-semibold">
               Live Notification Message
             </Label>
@@ -219,7 +219,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
                 message={selectedWatcher.watcher.message}
                 onSubmit={(msg: MessageInfoDetails) => {
                   handleUpdateMessage(selectedWatcher.watcher.id, msg).catch(
-                    (e) => {}
+                    (e) => {},
                   );
                 }}
                 placeholders={generateTwitchPlaceholders(selectedWatcher.user)}
@@ -232,7 +232,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
                 botDetails={botDetails}
                 message={selectedWatcher.watcher.message}
                 streamerDetails={generateTwitchPlaceholders(
-                  selectedWatcher.user
+                  selectedWatcher.user,
                 )}
               />
             )}

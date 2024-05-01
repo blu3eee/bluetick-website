@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { Skeleton } from '@/components/ui/skeleton';
-import { useFetchVercelDataCategory } from '@/hooks/vercel/insights';
-import { flag } from 'country-emoji';
-import React from 'react';
-import { cn } from '@/lib/utils';
-import { poppinsFont } from '@/styles/fonts';
+import { Skeleton } from "@/components/ui/skeleton";
+import { useFetchVercelDataCategory } from "@/hooks/vercel/insights";
+import { flag } from "country-emoji";
+import React from "react";
+import { cn } from "@/lib/utils";
+import { poppinsFont } from "@/styles/fonts";
 
 const BotCountries = (): JSX.Element => {
   const today = new Date();
@@ -14,9 +14,9 @@ const BotCountries = (): JSX.Element => {
     error,
     data: dataResponse,
   } = useFetchVercelDataCategory(
-    'country',
+    "country",
     new Date(today.getFullYear(), today.getMonth() - 1, today.getDate()),
-    new Date(today.getFullYear(), today.getMonth(), today.getDate())
+    new Date(today.getFullYear(), today.getMonth(), today.getDate()),
   );
 
   if (isLoading)
@@ -37,8 +37,8 @@ const BotCountries = (): JSX.Element => {
     <div className="flex flex-col items-center justify-center py-4 bg-secondary/70 px-2">
       <span
         className={cn(
-          'text-lg uppercase font-bold text-info text-center',
-          poppinsFont.className
+          "text-lg uppercase font-bold text-info text-center",
+          poppinsFont.className,
         )}
       >
         SPECIAL THANKS TO OUR USERS FROM ALL AROUND THE WORLD

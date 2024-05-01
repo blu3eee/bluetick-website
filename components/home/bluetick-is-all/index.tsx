@@ -1,7 +1,7 @@
-import React from 'react';
-import BotsMotion from './bots-motion';
-import { cn } from '@/lib/utils';
-import { rubikFont } from '@/styles/fonts';
+import React from "react";
+import BotsMotion from "./bots-motion";
+import { cn } from "@/lib/utils";
+import { rubikFont } from "@/styles/fonts";
 
 const BluetickIsAll = (): JSX.Element => {
   return (
@@ -11,8 +11,8 @@ const BluetickIsAll = (): JSX.Element => {
       <BotsMotion />
       <span
         className={cn(
-          'font-bold text-3xl text-blue-500 uppercase text-center',
-          rubikFont.className
+          "font-bold text-3xl text-blue-500 uppercase text-center",
+          rubikFont.className,
         )}
       >
         Bluetick is all

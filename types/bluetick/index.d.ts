@@ -1,5 +1,5 @@
-import { BotDetails } from './db/bot';
-import { DiscordUser } from './discord';
+import { type BotDetails } from "./db/bot";
+import { type DiscordUser } from "./discord";
 
 export type BotAllDetails = DiscordUser & BotDetails;
 

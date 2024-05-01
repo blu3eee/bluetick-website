@@ -1,22 +1,22 @@
-'use client';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import { useFetchGuildAutoRes } from '@/hooks/api/autores/list';
+"use client";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import { useFetchGuildAutoRes } from "@/hooks/api/autores/list";
 import type {
   AutoResponseDetails,
   CreateAutoResponseDto,
-} from '@/types/bluetick/db/autores';
-import React, { useState } from 'react';
-import MessagePreview from '../../ui/message-preview';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Label } from '@/components/ui/label';
-import { RefreshCcw } from 'lucide-react';
-import { AddResponseDialog } from './add-dialog';
-import type { MessageInfoDetails } from '@/types/bluetick';
-import DeleteDialog from './delete-dialog';
-import EditResponseDialog from './edit-dialog';
-import { toast } from 'sonner';
+} from "@/types/bluetick/db/autores";
+import React, { useState } from "react";
+import MessagePreview from "../../ui/message-preview";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Label } from "@/components/ui/label";
+import { RefreshCcw } from "lucide-react";
+import { AddResponseDialog } from "./add-dialog";
+import type { MessageInfoDetails } from "@/types/bluetick";
+import DeleteDialog from "./delete-dialog";
+import EditResponseDialog from "./edit-dialog";
+import { toast } from "sonner";
 
 interface AutoResListProps {
   serverId: string;
@@ -69,7 +69,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
 
   const handleAddNewResponse = async (
     trigger: string,
-    response: MessageInfoDetails
+    response: MessageInfoDetails,
   ): Promise<void> => {
     try {
       const dto: CreateAutoResponseDto = {
@@ -80,18 +80,18 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
       };
       await apiInstance.post<{ data: AutoResponseDetails }>(
         `${ROUTES.AUTO_RESPONSE}`,
-        dto
+        dto,
       );
       await refetch();
     } catch (e) {
-      console.error('Error adding new autores:', e);
+      console.error("Error adding new autores:", e);
     }
   };
 
   const handleDelete = async (): Promise<void> => {
     try {
       const { data } = await apiInstance.delete<{ data: { message: string } }>(
-        `${ROUTES.AUTO_RESPONSE}/${selected[0].id}`
+        `${ROUTES.AUTO_RESPONSE}/${selected[0].id}`,
       );
       if (data.data.message) {
         toast.success(data.data.message);
@@ -103,19 +103,19 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
       }
       await refetch();
     } catch (e) {
-      toast.error('An error happened while trying to delete autores');
+      toast.error("An error happened while trying to delete autores");
     }
   };
 
   const handleSubmitUpdate = async (
     id: number,
     trigger: string,
-    response: MessageInfoDetails
+    response: MessageInfoDetails,
   ): Promise<void> => {
     try {
       const { data } = await apiInstance.patch<{ data: AutoResponseDetails }>(
         `${ROUTES.AUTO_RESPONSE}/${id}`,
-        { trigger, response }
+        { trigger, response },
       );
       if (data.data) {
         toast.success(`Auto response updated [trigger: ${data.data.trigger}]`);
@@ -124,7 +124,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
       }
       await refetch();
     } catch (e) {
-      toast.error('An error happened while trying to update autores');
+      toast.error("An error happened while trying to update autores");
     }
   };
 
@@ -150,8 +150,8 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
         </div>
         <div className="flex items-center gap-2">
           <Button
-            size={'sm'}
-            variant={selectMode ? 'destructive' : 'outline'}
+            size={"sm"}
+            variant={selectMode ? "destructive" : "outline"}
             onClick={() => {
               setSelectMode(!selectMode);
             }}
@@ -170,12 +170,12 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
           {(selectMode || selected.length > 0) && (
             <>
               <Button
-                size={'sm'}
-                variant={'outline'}
+                size={"sm"}
+                variant={"outline"}
                 onClick={handleSelectAll}
                 className="px-2 rounded-lg"
               >
-                {selected.length === list.length ? 'Unselect' : 'Select'} All
+                {selected.length === list.length ? "Unselect" : "Select"} All
               </Button>
             </>
           )}
@@ -198,10 +198,10 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
           <div
             key={autores.id}
             className={cn(
-              'rounded-[12px] text-sm border w-fit px-2 py-1 text-blue-500 border-blue-500 cursor-pointer transition-color duration-500 hover:text-white hover:bg-blue-500',
+              "rounded-[12px] text-sm border w-fit px-2 py-1 text-blue-500 border-blue-500 cursor-pointer transition-color duration-500 hover:text-white hover:bg-blue-500",
               selected.includes(autores)
-                ? 'bg-blue-500 text-white hover:bg-blue-500/60'
-                : ''
+                ? "bg-blue-500 text-white hover:bg-blue-500/60"
+                : "",
             )}
             onClick={() => {
               handleSelectAutoRes(autores);
@@ -214,7 +214,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
       {selected.length === 1 && selected[0] && (
         <div>
           <MessagePreview
-            type={selected[0].response.type ?? 'Message'}
+            type={selected[0].response.type ?? "Message"}
             message={selected[0].response}
           />
         </div>

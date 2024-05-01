@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import type { ServerIdProps } from '../props';
-import { Label } from '@/components/ui/label';
-import { ChannelsMultiSelect } from '../../ui/channels-multiselect';
-import { GuildContext } from '@/context/guild-context';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useFetchGuildLogIgnores } from '@/hooks/api/bot-logs/log-ignores';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
-import RolesMultiSelect from '../../ui/roles-multiselect';
+import React, { useContext, useEffect, useState } from "react";
+import type { ServerIdProps } from "../props";
+import { Label } from "@/components/ui/label";
+import { ChannelsMultiSelect } from "../../ui/channels-multiselect";
+import { GuildContext } from "@/context/guild-context";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useFetchGuildLogIgnores } from "@/hooks/api/bot-logs/log-ignores";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import RolesMultiSelect from "../../ui/roles-multiselect";
 
 const Ignores: React.FC<ServerIdProps & { logSettingId: number }> = ({
   serverId,
@@ -46,15 +46,15 @@ const Ignores: React.FC<ServerIdProps & { logSettingId: number }> = ({
   // Function to compare initial and current states
   const hasChannelsChanges = (): boolean => {
     return (
-      initialIgnoredChannels.sort().join(',') !==
-      ignoredChannels.sort().join(',')
+      initialIgnoredChannels.sort().join(",") !==
+      ignoredChannels.sort().join(",")
     );
   };
 
   // Function to compare initial and current states
   const hasRolesChanges = (): boolean => {
     return (
-      initialIgnoredRoles.sort().join(',') !== ignoredRoles.sort().join(',')
+      initialIgnoredRoles.sort().join(",") !== ignoredRoles.sort().join(",")
     );
   };
 
@@ -67,11 +67,11 @@ const Ignores: React.FC<ServerIdProps & { logSettingId: number }> = ({
         .filter((ig) => !ignoredChannels.includes(ig.channelID))
         .map((i) => i.id);
       const adds = ignoredChannels.filter(
-        (id) => !ignores.channels.find((i) => i.channelID === id)
+        (id) => !ignores.channels.find((i) => i.channelID === id),
       );
       const response = await apiInstance.patch(
         `${ROUTES.LOG_SETTING}/channels/${logSettingId}`,
-        { deletes, adds }
+        { deletes, adds },
       );
 
       if (response.status === 200) {
@@ -94,11 +94,11 @@ const Ignores: React.FC<ServerIdProps & { logSettingId: number }> = ({
         .filter((ig) => !ignoredRoles.includes(ig.roleID))
         .map((i) => i.id);
       const adds = ignoredRoles.filter(
-        (id) => !ignores.roles.find((i) => i.roleID === id)
+        (id) => !ignores.roles.find((i) => i.roleID === id),
       );
       const response = await apiInstance.patch(
         `${ROUTES.LOG_SETTING}/roles/${logSettingId}`,
-        { deletes, adds }
+        { deletes, adds },
       );
 
       if (response.status === 200) {
@@ -130,7 +130,7 @@ const Ignores: React.FC<ServerIdProps & { logSettingId: number }> = ({
         )}
         <Button
           className="w-fit"
-          variant={'red'}
+          variant={"red"}
           disabled={!hasChannelsChanges() || isLoadingIgnores}
           onClick={() => {
             handleSaveChannels().catch((e) => {});
@@ -155,7 +155,7 @@ const Ignores: React.FC<ServerIdProps & { logSettingId: number }> = ({
         )}
         <Button
           className="w-fit"
-          variant={'red'}
+          variant={"red"}
           disabled={!hasRolesChanges() || isLoadingIgnores}
           onClick={() => {
             handleSaveRoles().catch((e) => {});

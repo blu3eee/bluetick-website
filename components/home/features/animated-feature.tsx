@@ -1,6 +1,6 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const variants = {
   hidden: {
@@ -12,7 +12,7 @@ const variants = {
 
 const animationConfig = {
   variants,
-  transition: { ease: 'linear', duration: 1, y: { duration: 0.8 } },
+  transition: { ease: "linear", duration: 1, y: { duration: 0.8 } },
   viewport: { once: true },
 };
 
@@ -25,7 +25,7 @@ const AnimatedElement: React.FC<{
     initial="hidden"
     whileInView="visible"
     id={id}
-    className={cn('max-w-[1400px] mx-auto', className)}
+    className={cn("max-w-[1400px] mx-auto", className)}
     {...animationConfig}
   >
     {children}

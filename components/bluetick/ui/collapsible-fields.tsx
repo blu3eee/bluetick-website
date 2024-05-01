@@ -2,10 +2,10 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/components/ui/collapsible';
+} from "@/components/ui/collapsible";
 
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import React from 'react';
+import { ChevronDown, ChevronUp } from "lucide-react";
+import React from "react";
 
 export const CollapsibleFields: React.FC<{
   label: React.ReactNode;

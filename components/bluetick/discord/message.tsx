@@ -1,12 +1,12 @@
-import { RenderHtmlContent } from '@/components/custom-ui/styled-text';
-import { replaceIds } from '@/lib/discord';
-import { isValidImageUrl } from '@/lib/validators';
-import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
-import React from 'react';
-import DiscordEmbed from './embed';
-import ImageGallery from '../../custom-ui/images-galery';
-import Image from 'next/image';
-import { Icons } from '@/components/icons';
+import { RenderHtmlContent } from "@/components/custom-ui/styled-text";
+import { replaceIds } from "@/lib/discord";
+import { isValidImageUrl } from "@/lib/validators";
+import type { TranscriptMessage } from "@/types/bluetick/db/tickets";
+import React from "react";
+import DiscordEmbed from "./embed";
+import ImageGallery from "../../custom-ui/images-galery";
+import Image from "next/image";
+import { Icons } from "@/components/icons";
 
 const DiscordMessage: React.FC<{
   author: { name: string; avatarURL: string };
@@ -29,8 +29,8 @@ const DiscordMessage: React.FC<{
         />
       ) : (
         <span className="w-[30px] text-xs font-bold text-gray-400 opacity-0 group-hover:opacity-100 mt-1">
-          {(messageTime.getHours() % 12).toString().padStart(2, '0')}:
-          {messageTime.getMinutes().toString().padStart(2, '0')}
+          {(messageTime.getHours() % 12).toString().padStart(2, "0")}:
+          {messageTime.getMinutes().toString().padStart(2, "0")}
         </span>
       )}
       <div className="flex flex-col justify-center">
@@ -76,11 +76,11 @@ const DiscordMessage: React.FC<{
               className="group/file relative bg-[#2B2D31aa] border-2 border-[#2B2D31] rounded-md p-2 mt-1 flex items-center gap-2 max-w-[400px]"
             >
               <div className="w-6 h-6">
-                {attachment.name.includes('.doc') ? (
+                {attachment.name.includes(".doc") ? (
                   <Icons.fileText />
-                ) : attachment.name.includes('.pdf') ? (
+                ) : attachment.name.includes(".pdf") ? (
                   <Icons.pdf />
-                ) : attachment.name.includes('.zip') ? (
+                ) : attachment.name.includes(".zip") ? (
                   <Icons.zip />
                 ) : (
                   <Icons.page />

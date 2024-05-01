@@ -1,17 +1,17 @@
-'use client';
-import React, { useContext } from 'react';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import { useFetchGuildTicketSetting } from '@/hooks/api/tickets/settings';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import type { TicketSettingDetails } from '@/types/bluetick/db/tickets';
-import { GuildContext } from '@/context/guild-context';
-import { Switch } from '@/components/ui/switch';
-import { ChannelSelect } from '../../ui/channel-select';
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
-import type { ServerIdProps } from '../props';
+"use client";
+import React, { useContext } from "react";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import { useFetchGuildTicketSetting } from "@/hooks/api/tickets/settings";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import type { TicketSettingDetails } from "@/types/bluetick/db/tickets";
+import { GuildContext } from "@/context/guild-context";
+import { Switch } from "@/components/ui/switch";
+import { ChannelSelect } from "../../ui/channel-select";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import type { ServerIdProps } from "../props";
 
 const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
   const {
@@ -25,16 +25,16 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
     id: -1,
     bot: {
       id: 0,
-      botID: '',
-      token: '',
-      themeHexColor: '',
-      discord_secret: '',
-      discord_callback_url: '',
+      botID: "",
+      token: "",
+      themeHexColor: "",
+      discord_secret: "",
+      discord_callback_url: "",
       premiumFlags: 0,
     },
     guild: {
       id: 0,
-      guildID: '',
+      guildID: "",
     },
     perUserTicketLimit: 5,
     allowUserToCloseTickets: false,
@@ -61,7 +61,7 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
   }
 
   const handleSettingChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     const { name, value } = event.target;
     setSetting((prev) => ({
@@ -74,17 +74,17 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
     try {
       const response = await apiInstance.patch(
         `/${ROUTES.TICKET_SETTINGS}/${BLUETICK_BOT_ID}/${serverId}`,
-        setting
+        setting,
       );
       if (response.status === 201 || response.status === 200) {
         await refetch();
-        toast.success('Ticket setting saved successfully');
+        toast.success("Ticket setting saved successfully");
       } else {
-        toast.success('Failed to save general ticket setting');
+        toast.success("Failed to save general ticket setting");
       }
     } catch (e) {
       toast.error(
-        'An error happened when trying to save general ticket setting.'
+        "An error happened when trying to save general ticket setting.",
       );
     }
   };
@@ -112,7 +112,7 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
                   }));
                 }}
               />
-              <span>{setting.threadTicket ? 'Yes' : 'No'}</span>
+              <span>{setting.threadTicket ? "Yes" : "No"}</span>
             </div>
           </div>
           <div className="flex flex-col gap-2 w-fit">
@@ -152,7 +152,7 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
                   }));
                 }}
               />
-              <span>{setting.allowUserToCloseTickets ? 'Yes' : 'No'}</span>
+              <span>{setting.allowUserToCloseTickets ? "Yes" : "No"}</span>
             </div>
           </div>
           <div className="flex flex-col gap-4 w-fit">
@@ -174,7 +174,7 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
                   }));
                 }}
               />
-              <span>{setting.ticketCloseConfirmation ? 'Yes' : 'No'}</span>
+              <span>{setting.ticketCloseConfirmation ? "Yes" : "No"}</span>
             </div>
           </div>
           {isLoadingChannels ? (
@@ -193,7 +193,7 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
                 </Label>
                 <div className="w-fit">
                   <ChannelSelect
-                    initChannelId={setting.ticketNotificationChannel ?? ''}
+                    initChannelId={setting.ticketNotificationChannel ?? ""}
                     options={channels?.textChannels ?? []}
                     onSelect={(newId) => {
                       setSetting((prev) => ({
@@ -213,7 +213,7 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
                 </Label>
                 <div className="w-fit">
                   <ChannelSelect
-                    initChannelId={setting.transcriptsChannel ?? ''}
+                    initChannelId={setting.transcriptsChannel ?? ""}
                     options={channels?.textChannels ?? []}
                     onSelect={(newId) => {
                       setSetting((prev) => ({
@@ -230,7 +230,7 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
 
         <div>
           <Button
-            size={'sm'}
+            size={"sm"}
             onClick={() => {
               handleSaveSetting().catch((e) => {
                 console.error(e);

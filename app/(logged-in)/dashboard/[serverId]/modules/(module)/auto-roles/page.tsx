@@ -1,8 +1,8 @@
-import AutoRolesComponent from '@/components/bluetick/modules/auto-roles/autoroles';
-import ModulePageTemplate from '@/components/bluetick/modules/module-page-template';
+import AutoRolesComponent from "@/components/bluetick/modules/auto-roles/autoroles";
+import ModulePageTemplate from "@/components/bluetick/modules/module-page-template";
 
-import { GUILD_MODULES } from '@/config/bluetick';
-import React from 'react';
+import { GUILD_MODULES } from "@/config/bluetick";
+import React from "react";
 
 const AutoRoles = ({
   params,

@@ -1,13 +1,13 @@
-import { RenderHtmlContent } from '@/components/custom-ui/styled-text';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { cn, replacePlaceholders } from '@/lib/utils';
-import { isValidImageUrl, isValidUrl } from '@/lib/validators';
-import type { ButtonInfoDetails, MessageInfoDetails } from '@/types/bluetick';
-import Image from 'next/image';
-import Link from 'next/link';
-import React from 'react';
-import { DisplayCustomEmoji } from './emoji-display';
+import { RenderHtmlContent } from "@/components/custom-ui/styled-text";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { cn, replacePlaceholders } from "@/lib/utils";
+import { isValidImageUrl, isValidUrl } from "@/lib/validators";
+import type { ButtonInfoDetails, MessageInfoDetails } from "@/types/bluetick";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+import { DisplayCustomEmoji } from "./emoji-display";
 
 interface MessagePreviewProps {
   type: string;
@@ -29,7 +29,7 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
       </Label>
       <div className="w-full p-4 bg-[#38343c] rounded-lg mt-2 text-white">
         <div className="flex items-center gap-2 mb-2">
-          <span className="font-semibold">{'Bluetick'}</span>
+          <span className="font-semibold">{"Bluetick"}</span>
           <span className="text-[10px] font-bold px-[4px] py-[1px] bg-blue-400 rounded-md">
             BOT
           </span>
@@ -37,10 +37,10 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
             Today at 01:01 AM
           </span>
         </div>
-        {type !== 'Embed' && message.content && (
+        {type !== "Embed" && message.content && (
           <div className="flex my-1 text-sm flex flex-col">
             {replacePlaceholders(message.content, placeholders)
-              .split('\n')
+              .split("\n")
               .map((line, index) => {
                 return (
                   <span key={index}>
@@ -51,7 +51,7 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
           </div>
         )}
         {/* whole embed */}
-        {type !== 'Message' && message.embed && (
+        {type !== "Message" && message.embed && (
           <div
             className="rounded-md w-fit min-w-[256px] max-w-[720px] min-h-8"
             style={{ backgroundColor: message.embed.color ?? `#ffffff` }}
@@ -69,7 +69,7 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                             <Image
                               src={replacePlaceholders(
                                 message.embed.authorURL,
-                                placeholders
+                                placeholders,
                               )}
                               alt="thumbnail"
                               height={100}
@@ -81,7 +81,7 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                       <div className="text-sm font-semibold">
                         {replacePlaceholders(
                           message.embed.author,
-                          placeholders
+                          placeholders,
                         )}
                       </div>
                     </div>
@@ -91,19 +91,22 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                   {message.embed.title && (
                     <Link
                       className={cn(
-                        'flex items-center font-bold my-1',
+                        "flex items-center font-bold my-1",
                         message.embed.url
-                          ? 'underline cursor-pointer hover:text-foreground/80'
-                          : ''
+                          ? "underline cursor-pointer hover:text-foreground/80"
+                          : "",
                       )}
                       href={replacePlaceholders(
                         message.embed.url &&
                           isValidUrl(
-                            replacePlaceholders(message.embed.url, placeholders)
+                            replacePlaceholders(
+                              message.embed.url,
+                              placeholders,
+                            ),
                           )
                           ? message.embed.url
-                          : '',
-                        placeholders
+                          : "",
+                        placeholders,
                       )}
                     >
                       {replacePlaceholders(message.embed.title, placeholders)}
@@ -115,9 +118,9 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                     <div className="flex my-1 text-sm flex flex-col">
                       {replacePlaceholders(
                         message.embed.description,
-                        placeholders
+                        placeholders,
                       )
-                        .split('\n')
+                        .split("\n")
                         .map((line, index) => (
                           <RenderHtmlContent key={index} text={line} />
                         ))}
@@ -127,13 +130,13 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                 {/* right one */}
                 {message.embed.thumbnail &&
                   isValidImageUrl(
-                    replacePlaceholders(message.embed.thumbnail, placeholders)
+                    replacePlaceholders(message.embed.thumbnail, placeholders),
                   ) && (
                     <div className="ml-2">
                       <Image
                         src={replacePlaceholders(
                           message.embed.thumbnail,
-                          placeholders
+                          placeholders,
                         )}
                         alt="thumbnail"
                         height={100}
@@ -146,13 +149,13 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
 
               {message.embed.image &&
                 isValidImageUrl(
-                  replacePlaceholders(message.embed.image, placeholders)
+                  replacePlaceholders(message.embed.image, placeholders),
                 ) && (
                   <div className="w-full my-1 overflow-hidden">
                     <Image
                       src={replacePlaceholders(
                         message.embed.image,
-                        placeholders
+                        placeholders,
                       )}
                       alt="image"
                       height={250}
@@ -165,13 +168,16 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                 <div className="flex items-center gap-2 my-1">
                   {message.embed.footerURL &&
                     isValidImageUrl(
-                      replacePlaceholders(message.embed.footerURL, placeholders)
+                      replacePlaceholders(
+                        message.embed.footerURL,
+                        placeholders,
+                      ),
                     ) && (
                       <div className="w-[24px] h-[24px]">
                         <Image
                           src={replacePlaceholders(
                             message.embed.footerURL,
-                            placeholders
+                            placeholders,
                           )}
                           alt="footer icon"
                           height={250}
@@ -220,8 +226,8 @@ const getButtonColor = (color: string): string => {
   return color === `blue`
     ? `#656afa`
     : color.toLowerCase() === `green`
-    ? `#49be89`
-    : color.toLowerCase() === `red`
-    ? `#f3534b`
-    : `#595e68`;
+      ? `#49be89`
+      : color.toLowerCase() === `red`
+        ? `#f3534b`
+        : `#595e68`;
 };

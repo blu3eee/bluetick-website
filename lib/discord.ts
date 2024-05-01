@@ -10,14 +10,14 @@ export function replaceIds(
   text: string,
   users: Record<string, { name: string }>,
   roles?: Record<string, { name: string; color?: string }>,
-  channels?: Record<string, { name: string }>
+  channels?: Record<string, { name: string }>,
 ): string {
   const userIdPattern = /<@(\d+)>/g;
   const channelIdPattern = /<#(\d+)>/g;
   const roleIdPattern = /<@&(\d+)>/g;
   const emojiIdPattern = /<(a?):([^:]+):(\d+)>/g;
   const pingStyle =
-    'background: rgb(34.5%,39.6%,55%);border-radius:2px;font-weight:500;padding:0px 2px 0px 2px;';
+    "background: rgb(34.5%,39.6%,55%);border-radius:2px;font-weight:500;padding:0px 2px 0px 2px;";
   return text
     .replace(userIdPattern, (match, userId) => {
       const user = users[userId];
@@ -34,14 +34,14 @@ export function replaceIds(
     .replace(roleIdPattern, (match, roleId) => {
       const role = roles?.[roleId];
       return `<span style="${pingStyle}cursor:pointer;${
-        role?.color && role.color !== '#000000'
+        role?.color && role.color !== "#000000"
           ? `background: ${role.color}22; color: ${role.color}`
           : ``
       }">@${role?.name ?? (roles ? `deleted-role` : roleId)}</span>`;
     })
     .replace(emojiIdPattern, (match, animated, name, id) => {
       const emojiURL = `https://cdn.discordapp.com/emojis/${id}.${
-        animated ? 'gif' : 'png'
+        animated ? "gif" : "png"
       }`;
       return `<img src="${emojiURL}" alt="${name}" style="width: 20px; height: 20px; vertical-align: middle; display: inline-block;" />`;
     });

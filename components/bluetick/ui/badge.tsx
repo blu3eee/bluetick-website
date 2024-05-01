@@ -3,12 +3,12 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip';
-import Image from 'next/image';
-import React from 'react';
+} from "@/components/ui/tooltip";
+import Image from "next/image";
+import React from "react";
 
 export const BadgeDisplay: React.FC<{ badge: string }> = ({ badge }) => {
-  const key = badge.split(' ').join('-').toLowerCase();
+  const key = badge.split(" ").join("-").toLowerCase();
 
   return (
     <TooltipProvider>

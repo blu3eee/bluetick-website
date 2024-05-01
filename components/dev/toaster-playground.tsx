@@ -1,23 +1,23 @@
-import React from 'react';
-import { Label } from '../ui/label';
-import { Button } from '../ui/button';
-import { toast } from 'sonner';
+import React from "react";
+import { Label } from "../ui/label";
+import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 const ToastPlayground = (): JSX.Element => {
   const toastContent = {
-    title: 'Event has been created',
+    title: "Event has been created",
     content: {
-      description: 'Sunday, December 03, 2023 at 9:00 AM',
+      description: "Sunday, December 03, 2023 at 9:00 AM",
       action: {
-        label: 'Undo',
+        label: "Undo",
         onClick: () => {
-          console.log('Undo');
+          console.log("Undo");
         },
       },
       cancel: {
-        label: 'Cancel',
+        label: "Cancel",
         onClick: () => {
-          console.log('Cancel!');
+          console.log("Cancel!");
         },
       },
     },
@@ -28,7 +28,7 @@ const ToastPlayground = (): JSX.Element => {
         <Label className="font-bold">toast (sonner) </Label>
         <div className="flex flex-wrap gap-4">
           <Button
-            size={'sm'}
+            size={"sm"}
             onClick={() => {
               toast(toastContent.title, toastContent.content);
             }}
@@ -36,8 +36,8 @@ const ToastPlayground = (): JSX.Element => {
             regular
           </Button>
           <Button
-            size={'sm'}
-            variant={'success'}
+            size={"sm"}
+            variant={"success"}
             onClick={() => {
               toast.success(toastContent.title, toastContent.content);
             }}
@@ -45,8 +45,8 @@ const ToastPlayground = (): JSX.Element => {
             success
           </Button>
           <Button
-            size={'sm'}
-            variant={'error'}
+            size={"sm"}
+            variant={"error"}
             onClick={() => {
               toast.error(toastContent.title, toastContent.content);
             }}
@@ -54,8 +54,8 @@ const ToastPlayground = (): JSX.Element => {
             error
           </Button>
           <Button
-            size={'sm'}
-            variant={'warning'}
+            size={"sm"}
+            variant={"warning"}
             onClick={() => {
               toast.warning(toastContent.title, toastContent.content);
             }}
@@ -63,8 +63,8 @@ const ToastPlayground = (): JSX.Element => {
             warning
           </Button>
           <Button
-            size={'sm'}
-            variant={'info'}
+            size={"sm"}
+            variant={"info"}
             onClick={() => {
               toast.info(toastContent.title, toastContent.content);
             }}

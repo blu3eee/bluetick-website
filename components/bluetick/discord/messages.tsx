@@ -1,6 +1,6 @@
-import React from 'react';
-import DiscordMessage from './message';
-import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
+import React from "react";
+import DiscordMessage from "./message";
+import type { TranscriptMessage } from "@/types/bluetick/db/tickets";
 
 interface Props {
   messages: TranscriptMessage[];
@@ -17,7 +17,7 @@ const Messages: React.FC<Props> = ({ messages, users, roles, channels }) => {
           (msg) =>
             msg.content ||
             msg.embeds.length !== 0 ||
-            msg.attachments.length !== 0
+            msg.attachments.length !== 0,
         )
         .map((msg, index) => {
           const author = users[msg.userID];

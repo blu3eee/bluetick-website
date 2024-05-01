@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { useTheme } from 'next-themes';
+import * as React from "react";
+import { useTheme } from "next-themes";
 
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Icons } from '@/components/icons';
+} from "@/components/ui/dropdown-menu";
+import { Icons } from "@/components/icons";
 
 // Adjust ModeMenuItem to accept icon as a React element
 interface ModeMenuItemProps {
@@ -21,7 +21,7 @@ const ModeMenuItem: React.FC<ModeMenuItemProps> = ({ mode, icon }) => {
 
   return (
     <DropdownMenuItem
-      className={`flex items-center focus:bg-accent/60 ${theme === mode ? 'bg-secondary/80 focus:bg-accent:50' : ''}`}
+      className={`flex items-center focus:bg-accent/60 ${theme === mode ? "bg-secondary/80 focus:bg-accent:50" : ""}`}
       onClick={() => {
         setTheme(mode);
       }}

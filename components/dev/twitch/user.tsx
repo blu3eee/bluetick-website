@@ -1,6 +1,6 @@
-import ImageWithFallback from '@/components/custom-ui/image-with-fallback';
-import type { TwitchUser } from '@/types/twitch';
-import React from 'react';
+import ImageWithFallback from "@/components/custom-ui/image-with-fallback";
+import type { TwitchUser } from "@/types/twitch";
+import React from "react";
 
 const TwitchUserDisplay: React.FC<TwitchUser & { showBgImage?: boolean }> = ({
   showBgImage = true,
@@ -11,7 +11,7 @@ const TwitchUserDisplay: React.FC<TwitchUser & { showBgImage?: boolean }> = ({
       <div className="flex flex-wrap items-start justify-between gap-4">
         <ImageWithFallback
           key={`profile-${user.id}`}
-          src={user.profilePictureUrl ?? '/twitch/twitch-bg.jpg'}
+          src={user.profilePictureUrl ?? "/twitch/twitch-bg.jpg"}
           alt="user-profile-image"
           className="rounded-md"
           width={100}
@@ -43,7 +43,7 @@ const TwitchUserDisplay: React.FC<TwitchUser & { showBgImage?: boolean }> = ({
       {showBgImage && (
         <ImageWithFallback
           key={user.id}
-          src={user.offlinePlaceholderUrl ?? '/twitch/twitch-bg.jpg'}
+          src={user.offlinePlaceholderUrl ?? "/twitch/twitch-bg.jpg"}
           alt="offline-url"
           className="rounded-md"
           width={1980}

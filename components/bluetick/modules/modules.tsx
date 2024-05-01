@@ -1,7 +1,7 @@
-'use client';
-import React from 'react';
-import { Label } from '@/components/ui/label';
-import { ModuleCard, guildModules } from './module-card';
+"use client";
+import React from "react";
+import { Label } from "@/components/ui/label";
+import { ModuleCard, guildModules } from "./module-card";
 
 const Modules = (): JSX.Element => {
   return (

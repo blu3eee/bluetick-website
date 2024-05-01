@@ -1,11 +1,11 @@
-import { Popover, PopoverTrigger } from '@/components/ui/popover';
-import type { DiscordPartialEmoji } from '@/types/bluetick/discord';
-import { PopoverContent } from '@radix-ui/react-popover';
-import React, { useEffect } from 'react';
-import EmojiPicker from 'emoji-picker-react';
-import { Switch } from '@/components/ui/switch';
-import { DisplayCustomEmoji } from './emoji-display';
-import { Label } from '@/components/ui/label';
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
+import type { DiscordPartialEmoji } from "@/types/bluetick/discord";
+import { PopoverContent } from "@radix-ui/react-popover";
+import React, { useEffect } from "react";
+import EmojiPicker from "emoji-picker-react";
+import { Switch } from "@/components/ui/switch";
+import { DisplayCustomEmoji } from "./emoji-display";
+import { Label } from "@/components/ui/label";
 
 interface CustomEmojiPickerProps {
   defaultEmoji?: string;
@@ -21,10 +21,10 @@ const CustomEmojiPicker: React.FC<CustomEmojiPickerProps> = ({
   const [open, setOpen] = React.useState(false);
 
   const [isDefault, setIsDefault] = React.useState(
-    defaultEmoji ? !(defaultEmoji.length >= 9) : true
+    defaultEmoji ? !(defaultEmoji.length >= 9) : true,
   );
 
-  const [emoji, setEmoji] = React.useState(defaultEmoji ?? '🔥');
+  const [emoji, setEmoji] = React.useState(defaultEmoji ?? "🔥");
 
   const handleChangeDefault = (): void => {
     if (discordEmojis && discordEmojis.length !== 0) {
@@ -33,7 +33,7 @@ const CustomEmojiPicker: React.FC<CustomEmojiPickerProps> = ({
         setIsDefault(false);
       } else {
         setIsDefault(true);
-        setEmoji('🔥');
+        setEmoji("🔥");
       }
     }
   };
@@ -44,7 +44,7 @@ const CustomEmojiPicker: React.FC<CustomEmojiPickerProps> = ({
         onEmojiSelect(emoji);
       }
     }, // eslint-disable-next-line react-hooks/exhaustive-deps
-    [emoji]
+    [emoji],
   );
 
   return (
@@ -97,11 +97,11 @@ const CustomEmojiPicker: React.FC<CustomEmojiPickerProps> = ({
           <Label className="text-gray-500">Use default emoji?</Label>
           <div className="flex items-center gap-2">
             <Switch
-              size={'xs'}
+              size={"xs"}
               checked={isDefault}
               onClick={handleChangeDefault}
             />
-            <Label className="text-gray-500">{isDefault ? 'Yes' : 'No'}</Label>
+            <Label className="text-gray-500">{isDefault ? "Yes" : "No"}</Label>
           </div>
         </div>
       )}

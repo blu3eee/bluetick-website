@@ -1,5 +1,5 @@
-import { BotDetails } from '../bot';
-import { GuildDetails } from '../guild';
+import { type BotDetails } from "../bot";
+import { type GuildDetails } from "../guild";
 
 // guild-action-logs.dto.ts
 export interface CreateActionLogDto {

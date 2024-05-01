@@ -1,8 +1,8 @@
 // /app/bluetick/(logged-in)/dashboard/[serverId]/layout.tsx
-import { BLUETICK_BOT_ID } from '@/config/bluetick';
-import { GuildContextProvider } from '@/context/guild-context';
-import type { Metadata } from 'next';
-import React from 'react';
+import { BLUETICK_BOT_ID } from "@/config/bluetick";
+import { GuildContextProvider } from "@/context/guild-context";
+import type { Metadata } from "next";
+import React from "react";
 
 interface GuildLayoutProps {
   children: React.ReactNode;
@@ -12,8 +12,8 @@ interface GuildLayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: 'Dashboard',
-  description: 'Bluetick - All in one discord bot',
+  title: "Dashboard",
+  description: "Bluetick - All in one discord bot",
 };
 
 /**

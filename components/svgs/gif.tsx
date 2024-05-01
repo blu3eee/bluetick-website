@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React from "react";
 
 const GIFSVG: React.FC<React.SVGProps<SVGSVGElement>> = (
-  props
+  props,
 ): React.JSX.Element => {
   return (
     <svg

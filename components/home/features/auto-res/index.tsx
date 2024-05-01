@@ -1,18 +1,18 @@
-'use client';
-import React, { useContext } from 'react';
-import FeatureLabel from '../feature-label';
-import { BluetickContext } from '@/context/bluetick-context';
-import { Skeleton } from '@/components/ui/skeleton';
-import { getBotAvatarURL } from '@/lib/helper';
-import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
-import DiscordMessage from '@/components/bluetick/discord/message';
-import { motion } from 'framer-motion';
-import AnimatedButton from '@/components/motions/animated-button';
-import { signIn, useSession } from 'next-auth/react';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { poppinsFont } from '@/styles/fonts';
+"use client";
+import React, { useContext } from "react";
+import FeatureLabel from "../feature-label";
+import { BluetickContext } from "@/context/bluetick-context";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getBotAvatarURL } from "@/lib/helper";
+import type { TranscriptMessage } from "@/types/bluetick/db/tickets";
+import DiscordMessage from "@/components/bluetick/discord/message";
+import { motion } from "framer-motion";
+import AnimatedButton from "@/components/motions/animated-button";
+import { signIn, useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { poppinsFont } from "@/styles/fonts";
 import {
   ArrowDown,
   ArrowRight,
@@ -20,45 +20,45 @@ import {
   PlusCircle,
   Smile,
   Sticker,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Icons } from '@/components/icons';
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Icons } from "@/components/icons";
 
 const AutoResFeature = (): JSX.Element => {
   const { isLoading, botDetails } = useContext(BluetickContext);
   const users: Record<string, { name: string; avatarURL: string }> = {
     bot: {
-      name: botDetails?.username ?? 'Bluetick',
-      avatarURL: botDetails ? getBotAvatarURL(botDetails) : '',
+      name: botDetails?.username ?? "Bluetick",
+      avatarURL: botDetails ? getBotAvatarURL(botDetails) : "",
     },
-    '1': {
-      name: 'Wumpus',
+    "1": {
+      name: "Wumpus",
       avatarURL:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6XONaI6wOpVvQ0GJ-YyBGxzWdr60xrKxnL2zzzH4SmA&s',
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6XONaI6wOpVvQ0GJ-YyBGxzWdr60xrKxnL2zzzH4SmA&s",
     },
-    '2': {
-      name: 'Clyde',
+    "2": {
+      name: "Clyde",
       avatarURL:
-        'https://res.cloudinary.com/apideck/image/upload/v1678484810/marketplaces/ckhg56iu1mkpc0b66vj7fsj3o/listings/tried-to-make-the-discord-clyde-logo-more-similar-to-the-v0-g2bha52fh9v91_w9wnla.webp',
+        "https://res.cloudinary.com/apideck/image/upload/v1678484810/marketplaces/ckhg56iu1mkpc0b66vj7fsj3o/listings/tried-to-make-the-discord-clyde-logo-more-similar-to-the-v0-g2bha52fh9v91_w9wnla.webp",
     },
-    '3': {
-      name: 'Nelly',
+    "3": {
+      name: "Nelly",
       avatarURL:
-        'https://assets-global.website-files.com/5f9072399b2640f14d6a2bf4/6192fd9364ed4731031c10c1_Author-Nelly-Webflow.png',
+        "https://assets-global.website-files.com/5f9072399b2640f14d6a2bf4/6192fd9364ed4731031c10c1_Author-Nelly-Webflow.png",
     },
   };
 
   const channels: Record<string, { name: string }> = {
-    '1': { name: 'support-tickets' },
-    '2': { name: 'server-information' },
-    '3': { name: 'rules' },
-    '4': { name: 'general' },
+    "1": { name: "support-tickets" },
+    "2": { name: "server-information" },
+    "3": { name: "rules" },
+    "4": { name: "general" },
   };
-  const triggers = ['ticket', 'rules', 'cinema'];
+  const triggers = ["ticket", "rules", "cinema"];
 
   const [messages, setMessages] = React.useState<TranscriptMessage[]>([
     {
-      userID: 'bot',
+      userID: "bot",
       content:
         "Hello <@1>! Let's send some trigger messages for auto-responders!",
       embeds: [],
@@ -97,9 +97,9 @@ const AutoResFeature = (): JSX.Element => {
   React.useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start',
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
       });
     }
   }, [messages]);
@@ -132,17 +132,17 @@ const AutoResFeature = (): JSX.Element => {
         </div>
         <div className="flex justify-end gap-2 mt-2">
           <AnimatedButton
-            size={'sm'}
-            variant={'info'}
+            size={"sm"}
+            variant={"info"}
             onClick={() => {
-              if (status === 'loading') {
-                toast.error('This is still loading');
+              if (status === "loading") {
+                toast.error("This is still loading");
               } else {
                 if (data) {
-                  router.push('/servers');
+                  router.push("/servers");
                 } else {
-                  signIn('discord', { callbackUrl: '/servers' }).catch(() => {
-                    toast.error('Failed to initiate log in with Discord');
+                  signIn("discord", { callbackUrl: "/servers" }).catch(() => {
+                    toast.error("Failed to initiate log in with Discord");
                   });
                 }
               }
@@ -150,7 +150,7 @@ const AutoResFeature = (): JSX.Element => {
           >
             Set this up
           </AnimatedButton>
-          <Button size={'sm'} variant={'warning'} className="gap-2" disabled>
+          <Button size={"sm"} variant={"warning"} className="gap-2" disabled>
             Send a message
             <ArrowRight className="hidden md:block" size={16} />
             <ArrowDown className="block md:hidden" size={16} />
@@ -162,8 +162,8 @@ const AutoResFeature = (): JSX.Element => {
         <div>
           <div
             className={cn(
-              'text-warning uppercase font-semibold',
-              poppinsFont.className
+              "text-warning uppercase font-semibold",
+              poppinsFont.className,
             )}
           >
             Discord Demo
@@ -224,8 +224,8 @@ const AutoResFeature = (): JSX.Element => {
               {triggers.map((trigger, index) => (
                 <Button
                   key={index}
-                  variant={'warning'}
-                  size={'xs'}
+                  variant={"warning"}
+                  size={"xs"}
                   className="rounded-xl"
                   disabled={isProcessing}
                   onClick={() => {
@@ -260,14 +260,14 @@ export default AutoResFeature;
 const responseTemplates: Record<string, (userId: string) => TranscriptMessage> =
   {
     ticket: (userId: string) => ({
-      userID: 'bot',
+      userID: "bot",
       content: `<@${userId}>, you can open tickets at <#1>!`,
       embeds: [],
       attachments: [],
       timestamp: Date.now(),
     }),
     rules: (userId: string) => ({
-      userID: 'bot',
+      userID: "bot",
       content: `READ THE RULES!!`,
       embeds: [
         {
@@ -276,17 +276,17 @@ const responseTemplates: Record<string, (userId: string) => TranscriptMessage> =
           author: null,
           description: `- Read our server information at <#2> and rules at <#3>\n\nHave fun!!`,
           footer: null,
-          thumbnailURL: '',
-          imageURL: '',
+          thumbnailURL: "",
+          imageURL: "",
           timestamp: null,
-          color: '#06d6a0',
+          color: "#06d6a0",
         },
       ],
       attachments: [],
       timestamp: Date.now(),
     }),
     cinema: (userId: string) => ({
-      userID: 'bot',
+      userID: "bot",
       content: `Absolute **CINEMAAAA**!!!`,
       embeds: [],
       attachments: [],

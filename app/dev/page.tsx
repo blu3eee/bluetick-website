@@ -1,13 +1,13 @@
-'use client';
-import VercelData from '@/components/dev/vercel-analytics';
-import { Button } from '@/components/ui/button';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import { BLUETICK_BOT_ID } from '@/config/bluetick';
-import { BluetickContext } from '@/context/bluetick-context';
-import { useFetchBotGuilds } from '@/hooks/api/discord/bot-guilds';
+"use client";
+import VercelData from "@/components/dev/vercel-analytics";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { BLUETICK_BOT_ID } from "@/config/bluetick";
+import { BluetickContext } from "@/context/bluetick-context";
+import { useFetchBotGuilds } from "@/hooks/api/discord/bot-guilds";
 
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
 const DevPage = (): JSX.Element => {
   const { botDetails, isLoading: isLoadingBot } = useContext(BluetickContext);
@@ -38,7 +38,7 @@ const DevPage = (): JSX.Element => {
               <span className="text-blue-500 text-sm font-semibold">
                 {guilds.reduce(
                   (acc, guild) => acc + guild.approximate_member_count,
-                  0
+                  0,
                 )}
               </span>
             </div>
@@ -47,13 +47,13 @@ const DevPage = (): JSX.Element => {
       )}
       <div className="flex items-center gap-2">
         <a href="/dev/playground">
-          <Button size={'sm'} variant={'warning'}>
+          <Button size={"sm"} variant={"warning"}>
             Playground
           </Button>
         </a>
         <a href="/dev/twitch">
           <Button
-            size={'sm'}
+            size={"sm"}
             className="bg-twitch text-twitch-foreground hover:bg-twitch-secondary focus:bg-twitch-secondary transition ease-in-out duration-200"
           >
             Twitch

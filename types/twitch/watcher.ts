@@ -1,6 +1,6 @@
-import { MessageInfoDetails } from '../bluetick';
-import { BotDetails } from '../bluetick/db/bot';
-import { GuildDetails } from '../bluetick/db/guild';
+import { type MessageInfoDetails } from "../bluetick";
+import { type BotDetails } from "../bluetick/db/bot";
+import { type GuildDetails } from "../bluetick/db/guild";
 
 export interface TwitchWatcherDetails {
   id: number;

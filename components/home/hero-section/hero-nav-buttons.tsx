@@ -1,15 +1,15 @@
-'use client';
-import { useSession } from 'next-auth/react';
-import React from 'react';
-import { Skeleton } from '../../ui/skeleton';
-import { useRouter } from 'next/navigation';
-import { LoginButton } from '../../bluetick/auth-buttons';
-import AnimatedButton from '../../motions/animated-button';
+"use client";
+import { useSession } from "next-auth/react";
+import React from "react";
+import { Skeleton } from "../../ui/skeleton";
+import { useRouter } from "next/navigation";
+import { LoginButton } from "../../bluetick/auth-buttons";
+import AnimatedButton from "../../motions/animated-button";
 
 const NavButtons = (): JSX.Element => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  if (status === 'loading') {
+  if (status === "loading") {
     return (
       <>
         <Skeleton className="w-24 h-10" />
@@ -21,9 +21,9 @@ const NavButtons = (): JSX.Element => {
     <>
       {session ? (
         <AnimatedButton
-          variant={'red'}
+          variant={"red"}
           onClick={() => {
-            router.push('/servers');
+            router.push("/servers");
           }}
         >
           Manage server
@@ -50,9 +50,9 @@ const AddBotButton = (): JSX.Element => {
   const router = useRouter();
   return (
     <AnimatedButton
-      variant={'blue'}
+      variant={"blue"}
       onClick={() => {
-        router.push('/servers');
+        router.push("/servers");
       }}
     >
       Add bot

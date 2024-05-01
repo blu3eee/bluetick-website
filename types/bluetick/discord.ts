@@ -1,6 +1,7 @@
-import { EmbedDetails } from '.';
+// eslint-disable @typescript-eslint/no-explicit-any
+import { type EmbedDetails } from ".";
 
-export type DiscordUser = {
+export interface DiscordUser {
   id: string;
   username: string;
   discriminator: string;
@@ -18,7 +19,7 @@ export type DiscordUser = {
   premium_type: number;
   public_flags: number;
   avatar_decoration?: string;
-};
+}
 
 export interface DiscordGuildMember {
   user: DiscordUser;
@@ -33,7 +34,7 @@ export interface DiscordGuildMember {
   permissions: string;
 }
 
-export type PartialMember = {
+export interface PartialMember {
   avatar?: string;
   flags: number;
   nick?: string;
@@ -43,9 +44,9 @@ export type PartialMember = {
   mute: boolean;
   beaf: boolean;
   permissions?: string;
-};
+}
 
-export type DiscordPartialGuildChannel = {
+export interface DiscordPartialGuildChannel {
   id: string;
   default_thread_rate_limit_per_user?: number;
   last_message_id: string;
@@ -60,9 +61,9 @@ export type DiscordPartialGuildChannel = {
   rate_limit_per_user: string;
   banner?: string;
   flags?: number;
-};
+}
 
-export type DiscordChannel = {
+export interface DiscordChannel {
   id: string;
   type: number;
   guild_id?: string;
@@ -88,9 +89,9 @@ export type DiscordChannel = {
   flags?: number;
   total_message_sent?: number;
   default_thread_rate_limit_per_user?: number;
-};
+}
 
-export type DiscordRole = {
+export interface DiscordRole {
   id: string;
   name: string;
   color: number;
@@ -105,9 +106,9 @@ export type DiscordRole = {
     bot_id?: string;
   };
   flags: number;
-};
+}
 
-export type DiscordPartialEmoji = {
+export interface DiscordPartialEmoji {
   id: string;
   name: string;
   roles: string[];
@@ -115,9 +116,9 @@ export type DiscordPartialEmoji = {
   managed?: boolean;
   animated?: boolean;
   available?: boolean;
-};
+}
 
-export type DiscordGuild = {
+export interface DiscordGuild {
   id: string;
   name: string;
   icon: string;
@@ -159,7 +160,7 @@ export type DiscordGuild = {
   nsfw_level: number;
   stickers?: string[];
   premium_progress_bar_enabled: boolean;
-};
+}
 
 export interface DiscordMessage {
   id: string;
@@ -171,12 +172,12 @@ export interface DiscordMessage {
   edited_timestamp: string | null;
   tts: boolean;
   mention_everyone: boolean;
-  mentions: Array<DiscordUser>;
-  mention_roles: Array<string>;
-  mention_channels?: Array<ChannelMention>;
-  attachments: Array<Attachment>;
-  embeds: Array<EmbedDetails>;
-  reactions?: Array<Reaction>;
+  mentions: DiscordUser[];
+  mention_roles: string[];
+  mention_channels?: ChannelMention[];
+  attachments: Attachment[];
+  embeds: EmbedDetails[];
+  reactions?: Reaction[];
   nonce?: string | number;
   pinned: boolean;
   webhook_id?: string;
@@ -187,14 +188,14 @@ export interface DiscordMessage {
   flags?: number;
   referenced_message?: DiscordMessage | null;
   interaction?: MessageInteraction;
-  components?: Array<MessageComponent>;
+  components?: MessageComponent[];
 }
 
 export interface DiscordMessageUpdateDto {
   content?: string;
   embeds?: EmbedDetails[];
   flags?: number;
-  components?: any[];
+  components?: MessageComponent[];
   files?: Attachment[];
 }
 
@@ -256,7 +257,7 @@ export interface MessageComponent {
   custom_id?: string;
   url?: string;
   disabled?: boolean;
-  components?: Array<MessageComponent>;
+  components?: MessageComponent[];
 }
 
 // * This is always present on application command, message component, and modal submit interaction types. It is optional for future-proofing against new interaction types
@@ -265,7 +266,7 @@ export interface MessageComponent {
 export interface DiscordInteraction {
   id: string;
   type: number;
-  data?: any; // *
+  // data?: any; // *
   guild_id?: string;
   channel?: DiscordPartialGuildChannel;
   channel_id: string;
@@ -281,7 +282,7 @@ export interface DiscordInteraction {
 export interface InteractionResponseData {
   tts?: boolean;
   content?: string;
-  embeds?: {
+  embeds?: Array<{
     title?: string;
     type?: string;
     description?: string;
@@ -314,10 +315,10 @@ export interface InteractionResponseData {
       url?: string;
       proxy_icon_url?: string;
     };
-    fields?: { name: string; value: string; inline?: boolean }[];
-  }[];
+    fields?: Array<{ name: string; value: string; inline?: boolean }>;
+  }>;
   flags?: number;
-  components?: any[];
+  components?: MessageComponent[];
 }
 
 export interface DiscordPartialInteraction {
@@ -331,17 +332,17 @@ export interface DiscordUpdateChannelParams {
 }
 
 export enum CHANNEL_TYPE {
-  ANNOUNCEMENT_THREAD = '10',
-  PUBLIC_THREAD = '11',
-  PRIVATE_THREAD = '12',
+  ANNOUNCEMENT_THREAD = "10",
+  PUBLIC_THREAD = "11",
+  PRIVATE_THREAD = "12",
 }
 
 export enum DISCORD_BUTTON_STYLES {
-  BLURPLE = 'Blurple',
-  GREY = 'Grey',
-  GREEN = 'Green',
-  RED = 'Red',
-  GREY_LINK = 'Link',
+  BLURPLE = "Blurple",
+  GREY = "Grey",
+  GREEN = "Green",
+  RED = "Red",
+  GREY_LINK = "Link",
 }
 
 export enum DISCORD_PERMISSIONS {

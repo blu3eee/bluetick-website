@@ -1,5 +1,5 @@
-import Modules from '@/components/bluetick/modules/modules';
-import React from 'react';
+import Modules from "@/components/bluetick/modules/modules";
+import React from "react";
 
 const DashboardModulesPage = ({
   params,

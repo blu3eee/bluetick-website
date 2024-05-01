@@ -9,8 +9,8 @@ export interface VercelData {
 }
 
 export type VercelDataCategories =
-  | 'path'
-  | 'referrer'
-  | 'country'
-  | 'os_name'
-  | 'client_name';
+  | "path"
+  | "referrer"
+  | "country"
+  | "os_name"
+  | "client_name";

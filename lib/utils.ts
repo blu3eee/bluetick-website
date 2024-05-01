@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Combines class names using clsx and then merges them with tailwind-merge.
@@ -22,19 +22,19 @@ export function intToHexColor(intColor: number): string {
   // Convert the integer to a hexadecimal string
   let hexColor = intColor.toString(16);
   // Ensure the hexadecimal string is 6 characters long, padding with zeros if necessary
-  hexColor = hexColor.padStart(6, '0');
+  hexColor = hexColor.padStart(6, "0");
   // Prefix with '#' to make it usable in CSS
   return `#${hexColor}`;
 }
 
 export const replacePlaceholders = (
   text: string,
-  valuesMap: Record<string, string>
+  valuesMap: Record<string, string>,
 ): string => {
   let resultText = text;
   for (const [placeholder, value] of Object.entries(valuesMap)) {
     // Using a global regex to replace all instances of the placeholder
-    const regex = new RegExp(`{${placeholder}}`, 'g');
+    const regex = new RegExp(`{${placeholder}}`, "g");
     resultText = resultText.replace(regex, value);
   }
   return resultText;

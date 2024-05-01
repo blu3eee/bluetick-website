@@ -1,5 +1,5 @@
-import markdownit from 'markdown-it';
-import React from 'react';
+import markdownit from "markdown-it";
+import React from "react";
 
 const convertToHtml = (text: string): string => {
   const md = markdownit({
@@ -15,7 +15,7 @@ const convertToHtml = (text: string): string => {
 
     // CSS language prefix for fenced blocks. Can be
     // useful for external highlighters.
-    langPrefix: 'language-',
+    langPrefix: "language-",
 
     // Autoconvert URL-like text to links
     linkify: false,
@@ -29,13 +29,13 @@ const convertToHtml = (text: string): string => {
     //
     // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
     // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
-    quotes: '“”‘’',
+    quotes: "“”‘’",
 
     // Highlighter function. Should return escaped HTML,
     // or '' if the source string is not changed and should be escaped externally.
     // If result starts with <pre... internal wrapper is skipped.
     highlight: function (/* str, lang */) {
-      return '';
+      return "";
     },
   });
 

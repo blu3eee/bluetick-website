@@ -1,10 +1,10 @@
-import React from 'react';
-import { Label } from '../ui/label';
-import DataBox from './analytics/data-box';
-import type { VercelDataCategories } from '@/types/vercel';
-import type { DateRange } from 'react-day-picker';
-import { DatePickerWithRange } from '../ui/date-picker';
-import { Button } from '../ui/button';
+import React from "react";
+import { Label } from "../ui/label";
+import DataBox from "./analytics/data-box";
+import type { VercelDataCategories } from "@/types/vercel";
+import type { DateRange } from "react-day-picker";
+import { DatePickerWithRange } from "../ui/date-picker";
+import { Button } from "../ui/button";
 
 const VercelData = (): JSX.Element => {
   const dataCategories: Array<{
@@ -12,24 +12,24 @@ const VercelData = (): JSX.Element => {
     category: VercelDataCategories;
   }> = [
     {
-      label: 'Pages',
-      category: 'path',
+      label: "Pages",
+      category: "path",
     },
     {
-      label: 'Referrers',
-      category: 'referrer',
+      label: "Referrers",
+      category: "referrer",
     },
     {
-      label: 'Countries',
-      category: 'country',
+      label: "Countries",
+      category: "country",
     },
     {
-      label: 'Operating Systems',
-      category: 'os_name',
+      label: "Operating Systems",
+      category: "os_name",
     },
     {
-      label: 'Browers',
-      category: 'client_name',
+      label: "Browers",
+      category: "client_name",
     },
   ];
   const today = new Date();
@@ -45,7 +45,7 @@ const VercelData = (): JSX.Element => {
   });
 
   const handleDateRangeChange = (
-    selectedRange: DateRange | undefined
+    selectedRange: DateRange | undefined,
   ): void => {
     setDateRange(selectedRange);
   };
@@ -70,7 +70,7 @@ const VercelData = (): JSX.Element => {
           toDateLimit={new Date()}
         />
         <Button
-          variant={'info'}
+          variant={"info"}
           onClick={() => {
             handleChangeFetchNewData();
           }}
@@ -82,7 +82,7 @@ const VercelData = (): JSX.Element => {
         {dataCategories.map((dataCategory, i) => (
           <div
             key={i}
-            className={`${i < 2 ? 'md:col-span-3' : 'md:col-span-2'}`}
+            className={`${i < 2 ? "md:col-span-3" : "md:col-span-2"}`}
           >
             <DataBox
               fromDateTime={dataDateRange.from ?? new Date(2024, 2, 10)}
