@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 import {
   AlertTriangle,
@@ -28,14 +28,14 @@ import {
   FileArchive,
   ChevronsUpDown,
   type LucideProps,
-} from 'lucide-react';
-import GithubSVG from './svgs/github';
-import FacebookSVG from './svgs/facebook';
-import InstagramSVG from './svgs/instagram';
-import TwitterSVG from './svgs/twitter';
-import PdfSVG from './svgs/pdf';
-import PandaLogoSVG from './svgs/panda';
-import GIFSVG from './svgs/gif';
+} from "lucide-react";
+import GithubSVG from "./svgs/github";
+import FacebookSVG from "./svgs/facebook";
+import InstagramSVG from "./svgs/instagram";
+import TwitterSVG from "./svgs/twitter";
+import PdfSVG from "./svgs/pdf";
+import PandaLogoSVG from "./svgs/panda";
+import GIFSVG from "./svgs/gif";
 
 export type Icon = LucideIcon;
 

@@ -1,30 +1,37 @@
-// useApiRequest.ts
-import { API_URL, apiInstance } from '@/config/bluetick';
-import axios, { AxiosInstance } from 'axios';
-import { useState } from 'react';
+import { apiInstance } from "@/config/bluetick";
+import { useState } from "react";
+import type { AxiosResponse } from "axios";
 
-type RequestMethod = 'get' | 'post' | 'patch' | 'delete' | 'put';
+type RequestMethod = "get" | "post" | "patch" | "delete" | "put";
 
-type ApiRequestHook = {
+interface ApiRequestHook {
   loading: boolean;
-  error: any;
-  request: (method: RequestMethod, url: string, data?: any) => Promise<any>;
-};
+  error: Error | null;
+  request: (
+    method: RequestMethod,
+    url: string,
+    data?: Record<string, unknown>,
+  ) => Promise<AxiosResponse<unknown>>;
+}
 
 const useApiRequest = (): ApiRequestHook => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<any>(null);
+  const [error, setError] = useState<Error | null>(null);
 
-  const request = async (method: RequestMethod, url: string, data = {}) => {
+  const request = async (
+    method: RequestMethod,
+    url: string,
+    data: Record<string, unknown> = {},
+  ): Promise<AxiosResponse<unknown>> => {
     setLoading(true);
     setError(null);
     try {
       const response = await apiInstance[method](url, data);
       setLoading(false);
-      return response.data;
+      return response;
     } catch (err) {
       setLoading(false);
-      setError(err);
+      setError(err as Error);
       throw err;
     }
   };

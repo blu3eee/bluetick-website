@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const PdfSVG: React.FC<React.SVGProps<SVGSVGElement>> = (
-  props
+  props,
 ): React.JSX.Element => {
   return (
     <svg

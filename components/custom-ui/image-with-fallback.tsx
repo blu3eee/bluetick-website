@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Image, { type ImageProps } from 'next/image';
+import React, { useState } from "react";
+import Image, { type ImageProps } from "next/image";
 
 interface ImageWithFallbackProps extends ImageProps {
   fallbackSrc: string;

@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import Content from '@/content/about.mdx';
+import Content from "@/content/about.mdx";
 
 /**
  * Page component that renders the About page content.

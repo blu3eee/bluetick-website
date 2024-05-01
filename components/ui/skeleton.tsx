@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
-import React from 'react';
-import type { AdditionalProps } from '.';
+import { cn } from "@/lib/utils";
+import React from "react";
+import type { AdditionalProps } from ".";
 
 /**
  * Renders a skeleton loader element with customizable classes.
@@ -15,7 +15,7 @@ function Skeleton({
 }: React.HTMLAttributes<HTMLDivElement> & AdditionalProps): React.ReactElement {
   return (
     <div
-      className={cn('animate-pulse rounded-md bg-muted', className)}
+      className={cn("animate-pulse rounded-md bg-muted", className)}
       {...props}
     />
   );

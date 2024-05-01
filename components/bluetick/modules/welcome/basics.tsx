@@ -1,13 +1,13 @@
-'use client';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import { GuildContext } from '@/context/guild-context';
-import { useFetchGuildWelcome } from '@/hooks/api/welcome/fetch';
-import React, { useContext } from 'react';
-import { toast } from 'sonner';
-import { ChannelSelect } from '../../ui/channel-select';
-import { Skeleton } from '@/components/ui/skeleton';
+"use client";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import { GuildContext } from "@/context/guild-context";
+import { useFetchGuildWelcome } from "@/hooks/api/welcome/fetch";
+import React, { useContext } from "react";
+import { toast } from "sonner";
+import { ChannelSelect } from "../../ui/channel-select";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const TypeAndChannel: React.FC<{
   type: string;
@@ -17,7 +17,7 @@ const TypeAndChannel: React.FC<{
   const { channels, isLoadingChannels } = useContext(GuildContext);
   const { data: guildWelcome, refetch } = useFetchGuildWelcome(
     BLUETICK_BOT_ID,
-    serverId
+    serverId,
   );
 
   const handleChange = async (newType: string): Promise<void> => {
@@ -26,14 +26,14 @@ const TypeAndChannel: React.FC<{
       console.log({ message: { type: newType } });
       const response = await apiInstance.patch(
         `${ROUTES.BOTGUILDWELCOMES}/${BLUETICK_BOT_ID}/${serverId}`,
-        { message: { type: newType } }
+        { message: { type: newType } },
       );
       if (response.status === 200) {
         setType(newType);
         await refetch();
         toast.success(`Message type set to ${newType} successful`);
       } else {
-        toast.error('Failed to update message type');
+        toast.error("Failed to update message type");
       }
     } catch (error) {
       console.error(error);
@@ -46,18 +46,18 @@ const TypeAndChannel: React.FC<{
     try {
       const response = await apiInstance.patch(
         `${ROUTES.BOTGUILDWELCOMES}/${BLUETICK_BOT_ID}/${serverId}`,
-        { channelID }
+        { channelID },
       );
       if (response.status === 200) {
         console.log(response.data.data);
         toast.success(`Set new welcome channel successful.`);
       } else {
-        toast.error('Failed to update welcome message channel');
+        toast.error("Failed to update welcome message channel");
       }
     } catch (error) {
       console.error(error);
       toast.error(
-        `An error happened while trying to update welcome message type`
+        `An error happened while trying to update welcome message type`,
       );
     }
   };
@@ -69,7 +69,7 @@ const TypeAndChannel: React.FC<{
         <RadioGroup
           onValueChange={(val) => {
             handleChange(val).catch((e) => {
-              console.error('Failed to handle radio group change', e);
+              console.error("Failed to handle radio group change", e);
             });
           }}
           defaultValue={initType}
@@ -101,10 +101,10 @@ const TypeAndChannel: React.FC<{
           <div className="mt-2">
             <ChannelSelect
               options={channels.textChannels}
-              initChannelId={guildWelcome?.channelID ?? ''}
+              initChannelId={guildWelcome?.channelID ?? ""}
               onSelect={(id) => {
                 handleChannelSelect(id).catch((error) => {
-                  console.error('Failed to handle select channel', error);
+                  console.error("Failed to handle select channel", error);
                 });
               }}
             />

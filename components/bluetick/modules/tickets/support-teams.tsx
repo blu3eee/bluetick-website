@@ -1,32 +1,32 @@
-'use client';
-import React, { useContext } from 'react';
-import type { ServerIdProps } from '../props';
-import { useFetchGuildTicketSupportTeams } from '@/hooks/api/tickets/teams';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import type { TicketSupportTeamDetails } from '@/types/bluetick/db/tickets';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
+"use client";
+import React, { useContext } from "react";
+import type { ServerIdProps } from "../props";
+import { useFetchGuildTicketSupportTeams } from "@/hooks/api/tickets/teams";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import type { TicketSupportTeamDetails } from "@/types/bluetick/db/tickets";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { CheckIcon, ChevronsUpDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useFetchGuildMembers } from '@/hooks/api/discord/guild-members';
-import type { DiscordGuildMember, DiscordRole } from '@/types/bluetick/discord';
+} from "@/components/ui/popover";
+import { CheckIcon, ChevronsUpDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useFetchGuildMembers } from "@/hooks/api/discord/guild-members";
+import type { DiscordGuildMember, DiscordRole } from "@/types/bluetick/discord";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@/components/ui/command';
-import { cn } from '@/lib/utils';
-import { GuildContext } from '@/context/guild-context';
-import { toast } from 'sonner';
-import { Icons } from '@/components/icons';
-import { Input } from '@/components/ui/input';
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { GuildContext } from "@/context/guild-context";
+import { toast } from "sonner";
+import { Icons } from "@/components/icons";
+import { Input } from "@/components/ui/input";
 
 const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
   const { discordGuild, isLoading } = useContext(GuildContext);
@@ -47,30 +47,30 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
         setTeams(data);
         setSelectedTeam(
           data.find((team) => team.name === selectedTeam?.name ?? `Default`) ??
-            data[0]
+            data[0],
         );
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data]
+    [data],
   );
 
   const { data: members, isLoading: isLoadingMembers } = useFetchGuildMembers(
     BLUETICK_BOT_ID,
-    serverId
+    serverId,
   );
 
   const [selectedMember, setSelectedMember] =
     React.useState<DiscordGuildMember | null>(null);
 
   const [selectedRole, setSelectedRole] = React.useState<DiscordRole | null>(
-    null
+    null,
   );
 
   const handleAddRole = async (): Promise<void> => {
     try {
       if (!selectedRole) {
-        toast.error('No role selected');
+        toast.error("No role selected");
         return;
       }
 
@@ -79,27 +79,27 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
           `${ROUTES.TICKET_SUPPORT_TEAMS}/${selectedTeam.id}`,
           {
             roles: [...selectedTeam.roles, selectedRole.id],
-          }
+          },
         );
         if (response.status === 200 || response.status === 201) {
           await refetch();
           toast.success(
-            `[Team: ${selectedTeam.name}] User @${selectedRole.name} added`
+            `[Team: ${selectedTeam.name}] User @${selectedRole.name} added`,
           );
           setSelectedRole(null);
         }
       } else {
-        toast.error('No team selected');
+        toast.error("No team selected");
       }
     } catch (e) {
-      toast.error('An error happened while trying to update staff team.');
+      toast.error("An error happened while trying to update staff team.");
     }
   };
 
   const handleAddUser = async (): Promise<void> => {
     try {
       if (!selectedMember) {
-        toast.error('No user selected');
+        toast.error("No user selected");
         return;
       }
       if (selectedTeam) {
@@ -107,20 +107,20 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
           `${ROUTES.TICKET_SUPPORT_TEAMS}/${selectedTeam.id}`,
           {
             users: [...selectedTeam.users, selectedMember.user.id],
-          }
+          },
         );
         if (response.status === 200 || response.status === 201) {
           await refetch();
           toast.success(
-            `[Team: ${selectedTeam.name}] User @${selectedMember.user.username} added`
+            `[Team: ${selectedTeam.name}] User @${selectedMember.user.username} added`,
           );
           setSelectedMember(null);
         }
       } else {
-        toast.error('No team selected');
+        toast.error("No team selected");
       }
     } catch (e) {
-      toast.error('An error happened while trying to update staff team.');
+      toast.error("An error happened while trying to update staff team.");
     }
   };
 
@@ -131,7 +131,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
           `${ROUTES.TICKET_SUPPORT_TEAMS}/${selectedTeam.id}`,
           {
             users: selectedTeam.users.filter((userId) => userId !== id),
-          }
+          },
         );
         if (response.status === 200 || response.status === 201) {
           await refetch();
@@ -140,10 +140,10 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
           toast.error(`[Team: ${selectedTeam.name}] Failed to remove user`);
         }
       } else {
-        toast.error('No team selected');
+        toast.error("No team selected");
       }
     } catch (e) {
-      toast.error('An error happened while trying to update staff team.');
+      toast.error("An error happened while trying to update staff team.");
     }
   };
 
@@ -154,7 +154,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
           `${ROUTES.TICKET_SUPPORT_TEAMS}/${selectedTeam.id}`,
           {
             roles: selectedTeam.roles.filter((roleId) => roleId !== id),
-          }
+          },
         );
         if (response.status === 200 || response.status === 201) {
           await refetch();
@@ -163,34 +163,34 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
           toast.error(`[Team: ${selectedTeam.name}] Failed to remove role`);
         }
       } else {
-        toast.error('No team selected');
+        toast.error("No team selected");
       }
     } catch (e) {
-      toast.error('An error happened while trying to update staff team roles.');
+      toast.error("An error happened while trying to update staff team roles.");
     }
   };
 
-  const [newTeamName, setNewTeamName] = React.useState('');
+  const [newTeamName, setNewTeamName] = React.useState("");
 
   const handleAddTeam = async (): Promise<void> => {
     try {
-      if (newTeamName === '') {
-        toast.error('Invalid team name: empty');
+      if (newTeamName === "") {
+        toast.error("Invalid team name: empty");
         return;
       }
 
-      if (newTeamName.toLowerCase() === 'default') {
-        toast.error('Invalid team name: cannot use name Default');
+      if (newTeamName.toLowerCase() === "default") {
+        toast.error("Invalid team name: cannot use name Default");
         return;
       }
 
       if (
         teams.find(
           (team) =>
-            team.name.trim().toLowerCase() === newTeamName.trim().toLowerCase()
+            team.name.trim().toLowerCase() === newTeamName.trim().toLowerCase(),
         )
       ) {
-        toast.error('Invalid team name: existed team name');
+        toast.error("Invalid team name: existed team name");
         return;
       }
 
@@ -205,15 +205,15 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
       });
       const newTeam = data.data;
       if (newTeam) {
-        console.log('created team data', newTeam);
+        console.log("created team data", newTeam);
         await refetch();
         toast.success(`Team added: ${newTeamName}`);
-        setNewTeamName('');
+        setNewTeamName("");
       } else {
         toast.error(`Failed to add new team`);
       }
     } catch (e) {
-      toast.error('An error happened while trying to create new staff team.');
+      toast.error("An error happened while trying to create new staff team.");
     }
   };
 
@@ -240,7 +240,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
             onClick={() => {
               handleAddTeam().catch(() => {});
             }}
-            disabled={newTeamName === ''}
+            disabled={newTeamName === ""}
           >
             Add new
           </Button>
@@ -276,7 +276,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                         value={team.name}
                         onSelect={(teamName) => {
                           const newSelectedTeam = teams.find(
-                            (team) => team.name === teamName
+                            (team) => team.name === teamName,
                           );
                           if (newSelectedTeam) {
                             setSelectedTeam(newSelectedTeam);
@@ -294,7 +294,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
             </Popover>
           )}
           <Button
-            variant={'destructive'}
+            variant={"destructive"}
             disabled={!selectedTeam || selectedTeam.name === `Default`}
           >
             Delete
@@ -328,7 +328,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                       <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
                         {discordGuild.roles
                           .filter(
-                            (role) => !selectedTeam?.roles.includes(role.id)
+                            (role) => !selectedTeam?.roles.includes(role.id),
                           )
                           .map((role) => (
                             <CommandItem
@@ -338,14 +338,14 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                                 const selectedValue = discordGuild.roles.find(
                                   (option) =>
                                     `${option.id}_${option.name}`.toLowerCase() ===
-                                    currentValue
+                                    currentValue,
                                 );
                                 if (selectedValue) {
                                   setSelectedRole(
                                     selectedRole &&
                                       selectedValue.id === selectedRole.id
                                       ? null
-                                      : selectedValue
+                                      : selectedValue,
                                   );
                                 }
                               }}
@@ -354,10 +354,10 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                               {role.name}
                               <CheckIcon
                                 className={cn(
-                                  'ml-auto h-4 w-4',
+                                  "ml-auto h-4 w-4",
                                   selectedRole && selectedRole.id === role.id
-                                    ? 'opacity-100'
-                                    : 'opacity-0'
+                                    ? "opacity-100"
+                                    : "opacity-0",
                                 )}
                               />
                             </CommandItem>
@@ -368,13 +368,13 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                 </Popover>
               )}
               <Button
-                size={'sm'}
+                size={"sm"}
                 disabled={selectedRole === null}
                 onClick={() => {
                   handleAddRole().catch((e) => {
                     console.log(e);
                     console.log(
-                      'an error happened while trying to add a role to the team'
+                      "an error happened while trying to add a role to the team",
                     );
                   });
                 }}
@@ -443,7 +443,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                               const selectedValue = members.find(
                                 (option) =>
                                   `${option.user.id}_${option.user.username}`.toLowerCase() ===
-                                  currentValue
+                                  currentValue,
                               );
                               if (selectedValue) {
                                 setSelectedMember(
@@ -451,7 +451,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                                     selectedValue.user.id ===
                                       selectedMember.user.id
                                     ? null
-                                    : selectedValue
+                                    : selectedValue,
                                 );
                               }
                             }}
@@ -462,11 +462,11 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                             })`}
                             <CheckIcon
                               className={cn(
-                                'ml-auto h-4 w-4',
+                                "ml-auto h-4 w-4",
                                 selectedMember &&
                                   selectedMember.user.id === mem.user.id
-                                  ? 'opacity-100'
-                                  : 'opacity-0'
+                                  ? "opacity-100"
+                                  : "opacity-0",
                               )}
                             />
                           </CommandItem>
@@ -477,11 +477,11 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                 </Popover>
               )}
               <Button
-                size={'sm'}
+                size={"sm"}
                 disabled={selectedMember === null}
                 onClick={() => {
                   handleAddUser().catch((e) => {
-                    console.log('error happened while adding user to the team');
+                    console.log("error happened while adding user to the team");
                   });
                 }}
               >

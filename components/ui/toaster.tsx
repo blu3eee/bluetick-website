@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import * as React from 'react';
+import * as React from "react";
 
 import {
   Toast,
@@ -9,8 +9,8 @@ import {
   ToastProvider,
   ToastTitle,
   ToastViewport,
-} from '@/components/ui/toast';
-import { useToast } from '@/components/ui/use-toast';
+} from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
 
 /**
  * Renders a collection of toast notifications.

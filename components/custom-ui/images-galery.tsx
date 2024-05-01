@@ -1,6 +1,6 @@
-import ImageViewer from '@/components/custom-ui/image-viewer';
-import { cn } from '@/lib/utils';
-import React from 'react';
+import ImageViewer from "@/components/custom-ui/image-viewer";
+import { cn } from "@/lib/utils";
+import React from "react";
 
 const ImageGallery: React.FC<{ urls: string[]; columns?: number }> = ({
   urls,
@@ -21,8 +21,8 @@ const ImageGallery: React.FC<{ urls: string[]; columns?: number }> = ({
   return (
     <div
       className={cn(
-        'grid gap-4',
-        urls.length === 1 ? `grid-cols-1` : 'grid-cols-2 md:md:grid-cols-4'
+        "grid gap-4",
+        urls.length === 1 ? `grid-cols-1` : "grid-cols-2 md:md:grid-cols-4",
       )}
     >
       {splitted.map((column, columnIndex) => (

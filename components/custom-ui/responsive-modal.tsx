@@ -1,5 +1,5 @@
 // responsive-modal.tsx
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useContext, useMemo } from "react";
 import {
   Dialog,
   DialogTrigger,
@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from '@/components/ui/dialog';
+} from "@/components/ui/dialog";
 
 import {
   Drawer,
@@ -20,9 +20,9 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/components/ui/drawer';
-import { useMediaQuery } from '@/hooks/use-media-query';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/drawer";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { cn } from "@/lib/utils";
 
 interface BaseProps {
   children: React.ReactNode;
@@ -43,7 +43,7 @@ const ResponsiveModalContext = createContext({ isDesktop: true });
 const ResponsiveModalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const value = useMemo(() => ({ isDesktop }), [isDesktop]);
   return (
     <ResponsiveModalContext.Provider value={value}>

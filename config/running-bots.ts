@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from 'axios';
-import { API_TOKEN } from './bluetick';
+import axios, { type AxiosInstance } from "axios";
+import { API_TOKEN } from "./bluetick";
 
 export const BOTS_API_URL = process.env.NEXT_PUBLIC_DISCORD_BOTS_API_URL;
 

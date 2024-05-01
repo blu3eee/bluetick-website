@@ -1,17 +1,17 @@
-'use client';
-import useUserFlags from '@/lib/user-flags';
-import React from 'react';
-import { poppinsFont } from '@/styles/fonts';
-import { Button } from '@/components/ui/button';
-import { Copy } from 'lucide-react';
-import Image from 'next/image';
-import { getUserAvatarURL } from '@/lib/helper';
-import { BadgeDisplay } from '@/components/bluetick/ui/badge';
-import { MutualServers } from '@/components/bluetick/servers/servers';
-import { useSession } from 'next-auth/react';
-import { Callout } from '@/components/callout';
-import { Skeleton } from '@/components/ui/skeleton';
-import { toast } from 'sonner';
+"use client";
+import useUserFlags from "@/lib/user-flags";
+import React from "react";
+import { poppinsFont } from "@/styles/fonts";
+import { Button } from "@/components/ui/button";
+import { Copy } from "lucide-react";
+import Image from "next/image";
+import { getUserAvatarURL } from "@/lib/helper";
+import { BadgeDisplay } from "@/components/bluetick/ui/badge";
+import { MutualServers } from "@/components/bluetick/servers/servers";
+import { useSession } from "next-auth/react";
+import { Callout } from "@/components/callout";
+import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
 
 const BotsPage = (): JSX.Element => {
   const { data: session, status } = useSession();
@@ -20,7 +20,7 @@ const BotsPage = (): JSX.Element => {
   const [userBadges, setUserBadges] = React.useState<string[]>([]);
 
   React.useEffect(() => {
-    if (status === 'loading') {
+    if (status === "loading") {
       return;
     }
     if (session?.user?.flags) {
@@ -29,14 +29,14 @@ const BotsPage = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, status]);
 
-  if (status === 'loading') {
+  if (status === "loading") {
     <div className="flex h-fit w-full items-center justify-center">
       <Skeleton className="w-full h-12" />
     </div>;
   }
 
   if (!session || !session.user) {
-    if (status !== 'loading') {
+    if (status !== "loading") {
       return (
         <div className="flex h-screen w-full items-center justify-center">
           <Callout>Invalid Request</Callout>
@@ -56,11 +56,11 @@ const BotsPage = (): JSX.Element => {
       .writeText(discordUser.id)
       .then(() => {
         // Handle successful copy action (e.g., show a toast notification)
-        console.log('ID copied to clipboard!');
+        console.log("ID copied to clipboard!");
       })
       .catch((err) => {
         // Handle errors (e.g., clipboard permissions denied)
-        console.error('Failed to copy ID:', err);
+        console.error("Failed to copy ID:", err);
       });
   };
 
@@ -88,10 +88,10 @@ const BotsPage = (): JSX.Element => {
             <Button
               variant="link"
               className="gap-2 text-red-400 hover:text-red-400/70"
-              size={'sm'}
+              size={"sm"}
               onClick={() => {
                 copyToClipboard();
-                toast.info('Copied your user ID');
+                toast.info("Copied your user ID");
               }}
             >
               <Copy />

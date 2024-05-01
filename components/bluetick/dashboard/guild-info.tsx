@@ -1,12 +1,12 @@
-'use client';
-import React, { useContext } from 'react';
-import { GuildContext } from '@/context/guild-context';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import { getGuildIconURL } from '@/lib/helper';
-import { Copy } from 'lucide-react';
-import { rubikFont } from '@/styles/fonts';
-import ImageWithFallback from '@/components/custom-ui/image-with-fallback';
+"use client";
+import React, { useContext } from "react";
+import { GuildContext } from "@/context/guild-context";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { getGuildIconURL } from "@/lib/helper";
+import { Copy } from "lucide-react";
+import { rubikFont } from "@/styles/fonts";
+import ImageWithFallback from "@/components/custom-ui/image-with-fallback";
 
 export const GuildInfo = (): JSX.Element => {
   const { discordGuild, isLoading, channels, isLoadingChannels } =
@@ -47,8 +47,8 @@ export const GuildInfo = (): JSX.Element => {
               ID: {discordGuild.id}
             </span>
             <Button
-              variant={'ghost'}
-              size={'sm'}
+              variant={"ghost"}
+              size={"sm"}
               className="w-fit text-xs gap-2 font-semibold text-red-400 hover:text-red-400 focus:text-red-400"
             >
               <Copy size={16} /> Copy Server ID
@@ -80,7 +80,7 @@ export const GuildInfo = (): JSX.Element => {
   );
 };
 
-const InfoItem: React.FC<{ label: string; value: any }> = ({
+const InfoItem: React.FC<{ label: string; value: string | number }> = ({
   label,
   value,
 }) => {

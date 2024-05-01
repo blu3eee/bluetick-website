@@ -1,22 +1,22 @@
-'use client';
-import React, { useContext } from 'react';
-import FeatureLabel from '../feature-label';
-import { BluetickContext } from '@/context/bluetick-context';
-import { Skeleton } from '@/components/ui/skeleton';
-import { getBotAvatarURL } from '@/lib/helper';
-import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
-import DiscordMessage from '@/components/bluetick/discord/message';
-import { motion } from 'framer-motion';
-import AnimatedButton from '@/components/motions/animated-button';
-import { signIn, useSession } from 'next-auth/react';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { poppinsFont } from '@/styles/fonts';
-import { Gift, Hash, PlusCircle, Smile, Sticker } from 'lucide-react';
-import { Icons } from '@/components/icons';
-import { botUsers } from '@/config/dummies';
-import { images } from '@/config/images';
+"use client";
+import React, { useContext } from "react";
+import FeatureLabel from "../feature-label";
+import { BluetickContext } from "@/context/bluetick-context";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getBotAvatarURL } from "@/lib/helper";
+import type { TranscriptMessage } from "@/types/bluetick/db/tickets";
+import DiscordMessage from "@/components/bluetick/discord/message";
+import { motion } from "framer-motion";
+import AnimatedButton from "@/components/motions/animated-button";
+import { signIn, useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { poppinsFont } from "@/styles/fonts";
+import { Gift, Hash, PlusCircle, Smile, Sticker } from "lucide-react";
+import { Icons } from "@/components/icons";
+import { botUsers } from "@/config/dummies";
+import { images } from "@/config/images";
 
 const TwitchFeature = (): JSX.Element => {
   const { data, status } = useSession();
@@ -37,17 +37,17 @@ const TwitchFeature = (): JSX.Element => {
         <div className="flex flex-col justify-end gap-2 mt-2">
           <div className="flex gap-2">
             <AnimatedButton
-              size={'sm'}
-              variant={'info'}
+              size={"sm"}
+              variant={"info"}
               onClick={() => {
-                if (status === 'loading') {
-                  toast.error('This is still loading');
+                if (status === "loading") {
+                  toast.error("This is still loading");
                 } else {
                   if (data) {
-                    router.push('/servers');
+                    router.push("/servers");
                   } else {
-                    signIn('discord', { callbackUrl: '/servers' }).catch(() => {
-                      toast.error('Failed to initiate log in with Discord');
+                    signIn("discord", { callbackUrl: "/servers" }).catch(() => {
+                      toast.error("Failed to initiate log in with Discord");
                     });
                   }
                 }
@@ -95,25 +95,25 @@ const DiscordDemo = (): JSX.Element => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [messages, setMessages] = React.useState<TranscriptMessage[]>([
     {
-      userID: 'bot',
-      content: '<@100>, your favorite streamer is live!',
+      userID: "bot",
+      content: "<@100>, your favorite streamer is live!",
       embeds: [
         {
           title: `Let's have some fun!`,
           url: null,
           author: {
-            name: 'Bluetick is live!',
-            iconURL: botDetails ? getBotAvatarURL(botDetails) : '',
+            name: "Bluetick is live!",
+            iconURL: botDetails ? getBotAvatarURL(botDetails) : "",
           },
           description: null,
           footer: {
-            text: 'Live notifcations by Bluetick',
-            iconURL: botDetails ? getBotAvatarURL(botDetails) : '',
+            text: "Live notifcations by Bluetick",
+            iconURL: botDetails ? getBotAvatarURL(botDetails) : "",
           },
-          thumbnailURL: botDetails ? getBotAvatarURL(botDetails) : '',
+          thumbnailURL: botDetails ? getBotAvatarURL(botDetails) : "",
           imageURL: images.twitchLive,
           timestamp: null,
-          color: '#06d6a0',
+          color: "#06d6a0",
         },
       ],
       attachments: [],
@@ -125,8 +125,8 @@ const DiscordDemo = (): JSX.Element => {
   const [isProcessing, setIsProcessing] = React.useState(false);
   const users: Record<string, { name: string; avatarURL: string }> = {
     bot: {
-      name: botDetails?.username ?? 'Bluetick',
-      avatarURL: botDetails ? getBotAvatarURL(botDetails) : '',
+      name: botDetails?.username ?? "Bluetick",
+      avatarURL: botDetails ? getBotAvatarURL(botDetails) : "",
     },
     ...botUsers,
   };
@@ -135,9 +135,9 @@ const DiscordDemo = (): JSX.Element => {
   React.useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start',
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
       });
     }
   }, [messages]);
@@ -156,15 +156,15 @@ const DiscordDemo = (): JSX.Element => {
       <div className="flex justify-between items-center gap-2">
         <div
           className={cn(
-            'text-warning uppercase font-semibold',
-            poppinsFont.className
+            "text-warning uppercase font-semibold",
+            poppinsFont.className,
           )}
         >
           Discord Demo
         </div>
         <div
           className={
-            'rounded-md bg-discord/60 p-1 flex items-center gap-1 cursor-pointer hover:bg-discord-gray/20 bg-discord-gray/10'
+            "rounded-md bg-discord/60 p-1 flex items-center gap-1 cursor-pointer hover:bg-discord-gray/20 bg-discord-gray/10"
           }
         >
           <Hash size={16} />

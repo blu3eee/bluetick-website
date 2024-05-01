@@ -1,12 +1,12 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { cn } from '@/lib/utils';
-import type { AdditionalProps } from './ui';
+import { cn } from "@/lib/utils";
+import type { AdditionalProps } from "./ui";
 
 interface CalloutProps {
   icon?: string;
   children?: React.ReactNode;
-  type?: 'default' | 'warning' | 'danger';
+  type?: "default" | "warning" | "danger";
 }
 
 /**
@@ -26,19 +26,19 @@ interface CalloutProps {
 export function Callout({
   children,
   icon,
-  type = 'default',
+  type = "default",
   className,
   ...props
 }: CalloutProps & AdditionalProps): JSX.Element {
   return (
     <div
       className={cn(
-        'my-6 flex items-center rounded-md border border-l-4 p-4',
+        "my-6 flex items-center rounded-md border border-l-4 p-4",
         {
-          'border-red-900 bg-red-50 text-black': type === 'danger',
-          'border-warning-light text-foreground': type === 'warning',
+          "border-red-900 bg-red-50 text-black": type === "danger",
+          "border-warning-light text-foreground": type === "warning",
         },
-        className
+        className,
       )}
       {...props}
     >

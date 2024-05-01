@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import React, { useContext } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   ResponsiveModal,
   ResponsiveModalTrigger,
@@ -11,12 +11,12 @@ import {
   ResponsiveModalClose,
   ResponsiveModalDescription,
   ResponsiveModalFooter,
-} from '@/components/custom-ui/responsive-modal';
-import { useSession } from 'next-auth/react';
-import { toast } from 'sonner';
-import { runningBotsInstance } from '@/config/running-bots';
-import { BLUETICK_BOT_ID } from '@/config/bluetick';
-import { GuildContext } from '@/context/guild-context';
+} from "@/components/custom-ui/responsive-modal";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { runningBotsInstance } from "@/config/running-bots";
+import { BLUETICK_BOT_ID } from "@/config/bluetick";
+import { GuildContext } from "@/context/guild-context";
 
 const CloseInactiveTicketsButton = (): JSX.Element => {
   const { data: session } = useSession();
@@ -34,14 +34,14 @@ const CloseInactiveTicketsButton = (): JSX.Element => {
         total: number;
       }>(`tickets/close-inactive`, {
         botID: BLUETICK_BOT_ID,
-        guildID: discordGuild?.id ?? '',
+        guildID: discordGuild?.id ?? "",
         requestedUserID: session?.user?.id,
         days,
       });
 
       if (response.status === 200) {
         const { successCount, failureCount, total } = response.data;
-        toast.info('Inactive tickets closed', {
+        toast.info("Inactive tickets closed", {
           description: `Total: ${total}. Success: ${successCount}. Failed: ${failureCount}`,
         });
       } else {
@@ -55,7 +55,7 @@ const CloseInactiveTicketsButton = (): JSX.Element => {
   };
   if (isLoading) {
     return (
-      <Button size={'sm'} variant={'red'} disabled>
+      <Button size={"sm"} variant={"red"} disabled>
         Loading
       </Button>
     );
@@ -63,7 +63,7 @@ const CloseInactiveTicketsButton = (): JSX.Element => {
   return (
     <ResponsiveModal open={open} onOpenChange={setOpen}>
       <ResponsiveModalTrigger>
-        <Button size={'sm'} variant={'red'} disabled={processing}>
+        <Button size={"sm"} variant={"red"} disabled={processing}>
           {processing ? `Closing tickets` : `Close all inactive tickets`}
         </Button>
       </ResponsiveModalTrigger>
@@ -100,12 +100,12 @@ const CloseInactiveTicketsButton = (): JSX.Element => {
         <ResponsiveModalFooter>
           <ResponsiveModalClose>
             <div className="flex justify-end gap-4">
-              <Button variant={'outline'} size={'md'}>
+              <Button variant={"outline"} size={"md"}>
                 Cancel
               </Button>
               <Button
-                variant={'blue'}
-                size={'md'}
+                variant={"blue"}
+                size={"md"}
                 onClick={() => {
                   handleCloseInactiveTickets().catch((e) => {});
                 }}

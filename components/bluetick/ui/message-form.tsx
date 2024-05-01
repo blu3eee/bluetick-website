@@ -1,27 +1,27 @@
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import type { ButtonInfoDetails, MessageInfoDetails } from '@/types/bluetick';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import type { ButtonInfoDetails, MessageInfoDetails } from "@/types/bluetick";
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import { HexColorPicker } from '@/components/custom-ui/color-picker';
-import MessagePreview from './message-preview';
-import { CollapsibleFields } from './collapsible-fields';
-import { toast } from 'sonner';
+import { HexColorPicker } from "@/components/custom-ui/color-picker";
+import MessagePreview from "./message-preview";
+import { CollapsibleFields } from "./collapsible-fields";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { ChevronsUpDown } from 'lucide-react';
-import CustomEmojiPicker from './custom-emoji-picker';
-import type { DiscordPartialEmoji } from '@/types/bluetick/discord';
+} from "@/components/ui/dropdown-menu";
+import { ChevronsUpDown } from "lucide-react";
+import CustomEmojiPicker from "./custom-emoji-picker";
+import type { DiscordPartialEmoji } from "@/types/bluetick/discord";
 
-type InputField = 'author' | 'title' | 'description' | 'images' | 'footer';
+type InputField = "author" | "title" | "description" | "images" | "footer";
 
 interface MessageFormProps {
   type: string;
@@ -51,14 +51,14 @@ const MessageForm: React.FC<MessageFormProps> = ({
   const [message, setMessage] = useState<MessageInfoDetails>(initialMessage);
   const [button, setButton] = useState<ButtonInfoDetails>(
     initButton ?? {
-      color: 'Green',
-      text: '',
-      emoji: '✉️',
-    }
+      color: "Green",
+      text: "",
+      emoji: "✉️",
+    },
   );
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     const { name, value } = event.target;
     setMessage((prevMessage) => ({
@@ -86,7 +86,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   }, [button]);
 
   const handleEmbedChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     const { name, value } = event.target;
     setMessage((prevMessage) => ({
@@ -116,7 +116,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
   // };
 
   const handleButtonChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ): void => {
     const { name, value } = event.target;
     setButton((prev) => ({
@@ -127,7 +127,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
   const handleSave = (): void => {
     if (
-      type.includes('Embed') &&
+      type.includes("Embed") &&
       (!message.embed ||
         (!message.embed.author &&
           !message.embed.description &&
@@ -144,7 +144,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
   return (
     <div className="flex flex-col gap-4">
-      {type !== 'Embed' && (
+      {type !== "Embed" && (
         <div>
           <Label
             htmlFor="content"
@@ -156,12 +156,12 @@ const MessageForm: React.FC<MessageFormProps> = ({
             id="content"
             name="content"
             placeholder="Enter message content"
-            value={message.content ?? ''}
+            value={message.content ?? ""}
             onChange={handleChange}
           />
         </div>
       )}
-      {type.includes('Embed') && (
+      {type.includes("Embed") && (
         <div>
           <Label
             htmlFor="embed"
@@ -169,7 +169,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
           >
             Embed
           </Label>
-          {!disabledEmbedFields.includes('title') && (
+          {!disabledEmbedFields.includes("title") && (
             <div className="flex gap-2 items-center flex-col md:flex-row">
               <div className="w-full">
                 <Label htmlFor="title">Title</Label>
@@ -177,7 +177,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                   id="title"
                   name="title"
                   placeholder="Title"
-                  value={message.embed?.title ?? ''}
+                  value={message.embed?.title ?? ""}
                   onChange={handleEmbedChange}
                 />
               </div>
@@ -188,25 +188,25 @@ const MessageForm: React.FC<MessageFormProps> = ({
                   id="url"
                   name="url"
                   placeholder="Title URL"
-                  value={message.embed?.url ?? ''}
+                  value={message.embed?.url ?? ""}
                   onChange={handleEmbedChange}
                 />
               </div>
             </div>
           )}
-          {!disabledEmbedFields.includes('description') && (
+          {!disabledEmbedFields.includes("description") && (
             <div>
               <Label htmlFor="description">Description</Label>
               <Textarea
                 id="description"
                 name="description"
                 placeholder="Description"
-                value={message.embed?.description ?? ''}
+                value={message.embed?.description ?? ""}
                 onChange={handleEmbedChange}
               />
             </div>
           )}
-          {!disabledEmbedFields.includes('author') && (
+          {!disabledEmbedFields.includes("author") && (
             <CollapsibleFields label="Author">
               <div className="flex gap-2 items-center flex-col md:flex-row">
                 <div className="w-full">
@@ -215,7 +215,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                     id="author"
                     name="author"
                     placeholder="Author"
-                    value={message.embed?.author ?? ''}
+                    value={message.embed?.author ?? ""}
                     onChange={handleEmbedChange}
                   />
                 </div>
@@ -225,14 +225,14 @@ const MessageForm: React.FC<MessageFormProps> = ({
                     id="authorURL"
                     name="authorURL"
                     placeholder="Author URL"
-                    value={message.embed?.authorURL ?? ''}
+                    value={message.embed?.authorURL ?? ""}
                     onChange={handleEmbedChange}
                   />
                 </div>
               </div>
             </CollapsibleFields>
           )}
-          {!disabledEmbedFields.includes('footer') && (
+          {!disabledEmbedFields.includes("footer") && (
             <CollapsibleFields label="Footer">
               <div className="flex gap-2 items-center flex-col md:flex-row">
                 <div className="w-full">
@@ -241,7 +241,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                     id="footer"
                     name="footer"
                     placeholder="Footer"
-                    value={message.embed?.footer ?? ''}
+                    value={message.embed?.footer ?? ""}
                     onChange={handleEmbedChange}
                   />
                 </div>
@@ -251,14 +251,14 @@ const MessageForm: React.FC<MessageFormProps> = ({
                     id="footerURL"
                     name="footerURL"
                     placeholder="Footer icon URL"
-                    value={message.embed?.footerURL ?? ''}
+                    value={message.embed?.footerURL ?? ""}
                     onChange={handleEmbedChange}
                   />
                 </div>
               </div>
             </CollapsibleFields>
           )}
-          {!disabledEmbedFields.includes('images') && (
+          {!disabledEmbedFields.includes("images") && (
             <CollapsibleFields label="Images">
               <div className="flex gap-2 items-center flex-col md:flex-row">
                 <div className="w-full">
@@ -267,7 +267,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                     id="image"
                     name="image"
                     placeholder="Large image URL"
-                    value={message.embed?.image ?? ''}
+                    value={message.embed?.image ?? ""}
                     onChange={handleEmbedChange}
                   />
                 </div>
@@ -277,7 +277,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                     id="thumbnail"
                     name="thumbnail"
                     placeholder="Small image URL"
-                    value={message.embed?.thumbnail ?? ''}
+                    value={message.embed?.thumbnail ?? ""}
                     onChange={handleEmbedChange}
                   />
                 </div>
@@ -289,7 +289,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
 
             <div className="mt-1">
               <HexColorPicker
-                initColor={message.embed?.color ?? '#ffffff'}
+                initColor={message.embed?.color ?? "#ffffff"}
                 onColorChange={(newVal) => {
                   setMessage((prevMessage) => ({
                     ...prevMessage,
@@ -321,13 +321,13 @@ const MessageForm: React.FC<MessageFormProps> = ({
                   align="end"
                   className="flex flex-col gap-1"
                 >
-                  {['Green', 'Blue', 'Red', 'Grey'].map((text, index) => (
+                  {["Green", "Blue", "Red", "Grey"].map((text, index) => (
                     <DropdownMenuItem
                       key={index}
                       className={`flex items-center focus:bg-accent/60 ${
                         button.color === text
-                          ? 'bg-secondary/80 focus:bg-accent:50'
-                          : ''
+                          ? "bg-secondary/80 focus:bg-accent:50"
+                          : ""
                       }`}
                       onClick={() => {
                         setButton((prev) => ({ ...prev, color: text }));
@@ -345,7 +345,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                 id="button_text"
                 name="text"
                 placeholder="Click!"
-                value={button.text ?? ''}
+                value={button.text ?? ""}
                 onChange={handleButtonChange}
               />
             </div>
@@ -365,8 +365,8 @@ const MessageForm: React.FC<MessageFormProps> = ({
       {onSave && (
         <Button
           onClick={handleSave}
-          variant={'outline'}
-          size={'sm'}
+          variant={"outline"}
+          size={"sm"}
           className="mt-4 text-red-400 border-[2px] font-semibold border-red-400 hover:bg-red-400 focus:bg-red-400/50 w-fit"
         >
           Save

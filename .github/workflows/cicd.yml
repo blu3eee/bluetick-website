@@ -1,0 +1,73 @@
+name: Continuous Integration
+
+# Triggers the workflow on push events and pull request events to the repository.
+on:
+  push:
+  pull_request:
+
+jobs:
+  # Job to build and test the project
+  build-and-test:
+    name: Build and Test
+    # Specifies the type of runner that the job will run on
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # Defines a matrix for the job to run with different versions of Node.js
+        node-version: ["18.x", "20.x"]
+    steps:
+      # Checks out the repository under $GITHUB_WORKSPACE, so the workflow can access it
+      - uses: actions/checkout@v2
+
+      # Caches installed Node.js modules to speed up subsequent runs
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          # Specifies the path to cache
+          path: ~/.npm
+          # Unique key for the cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          # Restore from cache when the key exactly matches this prefix
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Sets up the Node.js environment with the version specified in the matrix
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Installs project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Runs linting to check for syntax and style errors
+      - name: Run lint with eslint
+        run: npm run lint
+
+      # Checks the code format, ensuring consistency (prettier)
+      - name: Run format check
+        run: npm run format
+
+  # Job to check commit messages for push events
+  check-commit-messages:
+    name: Check commit messages
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "20.11.1"
+
+      - name: Install dependencies
+        run: npm install
+
+      # Checks the last commit message
+      # Conditionally runs this job only on push events
+      - name: Check commit messages
+        if: ${{ github.event_name == 'push' }}
+        run: npx commitlint --from HEAD~1 --verbose

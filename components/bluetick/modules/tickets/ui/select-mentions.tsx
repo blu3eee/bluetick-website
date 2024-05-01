@@ -1,19 +1,19 @@
-import { Icons } from '@/components/icons';
-import { Badge } from '@/components/ui/badge';
+import { Icons } from "@/components/icons";
+import { Badge } from "@/components/ui/badge";
 import {
   Command,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import type { DiscordRole } from '@/types/bluetick/discord';
-import { CheckSquare2, Square } from 'lucide-react';
-import React from 'react';
+} from "@/components/ui/popover";
+import type { DiscordRole } from "@/types/bluetick/discord";
+import { CheckSquare2, Square } from "lucide-react";
+import React from "react";
 
 interface SelectMentionsProps {
   roles: DiscordRole[];
@@ -29,7 +29,7 @@ const SelectMentions: React.FC<SelectMentionsProps> = ({
   // State and hooks setup
   const triggerRef = React.useRef<HTMLDivElement>(null);
   const [popoverWidth, setPopoverWidth] = React.useState<number | string>(
-    'auto'
+    "auto",
   );
 
   React.useEffect(() => {
@@ -53,27 +53,27 @@ const SelectMentions: React.FC<SelectMentionsProps> = ({
     }
   }, []);
 
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = React.useState("");
 
   const filteredRoles = query
     ? roles.filter((role) =>
-        role.name.toLowerCase().includes(query.toLowerCase())
+        role.name.toLowerCase().includes(query.toLowerCase()),
       )
     : roles;
 
   const getRoleNameById = (id: string): string => {
-    if (id === 'ticket-opener') {
-      return 'Ticket Opener';
+    if (id === "ticket-opener") {
+      return "Ticket Opener";
     }
     const role = roles.find((role) => role.id === id);
-    return role ? role.name : 'Unknown role';
+    return role ? role.name : "Unknown role";
   };
 
   const toggleRole = (mention: string): void => {
     onMentionsChange(
       selectedMentions.includes(mention)
         ? selectedMentions.filter((t) => t !== mention)
-        : [...selectedMentions, mention]
+        : [...selectedMentions, mention],
     );
   };
   const removeRole = (mentionId: string): void => {
@@ -112,7 +112,7 @@ const SelectMentions: React.FC<SelectMentionsProps> = ({
         </div>
       </PopoverTrigger>
       <PopoverContent
-        style={{ width: popoverWidth, minWidth: '240px' }}
+        style={{ width: popoverWidth, minWidth: "240px" }}
         className="p-2"
       >
         <Command>
@@ -125,13 +125,13 @@ const SelectMentions: React.FC<SelectMentionsProps> = ({
           />
           <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
             <CommandItem
-              key={'ticket-opener'}
+              key={"ticket-opener"}
               className="flex aria-selected:bg-accent/50 items-center gap-2"
               onSelect={() => {
-                toggleRole('ticket-opener');
+                toggleRole("ticket-opener");
               }}
             >
-              {selectedMentions.includes('ticket-opener') ? (
+              {selectedMentions.includes("ticket-opener") ? (
                 <CheckSquare2 className={`ml-2`} />
               ) : (
                 <Square className={`ml-2`} />

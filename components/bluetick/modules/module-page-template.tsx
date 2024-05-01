@@ -1,13 +1,13 @@
-'use client';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { GuildContext } from '@/context/guild-context';
-import { cn } from '@/lib/utils';
-import { rubikFont } from '@/styles/fonts';
-import { LayoutPanelLeft } from 'lucide-react';
-import { useParams } from 'next/navigation';
-import React, { useContext } from 'react';
-import { toast } from 'sonner';
+"use client";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { GuildContext } from "@/context/guild-context";
+import { cn } from "@/lib/utils";
+import { rubikFont } from "@/styles/fonts";
+import { LayoutPanelLeft } from "lucide-react";
+import { useParams } from "next/navigation";
+import React, { useContext } from "react";
+import { toast } from "sonner";
 
 interface TemplateProps {
   flag: number;
@@ -41,7 +41,7 @@ const ModulePageTemplate: React.FC<TemplateProps> = ({
     const success = await updateConfig({ moduleFlags: newFlags });
     if (success) {
       // Optionally, show feedback to the user
-      toast.success(`${label} module is ${wasTrue ? `off` : 'on'}.`);
+      toast.success(`${label} module is ${wasTrue ? `off` : "on"}.`);
     } else {
       // Handle error
       toast.error(`Failed to toggle module \`${label}\`.`);
@@ -53,8 +53,8 @@ const ModulePageTemplate: React.FC<TemplateProps> = ({
       <div className="flex items-start md:items-center justify-between w-full max-w-[1024px] my-2 flex-col md:flex-row gap-2">
         <div
           className={cn(
-            'flex items-center text-2xl font-bold gap-2 ',
-            rubikFont.className
+            "flex items-center text-2xl font-bold gap-2 ",
+            rubikFont.className,
           )}
         >
           <a
@@ -77,7 +77,7 @@ const ModulePageTemplate: React.FC<TemplateProps> = ({
             }}
           />
           <Label htmlFor="module-toggle">
-            Module {isModuleEnabled() ? 'Enabled' : 'Disabled'}
+            Module {isModuleEnabled() ? "Enabled" : "Disabled"}
           </Label>
         </div>
       </div>

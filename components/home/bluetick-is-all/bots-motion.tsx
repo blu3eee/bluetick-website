@@ -1,11 +1,11 @@
-'use client';
-import React from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
-import { rubikFont } from '@/styles/fonts';
+"use client";
+import React from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { rubikFont } from "@/styles/fonts";
 
 const BotsMotion = (): JSX.Element => {
-  const bots = ['Ticket Bot', 'Server Managing Bot', 'Entertainment Bot'];
+  const bots = ["Ticket Bot", "Server Managing Bot", "Entertainment Bot"];
   const [curIndex, setCurIndex] = React.useState(0);
   React.useEffect(() => {
     // Set up a timer to change the index every second
@@ -25,10 +25,10 @@ const BotsMotion = (): JSX.Element => {
       <section className="flex flex-col items-center justify-center w-full">
         <motion.div
           className={cn(
-            'flex flex-col items-center justify-center text-3xl font-bold',
-            rubikFont.className
+            "flex flex-col items-center justify-center text-3xl font-bold",
+            rubikFont.className,
           )}
-          transition={{ type: 'spring', duration: 1 }}
+          transition={{ type: "spring", duration: 1 }}
         >
           {bots.map((bot, i) => {
             const letters: Record<string, number> = {};
@@ -39,11 +39,11 @@ const BotsMotion = (): JSX.Element => {
                     className="flex items-center"
                     transition={{
                       duration: 1,
-                      ease: 'easeInOut',
+                      ease: "easeInOut",
                     }}
                   >
-                    {bot.split('').map((char, charIndex) => {
-                      const isSpace = char === ' ';
+                    {bot.split("").map((char, charIndex) => {
+                      const isSpace = char === " ";
                       const count = isSpace ? 0 : letters[char] || 0;
                       if (!isSpace) letters[char] = count + 1;
                       return (
@@ -57,10 +57,10 @@ const BotsMotion = (): JSX.Element => {
                           exit={{ opacity: 0 }}
                           transition={{
                             duration: 1,
-                            ease: 'easeInOut',
+                            ease: "easeInOut",
                           }}
                         >
-                          {isSpace ? '\u00A0' : char}
+                          {isSpace ? "\u00A0" : char}
                         </motion.span>
                       );
                     })}

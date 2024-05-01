@@ -74,63 +74,63 @@ function enumKeys<O extends object, K extends keyof O = keyof O>(obj: O): K[] {
 
 export const logsCollection = [
   {
-    category: 'Message',
+    category: "Message",
     value: DISCORD_LOGS_CATEGORIES.MESSAGE,
     events: enumKeys(MESSAGE_EVENTS)
       .map((eventKey) => ({
         event: eventKey,
         value: MESSAGE_EVENTS[eventKey],
       }))
-      .filter((obj) => typeof obj.value === 'number'),
+      .filter((obj) => typeof obj.value === "number"),
   },
   {
-    category: 'Member',
+    category: "Member",
     value: DISCORD_LOGS_CATEGORIES.MEMBER,
     events: enumKeys(MEMBER_EVENTS)
       .map((eventKey) => ({
         event: eventKey,
         value: MEMBER_EVENTS[eventKey],
       }))
-      .filter((obj) => typeof obj.value === 'number'),
+      .filter((obj) => typeof obj.value === "number"),
   },
   {
-    category: 'Role',
+    category: "Role",
     value: DISCORD_LOGS_CATEGORIES.ROLE,
     events: enumKeys(ROLE_EVENTS)
       .map((eventKey) => ({
         event: eventKey,
         value: ROLE_EVENTS[eventKey],
       }))
-      .filter((obj) => typeof obj.value === 'number'),
+      .filter((obj) => typeof obj.value === "number"),
   },
   {
-    category: 'Channel',
+    category: "Channel",
     value: DISCORD_LOGS_CATEGORIES.CHANNEL,
     events: enumKeys(CHANNEL_EVENTS)
       .map((eventKey) => ({
         event: eventKey,
         value: CHANNEL_EVENTS[eventKey],
       }))
-      .filter((obj) => typeof obj.value === 'number'),
+      .filter((obj) => typeof obj.value === "number"),
   },
   {
-    category: 'Emoji',
+    category: "Emoji",
     value: DISCORD_LOGS_CATEGORIES.EMOJI,
     events: enumKeys(EMOJI_EVENTS)
       .map((eventKey) => ({
         event: eventKey,
         value: EMOJI_EVENTS[eventKey],
       }))
-      .filter((obj) => typeof obj.value === 'number'),
+      .filter((obj) => typeof obj.value === "number"),
   },
   {
-    category: 'Voice',
+    category: "Voice",
     value: DISCORD_LOGS_CATEGORIES.VOICE,
     events: enumKeys(VOICE_EVENTS)
       .map((eventKey) => ({
         event: eventKey,
         value: VOICE_EVENTS[eventKey],
       }))
-      .filter((obj) => typeof obj.value === 'number'),
+      .filter((obj) => typeof obj.value === "number"),
   },
 ];

@@ -1,14 +1,14 @@
-import { Icons } from '@/components/icons';
-import { Badge } from '@/components/ui/badge';
-import { Command, CommandGroup, CommandItem } from '@/components/ui/command';
+import { Icons } from "@/components/icons";
+import { Badge } from "@/components/ui/badge";
+import { Command, CommandGroup, CommandItem } from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import type { TicketPanelDetails } from '@/types/bluetick/db/tickets';
-import { CheckSquare2, Square } from 'lucide-react';
-import React from 'react';
+} from "@/components/ui/popover";
+import type { TicketPanelDetails } from "@/types/bluetick/db/tickets";
+import { CheckSquare2, Square } from "lucide-react";
+import React from "react";
 
 interface MultiSelectPanelsProps {
   options: TicketPanelDetails[];
@@ -24,7 +24,7 @@ const MultiSelectPanels: React.FC<MultiSelectPanelsProps> = ({
   // State and hooks setup
   const triggerRef = React.useRef<HTMLDivElement>(null);
   const [popoverWidth, setPopoverWidth] = React.useState<number | string>(
-    'auto'
+    "auto",
   );
 
   React.useEffect(() => {
@@ -50,14 +50,14 @@ const MultiSelectPanels: React.FC<MultiSelectPanelsProps> = ({
 
   const getNameById = (id: string): string => {
     const role = options.find((role) => String(role.id) === id);
-    return role?.button.text ?? 'Unknown role';
+    return role?.button.text ?? "Unknown role";
   };
 
   const togglePanel = (mention: string): void => {
     onMentionsChange(
       selectedMentions.includes(mention)
         ? selectedMentions.filter((t) => t !== mention)
-        : [...selectedMentions, mention]
+        : [...selectedMentions, mention],
     );
   };
   const removePanel = (mentionId: string): void => {
@@ -96,7 +96,7 @@ const MultiSelectPanels: React.FC<MultiSelectPanelsProps> = ({
         </div>
       </PopoverTrigger>
       <PopoverContent
-        style={{ width: popoverWidth, minWidth: '240px' }}
+        style={{ width: popoverWidth, minWidth: "240px" }}
         className="p-2"
       >
         <Command>

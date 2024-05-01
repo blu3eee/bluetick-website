@@ -1,12 +1,12 @@
-'use client';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import { GuildContext } from '@/context/guild-context';
+"use client";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import { GuildContext } from "@/context/guild-context";
 import type {
   TicketMultiPanelDetails,
   UpdateTicketMultiPanelDto,
-} from '@/types/bluetick/db/tickets';
-import React, { useContext } from 'react';
-import { toast } from 'sonner';
+} from "@/types/bluetick/db/tickets";
+import React, { useContext } from "react";
+import { toast } from "sonner";
 import {
   Dialog,
   DialogHeader,
@@ -15,15 +15,15 @@ import {
   DialogContent,
   DialogFooter,
   DialogClose,
-} from '@/components/ui/dialog';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Button } from '@/components/ui/button';
-import { useFetchTicketPanels } from '@/hooks/api/tickets/reaction-panels';
-import MessageForm from '@/components/bluetick/ui/message-form';
-import MultiSelectPanels from './panels-select';
-import { ChannelSelect } from '@/components/bluetick/ui/channel-select';
-import MessagePreview from '../../../ui/message-preview';
+} from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { useFetchTicketPanels } from "@/hooks/api/tickets/reaction-panels";
+import MessageForm from "@/components/bluetick/ui/message-form";
+import MultiSelectPanels from "./panels-select";
+import { ChannelSelect } from "@/components/bluetick/ui/channel-select";
+import MessagePreview from "../../../ui/message-preview";
 
 interface EditPanelDialogProps {
   panel: TicketMultiPanelDetails;
@@ -47,46 +47,46 @@ const EditMultiPanelDialog: React.FC<EditPanelDialogProps> = ({
     data: panels,
 
     isLoading: isLoadingPanels,
-  } = useFetchTicketPanels(BLUETICK_BOT_ID, discordGuild?.id ?? '');
+  } = useFetchTicketPanels(BLUETICK_BOT_ID, discordGuild?.id ?? "");
 
   const handleUpdate = async (): Promise<void> => {
     console.log(form);
     const missings: string[] = [];
 
-    if (form.channelID && form.channelID === '') {
-      missings.push('panel channel');
+    if (form.channelID && form.channelID === "") {
+      missings.push("panel channel");
     }
-    if (form.message?.embed?.title === '') {
-      missings.push('panel message title');
+    if (form.message?.embed?.title === "") {
+      missings.push("panel message title");
     }
 
     if (missings.length > 0) {
-      toast.error(`Missing fields:\n${missings.join(', ')}`);
+      toast.error(`Missing fields:\n${missings.join(", ")}`);
       return;
     }
 
     // send request to create panel here
     const response = await apiInstance.patch(
       `/${ROUTES.TICKET_MULTI_PANELS}/${panel.id}`,
-      form
+      form,
     );
 
     if (response.status === 200 || response.status === 201) {
-      toast.success('Multi-reactions panel updated.');
+      toast.success("Multi-reactions panel updated.");
       if (refetch) {
         refetch();
       }
     } else {
-      toast.error('Failed to update multi-reactions  ticket panel.');
+      toast.error("Failed to update multi-reactions  ticket panel.");
     }
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger>{trigger ?? 'Edit'}</DialogTrigger>
+      <DialogTrigger>{trigger ?? "Edit"}</DialogTrigger>
       <DialogContent className="max-w-[1024px] h-3/4 overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            Edit multi-reactions ticket panel: (id){' '}
+            Edit multi-reactions ticket panel: (id){" "}
             <span className="text-blue-500">{panel.id}</span>
           </DialogTitle>
         </DialogHeader>
@@ -141,13 +141,13 @@ const EditMultiPanelDialog: React.FC<EditPanelDialogProps> = ({
                   message: msg,
                 }));
               }}
-              disabledEmbedFields={['footer']}
+              disabledEmbedFields={["footer"]}
               showPreview={false}
             />
           </div>
           <div>
             <MessagePreview
-              type={'Embed and Text'}
+              type={"Embed and Text"}
               message={{ ...panel.message, ...form.message }}
               buttons={panels
                 ?.filter((p) => (form.panelsIDs ?? []).includes(String(p.id)))
@@ -162,7 +162,7 @@ const EditMultiPanelDialog: React.FC<EditPanelDialogProps> = ({
                 handleUpdate().catch((e) => {
                   console.error(e);
                   console.error(
-                    'Error happened while handling update multi-reactions panel'
+                    "Error happened while handling update multi-reactions panel",
                   );
                 });
               }}

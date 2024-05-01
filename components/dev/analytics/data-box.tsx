@@ -1,9 +1,9 @@
-import { Skeleton } from '@/components/ui/skeleton';
-import { useFetchVercelDataCategory } from '@/hooks/vercel/insights';
-import type { VercelDataCategories } from '@/types/vercel';
-import { Label } from '@radix-ui/react-dropdown-menu';
-import React from 'react';
-import { flag, name } from 'country-emoji';
+import { Skeleton } from "@/components/ui/skeleton";
+import { useFetchVercelDataCategory } from "@/hooks/vercel/insights";
+import type { VercelDataCategories } from "@/types/vercel";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import React from "react";
+import { flag, name } from "country-emoji";
 
 const DataBox: React.FC<{
   label: string;
@@ -30,7 +30,7 @@ const DataBox: React.FC<{
   return (
     <div
       className={
-        'flex flex-col w-full max-h-[300px] md:max-h-[400px] border rounded-lg'
+        "flex flex-col w-full max-h-[300px] md:max-h-[400px] border rounded-lg"
       }
     >
       <div className="px-4 py-6 border-b flex items-center justify-between">
@@ -70,7 +70,7 @@ export default DataBox;
  * @returns {string} The processed key, possibly with additional information like a flag emoji.
  */
 function displayDataKey(category: VercelDataCategories, key: string): string {
-  if (category === 'country') {
+  if (category === "country") {
     return `${flag(key) ? `${flag(key)} ` : ``}${name(key) ?? key}`;
   }
   return key;

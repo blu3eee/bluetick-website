@@ -1,8 +1,8 @@
-import { BLUETICK_BOT_ID } from '@/config/bluetick';
-import type { BotAllDetails } from '@/types/bluetick';
-import type { DiscordGuild, DiscordUser } from '@/types/bluetick/discord';
+import { BLUETICK_BOT_ID } from "@/config/bluetick";
+import type { BotAllDetails } from "@/types/bluetick";
+import type { DiscordGuild, DiscordUser } from "@/types/bluetick/discord";
 
-const CDN_URL = 'https://cdn.discordapp.com';
+const CDN_URL = "https://cdn.discordapp.com";
 
 export const getGuildIconURL = (guild: DiscordGuild): string =>
   `${CDN_URL}/icons/${guild.id}/${guild.icon}.png`;

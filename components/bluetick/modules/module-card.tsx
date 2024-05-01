@@ -1,9 +1,9 @@
-import { Icons } from '@/components/icons';
-import { Skeleton } from '@/components/ui/skeleton';
-import { Switch } from '@/components/ui/switch';
-import { GuildContext } from '@/context/guild-context';
-import React, { useContext } from 'react';
-import { toast } from 'sonner';
+import { Icons } from "@/components/icons";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Switch } from "@/components/ui/switch";
+import { GuildContext } from "@/context/guild-context";
+import React, { useContext } from "react";
+import { toast } from "sonner";
 
 export interface ModuleCardProps {
   name: string;
@@ -30,7 +30,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
     const success = await updateConfig({ moduleFlags: newFlags });
     if (success) {
       // Optionally, show feedback to the user
-      toast.success(`${props.name} module is ${wasTrue ? `off` : 'on'}.`);
+      toast.success(`${props.name} module is ${wasTrue ? `off` : "on"}.`);
     } else {
       // Handle error
       toast.error(`Failed to toggle module ${props.name}.`);
@@ -94,42 +94,42 @@ export enum GuildModules {
 
 export const guildModules: ModuleCardProps[] = [
   {
-    name: 'Welcome',
-    description: 'Create welcome messages with various options.',
-    navigateTo: 'welcome',
+    name: "Welcome",
+    description: "Create welcome messages with various options.",
+    navigateTo: "welcome",
     flag: GuildModules.WELCOME,
   },
   {
-    name: 'Autoresponder',
-    description: 'Automatically respond to text triggers.',
-    navigateTo: 'auto-responder',
+    name: "Autoresponder",
+    description: "Automatically respond to text triggers.",
+    navigateTo: "auto-responder",
     flag: GuildModules.AUTO_RESPONSE,
   },
   {
-    name: 'Ticket System',
+    name: "Ticket System",
     description:
-      'System to create dedicated channels or threads tailored to serve various purposes based on your needs',
-    navigateTo: 'ticket-system',
+      "System to create dedicated channels or threads tailored to serve various purposes based on your needs",
+    navigateTo: "ticket-system",
     flag: GuildModules.TICKET,
   },
   {
-    name: 'Twitch',
+    name: "Twitch",
     description:
-      'Send notifications when you favorite Twitch users/streamers go live',
-    navigateTo: 'twitch',
+      "Send notifications when you favorite Twitch users/streamers go live",
+    navigateTo: "twitch",
     flag: GuildModules.TWITCH,
   },
   {
-    name: 'Autoroles',
+    name: "Autoroles",
     description:
-      'Enables auto roles on join, timed auto roles, and joinable ranks.',
-    navigateTo: 'auto-roles',
+      "Enables auto roles on join, timed auto roles, and joinable ranks.",
+    navigateTo: "auto-roles",
     flag: GuildModules.AUTOROLES,
   },
   {
-    name: 'Action Logs',
-    description: 'Customizable log of events that happen in the server.',
-    navigateTo: 'action-logs',
+    name: "Action Logs",
+    description: "Customizable log of events that happen in the server.",
+    navigateTo: "action-logs",
     flag: GuildModules.ACTION_LOGS,
   },
 ];

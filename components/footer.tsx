@@ -1,12 +1,12 @@
-'use client';
-import * as React from 'react';
+"use client";
+import * as React from "react";
 
-import type { JSX } from 'react'; // Changed to import type
-import { cn } from '@/lib/utils';
-import type { AdditionalProps } from './ui';
-import { ModeToggle } from './mode-toggle';
-import { Icons } from './icons';
-import { rubikFont } from '@/styles/fonts';
+import type { JSX } from "react"; // Changed to import type
+import { cn } from "@/lib/utils";
+import type { AdditionalProps } from "./ui";
+import { ModeToggle } from "./mode-toggle";
+import { Icons } from "./icons";
+import { rubikFont } from "@/styles/fonts";
 
 /**
  * Renders the footer section of the application
@@ -24,7 +24,7 @@ export function Footer({ className }: AdditionalProps): JSX.Element {
             <span
               className={cn(
                 rubikFont.className,
-                'uppercase font-bold text-xl '
+                "uppercase font-bold text-xl ",
               )}
             >
               Bluetick

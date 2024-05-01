@@ -1,23 +1,23 @@
-import { GuildContext } from '@/context/guild-context';
-import React, { useContext } from 'react';
-import type { ServerIdProps } from '../props';
-import { Label } from '@/components/ui/label';
-import { ChannelSelect } from '../../ui/channel-select';
-import { Skeleton } from '@/components/ui/skeleton';
-import { CollapsibleFields } from '../../ui/collapsible-fields';
-import { logsCollection } from './constants';
-import { Checkbox } from '@/components/ui/checkbox';
-import { toast } from 'sonner';
-import { useFetchGuildActionLogs } from '@/hooks/api/bot-logs/action-logs';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import type { BotGuildActionLogDetails } from '@/types/bluetick/db/bot-logs/action-logs';
-import { cn } from '@/lib/utils';
-import { setCharAt } from './bot-logs';
+import { GuildContext } from "@/context/guild-context";
+import React, { useContext } from "react";
+import type { ServerIdProps } from "../props";
+import { Label } from "@/components/ui/label";
+import { ChannelSelect } from "../../ui/channel-select";
+import { Skeleton } from "@/components/ui/skeleton";
+import { CollapsibleFields } from "../../ui/collapsible-fields";
+import { logsCollection } from "./constants";
+import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner";
+import { useFetchGuildActionLogs } from "@/hooks/api/bot-logs/action-logs";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import type { BotGuildActionLogDetails } from "@/types/bluetick/db/bot-logs/action-logs";
+import { cn } from "@/lib/utils";
+import { setCharAt } from "./bot-logs";
 
 const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
   const { channels, isLoadingChannels } = useContext(GuildContext);
-  const [selectedChannel, setSelectedChannel] = React.useState('');
-  const [logEvents, setLogEvents] = React.useState(''.padEnd(60, '0'));
+  const [selectedChannel, setSelectedChannel] = React.useState("");
+  const [logEvents, setLogEvents] = React.useState("".padEnd(60, "0"));
   const [actionLog, setActionLog] =
     React.useState<BotGuildActionLogDetails | null>(null);
 
@@ -25,7 +25,7 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
 
   const { data: actionLogs, refetch } = useFetchGuildActionLogs(
     BLUETICK_BOT_ID,
-    serverId
+    serverId,
   );
 
   React.useEffect(() => {
@@ -40,7 +40,7 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
 
   const handleSelectEvent = async (
     eventName: string,
-    index: number
+    index: number,
   ): Promise<void> => {
     setIsUpdating(true);
     try {
@@ -50,16 +50,16 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
       }
       if (!actionLog) {
         toast.error(
-          `Error modifying action log (no action log found for this server)`
+          `Error modifying action log (no action log found for this server)`,
         );
         return;
       }
       eventName = eventName
-        .split(' ')
+        .split(" ")
         .map((word) => word[0].toUpperCase() + word.substring(1).toLowerCase())
-        .join(' ');
-      const wasEnabled = logEvents[index] === '1';
-      const newLogEvents = setCharAt(logEvents, index, wasEnabled ? '0' : '1');
+        .join(" ");
+      const wasEnabled = logEvents[index] === "1";
+      const newLogEvents = setCharAt(logEvents, index, wasEnabled ? "0" : "1");
       const { data } = await apiInstance.patch<{
         data: BotGuildActionLogDetails;
       }>(`${ROUTES.ACTION_LOGS}/${actionLog.id}`, {
@@ -69,12 +69,12 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
         await refetch();
         setActionLog(data.data);
         setLogEvents(data.data.events);
-        toast.success(`${eventName} ${wasEnabled ? 'disabled' : 'enabled'}`);
+        toast.success(`${eventName} ${wasEnabled ? "disabled" : "enabled"}`);
       } else {
         toast.error(
           `Failed to ${
-            wasEnabled ? 'disabled' : 'enabled'
-          } log for ${eventName}`
+            wasEnabled ? "disabled" : "enabled"
+          } log for ${eventName}`,
         );
       }
     } catch (e) {
@@ -87,7 +87,7 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
 
   const handleChannelSelect = async (id: string): Promise<void> => {
     try {
-      const newChannelId = id === selectedChannel ? '' : id;
+      const newChannelId = id === selectedChannel ? "" : id;
       setSelectedChannel(newChannelId);
       if (!actionLog) {
         const { data } = await apiInstance.post<{
@@ -154,12 +154,12 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-2">
               {category.events.map((e) => {
                 const eventName = e.event
-                  .split('_')
+                  .split("_")
                   .map(
                     (word) =>
-                      word[0].toUpperCase() + word.substring(1).toLowerCase()
+                      word[0].toUpperCase() + word.substring(1).toLowerCase(),
                   )
-                  .join(' ');
+                  .join(" ");
 
                 const index = category.value * 10 + e.value;
                 return (
@@ -169,7 +169,7 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
                   >
                     <Checkbox
                       id={`${category.category}_${eventName}`}
-                      checked={logEvents[index] === '1'}
+                      checked={logEvents[index] === "1"}
                       onClick={() => {
                         handleSelectEvent(eventName, index).catch((e) => {});
                       }}
@@ -178,8 +178,8 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
                     <Label
                       htmlFor={`${category.category}_${eventName}`}
                       className={cn(
-                        'text-sm ',
-                        logEvents[index] === '1' ? `text-foreground/80` : ``
+                        "text-sm ",
+                        logEvents[index] === "1" ? `text-foreground/80` : ``,
                       )}
                     >
                       {eventName}

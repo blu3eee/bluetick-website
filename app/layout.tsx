@@ -1,27 +1,27 @@
-import type { Metadata } from 'next';
-import { Inter as FontSans } from 'next/font/google';
+import type { Metadata } from "next";
+import { Inter as FontSans } from "next/font/google";
 
-import '../styles/globals.css';
-import React from 'react'; // Ensure React is imported for JSX to work
-import { ThemeProvider } from '../context/ThemeProvider';
-import { cn } from '../lib/utils';
-import { Toaster } from 'sonner';
-import NextAuthProvider from '@/context/next-auth';
-import { QueryProvider } from '@/context/query';
-import BluetickHeader from '@/components/bluetick/header';
-import { Footer } from '@/components/footer';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import { BluetickProvider } from '@/context/bluetick-context';
+import "../styles/globals.css";
+import React from "react"; // Ensure React is imported for JSX to work
+import { ThemeProvider } from "../context/ThemeProvider";
+import { cn } from "../lib/utils";
+import { Toaster } from "sonner";
+import NextAuthProvider from "@/context/next-auth";
+import { QueryProvider } from "@/context/query";
+import BluetickHeader from "@/components/bluetick/header";
+import { Footer } from "@/components/footer";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { BluetickProvider } from "@/context/bluetick-context";
 
 const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans',
+  subsets: ["latin"],
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
-  title: 'Bluetick',
-  description: 'All in one discord bot',
+  title: "Bluetick",
+  description: "All in one discord bot",
 };
 
 interface RootLayoutProps {
@@ -43,8 +43,8 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
       <head />
       <body
         className={cn(
-          'min-h-screen bg-background font-sans antialiased',
-          fontSans.variable
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable,
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -60,22 +60,22 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
                     duration: 3000,
                     unstyled: true,
                     classNames: {
-                      title: 'text-sm font-bold',
-                      description: 'text-xs text-zinc-900',
-                      toast: cn(defaultToast, 'bg-[#2B2D31]'),
+                      title: "text-sm font-bold",
+                      description: "text-xs text-zinc-900",
+                      toast: cn(defaultToast, "bg-[#2B2D31]"),
                       success: cn(
                         defaultToast,
-                        'bg-success text-success-foreground'
+                        "bg-success text-success-foreground",
                       ),
-                      error: cn(defaultToast, 'bg-error text-error-foreground'),
+                      error: cn(defaultToast, "bg-error text-error-foreground"),
                       warning: cn(
                         defaultToast,
-                        'bg-warning text-warning-foreground'
+                        "bg-warning text-warning-foreground",
                       ),
-                      info: cn(defaultToast, 'bg-info text-info-foreground'),
-                      actionButton: 'bg-zinc-400',
-                      cancelButton: 'bg-blue-500',
-                      closeButton: 'bg-lime-400',
+                      info: cn(defaultToast, "bg-info text-info-foreground"),
+                      actionButton: "bg-zinc-400",
+                      cancelButton: "bg-blue-500",
+                      closeButton: "bg-lime-400",
                     },
                   }}
                 />
@@ -89,4 +89,4 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
   );
 }
 
-const defaultToast = 'rounded-lg flex items-center p-4 gap-4 w-full';
+const defaultToast = "rounded-lg flex items-center p-4 gap-4 w-full";

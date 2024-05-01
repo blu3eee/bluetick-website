@@ -1,8 +1,8 @@
-import React from 'react';
-import type { TwitchUser } from '@/types/twitch';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import TwitchUserDisplay from '@/components/dev/twitch/user';
+import React from "react";
+import type { TwitchUser } from "@/types/twitch";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import TwitchUserDisplay from "@/components/dev/twitch/user";
 
 interface Props {
   user: TwitchUser | null;
@@ -17,7 +17,7 @@ const TwitchWatcher: React.FC<Props> = ({ user, unwatch = false, refetch }) => {
         <Label className="text-twitch uppercase font-semibold">Watching</Label>
         {unwatch && refetch && (
           <div className="flex flex-wrap items-center">
-            <Button variant={'error'} size={'sm'}>
+            <Button variant={"error"} size={"sm"}>
               Unwatch this user
             </Button>
           </div>

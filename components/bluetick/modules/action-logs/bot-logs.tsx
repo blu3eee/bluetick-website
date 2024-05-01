@@ -1,13 +1,13 @@
-'use client';
-import React from 'react';
-import type { ServerIdProps } from '../props';
-import LogSetting from './setting';
-import { useFetchGuildLogSetting } from '@/hooks/api/bot-logs/logs-settings';
-import { BLUETICK_BOT_ID } from '@/config/bluetick';
-import { Skeleton } from '@/components/ui/skeleton';
-import OneLogChannel from './one-log-channel';
-import Ignores from './ignores';
-import SpecifiedLogChannels from './specified-log-channel';
+"use client";
+import React from "react";
+import type { ServerIdProps } from "../props";
+import LogSetting from "./setting";
+import { useFetchGuildLogSetting } from "@/hooks/api/bot-logs/logs-settings";
+import { BLUETICK_BOT_ID } from "@/config/bluetick";
+import { Skeleton } from "@/components/ui/skeleton";
+import OneLogChannel from "./one-log-channel";
+import Ignores from "./ignores";
+import SpecifiedLogChannels from "./specified-log-channel";
 
 /**
  * Replaces the character at the specified index in the given string with the provided character.

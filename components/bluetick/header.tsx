@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
-import { MainNav } from '../nav/main';
-import { LoginButton, LogoutButton } from './auth-buttons';
-import { bluetickConfig } from '@/config/bluetick';
-import { usePathname, useRouter } from 'next/navigation';
-import { Button } from '../ui/button';
-import { SidebarContent } from './sidebar';
-import { useSession } from 'next-auth/react';
-import { Skeleton } from '../ui/skeleton';
+import React, { useEffect } from "react";
+import { MainNav } from "../nav/main";
+import { LoginButton, LogoutButton } from "./auth-buttons";
+import { bluetickConfig } from "@/config/bluetick";
+import { usePathname, useRouter } from "next/navigation";
+import { Button } from "../ui/button";
+import { SidebarContent } from "./sidebar";
+import { useSession } from "next-auth/react";
+import { Skeleton } from "../ui/skeleton";
 
 const BluetickHeader = (): JSX.Element => {
   const pathname = usePathname();
@@ -17,12 +17,12 @@ const BluetickHeader = (): JSX.Element => {
 
   useEffect(() => {
     if (
-      status !== 'loading' &&
+      status !== "loading" &&
       !session &&
       pathname &&
-      (pathname.startsWith('/dashboard') || pathname.startsWith('/servers'))
+      (pathname.startsWith("/dashboard") || pathname.startsWith("/servers"))
     ) {
-      router.push('/');
+      router.push("/");
     }
   }, [session, status, pathname, router]);
 
@@ -32,15 +32,15 @@ const BluetickHeader = (): JSX.Element => {
         <MainNav items={bluetickConfig.mainNav} config={bluetickConfig}>
           <SidebarContent />
         </MainNav>
-        {status === 'loading' ? (
+        {status === "loading" ? (
           <Skeleton className="rounded-lg w-24 h-10" />
         ) : session ? (
           <>
             <div className="flex items-center gap-2 md:gap-4">
               <Button
-                variant={'outline'}
+                variant={"outline"}
                 onClick={() => {
-                  router.push('/servers');
+                  router.push("/servers");
                 }}
               >
                 Manage Servers

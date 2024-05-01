@@ -1,18 +1,18 @@
-import type { DiscordRole } from '@/types/bluetick/discord';
-import React from 'react';
+import type { DiscordRole } from "@/types/bluetick/discord";
+import React from "react";
 import {
   Command,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Icons } from '@/components/icons';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/popover";
+import { Icons } from "@/components/icons";
+import { cn } from "@/lib/utils";
 
 interface Props {
   roles: DiscordRole[];
@@ -30,7 +30,7 @@ const RoleSelect: React.FC<Props> = ({
   // State and hooks setup
   const triggerRef = React.useRef<HTMLDivElement>(null);
   const [popoverWidth, setPopoverWidth] = React.useState<number | string>(
-    'auto'
+    "auto",
   );
   React.useEffect(() => {
     const triggerElement = triggerRef.current;
@@ -53,21 +53,21 @@ const RoleSelect: React.FC<Props> = ({
     }
   }, []);
 
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = React.useState("");
   const filteredRoles = (
     query
       ? roles.filter((role) =>
-          role.name.toLowerCase().includes(query.toLowerCase())
+          role.name.toLowerCase().includes(query.toLowerCase()),
         )
       : roles
   ).filter((role) => role.name !== (allowEveryone ? `` : `@everyone`));
 
   const getRoleNameById = (id: string): string => {
-    if (id === 'ticket-opener') {
-      return 'Ticket Opener';
+    if (id === "ticket-opener") {
+      return "Ticket Opener";
     }
     const role = roles.find((role) => role.id === id);
-    return role ? role.name : 'Unknown role';
+    return role ? role.name : "Unknown role";
   };
 
   return (
@@ -84,7 +84,7 @@ const RoleSelect: React.FC<Props> = ({
                 size="12"
                 className="cursor-pointer"
                 onClick={() => {
-                  onValueChange('');
+                  onValueChange("");
                 }}
               />
             </div>
@@ -95,7 +95,7 @@ const RoleSelect: React.FC<Props> = ({
       </PopoverTrigger>
 
       <PopoverContent
-        style={{ width: popoverWidth, minWidth: '240px' }}
+        style={{ width: popoverWidth, minWidth: "240px" }}
         className="p-2"
       >
         <Command>
@@ -112,8 +112,8 @@ const RoleSelect: React.FC<Props> = ({
                 <CommandItem
                   key={role.id}
                   className={cn(
-                    'flex aria-selected:bg-accent/50 items-center gap-2',
-                    value === role.id ? `bg-secondary/50` : ``
+                    "flex aria-selected:bg-accent/50 items-center gap-2",
+                    value === role.id ? `bg-secondary/50` : ``,
                   )}
                   onSelect={() => {
                     onValueChange(role.id);

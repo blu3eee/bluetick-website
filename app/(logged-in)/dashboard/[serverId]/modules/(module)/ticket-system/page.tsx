@@ -1,12 +1,12 @@
-import ModulePageTemplate from '@/components/bluetick/modules/module-page-template';
-import { GUILD_MODULES } from '@/config/bluetick';
-import React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import GeneralSettings from '@/components/bluetick/modules/tickets/general-settings';
-import ReactionPanels from '@/components/bluetick/modules/tickets/reaction-panels';
-import MultiReactionsPanels from '@/components/bluetick/modules/tickets/multi-panels';
-import SupportTeams from '@/components/bluetick/modules/tickets/support-teams';
-import TicketsView from '@/components/bluetick/modules/tickets/tickets';
+import ModulePageTemplate from "@/components/bluetick/modules/module-page-template";
+import { GUILD_MODULES } from "@/config/bluetick";
+import React from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import GeneralSettings from "@/components/bluetick/modules/tickets/general-settings";
+import ReactionPanels from "@/components/bluetick/modules/tickets/reaction-panels";
+import MultiReactionsPanels from "@/components/bluetick/modules/tickets/multi-panels";
+import SupportTeams from "@/components/bluetick/modules/tickets/support-teams";
+import TicketsView from "@/components/bluetick/modules/tickets/tickets";
 
 const TicketSystem = ({
   params,

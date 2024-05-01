@@ -1,20 +1,20 @@
-'use client';
-import type { CreateTicketPanelDto } from '@/types/bluetick/db/tickets';
-import React, { useContext } from 'react';
-import { CollapsibleFields } from '../../../ui/collapsible-fields';
-import { Label } from '@/components/ui/label';
-import { GuildContext } from '@/context/guild-context';
-import SelectMentions from './select-mentions';
-import { Button } from '@/components/ui/button';
-import { ChannelSelect } from '../../../ui/channel-select';
-import { Skeleton } from '@/components/ui/skeleton';
-import { NamingScheme } from './naming-scheme';
-import { SquarePen } from 'lucide-react';
-import { useFetchGuildTicketSupportTeams } from '@/hooks/api/tickets/teams';
-import SupportTeamSelect from './team-select';
-import MessageForm from '@/components/bluetick/ui/message-form';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import { toast } from 'sonner';
+"use client";
+import type { CreateTicketPanelDto } from "@/types/bluetick/db/tickets";
+import React, { useContext } from "react";
+import { CollapsibleFields } from "../../../ui/collapsible-fields";
+import { Label } from "@/components/ui/label";
+import { GuildContext } from "@/context/guild-context";
+import SelectMentions from "./select-mentions";
+import { Button } from "@/components/ui/button";
+import { ChannelSelect } from "../../../ui/channel-select";
+import { Skeleton } from "@/components/ui/skeleton";
+import { NamingScheme } from "./naming-scheme";
+import { SquarePen } from "lucide-react";
+import { useFetchGuildTicketSupportTeams } from "@/hooks/api/tickets/teams";
+import SupportTeamSelect from "./team-select";
+import MessageForm from "@/components/bluetick/ui/message-form";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import { toast } from "sonner";
 
 interface CreatePanelFormProps {
   serverId: string;
@@ -29,11 +29,11 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
     botID: BLUETICK_BOT_ID,
     guildID: serverId,
     mentionOnOpen: [],
-    namingScheme: '',
-    channelID: '',
-    message: { type: 'Embed' },
-    button: { color: 'Green', text: '', emoji: '✉️' },
-    welcomeMessage: { type: 'Embed and Text' },
+    namingScheme: "",
+    channelID: "",
+    message: { type: "Embed" },
+    button: { color: "Green", text: "", emoji: "✉️" },
+    welcomeMessage: { type: "Embed and Text" },
   });
 
   const { isLoading, discordGuild, channels, isLoadingChannels } =
@@ -57,23 +57,23 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
     // check
     const missings: string[] = [];
     if (!form.ticketCategory) {
-      missings.push('ticket category');
+      missings.push("ticket category");
     }
     if (!form.supportTeamID || form.supportTeamID === -1) {
-      missings.push('support team');
+      missings.push("support team");
     }
-    if (form.namingScheme === '') {
-      missings.push('naming scheme');
+    if (form.namingScheme === "") {
+      missings.push("naming scheme");
     }
     if (!form.message.embed?.title) {
-      missings.push('panel message title');
+      missings.push("panel message title");
     }
-    if (form.button.text === '') {
-      missings.push('panel button text');
+    if (form.button.text === "") {
+      missings.push("panel button text");
     }
 
     if (missings.length > 0) {
-      toast.error(`Missing fields:\n${missings.join(', ')}`);
+      toast.error(`Missing fields:\n${missings.join(", ")}`);
       return;
     }
 
@@ -81,12 +81,12 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
     const response = await apiInstance.post(`/${ROUTES.TICKET_PANELS}`, form);
 
     if (response.status === 200 || response.status === 201) {
-      toast.success('New reaction panel created.');
+      toast.success("New reaction panel created.");
 
       // refetch
       handleCreatePanel();
     } else {
-      toast.error('Failed to create new reaction panel.');
+      toast.error("Failed to create new reaction panel.");
     }
   };
 
@@ -102,7 +102,7 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
               {!isLoadingChannels && channels ? (
                 <ChannelSelect
                   options={channels.textChannels}
-                  initChannelId={''}
+                  initChannelId={""}
                   onSelect={(newId: string) => {
                     setForm((prev) => ({
                       ...prev,
@@ -121,7 +121,7 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
               {!isLoadingChannels && channels ? (
                 <ChannelSelect
                   options={channels.categories}
-                  initChannelId={''}
+                  initChannelId={""}
                   onSelect={(newId: string) => {
                     setForm((prev) => ({
                       ...prev,
@@ -193,9 +193,9 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
       <CollapsibleFields label="Panel Message" defaultOpen={true}>
         <div className="pl-6">
           <MessageForm
-            type={'Embed'}
+            type={"Embed"}
             initialMessage={form.message}
-            disabledEmbedFields={['footer']}
+            disabledEmbedFields={["footer"]}
             buttonEmojis={discordGuild?.emojis}
             onChange={(newMessage) => {
               setForm((prev) => ({
@@ -216,9 +216,9 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
       <CollapsibleFields label="Panel Message">
         <div className="pl-6">
           <MessageForm
-            type={'Embed and Text'}
+            type={"Embed and Text"}
             initialMessage={form.welcomeMessage}
-            disabledEmbedFields={['footer']}
+            disabledEmbedFields={["footer"]}
             onChange={(newMessage) => {
               setForm((prev) => ({
                 ...prev,
@@ -230,7 +230,7 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
       </CollapsibleFields>
       <div className="pl-6">
         <Button
-          size={'sm'}
+          size={"sm"}
           onClick={() => {
             handleSubmit().catch(() => {});
           }}

@@ -1,13 +1,13 @@
-'use client';
-import React, { useContext, useState } from 'react';
-import type { ServerIdProps } from '../props';
-import { Label } from '@/components/ui/label';
-import { GuildContext } from '@/context/guild-context';
-import { Skeleton } from '@/components/ui/skeleton';
-import RoleSelect from '../../ui/role-select';
-import { Input } from '@/components/ui/input';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Button } from '@/components/ui/button';
+"use client";
+import React, { useContext, useState } from "react";
+import type { ServerIdProps } from "../props";
+import { Label } from "@/components/ui/label";
+import { GuildContext } from "@/context/guild-context";
+import { Skeleton } from "@/components/ui/skeleton";
+import RoleSelect from "../../ui/role-select";
+import { Input } from "@/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -16,21 +16,21 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { toast } from 'sonner';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
+} from "@/components/ui/table";
+import { toast } from "sonner";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
 import type {
   AutoRoleDetails,
   CreateAutoRoleDto,
-} from '@/types/bluetick/db/autorole';
-import { useFetchGuildAutoRoles } from '@/hooks/api/autorole/list';
+} from "@/types/bluetick/db/autorole";
+import { useFetchGuildAutoRoles } from "@/hooks/api/autorole/list";
 
 const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
   const { discordGuild, isLoading } = useContext(GuildContext);
 
-  const [selectedRole, setSelectedRole] = React.useState('');
-  const [delay, setDelay] = useState('0'); // State to keep track of delay input
-  const [roleActionType, setRoleActionType] = useState('add'); // State to keep track of role action type
+  const [selectedRole, setSelectedRole] = React.useState("");
+  const [delay, setDelay] = useState("0"); // State to keep track of delay input
+  const [roleActionType, setRoleActionType] = useState("add"); // State to keep track of role action type
 
   const {
     data: autoRoles,
@@ -49,7 +49,7 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
       };
       const { data } = await apiInstance.post<{ data: AutoRoleDetails }>(
         `${ROUTES.AUTO_ROLES}`,
-        createDto
+        createDto,
       );
 
       if (data.data) {
@@ -59,14 +59,14 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
         toast.success(`Failed to create auto-role`);
       }
     } catch (e) {
-      toast.error('An error happened while trying to add auto-role');
+      toast.error("An error happened while trying to add auto-role");
     }
   };
 
   const handleDeleteAutoRole = async (id: number): Promise<void> => {
     try {
       const { data } = await apiInstance.delete<{ data: { message: string } }>(
-        `${ROUTES.AUTO_ROLES}/${id}`
+        `${ROUTES.AUTO_ROLES}/${id}`,
       );
 
       if (data.data.message) {
@@ -76,28 +76,28 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
         toast.error(`Failed to delete auto-role`);
       }
     } catch (e) {
-      toast.error('An error happened while trying to delete an auto-role');
+      toast.error("An error happened while trying to delete an auto-role");
     }
   };
 
   const areInputsValid = (): boolean => {
     // Check if selectedRole is not '0'
     const isValidRoleSelected =
-      selectedRole !== '' &&
+      selectedRole !== "" &&
       discordGuild?.roles.find((role) => role.id === selectedRole) !== null;
 
     // Check if delay is a non-negative number. Since delay is a string, convert it to a number first.
     // Also, ensure that the delay is not empty.
     const isValidDelay =
-      delay !== '' && !isNaN(Number(delay)) && Number(delay) >= 0;
+      delay !== "" && !isNaN(Number(delay)) && Number(delay) >= 0;
 
     return isValidRoleSelected && isValidDelay;
   };
 
   const getRoleNameById = (id: string): string => {
-    if (!discordGuild) return 'Unknown';
+    if (!discordGuild) return "Unknown";
     const role = discordGuild.roles.find((role) => role.id === id);
-    return role?.name ?? 'Unknown';
+    return role?.name ?? "Unknown";
   };
 
   return (
@@ -134,8 +134,8 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
             onChange={(e) => {
               // Check if the value is not negative; if negative, set it to an empty string or a desired minimum
               const newValue = e.target.value;
-              if (newValue !== '' && Number(newValue) < 0) {
-                setDelay('0'); // Resets to 0 if a negative number is attempted
+              if (newValue !== "" && Number(newValue) < 0) {
+                setDelay("0"); // Resets to 0 if a negative number is attempted
               } else {
                 setDelay(newValue);
               }
@@ -160,7 +160,7 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
           </RadioGroup>
         </div>
         <Button
-          variant={'blue'}
+          variant={"blue"}
           onClick={() => {
             handleAddAutoRole().catch((e) => {});
           }}
@@ -171,15 +171,15 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
       </div>
       <div className="bg-secondary rounded-lg p-4 flex flex-col gap-4 w-full md:w-1/2">
         <Label className="uppercase">Autorole List</Label>
-        {status !== 'success' ? (
+        {status !== "success" ? (
           <Skeleton className="w-full h-10" />
         ) : (
           <div className="w-full">
             <Table>
               <TableCaption>
                 {autoRoles.length === 0
-                  ? 'No auto-role found'
-                  : 'A list of your auto-role.'}
+                  ? "No auto-role found"
+                  : "A list of your auto-role."}
               </TableCaption>
               <TableHeader>
                 <TableRow>

@@ -1,14 +1,14 @@
-'use client';
-import React from 'react';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import type { ServerIdProps } from '../props';
-import { useFetchGuildTickets } from '@/hooks/api/tickets/tickets';
-import { BLUETICK_BOT_ID } from '@/config/bluetick';
-import { Skeleton } from '@/components/ui/skeleton';
-import { cn } from '@/lib/utils';
-import { rubikFont } from '@/styles/fonts';
-import { TICKET_STATUS } from '@/types/bluetick/db/tickets';
-import { Label } from '@/components/ui/label';
+"use client";
+import React from "react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import type { ServerIdProps } from "../props";
+import { useFetchGuildTickets } from "@/hooks/api/tickets/tickets";
+import { BLUETICK_BOT_ID } from "@/config/bluetick";
+import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
+import { rubikFont } from "@/styles/fonts";
+import { TICKET_STATUS } from "@/types/bluetick/db/tickets";
+import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -17,14 +17,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 
-import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
-import { runningBotsInstance } from '@/config/running-bots';
-import { useSession } from 'next-auth/react';
-import PaginatePages from '@/components/custom-ui/paginate-pages';
-import CloseInactiveTicketsButton from './ui/inactive-tickets-close';
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { runningBotsInstance } from "@/config/running-bots";
+import { useSession } from "next-auth/react";
+import PaginatePages from "@/components/custom-ui/paginate-pages";
+import CloseInactiveTicketsButton from "./ui/inactive-tickets-close";
 
 const limit = 10;
 
@@ -42,12 +42,12 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [tickets]
+    [tickets],
   );
 
-  const [filterStatus, setFilterStatus] = React.useState('');
+  const [filterStatus, setFilterStatus] = React.useState("");
   const [closingTicketId, setClosingTicketId] = React.useState<number | null>(
-    null
+    null,
   );
 
   // pagination
@@ -58,13 +58,13 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
   if (isLoading || !tickets) {
     return (
       <div className="flex flex-col gap-4 w-full">
-        <span className={cn('text-lg font bold', rubikFont.className)}>
+        <span className={cn("text-lg font bold", rubikFont.className)}>
           Loading tickets...
         </span>
         {[0, 1, 2, 3, 4].map((i) => (
           <Skeleton
             key={i}
-            className={cn('w-full h-12', i % 2 === 0 ?? `w-3/4`)}
+            className={cn("w-full h-12", i % 2 === 0 ?? `w-3/4`)}
           />
         ))}
       </div>
@@ -72,9 +72,9 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
   }
 
   const info = [
-    { label: 'Total', value: tickets.length },
+    { label: "Total", value: tickets.length },
     {
-      label: 'Open',
+      label: "Open",
       value: tickets.filter((ticket) => ticket.status === TICKET_STATUS.OPEN)
         .length,
     },
@@ -82,7 +82,7 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
 
   const filterTickets = tickets
     .filter((ticket) =>
-      filterStatus !== '' ? ticket.status === filterStatus : true
+      filterStatus !== "" ? ticket.status === filterStatus : true,
     )
     .sort((a, b) => b.id - a.id); // Sort tickets from newest to oldest
 
@@ -94,7 +94,7 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
   const handleRadioValueChange = (val: string): void => {
     // Check if the clicked value is the same as the current filterStatus
     // If so, clear the filterStatus (deselect). Otherwise, update to the new value.
-    setFilterStatus((currentStatus) => (currentStatus === val ? '' : val));
+    setFilterStatus((currentStatus) => (currentStatus === val ? "" : val));
     // Reset the current page to page 1
     setCurrentPage(1);
   };
@@ -104,12 +104,12 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
 
     try {
       const res = await runningBotsInstance.post<{ message: string }>(
-        '/tickets/close',
+        "/tickets/close",
         {
           botID: BLUETICK_BOT_ID,
           ticketID: id,
-          requestedUserID: session?.user?.id ?? '',
-        }
+          requestedUserID: session?.user?.id ?? "",
+        },
       );
 
       if (res.status === 200) {
@@ -171,8 +171,8 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
         </div>
         <div className="flex items-center gap-4">
           <Button
-            size={'sm'}
-            variant={'blue'}
+            size={"sm"}
+            variant={"blue"}
             onClick={() => {
               setFilterStatus(``);
             }}
@@ -196,8 +196,8 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
           <Table>
             <TableCaption>
               {tickets.length === 0
-                ? 'No ticket found'
-                : 'A list of your server ticket.'}
+                ? "No ticket found"
+                : "A list of your server ticket."}
             </TableCaption>
             <TableHeader>
               <TableRow>
@@ -231,8 +231,8 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
                           className="bg-blue-500 text-white rounded-md hover:bg-blue-400"
                         >
                           <Button
-                            size={'sm'}
-                            variant={'blue'}
+                            size={"sm"}
+                            variant={"blue"}
                             className="w-fit p-1 h-fit"
                           >
                             Transcript
@@ -242,8 +242,8 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
                     {ticket.status === TICKET_STATUS.OPEN &&
                       ticket.channelID && (
                         <Button
-                          size={'sm'}
-                          variant={'red'}
+                          size={"sm"}
+                          variant={"red"}
                           onClick={() => {
                             handleCloseTicket(ticket.id).catch((e) => {});
                           }}
@@ -251,10 +251,10 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
                           className="w-fit p-1  h-fit"
                         >
                           {closingTicketId === ticket.id ? (
-                            'Closing...'
+                            "Closing..."
                           ) : (
                             <span>
-                              Close{' '}
+                              Close{" "}
                               <span className="hidden md:inline-flex">
                                 ticket
                               </span>

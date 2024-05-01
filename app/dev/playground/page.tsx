@@ -1,6 +1,6 @@
-'use client';
-import React from 'react';
-import ToastPlayground from '@/components/dev/toaster-playground';
+"use client";
+import React from "react";
+import ToastPlayground from "@/components/dev/toaster-playground";
 
 const PlaygroundPage = (): JSX.Element => {
   return (

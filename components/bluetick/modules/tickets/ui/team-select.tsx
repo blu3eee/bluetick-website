@@ -1,20 +1,20 @@
-import type { TicketSupportTeamDetails } from '@/types/bluetick/db/tickets';
-import React from 'react';
-import { Button } from '@/components/ui/button';
+import type { TicketSupportTeamDetails } from "@/types/bluetick/db/tickets";
+import React from "react";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { CheckIcon, ChevronDown } from 'lucide-react';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/popover";
+import { CheckIcon, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
 interface SupportTeamSelectProps {
   options: TicketSupportTeamDetails[];
   selectedTeamId: number;
@@ -27,11 +27,11 @@ const SupportTeamSelect: React.FC<SupportTeamSelectProps> = ({
   onSelect,
 }) => {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
   React.useEffect(() => {
     const selectedValue = options.find(
-      (option) => option.id === selectedTeamId
+      (option) => option.id === selectedTeamId,
     );
     if (selectedValue) {
       setValue(`${selectedValue.id}_${selectedValue.name.toLowerCase()}`);
@@ -51,7 +51,7 @@ const SupportTeamSelect: React.FC<SupportTeamSelectProps> = ({
           {value
             ? options.find((c) => `${c.id}_${c.name.toLowerCase()}` === value)
                 ?.name
-            : 'Select team...'}
+            : "Select team..."}
           <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-80" />
         </Button>
       </PopoverTrigger>
@@ -71,10 +71,10 @@ const SupportTeamSelect: React.FC<SupportTeamSelectProps> = ({
                   const selectedValue = options.find(
                     (option) =>
                       `${option.id}_${option.name}`.toLowerCase() ===
-                      currentValue
+                      currentValue,
                   );
                   if (selectedValue) {
-                    setValue(currentValue === value ? '' : currentValue);
+                    setValue(currentValue === value ? "" : currentValue);
                     onSelect(selectedValue.id);
                   }
                   setOpen(false);
@@ -84,10 +84,10 @@ const SupportTeamSelect: React.FC<SupportTeamSelectProps> = ({
                 {channel.name}
                 <CheckIcon
                   className={cn(
-                    'ml-auto h-4 w-4',
+                    "ml-auto h-4 w-4",
                     value === `${channel.id}_${channel.name.toLowerCase()}`
-                      ? 'opacity-100'
-                      : 'opacity-0'
+                      ? "opacity-100"
+                      : "opacity-0",
                   )}
                 />
               </CommandItem>

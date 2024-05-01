@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import React, { useContext } from 'react';
-import FeatureLabel from '../feature-label';
-import AnimatedButton from '@/components/motions/animated-button';
-import { useRouter } from 'next/navigation';
-import { signIn, useSession } from 'next-auth/react';
-import { toast } from 'sonner';
-import { poppinsFont } from '@/styles/fonts';
-import { cn } from '@/lib/utils';
-import DiscordMessage from '@/components/bluetick/discord/message';
+import React, { useContext } from "react";
+import FeatureLabel from "../feature-label";
+import AnimatedButton from "@/components/motions/animated-button";
+import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { poppinsFont } from "@/styles/fonts";
+import { cn } from "@/lib/utils";
+import DiscordMessage from "@/components/bluetick/discord/message";
 
-import { BluetickContext } from '@/context/bluetick-context';
-import { getBotAvatarURL } from '@/lib/helper';
-import { Button } from '@/components/ui/button';
-import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
-import { motion } from 'framer-motion';
+import { BluetickContext } from "@/context/bluetick-context";
+import { getBotAvatarURL } from "@/lib/helper";
+import { Button } from "@/components/ui/button";
+import type { TranscriptMessage } from "@/types/bluetick/db/tickets";
+import { motion } from "framer-motion";
 import {
   ArrowDown,
   ArrowLeft,
@@ -23,9 +23,9 @@ import {
   CornerDownRight,
   Hash,
   Mail,
-} from 'lucide-react';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
+} from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 const TicketFeature = (): JSX.Element => {
   const [channels, setChannels] = React.useState<
@@ -41,8 +41,8 @@ const TicketFeature = (): JSX.Element => {
       <div className="w-full rounded-lg bg-discord p-4 text-white h-fit">
         <div
           className={cn(
-            'text-warning uppercase font-semibold',
-            poppinsFont.className
+            "text-warning uppercase font-semibold",
+            poppinsFont.className,
           )}
         >
           Ticket Panel Channel
@@ -82,20 +82,20 @@ const TicketDemo: React.FC<TicketDemoProps> = ({
 
   const users: Record<string, { name: string; avatarURL: string }> = {
     bot: {
-      name: botDetails?.username ?? 'Bluetick',
-      avatarURL: botDetails ? getBotAvatarURL(botDetails) : '',
+      name: botDetails?.username ?? "Bluetick",
+      avatarURL: botDetails ? getBotAvatarURL(botDetails) : "",
     },
-    '1': {
-      name: 'Wumpus',
-      avatarURL: '',
+    "1": {
+      name: "Wumpus",
+      avatarURL: "",
     },
-    '2': {
-      name: 'Clyde',
-      avatarURL: '',
+    "2": {
+      name: "Clyde",
+      avatarURL: "",
     },
-    '3': {
-      name: 'Nelly',
-      avatarURL: '',
+    "3": {
+      name: "Nelly",
+      avatarURL: "",
     },
   };
 
@@ -106,9 +106,9 @@ const TicketDemo: React.FC<TicketDemoProps> = ({
   React.useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start',
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
       });
     }
   }, [messages]);
@@ -127,7 +127,7 @@ const TicketDemo: React.FC<TicketDemoProps> = ({
     }));
 
     const newMsg = {
-      userID: 'bot',
+      userID: "bot",
       content: `<@${userIdString}>, your ticket 🎟️ is opened`,
       embeds: [
         {
@@ -136,10 +136,10 @@ const TicketDemo: React.FC<TicketDemoProps> = ({
           author: null,
           description: `Your ticket is opened here: <#${counter + 1}>`,
           footer: null,
-          thumbnailURL: '',
-          imageURL: '',
+          thumbnailURL: "",
+          imageURL: "",
           timestamp: null,
-          color: '#06d6a0',
+          color: "#06d6a0",
         },
       ],
       attachments: [],
@@ -159,23 +159,23 @@ const TicketDemo: React.FC<TicketDemoProps> = ({
     <>
       <DiscordMessage
         author={{
-          name: botDetails?.username ?? 'Bluetick',
-          avatarURL: botDetails ? getBotAvatarURL(botDetails) : '',
+          name: botDetails?.username ?? "Bluetick",
+          avatarURL: botDetails ? getBotAvatarURL(botDetails) : "",
         }}
         message={{
-          userID: 'bot',
-          content: '',
+          userID: "bot",
+          content: "",
           embeds: [
             {
-              title: 'Get Support',
+              title: "Get Support",
               url: null,
               author: null,
-              description: 'Click button to open support ticket 🎟️!',
+              description: "Click button to open support ticket 🎟️!",
               footer: null,
-              thumbnailURL: '',
-              imageURL: '',
+              thumbnailURL: "",
+              imageURL: "",
               timestamp: null,
-              color: '#d8fcff',
+              color: "#d8fcff",
             },
           ],
           attachments: [],
@@ -186,8 +186,8 @@ const TicketDemo: React.FC<TicketDemoProps> = ({
       <div className="mt-2 ml-12 flex items-center gap-2">
         <Button
           className="text-white bg-success-dark hover:bg-success gap-2"
-          size={'sm'}
-          variant={'success'}
+          size={"sm"}
+          variant={"success"}
           onClick={() => {
             handleCreateTicket(`ticket-support`);
           }}
@@ -197,8 +197,8 @@ const TicketDemo: React.FC<TicketDemoProps> = ({
         </Button>
         <Button
           className="gap-2"
-          size={'sm'}
-          variant={'error'}
+          size={"sm"}
+          variant={"error"}
           onClick={() => {
             handleCreateTicket(`ticket-bug`);
           }}
@@ -258,7 +258,7 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [channels]
+    [channels],
   );
 
   return (
@@ -268,13 +268,13 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
           Ticket Channel Mode
         </Label>
         <Switch
-          size={'xs'}
+          size={"xs"}
           checked={isThread}
           onClick={() => {
             setIsThread(!isThread);
           }}
         />
-        <span>{isThread ? `Thread Channel` : 'Text Channel'}</span>
+        <span>{isThread ? `Thread Channel` : "Text Channel"}</span>
       </div>
       <div className="bg-discord text-white rounded-lg px-3 py-4 max-h-[320px] overflow-auto">
         {/* category */}
@@ -305,7 +305,7 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
                 initial="hidden"
                 animate="visible"
                 className={
-                  'ml-3 text-discord-gray flex items-center gap-1 font-semibold text-md flex items-center'
+                  "ml-3 text-discord-gray flex items-center gap-1 font-semibold text-md flex items-center"
                 }
               >
                 <CornerDownRight size={16} />
@@ -351,8 +351,8 @@ const Description = (): JSX.Element => {
       </p>
       <div className="flex items-center justify-start gap-2 mt-2">
         <Button
-          size={'sm'}
-          variant={'warning'}
+          size={"sm"}
+          variant={"warning"}
           disabled
           className="w-fit gap-2"
         >
@@ -361,17 +361,17 @@ const Description = (): JSX.Element => {
           See how it works
         </Button>
         <AnimatedButton
-          size={'sm'}
-          variant={'info'}
+          size={"sm"}
+          variant={"info"}
           onClick={() => {
-            if (status === 'loading') {
-              toast.error('This is still loading');
+            if (status === "loading") {
+              toast.error("This is still loading");
             } else {
               if (data) {
-                router.push('/servers');
+                router.push("/servers");
               } else {
-                signIn('discord', { callbackUrl: '/servers' }).catch(() => {
-                  toast.error('Failed to initiate log in with Discord');
+                signIn("discord", { callbackUrl: "/servers" }).catch(() => {
+                  toast.error("Failed to initiate log in with Discord");
                 });
               }
             }

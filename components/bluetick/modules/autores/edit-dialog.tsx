@@ -1,6 +1,6 @@
-import React from 'react';
-import type { AutoResponseDetails } from '@/types/bluetick/db/autores';
-import { Button } from '@/components/ui/button';
+import React from "react";
+import type { AutoResponseDetails } from "@/types/bluetick/db/autores";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -10,13 +10,13 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import type { MessageInfoDetails } from '@/types/bluetick';
-import { toast } from 'sonner';
-import MessageForm from '../../ui/message-form';
-import MessageTypesRadioGroup from '../../ui/message-types';
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import type { MessageInfoDetails } from "@/types/bluetick";
+import { toast } from "sonner";
+import MessageForm from "../../ui/message-form";
+import MessageTypesRadioGroup from "../../ui/message-types";
 
 interface Props {
   editTrigger?: React.ReactNode;
@@ -24,7 +24,7 @@ interface Props {
   onSubmitUpdate: (
     id: number,
     trigger: string,
-    newAutoRes: MessageInfoDetails
+    newAutoRes: MessageInfoDetails,
   ) => void;
 }
 
@@ -34,19 +34,19 @@ const EditResponseDialog: React.FC<Props> = ({
   onSubmitUpdate,
 }) => {
   const [response, setResponse] = React.useState<MessageInfoDetails>(
-    init.response
+    init.response,
   );
 
   const [trigger, setTrigger] = React.useState(init.trigger);
 
   const handleSubmit = (): void => {
     if (!trigger) {
-      toast.error('Your response trigger is empty');
+      toast.error("Your response trigger is empty");
       return;
     }
 
     if (!response.embed && !response.content) {
-      toast.error('Your response content and embed are empty');
+      toast.error("Your response content and embed are empty");
       return;
     }
 
@@ -56,7 +56,7 @@ const EditResponseDialog: React.FC<Props> = ({
   return (
     <Dialog>
       <DialogTrigger>
-        {editTrigger ?? <Button size={'sm'}>Edit response</Button>}
+        {editTrigger ?? <Button size={"sm"}>Edit response</Button>}
       </DialogTrigger>
       <DialogContent className="max-w-[1024px] h-3/4  overflow-y-auto">
         <DialogHeader>
@@ -83,7 +83,7 @@ const EditResponseDialog: React.FC<Props> = ({
               <Label htmlFor="message-type">Message Type</Label>
               <div className="px-2">
                 <MessageTypesRadioGroup
-                  initType={response.type ?? 'Message'}
+                  initType={response.type ?? "Message"}
                   onValueChange={(newValue) => {
                     setResponse((prev) => ({
                       ...prev,
@@ -96,9 +96,9 @@ const EditResponseDialog: React.FC<Props> = ({
           </div>
           <div className="w-full bg-secondary rounded-lg px-4 py-3 flex flex-col gap-2">
             <MessageForm
-              type={response.type ?? 'Message'}
+              type={response.type ?? "Message"}
               initialMessage={response}
-              disabledEmbedFields={['footer']}
+              disabledEmbedFields={["footer"]}
               onChange={(newRes) => {
                 setResponse(newRes);
               }}
@@ -107,7 +107,7 @@ const EditResponseDialog: React.FC<Props> = ({
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="submit" size={'sm'} onClick={handleSubmit}>
+            <Button type="submit" size={"sm"} onClick={handleSubmit}>
               Create
             </Button>
           </DialogClose>

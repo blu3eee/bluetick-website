@@ -1,14 +1,14 @@
-'use client';
-import React, { useContext } from 'react';
-import useMutualGuilds from '@/hooks/api/discord/mutual-guilds';
-import { getBotInviteURL, getGuildIconURL } from '@/lib/helper';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useRouter } from 'next/navigation';
-import { Callout } from '@/components/callout';
-import { BluetickContext } from '@/context/bluetick-context';
-import { BLUETICK_BOT_ID } from '@/config/bluetick';
-import { Button } from '@/components/ui/button';
-import ImageWithFallback from '@/components/custom-ui/image-with-fallback';
+"use client";
+import React, { useContext } from "react";
+import useMutualGuilds from "@/hooks/api/discord/mutual-guilds";
+import { getBotInviteURL, getGuildIconURL } from "@/lib/helper";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
+import { Callout } from "@/components/callout";
+import { BluetickContext } from "@/context/bluetick-context";
+import { BLUETICK_BOT_ID } from "@/config/bluetick";
+import { Button } from "@/components/ui/button";
+import ImageWithFallback from "@/components/custom-ui/image-with-fallback";
 
 export const MutualServers = (): JSX.Element => {
   const { botDetails, isLoading: isLoadingBluetick } =
@@ -16,7 +16,7 @@ export const MutualServers = (): JSX.Element => {
   const { mutualGuilds, loadingState: isLoading, error } = useMutualGuilds();
   const router = useRouter();
 
-  if (isLoading !== 'completed') {
+  if (isLoading !== "completed") {
     return (
       <div className="flex flex-wrap w-full h-full gap-4 p-8 items-center justify-center">
         <Skeleton className="rounded-lg w-60 h-60" />

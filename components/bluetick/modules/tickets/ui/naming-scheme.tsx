@@ -1,12 +1,12 @@
-import { Input } from '@/components/ui/input';
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { Switch } from '@/components/ui/switch';
-import { Info } from 'lucide-react';
-import React from 'react';
+} from "@/components/ui/popover";
+import { Switch } from "@/components/ui/switch";
+import { Info } from "lucide-react";
+import React from "react";
 
 interface NamingSchemeProps {
   initScheme?: string;
@@ -18,13 +18,13 @@ export const NamingScheme: React.FC<NamingSchemeProps> = ({
   initScheme,
 }) => {
   const [defaultNaming, setDefaultNaming] = React.useState(
-    !initScheme || initScheme === 'ticket-{id}'
+    !initScheme || initScheme === "ticket-{id}",
   );
-  const [naming, setNaming] = React.useState(initScheme ?? 'ticket-{id}');
+  const [naming, setNaming] = React.useState(initScheme ?? "ticket-{id}");
 
   const handleDefaultSwitch = (): void => {
     if (!defaultNaming) {
-      setNaming('ticket-{id}');
+      setNaming("ticket-{id}");
     }
     setDefaultNaming(!defaultNaming);
   };
@@ -42,7 +42,7 @@ export const NamingScheme: React.FC<NamingSchemeProps> = ({
       {defaultNaming ? (
         <div className="flex flex-col text-sm">
           <span className="text-gray-500">Use default</span>
-          <span className="font-semibold">{'ticker-{id}'}</span>
+          <span className="font-semibold">{"ticker-{id}"}</span>
         </div>
       ) : (
         <div className="flex items-center gap-2">
@@ -71,10 +71,10 @@ export const NamingScheme: React.FC<NamingSchemeProps> = ({
               <div className="flex flex-col">
                 <span className="uppercase font-bold">Naming helper</span>
                 <div>
-                  <span className="text-red-400">{'{id}'}</span> - Ticker ID
+                  <span className="text-red-400">{"{id}"}</span> - Ticker ID
                 </div>
                 <div>
-                  <span className="text-red-400">{'{username}'}</span> - Ticker
+                  <span className="text-red-400">{"{username}"}</span> - Ticker
                   opener&apos;s username
                 </div>
               </div>

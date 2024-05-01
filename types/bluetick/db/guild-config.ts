@@ -1,7 +1,7 @@
-import { BotDetails } from './bot';
-import { GuildDetails } from './guild';
+import { type BotDetails } from "./bot";
+import { type GuildDetails } from "./guild";
 
-export type BotGuildConfig = {
+export interface BotGuildConfig {
   id: number;
   bot: BotDetails;
   guild: GuildDetails;
@@ -9,14 +9,14 @@ export type BotGuildConfig = {
   locale: string;
   moduleFlags: number;
   premiumFlags: number;
-};
+}
 
-export type UpdateGuildConfig = {
+export interface UpdateGuildConfig {
   prefix?: string;
   locale?: string;
   moduleFlags?: number;
   premiumFlags?: number;
-};
+}
 
 export enum GuildModules {
   WELCOME = 1 << 1,

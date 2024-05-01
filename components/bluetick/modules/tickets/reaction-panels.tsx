@@ -1,11 +1,11 @@
-'use client';
-import React, { useContext } from 'react';
-import type { ServerIdProps } from '../props';
-import { useFetchTicketPanels } from '@/hooks/api/tickets/reaction-panels';
-import { BLUETICK_BOT_ID, ROUTES, apiInstance } from '@/config/bluetick';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import type { TicketPanelDetails } from '@/types/bluetick/db/tickets';
+"use client";
+import React, { useContext } from "react";
+import type { ServerIdProps } from "../props";
+import { useFetchTicketPanels } from "@/hooks/api/tickets/reaction-panels";
+import { BLUETICK_BOT_ID, ROUTES, apiInstance } from "@/config/bluetick";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import type { TicketPanelDetails } from "@/types/bluetick/db/tickets";
 import {
   Table,
   TableBody,
@@ -14,20 +14,20 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { toast } from 'sonner';
-import { GuildContext } from '@/context/guild-context';
-import EditPanelDialog from './ui/edit-panel';
-import CreatePanelForm from './ui/create-panel';
+} from "@/components/ui/table";
+import { toast } from "sonner";
+import { GuildContext } from "@/context/guild-context";
+import EditPanelDialog from "./ui/edit-panel";
+import CreatePanelForm from "./ui/create-panel";
 
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import DeletePanelDialog from './ui/delete-panel';
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import DeletePanelDialog from "./ui/delete-panel";
 
 const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
   const { data, refetch, isLoading } = useFetchTicketPanels(
     BLUETICK_BOT_ID,
-    serverId
+    serverId,
   );
 
   const [panels, setPanels] = React.useState<TicketPanelDetails[]>([]);
@@ -41,7 +41,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [data]
+    [data],
   );
 
   const handleCreatePanel = async (): Promise<void> => {
@@ -49,7 +49,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
       await refetch();
     } catch (e) {
       //   console.error(e);
-      toast.error('An error happened while creating new reaction panel.');
+      toast.error("An error happened while creating new reaction panel.");
     }
   };
 
@@ -60,7 +60,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
       toast.success(`Ticket panel deleted ${id}.`);
       await refetch();
     } else {
-      toast.error('Failed to delete ticket panel.');
+      toast.error("Failed to delete ticket panel.");
     }
   };
 
@@ -75,7 +75,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
           action: {
             label: <div>See message</div>,
             onClick: () => {
-              toast.success('Redirecting you to Discord');
+              toast.success("Redirecting you to Discord");
               router.push(resData.url);
             },
           },
@@ -107,8 +107,8 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
             <Table>
               <TableCaption>
                 {panels.length === 0
-                  ? 'No panel found'
-                  : 'A list of your reaction panels.'}
+                  ? "No panel found"
+                  : "A list of your reaction panels."}
               </TableCaption>
               <TableHeader>
                 <TableRow>
@@ -131,26 +131,26 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                         rel="noopener noreferrer"
                       >
                         {isLoadingChannels || !channels
-                          ? 'loading...'
+                          ? "loading..."
                           : channels.textChannels.find(
-                              (c) => c.id === panel.channelID
-                            )?.name
-                          ? `#${
-                              channels.textChannels.find(
-                                (c) => c.id === panel.channelID
+                                (c) => c.id === panel.channelID,
                               )?.name
-                            }`
-                          : panel.channelID}
+                            ? `#${
+                                channels.textChannels.find(
+                                  (c) => c.id === panel.channelID,
+                                )?.name
+                              }`
+                            : panel.channelID}
                       </a>
                     </TableCell>
                     <TableCell className="hidden md:table-cell">
-                      {panel.message?.embed?.title ?? 'empty title'}
+                      {panel.message?.embed?.title ?? "empty title"}
                     </TableCell>
-                    <TableCell>{panel.button.text ?? '[none]'}</TableCell>
+                    <TableCell>{panel.button.text ?? "[none]"}</TableCell>
                     <TableCell className="flex justify-end items-center gap-2">
                       <Button
-                        size={'xs'}
-                        variant={'warning'}
+                        size={"xs"}
+                        variant={"warning"}
                         onClick={() => {
                           handeResendPanel(panel.id).catch((e) => {});
                         }}
@@ -160,7 +160,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                       <EditPanelDialog
                         panel={panel}
                         trigger={
-                          <Button size={'xs'} variant={'info'}>
+                          <Button size={"xs"} variant={"info"}>
                             Edit
                           </Button>
                         }
@@ -172,7 +172,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                       />
                       <DeletePanelDialog
                         trigger={
-                          <Button size={'xs'} variant={'error'}>
+                          <Button size={"xs"} variant={"error"}>
                             Delete
                           </Button>
                         }
@@ -201,13 +201,13 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
             handleCreatePanel={() => {
               handleCreatePanel().catch((e) => {
                 console.error(e);
-                console.error('an error happened while trying to create panel');
+                console.error("an error happened while trying to create panel");
               });
             }}
           />
         ) : (
           <div className="text-md text-gray-500">
-            Your server reached limit{' '}
+            Your server reached limit{" "}
             <span className="text-blue-500 font-bold">{panels.length}</span> /
             3. You can delete existing panel(s) to create new ones.
           </div>

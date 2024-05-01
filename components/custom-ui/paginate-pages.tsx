@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Pagination,
   PaginationContent,
@@ -7,7 +7,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
+} from "@/components/ui/pagination";
 interface Props {
   currentPage: number;
   totalPages: number;
@@ -41,7 +41,7 @@ const PaginatePages: React.FC<Props> = ({
           >
             1
           </PaginationLink>
-        </PaginationItem>
+        </PaginationItem>,
       );
     }
 
@@ -50,7 +50,7 @@ const PaginatePages: React.FC<Props> = ({
       pageNumbers.push(
         <PaginationItem key="ellipsis-start">
           <PaginationEllipsis />
-        </PaginationItem>
+        </PaginationItem>,
       );
     }
 
@@ -69,7 +69,7 @@ const PaginatePages: React.FC<Props> = ({
           >
             {i}
           </PaginationLink>
-        </PaginationItem>
+        </PaginationItem>,
       );
     }
 
@@ -78,7 +78,7 @@ const PaginatePages: React.FC<Props> = ({
       pageNumbers.push(
         <PaginationItem key="ellipsis-end">
           <PaginationEllipsis />
-        </PaginationItem>
+        </PaginationItem>,
       );
     }
 
@@ -93,7 +93,7 @@ const PaginatePages: React.FC<Props> = ({
           >
             {totalPages}
           </PaginationLink>
-        </PaginationItem>
+        </PaginationItem>,
       );
     }
 

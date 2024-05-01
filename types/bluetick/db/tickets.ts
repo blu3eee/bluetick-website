@@ -1,6 +1,6 @@
-import { ButtonInfoDetails, MessageInfoDetails } from '..';
-import { BotDetails } from './bot';
-import { GuildDetails } from './guild';
+import { type ButtonInfoDetails, type MessageInfoDetails } from "..";
+import { type BotDetails } from "./bot";
+import { type GuildDetails } from "./guild";
 
 export interface UpdateTicketGeneralSettingDto {
   perUserTicketLimit?: number;
@@ -13,7 +13,7 @@ export interface UpdateTicketGeneralSettingDto {
   archiveOverflowCategory?: string;
 }
 
-export type TicketSettingDetails = {
+export interface TicketSettingDetails {
   id: number;
   bot: BotDetails;
   guild: GuildDetails;
@@ -25,7 +25,7 @@ export type TicketSettingDetails = {
   threadTicket?: boolean;
   archiveCategory?: string;
   archiveOverflowCategory?: string;
-};
+}
 
 export interface CreateTicketPanelDto {
   botID: string;
@@ -128,21 +128,21 @@ export interface TicketDetails {
   transcriptMessageID?: string;
 }
 
-export type CreateTicketDto = {
+export interface CreateTicketDto {
   panelID: number;
   userID: string;
-};
+}
 
-export type UpdateTicketDto = {
+export interface UpdateTicketDto {
   channelID?: string;
   userID?: string;
   status?: string;
   notificationMessageID?: string;
   transcriptChannelID?: string;
   transcriptMessageID?: string;
-};
+}
 
-export type TicketTranscriptDetails = {
+export interface TicketTranscriptDetails {
   generated: number;
   guildInfo: {
     guildID: string;
@@ -158,11 +158,9 @@ export type TicketTranscriptDetails = {
     threadID: string;
     name: string;
   };
-  usersInfo: {
-    [id: string]: TranscriptUser;
-  };
+  usersInfo: Record<string, TranscriptUser>;
   messagesInfo: TranscriptMessage[];
-};
+}
 
 export interface TranscriptMessage {
   userID: string;
@@ -188,7 +186,7 @@ export interface TranscriptEmbed {
   imageURL: string;
   timestamp: string | null;
   color: string | null;
-  fields?: Array<EmbedFields>;
+  fields?: EmbedFields[];
 }
 
 export interface EmbedFields {
@@ -209,8 +207,8 @@ export interface TranscriptUser {
 }
 
 export enum TICKET_STATUS {
-  OPEN = 'Open',
-  CLOSED = 'Closed',
-  CHANNEL_DELETED = 'Thread deleted',
-  PROCESSING = 'processing',
+  OPEN = "Open",
+  CLOSED = "Closed",
+  CHANNEL_DELETED = "Thread deleted",
+  PROCESSING = "processing",
 }

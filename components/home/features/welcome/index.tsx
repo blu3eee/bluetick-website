@@ -1,26 +1,26 @@
-'use client';
-import React, { useContext } from 'react';
-import FeatureLabel from '../feature-label';
-import { BluetickContext } from '@/context/bluetick-context';
-import { Skeleton } from '@/components/ui/skeleton';
-import { getBotAvatarURL } from '@/lib/helper';
-import type { TranscriptMessage } from '@/types/bluetick/db/tickets';
-import DiscordMessage from '@/components/bluetick/discord/message';
-import { motion } from 'framer-motion';
-import AnimatedButton from '@/components/motions/animated-button';
-import { signIn, useSession } from 'next-auth/react';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { poppinsFont } from '@/styles/fonts';
+"use client";
+import React, { useContext } from "react";
+import FeatureLabel from "../feature-label";
+import { BluetickContext } from "@/context/bluetick-context";
+import { Skeleton } from "@/components/ui/skeleton";
+import { getBotAvatarURL } from "@/lib/helper";
+import type { TranscriptMessage } from "@/types/bluetick/db/tickets";
+import DiscordMessage from "@/components/bluetick/discord/message";
+import { motion } from "framer-motion";
+import AnimatedButton from "@/components/motions/animated-button";
+import { signIn, useSession } from "next-auth/react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+import { poppinsFont } from "@/styles/fonts";
 
 const WelcomeFeature = (): JSX.Element => {
   const { isLoading, botDetails } = useContext(BluetickContext);
 
   const [messages, setMessages] = React.useState<TranscriptMessage[]>([
     {
-      userID: 'bot',
-      content: 'Hello <@1>!',
+      userID: "bot",
+      content: "Hello <@1>!",
       embeds: [],
       attachments: [],
       timestamp: new Date(2024, 0, 1).valueOf(),
@@ -29,20 +29,20 @@ const WelcomeFeature = (): JSX.Element => {
 
   const users: Record<string, { name: string; avatarURL: string }> = {
     bot: {
-      name: botDetails?.username ?? 'Bluetick',
-      avatarURL: botDetails ? getBotAvatarURL(botDetails) : '',
+      name: botDetails?.username ?? "Bluetick",
+      avatarURL: botDetails ? getBotAvatarURL(botDetails) : "",
     },
-    '1': {
-      name: 'Wumpus',
-      avatarURL: '',
+    "1": {
+      name: "Wumpus",
+      avatarURL: "",
     },
-    '2': {
-      name: 'Clyde',
-      avatarURL: '',
+    "2": {
+      name: "Clyde",
+      avatarURL: "",
     },
-    '3': {
-      name: 'Nelly',
-      avatarURL: '',
+    "3": {
+      name: "Nelly",
+      avatarURL: "",
     },
   };
 
@@ -73,9 +73,9 @@ const WelcomeFeature = (): JSX.Element => {
   React.useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'start',
+        behavior: "smooth",
+        block: "nearest",
+        inline: "start",
       });
     }
   }, [messages]);
@@ -94,17 +94,17 @@ const WelcomeFeature = (): JSX.Element => {
         </p>
         <div className="flex justify-end gap-2 mt-2">
           <AnimatedButton
-            size={'sm'}
-            variant={'info'}
+            size={"sm"}
+            variant={"info"}
             onClick={() => {
-              if (status === 'loading') {
-                toast.error('This is still loading');
+              if (status === "loading") {
+                toast.error("This is still loading");
               } else {
                 if (data) {
-                  router.push('/servers');
+                  router.push("/servers");
                 } else {
-                  signIn('discord', { callbackUrl: '/servers' }).catch(() => {
-                    toast.error('Failed to initiate log in with Discord');
+                  signIn("discord", { callbackUrl: "/servers" }).catch(() => {
+                    toast.error("Failed to initiate log in with Discord");
                   });
                 }
               }
@@ -113,8 +113,8 @@ const WelcomeFeature = (): JSX.Element => {
             Set this up
           </AnimatedButton>
           <AnimatedButton
-            size={'sm'}
-            variant={'warning'}
+            size={"sm"}
+            variant={"warning"}
             onClick={() => {
               handleJoinServerDemo();
             }}
@@ -127,8 +127,8 @@ const WelcomeFeature = (): JSX.Element => {
       <div className="w-full rounded-lg bg-discord p-4">
         <div
           className={cn(
-            'text-warning uppercase font-semibold',
-            poppinsFont.className
+            "text-warning uppercase font-semibold",
+            poppinsFont.className,
           )}
         >
           Discord Demo
@@ -143,7 +143,7 @@ const WelcomeFeature = (): JSX.Element => {
                   (msg) =>
                     msg.content ||
                     msg.embeds.length !== 0 ||
-                    msg.attachments.length !== 0
+                    msg.attachments.length !== 0,
                 )
                 .map((msg, index) => {
                   const isLastMessage = index === messages.length - 1; // Check if it's the last message
@@ -194,21 +194,21 @@ export default WelcomeFeature;
 
 const greetingTemplates: Array<(userId: string) => TranscriptMessage> = [
   (userId: string) => ({
-    userID: 'bot',
+    userID: "bot",
     content: `Hello <@${userId}>! Welcome to our server. We're glad to have you here!`,
     embeds: [],
     attachments: [],
     timestamp: Date.now(),
   }),
   (userId: string) => ({
-    userID: 'bot',
+    userID: "bot",
     content: `Welcome aboard <@${userId}>! Feel free to introduce yourself and join the fun.`,
     embeds: [],
     attachments: [],
     timestamp: Date.now(),
   }),
   (userId: string) => ({
-    userID: 'bot',
+    userID: "bot",
     content: `Hey <@${userId}>! You've just joined the coolest server on Discord. Enjoy your stay!`,
     embeds: [],
     attachments: [],

@@ -1,8 +1,8 @@
-import AutoResList from '@/components/bluetick/modules/autores/list';
-import ModulePageTemplate from '@/components/bluetick/modules/module-page-template';
+import AutoResList from "@/components/bluetick/modules/autores/list";
+import ModulePageTemplate from "@/components/bluetick/modules/module-page-template";
 
-import { GUILD_MODULES } from '@/config/bluetick';
-import React from 'react';
+import { GUILD_MODULES } from "@/config/bluetick";
+import React from "react";
 
 const AutoResponder = ({
   params,

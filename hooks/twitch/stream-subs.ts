@@ -1,20 +1,23 @@
-import { useQuery } from 'react-query';
+import { type UseQueryResult, useQuery } from "react-query";
 
-import { twitchInstance } from '@/config/twitch-service';
-import { TwitchUser } from '@/types/twitch';
+import { twitchInstance } from "@/config/twitch-service";
+import { type TwitchUser } from "@/types/twitch";
 
 const fetchTwitchStreamListeners = async (): Promise<TwitchUser[]> => {
   const response = await twitchInstance.get(`/streams`);
   return response.data;
 };
 
-export const useFetchTwitchStreamListeners = () => {
+export const useFetchTwitchStreamListeners = (): UseQueryResult<
+  TwitchUser[],
+  Error
+> => {
   return useQuery<TwitchUser[], Error>(
-    ['twitchStreamSubs'],
-    () => fetchTwitchStreamListeners(),
+    ["twitchStreamSubs"],
+    async () => await fetchTwitchStreamListeners(),
     {
       // Add any options here
       enabled: true,
-    }
+    },
   );
 };

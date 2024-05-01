@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import Link from 'next/link';
+import * as React from "react";
+import Link from "next/link";
 
-import type { NavMenu, MainNavItem, NavItem, SiteConfig } from '@/types';
+import type { NavMenu, MainNavItem, NavItem, SiteConfig } from "@/types";
 
-import { Icons } from '@/components/icons';
-import { MobileNav } from '@/components/nav/mobile';
-import { rubikFont } from '@/styles/fonts';
-import { Menu } from 'lucide-react';
-import { ModeToggle } from '../mode-toggle';
-import { Button } from '../ui/button';
+import { Icons } from "@/components/icons";
+import { MobileNav } from "@/components/nav/mobile";
+import { rubikFont } from "@/styles/fonts";
+import { Menu } from "lucide-react";
+import { ModeToggle } from "../mode-toggle";
+import { Button } from "../ui/button";
 
 import {
   NavigationMenu,
@@ -20,10 +20,10 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu';
-import { cn } from '@/lib/utils';
-import Image from 'next/image';
-import { bluetickConfig } from '@/config/bluetick';
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { bluetickConfig } from "@/config/bluetick";
 
 interface MainNavProps {
   items?: MainNavItem[];
@@ -66,7 +66,7 @@ export function MainNav({
     <>
       <div className="flex gap-2 items-center md:hidden">
         <Button
-          variant={'ghost'}
+          variant={"ghost"}
           className="relative h-9 w-8 px-0 hover:bg-primary/50"
           onClick={toggleMobileMenu}
         >
@@ -150,8 +150,8 @@ function isNavMenu(item: MainNavItem): item is NavMenu {
 }
 
 const ListItem = React.forwardRef<
-  React.ElementRef<'a'>,
-  React.ComponentPropsWithoutRef<'a'> & { className?: string; title: string }
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a"> & { className?: string; title: string }
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>
@@ -159,8 +159,8 @@ const ListItem = React.forwardRef<
         <a
           ref={ref}
           className={cn(
-            'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-            className
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className,
           )}
           {...props}
         >
@@ -173,7 +173,7 @@ const ListItem = React.forwardRef<
     </li>
   );
 });
-ListItem.displayName = 'ListItem';
+ListItem.displayName = "ListItem";
 
 const NavMenuListItem: React.FC<{
   item: NavMenu;
@@ -206,7 +206,7 @@ const NavMenuListItem: React.FC<{
                         />
                       )}
                       <div className="mb-2 mt-4 text-lg font-medium">
-                        Project:{' '}
+                        Project:{" "}
                         <span className="font-bold">{activeItem.title}</span>
                       </div>
                       <p className="text-sm leading-tight text-muted-foreground">

@@ -11,15 +11,15 @@ export interface TwitchUser {
 
 // Aliased type: "staff" | "admin" | "global_mod" | ""
 export enum TwitchUserType {
-  STAFF = 'staff',
-  ADMIN = 'admin',
-  GLOBAL_MOD = 'global_mod',
-  REGULAR = '',
+  STAFF = "staff",
+  ADMIN = "admin",
+  GLOBAL_MOD = "global_mod",
+  REGULAR = "",
 }
 
 // "partner" | "affiliate" | ""
 export enum TwitchBroadcasterType {
-  PARTNER = 'partner',
-  AFFILIATE = 'affiliate',
-  REGULAR = '',
+  PARTNER = "partner",
+  AFFILIATE = "affiliate",
+  REGULAR = "",
 }

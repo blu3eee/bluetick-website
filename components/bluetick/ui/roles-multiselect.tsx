@@ -1,20 +1,20 @@
-import type { DiscordRole } from '@/types/bluetick/discord';
-import React from 'react';
-import { cn } from '@/lib/utils';
+import type { DiscordRole } from "@/types/bluetick/discord";
+import React from "react";
+import { cn } from "@/lib/utils";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from '@/components/ui/command';
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/ui/popover';
-import { CheckIcon, ChevronDown } from 'lucide-react';
-import { Icons } from '@/components/icons';
+} from "@/components/ui/popover";
+import { CheckIcon, ChevronDown } from "lucide-react";
+import { Icons } from "@/components/icons";
 
 interface Props {
   options: DiscordRole[];
@@ -32,15 +32,15 @@ const RolesMultiSelect: React.FC<Props> = ({
 
   React.useEffect(() => {
     const values = options.filter((option) =>
-      selectedRoles.includes(option.id)
+      selectedRoles.includes(option.id),
     );
     setSelectedValues(
-      values.map((value) => `${value.id}_${value.name.toLowerCase()}`)
+      values.map((value) => `${value.id}_${value.name.toLowerCase()}`),
     );
   }, [selectedRoles, options]);
 
   const handleRemoveRolesMultiSelect = (value: string): void => {
-    const id = value.split('_')[0];
+    const id = value.split("_")[0];
 
     setSelectedValues(selectedValues.filter((val) => val !== value));
     onSelect(selectedRoles.filter((val) => val !== id));
@@ -60,7 +60,7 @@ const RolesMultiSelect: React.FC<Props> = ({
       <div className="flex flex-wrap gap-2">
         {selectedValues.map((value, index) => {
           const selectedValue = options.find(
-            (c) => `${c.id}_${c.name.toLowerCase()}` === value
+            (c) => `${c.id}_${c.name.toLowerCase()}` === value,
           );
 
           return (
@@ -68,7 +68,7 @@ const RolesMultiSelect: React.FC<Props> = ({
               key={index}
               className="flex items-center gap-2 bg-blue-500 rounded-md px-2 py-1 text-white text-sm"
             >
-              {selectedValue?.name ?? 'Unknown'}
+              {selectedValue?.name ?? "Unknown"}
               <Icons.close
                 size={16}
                 onClick={() => {
@@ -98,21 +98,21 @@ const RolesMultiSelect: React.FC<Props> = ({
                   const selected = options.find(
                     (option) =>
                       `${option.id}_${option.name}`.toLowerCase() ===
-                      currentValue
+                      currentValue,
                   );
                   if (selected) {
                     const value =
                       `${selected.id}_${selected.name}`.toLowerCase();
                     const newSelectedValues = selectedValues.includes(value)
                       ? selectedValues.filter(
-                          (val) => !val.includes(selected.id)
+                          (val) => !val.includes(selected.id),
                         )
                       : [...selectedValues, value];
                     setSelectedValues(newSelectedValues);
                     onSelect(
                       selectedValues.includes(value)
                         ? selectedRoles.filter((id) => id !== selected.id)
-                        : [...selectedRoles, selected.id]
+                        : [...selectedRoles, selected.id],
                     );
                   }
                   //   setOpen(false);
@@ -122,12 +122,12 @@ const RolesMultiSelect: React.FC<Props> = ({
                 {RolesMultiSelect.name}
                 <CheckIcon
                   className={cn(
-                    'ml-auto h-4 w-4',
+                    "ml-auto h-4 w-4",
                     selectedValues.includes(
-                      `${RolesMultiSelect.id}_${RolesMultiSelect.name}`.toLowerCase()
+                      `${RolesMultiSelect.id}_${RolesMultiSelect.name}`.toLowerCase(),
                     )
-                      ? 'opacity-100'
-                      : 'opacity-0'
+                      ? "opacity-100"
+                      : "opacity-0",
                   )}
                 />
               </CommandItem>

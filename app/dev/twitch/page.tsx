@@ -1,15 +1,15 @@
-'use client';
-import TwitchUserDisplay from '@/components/dev/twitch/user';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Skeleton } from '@/components/ui/skeleton';
-import { twitchInstance } from '@/config/twitch-service';
-import { useFetchTwitchStreamListeners } from '@/hooks/twitch/stream-subs';
-import type { TwitchUser } from '@/types/twitch';
-import React from 'react';
-import { toast } from 'sonner';
+"use client";
+import TwitchUserDisplay from "@/components/dev/twitch/user";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
+import { twitchInstance } from "@/config/twitch-service";
+import { useFetchTwitchStreamListeners } from "@/hooks/twitch/stream-subs";
+import type { TwitchUser } from "@/types/twitch";
+import React from "react";
+import { toast } from "sonner";
 
 const TwitchDev = (): JSX.Element => {
   const {
@@ -21,7 +21,7 @@ const TwitchDev = (): JSX.Element => {
 
   const [selected, setSelected] = React.useState<TwitchUser | null>(null);
 
-  const [twitchSearch, setTwitchSearch] = React.useState('');
+  const [twitchSearch, setTwitchSearch] = React.useState("");
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setTwitchSearch(e.target.value);
@@ -34,14 +34,14 @@ const TwitchDev = (): JSX.Element => {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [users, status]
+    [users, status],
   );
 
   const [foundUser, setFoundUser] = React.useState<TwitchUser | null>(null);
   const [isSearching, setIsSearching] = React.useState(false);
   const handleSearch = async (): Promise<void> => {
-    if (twitchSearch === '') {
-      toast.error('Cannot search user with empty string');
+    if (twitchSearch === "") {
+      toast.error("Cannot search user with empty string");
       return;
     }
 
@@ -51,7 +51,7 @@ const TwitchDev = (): JSX.Element => {
       if (users) {
         const exist = users.find(
           (user) =>
-            user.displayName.toLowerCase() === twitchSearch.toLowerCase()
+            user.displayName.toLowerCase() === twitchSearch.toLowerCase(),
         );
         if (exist) {
           setFoundUser(null);
@@ -60,7 +60,7 @@ const TwitchDev = (): JSX.Element => {
         }
       }
       const response = await twitchInstance.get<TwitchUser>(
-        `/users/${twitchSearch}`
+        `/users/${twitchSearch}`,
       );
       if (response.status === 200) {
         setFoundUser(response.data);
@@ -74,7 +74,7 @@ const TwitchDev = (): JSX.Element => {
 
   const handleWatchUser = async (user: TwitchUser): Promise<void> => {
     try {
-      const response = await twitchInstance.post('/streams/watch', {
+      const response = await twitchInstance.post("/streams/watch", {
         userId: user.id,
       });
       if (response.status === 200) {
@@ -84,7 +84,7 @@ const TwitchDev = (): JSX.Element => {
         });
       } else {
         toast.error(
-          `Failed to add watcher for twitch user: ${user.displayName}`
+          `Failed to add watcher for twitch user: ${user.displayName}`,
         );
       }
     } catch (e) {
@@ -94,7 +94,7 @@ const TwitchDev = (): JSX.Element => {
 
   const handleUnwatchUser = async (user: TwitchUser): Promise<void> => {
     try {
-      const response = await twitchInstance.post('/streams/unwatch', {
+      const response = await twitchInstance.post("/streams/unwatch", {
         userId: user.id,
       });
       if (response.status === 200) {
@@ -111,34 +111,34 @@ const TwitchDev = (): JSX.Element => {
 
   const handleTestGoLive = async (user: TwitchUser): Promise<void> => {
     try {
-      const response = await twitchInstance.post('/streams/test/online', {
-        userId: user.id ?? '',
+      const response = await twitchInstance.post("/streams/test/online", {
+        userId: user.id ?? "",
       });
       console.log(response.status);
       if (response.status === 200) {
-        toast.success('Streamer is live!');
+        toast.success("Streamer is live!");
       } else {
         toast.error(`An error happened while trying to go live`);
       }
     } catch (e) {
-      console.log('Error testing go live');
+      console.log("Error testing go live");
       console.error(e);
     }
   };
 
   const handleTestGoOffline = async (user: TwitchUser): Promise<void> => {
     try {
-      const response = await twitchInstance.post('/streams/test/offline', {
-        userId: user.id ?? '',
+      const response = await twitchInstance.post("/streams/test/offline", {
+        userId: user.id ?? "",
       });
       console.log(response.status);
       if (response.status === 200) {
-        toast.success('Streamer is offline.');
+        toast.success("Streamer is offline.");
       } else {
         toast.error(`An error happened while trying to go offline`);
       }
     } catch (e) {
-      console.log('Error testing go offline');
+      console.log("Error testing go offline");
       console.error(e);
     }
   };
@@ -149,11 +149,11 @@ const TwitchDev = (): JSX.Element => {
         <Label className="text-twitch uppercase font-semibold">
           Stream Watchers
         </Label>
-        {status === 'loading' ? (
+        {status === "loading" ? (
           <Skeleton className="w-full h-12" />
-        ) : status === 'error' ? (
+        ) : status === "error" ? (
           <div>Error: {error.message}</div>
-        ) : status === 'idle' ? (
+        ) : status === "idle" ? (
           <div>Idling</div>
         ) : users.length === 0 ? (
           <div>No stream has been subscribed</div>
@@ -163,7 +163,7 @@ const TwitchDev = (): JSX.Element => {
               <Badge
                 key={index}
                 className="cursor-pointer border-white"
-                variant={selected?.id === user.id ? 'default' : 'outline'}
+                variant={selected?.id === user.id ? "default" : "outline"}
                 onClick={() => {
                   setSelected(selected === user ? null : user);
                 }}
@@ -176,15 +176,15 @@ const TwitchDev = (): JSX.Element => {
       </div>
       <div className="flex flex-wrap items-center gap-2 bg-secondary rounded-lg p-4">
         <Button
-          size={'sm'}
-          variant={'twitch'}
+          size={"sm"}
+          variant={"twitch"}
           className="w-fit"
-          disabled={twitchSearch === '' || isSearching}
+          disabled={twitchSearch === "" || isSearching}
           onClick={() => {
             handleSearch().catch((e) => {});
           }}
         >
-          {isSearching ? 'Searching...' : 'Search'}
+          {isSearching ? "Searching..." : "Search"}
         </Button>
         <Input
           placeholder="Twitch user/id"
@@ -192,7 +192,7 @@ const TwitchDev = (): JSX.Element => {
           value={twitchSearch}
           onChange={handleSearchChange}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && twitchSearch !== '' && !isSearching) {
+            if (e.key === "Enter" && twitchSearch !== "" && !isSearching) {
               handleSearch().catch((e) => {});
             }
           }}
@@ -207,13 +207,13 @@ const TwitchDev = (): JSX.Element => {
             </Label>
             <div className="flex flex-wrap items-center">
               <Button
-                size={'sm'}
-                variant={'twitch'}
+                size={"sm"}
+                variant={"twitch"}
                 onClick={() => {
                   handleWatchUser(foundUser)
                     .then(() => {
                       setFoundUser(null);
-                      setTwitchSearch('');
+                      setTwitchSearch("");
                     })
                     .catch((e) => {});
                 }}
@@ -231,8 +231,8 @@ const TwitchDev = (): JSX.Element => {
             </Label>
             <div className="flex flex-wrap items-center gap-2">
               <Button
-                variant={'error'}
-                size={'sm'}
+                variant={"error"}
+                size={"sm"}
                 onClick={() => {
                   handleUnwatchUser(selected).catch((e) => {});
                 }}
@@ -240,8 +240,8 @@ const TwitchDev = (): JSX.Element => {
                 Unwatch this user
               </Button>
               <Button
-                variant={'twitch'}
-                size={'sm'}
+                variant={"twitch"}
+                size={"sm"}
                 onClick={() => {
                   handleTestGoLive(selected).catch((e) => {});
                 }}
@@ -249,8 +249,8 @@ const TwitchDev = (): JSX.Element => {
                 Test Go Live!
               </Button>
               <Button
-                variant={'twitch'}
-                size={'sm'}
+                variant={"twitch"}
+                size={"sm"}
                 onClick={() => {
                   handleTestGoOffline(selected).catch((e) => {});
                 }}

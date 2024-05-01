@@ -1,8 +1,8 @@
-import React, { useCallback } from 'react';
-import { ColorPicker, type IColor, useColor } from 'react-color-palette';
-import 'react-color-palette/css';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Input } from '../ui/input';
+import React, { useCallback } from "react";
+import { ColorPicker, type IColor, useColor } from "react-color-palette";
+import "react-color-palette/css";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Input } from "../ui/input";
 
 interface HexColorPickerProps {
   initColor: string;
@@ -20,7 +20,7 @@ export const HexColorPicker: React.FC<HexColorPickerProps> = ({
       setColor(newColor);
       onColorChange(newColor.hex);
     },
-    [onColorChange, setColor]
+    [onColorChange, setColor],
   );
 
   return (
@@ -50,7 +50,7 @@ export const HexColorPicker: React.FC<HexColorPickerProps> = ({
       </PopoverTrigger>
       <PopoverContent className="w-80">
         <ColorPicker
-          hideInput={['rgb', 'hsv']}
+          hideInput={["rgb", "hsv"]}
           color={color}
           onChange={handleColorChange}
           hideAlpha={true}

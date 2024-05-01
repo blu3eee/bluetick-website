@@ -1,6 +1,6 @@
-import React from 'react';
-import { poppinsFont, rubikFont } from '@/styles/fonts';
-import HeroNavButtons from './hero-nav-buttons';
+import React from "react";
+import { poppinsFont, rubikFont } from "@/styles/fonts";
+import HeroNavButtons from "./hero-nav-buttons";
 
 const HeroSection = (): JSX.Element => {
   return (
@@ -8,9 +8,9 @@ const HeroSection = (): JSX.Element => {
       className="h-[500px] justify-center bg-primary-light dark:bg-primary-dark"
       style={{
         backgroundImage: `url('/bluetick/home-bg-2.webp')`,
-        backgroundSize: 'cover', // Cover the entire section
-        backgroundPosition: 'center', // Center the background image
-        backgroundRepeat: 'no-repeat', // Do not repeat the image
+        backgroundSize: "cover", // Cover the entire section
+        backgroundPosition: "center", // Center the background image
+        backgroundRepeat: "no-repeat", // Do not repeat the image
       }}
     >
       <div className="p-8 flex flex-col justify-center ml-0 sm:ml-auto mr-0 sm:mr-12 items-center sm:items-end h-full gap-4 max-w-[600px] ">

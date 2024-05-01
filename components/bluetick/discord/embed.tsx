@@ -1,11 +1,11 @@
-import React from 'react';
-import { RenderHtmlContent } from '@/components/custom-ui/styled-text';
-import { replaceIds } from '@/lib/discord';
-import { cn } from '@/lib/utils';
-import { isValidImageUrl, isValidUrl } from '@/lib/validators';
-import type { TranscriptEmbed } from '@/types/bluetick/db/tickets';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from "react";
+import { RenderHtmlContent } from "@/components/custom-ui/styled-text";
+import { replaceIds } from "@/lib/discord";
+import { cn } from "@/lib/utils";
+import { isValidImageUrl, isValidUrl } from "@/lib/validators";
+import type { TranscriptEmbed } from "@/types/bluetick/db/tickets";
+import Image from "next/image";
+import Link from "next/link";
 
 interface DiscordEmbedProps {
   embed: TranscriptEmbed;
@@ -52,12 +52,12 @@ const DiscordEmbed: React.FC<DiscordEmbedProps> = ({
             {embed.title && (
               <Link
                 className={cn(
-                  'flex items-center font-bold my-1',
+                  "flex items-center font-bold my-1",
                   embed.url
-                    ? 'underline cursor-pointer hover:text-foreground/80'
-                    : ''
+                    ? "underline cursor-pointer hover:text-foreground/80"
+                    : "",
                 )}
-                href={embed.url && isValidUrl(embed.url) ? embed.url : ''}
+                href={embed.url && isValidUrl(embed.url) ? embed.url : ""}
               >
                 {embed.title}
               </Link>

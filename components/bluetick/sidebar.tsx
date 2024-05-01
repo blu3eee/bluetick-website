@@ -1,28 +1,28 @@
-'use client';
+"use client";
 
-import React, { useContext, useEffect, useState } from 'react';
-import Image from 'next/image';
+import React, { useContext, useEffect, useState } from "react";
+import Image from "next/image";
 import {
   getBotAvatarURL,
   getBotInviteURL,
   getUserAvatarURL,
-} from '@/lib/helper';
-import { LoginButton, LogoutButton } from './auth-buttons';
-import { useParams, usePathname } from 'next/navigation';
-import { Separator } from '../ui/separator';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
+} from "@/lib/helper";
+import { LoginButton, LogoutButton } from "./auth-buttons";
+import { useParams, usePathname } from "next/navigation";
+import { Separator } from "../ui/separator";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
   type LucideIcon,
   Package,
   Server,
-} from 'lucide-react';
-import { Skeleton } from '../ui/skeleton';
-import { useSession } from 'next-auth/react';
-import { BluetickContext } from '@/context/bluetick-context';
-import { BLUETICK_BOT_ID } from '@/config/bluetick';
-import { Button } from '../ui/button';
+} from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
+import { useSession } from "next-auth/react";
+import { BluetickContext } from "@/context/bluetick-context";
+import { BLUETICK_BOT_ID } from "@/config/bluetick";
+import { Button } from "../ui/button";
 
 export const SidebarContent = (): JSX.Element => {
   const { data: session, status } = useSession();
@@ -43,22 +43,22 @@ export const SidebarContent = (): JSX.Element => {
   useEffect(() => {
     const updatedSidebarNavItems = [
       {
-        href: 'servers',
+        href: "servers",
         icon: Server,
-        label: 'Servers',
+        label: "Servers",
         show: true,
       },
       {
         href: `dashboard/${params?.serverId}`,
         icon: LayoutDashboard,
-        label: 'Dashboard',
-        show: pathname.startsWith('/dashboard'),
+        label: "Dashboard",
+        show: pathname.startsWith("/dashboard"),
       },
       {
         href: `dashboard/${params?.serverId}/modules`,
         icon: Package,
-        label: 'Modules',
-        show: pathname.startsWith('/dashboard'),
+        label: "Modules",
+        show: pathname.startsWith("/dashboard"),
       },
     ];
 
@@ -66,7 +66,7 @@ export const SidebarContent = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  if (status === 'loading') {
+  if (status === "loading") {
     return (
       <div className="w-full flex flex-col gap-4 p-4">
         <Skeleton className="h-12 w-full" />
@@ -117,10 +117,10 @@ export const SidebarContent = (): JSX.Element => {
             key={item.href}
             href={`/${item.href}`}
             className={cn(
-              'flex w-full items-center rounded-md p-2 hover:underline gap-4',
+              "flex w-full items-center rounded-md p-2 hover:underline gap-4",
               {
-                'bg-muted': pathname === `/${item.href}`,
-              }
+                "bg-muted": pathname === `/${item.href}`,
+              },
             )}
           >
             <item.icon />
