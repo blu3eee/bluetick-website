@@ -1,10 +1,17 @@
 # Bluetick
 
-**Discord Bot and Bot Admin Manager - Web Application**
+[![github actions](https://github.com/blu3eee/bluetick-website/actions/workflows/cicd.yml/badge.svg)](https://github.com/blu3eee/bluetick-website/actions/workflows/cicd.yml)
+[![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io)
+[![GitHub license](https://badgen.net/github/license/blu3eee/bluetick-website)](https://github.com/blu3eee/bluetick-website/blob/main/LICENSE)
+
+> **Discord Bot and Bot Admin Manager - Web Application**
 
 ## TL;DR
 
-This is a personal project aiming to ease Discord server owners and admins in server managing tasks with entertainment-related features. The project is up at [bluetick.khainguyen.dev](https://bluetick.khainguyen.dev).
+This is a personal project aiming to ease Discord server owners and admins in server managing tasks with entertainment-related features.
+
+- [Project Website](https://bluetick.khainguyen.dev)
+- [LICENSE](/LICENSE)
 
 ## How it all started
 
