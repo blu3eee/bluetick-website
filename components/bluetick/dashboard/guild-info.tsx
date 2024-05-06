@@ -7,10 +7,23 @@ import { getGuildIconURL } from "@/lib/helper";
 import { Copy } from "lucide-react";
 import { rubikFont } from "@/styles/fonts";
 import ImageWithFallback from "@/components/custom-ui/image-with-fallback";
+import { toast } from "sonner";
 
 export const GuildInfo = (): JSX.Element => {
   const { discordGuild, isLoading, channels, isLoadingChannels } =
     useContext(GuildContext);
+  const copyToClipboard = (): void => {
+    navigator.clipboard
+      .writeText(discordGuild?.id ?? "")
+      .then(() => {
+        // Handle successful copy action (e.g., show a toast notification)
+        console.log("ID copied to clipboard!");
+      })
+      .catch((err) => {
+        // Handle errors (e.g., clipboard permissions denied)
+        console.error("Failed to copy ID:", err);
+      });
+  };
 
   if (isLoading || !discordGuild)
     return (
@@ -50,6 +63,10 @@ export const GuildInfo = (): JSX.Element => {
               variant={"ghost"}
               size={"sm"}
               className="w-fit text-xs gap-2 font-semibold text-red-400 hover:text-red-400 focus:text-red-400"
+              onClick={() => {
+                copyToClipboard();
+                toast.info("Copied your user ID");
+              }}
             >
               <Copy size={16} /> Copy Server ID
             </Button>
