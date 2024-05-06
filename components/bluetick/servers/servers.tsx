@@ -52,30 +52,42 @@ export const MutualServers = (): JSX.Element => {
   };
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 w-full gap-2 place-items-center	">
-      {mutualGuilds.map((guild) => {
-        return (
-          <div
-            key={guild.id}
-            className="flex flex-col items-center justify-center cursor-pointer mb-4 bg-secondary hover:bg-secondary/70 px-3 md:px-4 py-2 rounded-lg w-fit"
-            onClick={() => {
-              handleServerClick(guild.id);
-            }}
-          >
-            <ImageWithFallback
-              className="rounded-lg h-[128px] w-auto object-contain"
-              src={getGuildIconURL(guild)}
-              alt="server icon"
-              width={150}
-              height={150}
-              fallbackSrc="/discord/discord.png"
-            />
-            <div className="text-md mt-2 font-semibold text-center">
-              {guild.name}
+    <div className="w-full flex gap-2 flex-col">
+      {botDetails && (
+        <a href={getBotInviteURL(botDetails.botID ?? BLUETICK_BOT_ID)}>
+          <Button>Invite bot to your server</Button>
+        </a>
+      )}
+      <div
+        className="grid w-full gap-2 place-items-center justify-evenly"
+        style={{
+          gridTemplateColumns: "repeat(auto-fill, minmax(150px, 175px))",
+        }}
+      >
+        {mutualGuilds.map((guild) => {
+          return (
+            <div
+              key={guild.id}
+              className="flex flex-col items-center justify-center cursor-pointer mb-4 bg-secondary hover:bg-secondary/70 px-3 md:px-4 py-2 rounded-lg w-fit"
+              onClick={() => {
+                handleServerClick(guild.id);
+              }}
+            >
+              <ImageWithFallback
+                className="rounded-lg h-[128px] w-auto object-contain"
+                src={getGuildIconURL(guild)}
+                alt="server icon"
+                width={150}
+                height={150}
+                fallbackSrc="/discord/discord.png"
+              />
+              <div className="text-md mt-2 font-semibold text-center">
+                {guild.name}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

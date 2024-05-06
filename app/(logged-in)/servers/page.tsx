@@ -67,7 +67,7 @@ const BotsPage = (): JSX.Element => {
   const { user: discordUser } = session;
   return (
     <div className="flex flex-col gap-2 items-center mx-4">
-      <div className="flex items-center gap-4 w-full rounded-lg border px-4 md:px-12 py-4 mb-8">
+      <div className="flex items-center gap-4 w-full rounded-lg border px-4 md:px-12 py-4">
         <Image
           className="rounded-full"
           src={getUserAvatarURL(discordUser)}

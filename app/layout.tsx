@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import React from "react"; // Ensure React is imported for JSX to work
-import { ThemeProvider } from "../context/ThemeProvider";
-import { cn } from "../lib/utils";
+import { ThemeProvider } from "@/context/ThemeProvider";
+import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
 import NextAuthProvider from "@/context/next-auth";
 import { QueryProvider } from "@/context/query";
@@ -69,6 +69,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
                     },
                   }}
                 />
+
                 <Footer />
               </QueryProvider>
             </BluetickProvider>
