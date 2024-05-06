@@ -58,24 +58,14 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
                 <Toaster
                   toastOptions={{
                     duration: 3000,
-                    unstyled: true,
                     classNames: {
                       title: "text-sm font-bold",
-                      description: "text-xs text-zinc-900",
-                      toast: cn(defaultToast, "bg-[#2B2D31]"),
-                      success: cn(
-                        defaultToast,
-                        "bg-success text-success-foreground",
-                      ),
-                      error: cn(defaultToast, "bg-error text-error-foreground"),
-                      warning: cn(
-                        defaultToast,
-                        "bg-warning text-warning-foreground",
-                      ),
-                      info: cn(defaultToast, "bg-info text-info-foreground"),
-                      actionButton: "bg-zinc-400",
-                      cancelButton: "bg-blue-500",
-                      closeButton: "bg-lime-400",
+                      description: "text-xs",
+                      toast: cn("border-0"),
+                      success: cn("bg-success text-success-foreground"),
+                      error: cn("bg-error text-error-foreground"),
+                      warning: cn("bg-warning text-warning-foreground"),
+                      info: cn("bg-info text-info-foreground"),
                     },
                   }}
                 />
@@ -88,5 +78,3 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     </html>
   );
 }
-
-const defaultToast = "rounded-lg flex items-center p-4 gap-4 w-full";
