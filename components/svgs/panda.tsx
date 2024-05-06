@@ -9,8 +9,8 @@ const PandaLogoSVG: React.FC<LucideProps> = (props): React.JSX.Element => {
       viewBox="0 0 651 587"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      height={props.height ?? props.width ?? props.size ?? "587"}
-      width={props.width ?? props.height ?? props.size ?? "587"}
+      height={props.height ?? props.width ?? props.size ?? "24"}
+      width={props.width ?? props.height ?? props.size ?? "24"}
       {...props} // Spread additional props to the SVG element
     >
       <path
