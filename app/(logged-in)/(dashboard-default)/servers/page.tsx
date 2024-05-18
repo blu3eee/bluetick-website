@@ -66,7 +66,7 @@ const BotsPage = (): JSX.Element => {
 
   const { user: discordUser } = session;
   return (
-    <div className="flex flex-col gap-3 items-center mx-4">
+    <div className="container flex flex-col gap-3 items-center">
       <div className="flex items-center gap-4 w-full rounded-lg border px-4 md:px-12 py-4">
         <Image
           className="rounded-full"

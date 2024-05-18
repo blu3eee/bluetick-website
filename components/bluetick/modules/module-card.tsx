@@ -2,6 +2,7 @@ import { Icons } from "@/components/icons";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
 import { GuildContext } from "@/context/guild-context";
+import Link from "next/link";
 import React, { useContext } from "react";
 import { toast } from "sonner";
 
@@ -40,8 +41,8 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
   return (
     <div className="flex flex-col gap-2 bg-secondary p-4 rounded-lg justify-between">
       <div className="flex flex-col gap-2">
-        <div className="flex flex-col justify-between gap-2">
-          <div className="text-lg font-semibold">{props.name}</div>
+        <div className="flex flex-row flex-wrap items-center justify-between gap-2">
+          <div className="text-lg font-semibold flex-grow">{props.name}</div>
           <Switch
             size="xs"
             checked={isModuleEnabled()}
@@ -51,10 +52,12 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
                 console.log(e);
               });
             }}
-            className="self-end"
+            className="flex-none"
           />
         </div>
-        <div className="text-gray-500 text-sm">{props.description}</div>
+        <div className="text-gray-500 text-sm line-clamp-3">
+          {props.description}
+        </div>
       </div>
       <div className="flex flex-wrap items-center gap-1 justify-end">
         <a
@@ -66,13 +69,13 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
           <Icons.help size={16} />
           Help
         </a>
-        <a
+        <Link
           href={`/dashboard/${config.guild.guildID}/modules/${props.navigateTo}`}
           className="bg-info text-info-foreground hover:bg-info-light focus:bg-info-light/80 px-2 py-1 w-fit rounded-lg border text-sm self-end flex items-center gap-1 font-medium"
         >
           <Icons.settings size={16} />
           Settings
-        </a>
+        </Link>
       </div>
     </div>
   );

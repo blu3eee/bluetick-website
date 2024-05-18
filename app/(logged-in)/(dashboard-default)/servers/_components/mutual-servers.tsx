@@ -18,6 +18,7 @@ import {
 import { useMutualGuildsContext } from "@/app/(logged-in)/_context/mutual-guilds";
 import type { DiscordGuild } from "@/types/bluetick/discord";
 import { useSession } from "next-auth/react";
+import { UserRound } from "lucide-react";
 
 export const MutualServers = (): React.ReactNode => {
   const { mutualGuilds, loadingState, error } = useMutualGuildsContext();
@@ -126,6 +127,21 @@ const GuildCard: React.FC<GuildCardProps> = ({ guild }) => {
           </Popover>
         </div>
       </div>
+      <div className="flex items-center flex-wrap gap-2 text-sm font-medium text-foreground/70">
+        <div className="flex items-center gap-2">
+          <UserRound size={16} />
+          {guild.approximate_member_count} members
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="h-2 w-2 rounded-full bg-success" />
+          {guild.approximate_presence_count} online
+        </div>
+      </div>
+      {guild.description && (
+        <div className="text-foreground/50 font-medium text-xs line-clamp-2">
+          {guild.description}
+        </div>
+      )}
     </div>
   );
 };
