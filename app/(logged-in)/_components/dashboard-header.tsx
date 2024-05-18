@@ -3,7 +3,7 @@ import { Icons } from "@/components/icons";
 
 import React from "react";
 
-import { ExternalLink, Settings } from "lucide-react";
+import { ExternalLink, Menu } from "lucide-react";
 import useScrollPosition from "@react-hook/window-scroll";
 import { useRange } from "@/hooks/use-range";
 import {
@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { rubikFont } from "@/styles/fonts";
 import { ModeToggle } from "@/components/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
+import Link from "next/link";
 
 interface DashboardHeaderProps {
   children: React.ReactNode;
@@ -34,14 +35,15 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   return (
     <>
       <header className="flex gap-4 bg-secondary px-6 py-4 sm:pl-[70px] text-sm transition-all duration-1000">
-        <Icons.logo
-          size={36}
-          style={{
-            transform: `scale(${logoScale})`,
-          }}
-          className="fixed left-6 top-3 z-10 hidden sm:block"
-          aria-label="Vercel Logo"
-        />
+        <Link href={"/"} className="fixed left-6 top-3 z-10 hidden sm:block">
+          <Icons.logo
+            size={36}
+            style={{
+              transform: `scale(${logoScale})`,
+            }}
+            aria-label="Vercel Logo"
+          />
+        </Link>
         <InfoBar>{children}</InfoBar>
       </header>
     </>
@@ -69,12 +71,12 @@ const InfoBar: React.FC<InfoBarProps> = ({ children }): React.ReactNode => {
                   "h-9 w-8 px-0 cursor-pointer",
                 )}
               >
-                <Settings />
+                <Menu />
               </div>
             </PopoverTrigger>
             <PopoverContent align="end">
               <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-info">
+                <Link href={"/"} className="flex items-center gap-2 text-info">
                   <Icons.logo size={30} aria-label="Vercel Logo" />
                   <span
                     className={cn(
@@ -84,7 +86,7 @@ const InfoBar: React.FC<InfoBarProps> = ({ children }): React.ReactNode => {
                   >
                     Bluetick
                   </span>
-                </div>
+                </Link>
                 <NavLinks />
               </div>
             </PopoverContent>
