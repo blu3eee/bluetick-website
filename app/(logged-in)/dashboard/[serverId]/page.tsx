@@ -1,8 +1,8 @@
-import GuildConfig from "@/components/bluetick/dashboard/guild-config";
-import { GuildInfo } from "@/components/bluetick/dashboard/guild-info";
 import Modules from "@/components/bluetick/modules/modules";
 
 import React from "react";
+import GuildInfo from "./_components/guild-info";
+import GuildConfig from "./_components/guild-config";
 
 const DashboardPage = ({
   params,

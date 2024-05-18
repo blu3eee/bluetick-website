@@ -1,6 +1,6 @@
 // /app/bluetick/(logged-in)/dashboard/[serverId]/modules/(module)/layout.tsx
-import { GuildInfo } from "@/components/bluetick/dashboard/guild-info";
 import React from "react";
+import GuildInfo from "../../_components/guild-info";
 
 interface ModuleLayoutProps {
   children: React.ReactNode;

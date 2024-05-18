@@ -94,13 +94,19 @@ const config = {
         discord: {
           DEFAULT: "#38343c",
           gray: {
-            DEFAULT: "#99aab5",
+            DEFAULT: "#36393e",
+            light: "#424549",
+            dark: "#282b30",
           },
-        },
-        twitch: {
-          DEFAULT: "#6441a5",
-          secondary: "#392E5C",
-          foreground: { DEFAULT: "#ffffff" },
+          blurple: {
+            DEFAULT: "#7289da",
+          },
+          bg: {
+            DEFAULT: "#1e2124",
+          },
+          black: {
+            DEFAULT: "#1e2124",
+          },
         },
       },
       borderRadius: {

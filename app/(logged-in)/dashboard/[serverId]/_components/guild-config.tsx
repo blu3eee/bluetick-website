@@ -117,7 +117,7 @@ const GuildConfig = (): JSX.Element => {
               <Button
                 variant={"outline"}
                 size="sm"
-                className="relative h-10 mt-1 p-4 hover:bg-primary/50 w-full text-start flex items-center justify-between w-fit gap-4"
+                className="relative h-10 mt-1 p-4 hover:bg-primary/50 text-start flex items-center justify-between w-fit gap-4"
               >
                 {ISO6391.getNativeName(locale)}
                 <Icons.select size={16} />

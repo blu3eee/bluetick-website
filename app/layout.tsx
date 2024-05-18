@@ -8,11 +8,14 @@ import { cn } from "@/lib/utils";
 import { Toaster } from "sonner";
 import NextAuthProvider from "@/context/next-auth";
 import { QueryProvider } from "@/context/query";
-import BluetickHeader from "@/components/bluetick/header";
 import { Footer } from "@/components/footer";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { BluetickProvider } from "@/context/bluetick-context";
+import { config } from "@fortawesome/fontawesome-svg-core";
+
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -42,6 +45,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
+        id="root-body"
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
@@ -53,7 +57,6 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
               <QueryProvider>
                 <Analytics />
                 <SpeedInsights />
-                <BluetickHeader />
                 <main className="flex min-h-screen flex-col">{children}</main>
                 <Toaster
                   toastOptions={{
@@ -61,15 +64,14 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
                     classNames: {
                       title: "text-sm font-bold",
                       description: "text-xs",
-                      toast: cn("border-0"),
-                      success: cn("bg-success text-success-foreground"),
-                      error: cn("bg-error text-error-foreground"),
-                      warning: cn("bg-warning text-warning-foreground"),
-                      info: cn("bg-info text-info-foreground"),
+                      toast: "border-0",
+                      success: "bg-success text-success-foreground",
+                      error: "bg-error text-error-foreground",
+                      warning: "bg-warning text-warning-foreground",
+                      info: "bg-info text-info-foreground",
                     },
                   }}
                 />
-
                 <Footer />
               </QueryProvider>
             </BluetickProvider>

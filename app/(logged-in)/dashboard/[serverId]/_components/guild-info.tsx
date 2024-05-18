@@ -9,7 +9,7 @@ import { rubikFont } from "@/styles/fonts";
 import ImageWithFallback from "@/components/custom-ui/image-with-fallback";
 import { toast } from "sonner";
 
-export const GuildInfo = (): JSX.Element => {
+const GuildInfo = (): JSX.Element => {
   const { discordGuild, isLoading, channels, isLoadingChannels } =
     useContext(GuildContext);
   const copyToClipboard = (): void => {
@@ -52,8 +52,8 @@ export const GuildInfo = (): JSX.Element => {
           fallbackSrc="/discord/discord.png"
         />
         <div className="flex flex-col gap-1 w-full">
-          <span className={`text-xl font-semibold ${rubikFont.className}`}>
-            <span className="text-gray-400">Server:</span> {discordGuild.name}
+          <span className={`text-2xl font-medium ${rubikFont.className}`}>
+            {discordGuild.name}
           </span>
           <div className="flex items-start md:items-center justify-between w-full flex-col md:flex-row">
             <span className="text-md font-semibold text-gray-500">
@@ -65,7 +65,7 @@ export const GuildInfo = (): JSX.Element => {
               className="w-fit text-xs gap-2 font-semibold text-red-400 hover:text-red-400 focus:text-red-400"
               onClick={() => {
                 copyToClipboard();
-                toast.info("Copied your user ID");
+                toast.info("Copied server ID");
               }}
             >
               <Copy size={16} /> Copy Server ID
@@ -96,6 +96,8 @@ export const GuildInfo = (): JSX.Element => {
     </div>
   );
 };
+
+export default GuildInfo;
 
 const InfoItem: React.FC<{ label: string; value: string | number }> = ({
   label,

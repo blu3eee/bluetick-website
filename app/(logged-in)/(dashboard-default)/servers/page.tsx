@@ -7,11 +7,11 @@ import { Copy } from "lucide-react";
 import Image from "next/image";
 import { getUserAvatarURL } from "@/lib/helper";
 import { BadgeDisplay } from "@/components/bluetick/ui/badge";
-import { MutualServers } from "@/components/bluetick/servers/servers";
 import { useSession } from "next-auth/react";
 import { Callout } from "@/components/callout";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
+import { MutualServers } from "./_components/mutual-servers";
 
 const BotsPage = (): JSX.Element => {
   const { data: session, status } = useSession();
@@ -66,7 +66,7 @@ const BotsPage = (): JSX.Element => {
 
   const { user: discordUser } = session;
   return (
-    <div className="flex flex-col gap-2 items-center mx-4">
+    <div className="flex flex-col gap-3 items-center mx-4">
       <div className="flex items-center gap-4 w-full rounded-lg border px-4 md:px-12 py-4">
         <Image
           className="rounded-full"

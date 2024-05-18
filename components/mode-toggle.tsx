@@ -1,14 +1,17 @@
 import * as React from "react";
 import { useTheme } from "next-themes";
 
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
 import { Icons } from "@/components/icons";
+import { cn } from "@/lib/utils";
+import { PopoverClose } from "@radix-ui/react-popover";
 
 // Adjust ModeMenuItem to accept icon as a React element
 interface ModeMenuItemProps {
@@ -20,17 +23,22 @@ const ModeMenuItem: React.FC<ModeMenuItemProps> = ({ mode, icon }) => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <DropdownMenuItem
-      className={`flex items-center focus:bg-accent/60 ${theme === mode ? "bg-secondary/80 focus:bg-accent:50" : ""}`}
+    <div
+      className={cn(
+        `flex items-center px-2 py-1 rounded-md cursor-pointer hover:bg-primary/15 transition-all duration-300 ease-in-out w-full`,
+        theme === mode && "bg-primary/10",
+      )}
       onClick={() => {
         setTheme(mode);
       }}
     >
-      <div className="mr-2 h-4 w-4">
-        {icon} {/* Render the icon directly */}
-      </div>
-      <span>{mode.charAt(0).toUpperCase() + mode.slice(1)}</span>
-    </DropdownMenuItem>
+      <PopoverClose className="flex items-center gap-2">
+        <div className="mr-2 h-4 w-4">
+          {icon} {/* Render the icon directly */}
+        </div>
+        <span>{mode.charAt(0).toUpperCase() + mode.slice(1)}</span>
+      </PopoverClose>
+    </div>
   );
 };
 
@@ -40,27 +48,31 @@ const ModeMenuItem: React.FC<ModeMenuItemProps> = ({ mode, icon }) => {
  */
 export function ModeToggle(): JSX.Element {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="relative h-9 w-8 px-0 hover:bg-primary/50"
+    <Popover>
+      <PopoverTrigger>
+        <div
+          // variant="ghost"
+          // size="sm"
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "sm" }),
+            "relative h-9 w-8 px-0",
+          )}
         >
           <Icons.sun className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
           <Icons.moon className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
           <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="flex flex-col gap-1">
-        {/* Pass the icon component for each mode */}
-        <ModeMenuItem mode="light" icon={<Icons.sun className="h-4 w-4" />} />
-        <ModeMenuItem mode="dark" icon={<Icons.moon className="h-4 w-4" />} />
-        <ModeMenuItem
-          mode="system"
-          icon={<Icons.laptop className="h-4 w-4" />}
-        />
-      </DropdownMenuContent>
-    </DropdownMenu>
+        </div>
+      </PopoverTrigger>
+      <PopoverContent align="end" className="w-full min-w-[150px] ">
+        <div className="flex flex-col gap-1 w-full">
+          <ModeMenuItem mode="light" icon={<Icons.sun className="h-4 w-4" />} />
+          <ModeMenuItem mode="dark" icon={<Icons.moon className="h-4 w-4" />} />
+          <ModeMenuItem
+            mode="system"
+            icon={<Icons.laptop className="h-4 w-4" />}
+          />
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 }

@@ -1,5 +1,5 @@
-import { SidebarWrapped } from "@/components/bluetick/sidebar";
 import React from "react";
+import { MutualGuildsProvider } from "./_context/mutual-guilds";
 
 interface ServersLayoutProps {
   children: React.ReactNode;
@@ -17,9 +17,8 @@ export default function ServersLayout({
   children,
 }: ServersLayoutProps): JSX.Element {
   return (
-    <div className="flex-1 md:grid md:grid-cols-[220px_1fr] md:gap-6 lg:grid-cols-[240px_1fr] lg:gap-10">
-      <SidebarWrapped />
-      <div className="px-6 md:px-0 md:pr-8 py-8 max-w-[1248px]">{children}</div>
-    </div>
+    <MutualGuildsProvider>
+      <div className="relative">{children}</div>
+    </MutualGuildsProvider>
   );
 }

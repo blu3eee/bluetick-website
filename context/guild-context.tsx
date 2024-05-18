@@ -13,7 +13,7 @@ import {
 } from "@/types/bluetick/discord";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { toast } from "sonner";
 
 interface GuildContextValue {
@@ -156,4 +156,14 @@ export const GuildContextProvider = ({
       {children}
     </GuildContext.Provider>
   );
+};
+
+export const useCurrentGuildContext = (): GuildContextValue => {
+  const context = useContext(GuildContext);
+  if (context === undefined) {
+    throw new Error(
+      "useMutualGuildsContext must be used within a MutualGuildsProvider",
+    );
+  }
+  return context;
 };

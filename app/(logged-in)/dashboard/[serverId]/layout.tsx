@@ -1,8 +1,13 @@
-// /app/bluetick/(logged-in)/dashboard/[serverId]/layout.tsx
 import { BLUETICK_BOT_ID } from "@/config/bluetick";
 import { GuildContextProvider } from "@/context/guild-context";
 import type { Metadata } from "next";
 import React from "react";
+import TopNavBar, { type NavItemProps } from "../../_components/top-navbar";
+import DashboardHeader from "../../_components/dashboard-header";
+import { cn } from "@/lib/utils";
+import { rubikFont } from "@/styles/fonts";
+import UserInfoHeader from "../../_components/user-info";
+import ServerSelectComboBox from "./_components/server-combobox";
 
 interface GuildLayoutProps {
   children: React.ReactNode;
@@ -31,9 +36,53 @@ export default function GuildLayout({
   const { serverId } = params;
   const botId = BLUETICK_BOT_ID;
 
+  const navItems: NavItemProps[] = [
+    {
+      title: "Dashboard",
+      href: `/dashboard/${serverId}`,
+    },
+    {
+      title: "Modules",
+      href: `/dashboard/${serverId}/modules`,
+      condition: "startsWith",
+    },
+    {
+      title: "Servers",
+      href: "/servers",
+    },
+    {
+      title: "Transcripts",
+      href: "/transcripts",
+      disabled: true,
+    },
+  ];
+
   return (
     <GuildContextProvider serverId={serverId} botId={botId}>
-      {children}
+      <DashboardHeader>
+        <>
+          <span
+            className={cn(
+              "text-foreground/20 font-bold text-xl hidden sm:block",
+              rubikFont.className,
+            )}
+          >
+            /
+          </span>
+          <UserInfoHeader />
+          <span
+            className={cn(
+              "text-foreground/20 font-bold text-xl",
+              rubikFont.className,
+            )}
+          >
+            /
+          </span>
+          <ServerSelectComboBox serverId={serverId} />
+        </>
+      </DashboardHeader>
+      <TopNavBar items={navItems} id={serverId} />
+      <div className="py-6 min-h-screen container">{children}</div>
     </GuildContextProvider>
   );
 }
