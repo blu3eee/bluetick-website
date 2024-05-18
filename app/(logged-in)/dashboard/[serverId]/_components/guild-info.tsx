@@ -42,9 +42,9 @@ const GuildInfo = (): JSX.Element => {
 
   return (
     <div className="flex flex-col gap-4 rounded-lg border px-6 py-4 bg-secondary w-full max-w-[1024px]">
-      <div className="flex gap-8 items-center w-full">
+      <div className="flex gap-4 md:gap-8 items-center w-full">
         <ImageWithFallback
-          className="rounded-lg"
+          className="rounded-lg w-[100px] md:w-[150px] h-auto"
           src={getGuildIconURL(discordGuild)}
           alt="guild avt"
           width={150}
@@ -52,11 +52,13 @@ const GuildInfo = (): JSX.Element => {
           fallbackSrc="/discord/discord.png"
         />
         <div className="flex flex-col gap-1 w-full">
-          <span className={`text-2xl font-medium ${rubikFont.className}`}>
+          <span
+            className={`text-2xl font-medium ${rubikFont.className} line-clamp-1`}
+          >
             {discordGuild.name}
           </span>
           <div className="flex items-start md:items-center justify-between w-full flex-col md:flex-row">
-            <span className="text-md font-semibold text-gray-500">
+            <span className="text-sm font-semibold text-gray-500 line-clamp-1">
               ID: {discordGuild.id}
             </span>
             <Button

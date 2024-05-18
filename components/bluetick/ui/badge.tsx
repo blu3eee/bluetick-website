@@ -14,7 +14,7 @@ export const BadgeDisplay: React.FC<{ badge: string }> = ({ badge }) => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
-          <Image src={`/discord/${key}.png`} alt={key} width={24} height={24} />
+          <Image src={`/discord/${key}.png`} alt={key} width={20} height={20} />
         </TooltipTrigger>
         <TooltipContent>
           <p className="px-4 py-2 bg-secondary rounded-lg">{badge}</p>

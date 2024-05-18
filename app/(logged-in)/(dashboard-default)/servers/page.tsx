@@ -1,7 +1,7 @@
 "use client";
 import useUserFlags from "@/lib/user-flags";
 import React from "react";
-import { poppinsFont } from "@/styles/fonts";
+import { rubikFont } from "@/styles/fonts";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import Image from "next/image";
@@ -10,8 +10,8 @@ import { BadgeDisplay } from "@/components/bluetick/ui/badge";
 import { useSession } from "next-auth/react";
 import { Callout } from "@/components/callout";
 import { Skeleton } from "@/components/ui/skeleton";
-import { toast } from "sonner";
 import { MutualServers } from "./_components/mutual-servers";
+import { toast } from "sonner";
 
 const BotsPage = (): JSX.Element => {
   const { data: session, status } = useSession();
@@ -69,34 +69,38 @@ const BotsPage = (): JSX.Element => {
     <div className="container flex flex-col gap-3 items-center">
       <div className="flex items-center gap-4 w-full rounded-lg border px-4 md:px-12 py-4">
         <Image
-          className="rounded-full"
-          src={getUserAvatarURL(discordUser)}
+          className="rounded-full object-cover border-spacing-0"
+          src={
+            discordUser.avatar
+              ? getUserAvatarURL(discordUser)
+              : "/discord/discord.png"
+          }
           alt="user avatar"
-          height={150}
-          width={150}
+          height={75}
+          width={75}
         />
         <div className="flex flex-col w-full gap-2">
           <div className="flex flex-col md:flex-row w-full items-start md:items-center justify-between gap-2">
-            <div className="flex flex-col">
-              <div className={`font-bold text-3xl ${poppinsFont.className}`}>
+            <div className="flex flex-col w-full">
+              <div className={`font-bold text-2xl ${rubikFont.className}`}>
                 {discordUser.global_name ?? discordUser.username}
               </div>
-              <div className="font-bold text-md text-blue-500">
+              <div className="font-bold text-sm text-blue-500 flex items-center justify-between w-full flex-wrap gap-2">
                 @{discordUser.username}
+                <Button
+                  variant="link"
+                  className="gap-2 text-red-400 text-xs hover:text-red-400/70"
+                  size={"sm"}
+                  onClick={() => {
+                    copyToClipboard();
+                    toast.info("Copied your user ID");
+                  }}
+                >
+                  <Copy size={16} />
+                  Copy ID
+                </Button>
               </div>
             </div>
-            <Button
-              variant="link"
-              className="gap-2 text-red-400 hover:text-red-400/70"
-              size={"sm"}
-              onClick={() => {
-                copyToClipboard();
-                toast.info("Copied your user ID");
-              }}
-            >
-              <Copy />
-              Copy ID
-            </Button>
           </div>
           <div className="flex flex-wrap gap-2">
             {userBadges.map((badge) => (

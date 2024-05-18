@@ -39,7 +39,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 bg-secondary p-4 rounded-lg justify-between">
+    <div className="flex flex-col gap-2 bg-secondary p-4 rounded-lg justify-between border">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row flex-wrap items-center justify-between gap-2">
           <div className="text-lg font-semibold flex-grow">{props.name}</div>
