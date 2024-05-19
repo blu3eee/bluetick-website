@@ -14,7 +14,7 @@ const HeroSection = (): JSX.Element => {
             The Discord Bot that do everything automatically.
           </h1>
           <p
-            className={`text-md text-wrap rounded-lg p-2 text-center font-semibold text-white backdrop-blur-md sm:text-end ${poppinsFont.className}`}
+            className={`text-md text-wrap rounded-lg p-2 text-center font-semibold text-foreground backdrop-blur-md sm:text-end ${poppinsFont.className}`}
           >
             An all-in-one website offering versatile Discord bot solutions. From
             server moderation to ticket systems, auto-responses, welcome
