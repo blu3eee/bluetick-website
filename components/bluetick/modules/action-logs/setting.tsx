@@ -82,8 +82,8 @@ const LogSetting: React.FC<{
   };
 
   return (
-    <div className="bg-secondary rounded-lg p-4 flex flex-wrap gap-8">
-      <div className="flex gap-2 items-center">
+    <div className="flex flex-wrap gap-8 rounded-lg bg-secondary p-4">
+      <div className="flex items-center gap-2">
         <Checkbox
           id="specified-channels"
           checked={specifyChannels}
@@ -96,11 +96,11 @@ const LogSetting: React.FC<{
           Specified Channel For Each Event
         </Label>
       </div>
-      <div className="flex gap-2 flex-col max-w-[200px]">
+      <div className="flex max-w-[200px] flex-col gap-2">
         <Label htmlFor="new-account-age" className="uppercase">
           New Account Age (Days)
         </Label>
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center gap-2">
           <Input
             type="number"
             id="new-account-age"

@@ -72,7 +72,7 @@ const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ serverId }) => {
         serverId={serverId}
         setType={setType}
       />
-      <div className="bg-secondary rounded-lg p-4 w-full">
+      <div className="w-full rounded-lg bg-secondary p-4">
         <Label className="text-sm text-gray-500">
           * All fields are optional
         </Label>
@@ -86,7 +86,7 @@ const WelcomeMessage: React.FC<WelcomeMessageProps> = ({ serverId }) => {
           }}
         />
       </div>
-      <div className="bg-secondary rounded-lg p-4 w-full">
+      <div className="w-full rounded-lg bg-secondary p-4">
         <PlaceholdersHelpBox placeholders={welcomePlaceholders} />
       </div>
     </div>

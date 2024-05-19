@@ -33,7 +33,7 @@ const TwitchComponent = (): JSX.Element => {
         }}
       />
       <div className={cn(secondaryStyle)}>
-        <Label className="uppercase text-twitch font-semibold">
+        <Label className="text-twitch font-semibold uppercase">
           Search Twitch User With Username or Id
         </Label>
         <SearchAndAdd

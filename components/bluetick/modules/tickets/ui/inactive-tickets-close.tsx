@@ -75,10 +75,10 @@ const CloseInactiveTicketsButton = (): JSX.Element => {
           </ResponsiveModalDescription>
         </ResponsiveModalHeader>
         <div className="px-4 md:px-0">
-          <div className="flex flex-col gap-2 w-fit">
+          <div className="flex w-fit flex-col gap-2">
             <Label
               htmlFor="per-user-limit"
-              className="text-xs font-bold text-gray-500 uppercase"
+              className="text-xs font-bold uppercase text-gray-500"
             >
               CLOSE ALL TICKETS THAT HAS BEEN INACTIVE FOR
             </Label>

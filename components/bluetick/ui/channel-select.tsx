@@ -45,7 +45,7 @@ export const ChannelSelect: React.FC<ChannelSelectProps> = ({
       <PopoverTrigger asChild>
         <div
           aria-expanded={open}
-          className="flex items-center justify-between w-full px-4 py-2 border rounded-lg cursor-pointer hover:bg-background border-foreground/50 text-foreground"
+          className="flex w-full cursor-pointer items-center justify-between rounded-lg border border-foreground/50 px-4 py-2 text-foreground hover:bg-background"
         >
           {value ? (
             options.find((c) => `${c.id}_${c.name.toLowerCase()}` === value)
@@ -63,7 +63,7 @@ export const ChannelSelect: React.FC<ChannelSelectProps> = ({
             className="h-9 w-full"
           />
           <CommandEmpty>No channel found.</CommandEmpty>
-          <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+          <CommandGroup className="max-h-[300px] w-full overflow-y-auto">
             {options.map((channel) => (
               <CommandItem
                 key={channel.id}

@@ -34,7 +34,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
 
   return (
     <>
-      <header className="flex gap-4 bg-secondary px-6 py-4 sm:pl-[70px] text-sm transition-all duration-1000">
+      <header className="flex gap-4 bg-secondary px-6 py-4 text-sm transition-all duration-1000 sm:pl-[70px]">
         <Link href={"/"} className="fixed left-6 top-3 z-10 hidden sm:block">
           <Icons.logo
             size={36}
@@ -59,16 +59,16 @@ interface InfoBarProps {
 const InfoBar: React.FC<InfoBarProps> = ({ children }): React.ReactNode => {
   return (
     <div className="flex w-full items-center justify-between gap-3">
-      <div className="flex gap-2 items-center">{children}</div>
-      <div className="flex items-center gap-1 text-foreground/70 font-medium">
+      <div className="flex items-center gap-2">{children}</div>
+      <div className="flex items-center gap-1 font-medium text-foreground/70">
         <ModeToggle />
-        <div className="flex md:hidden items-center gap-2">
+        <div className="flex items-center gap-2 md:hidden">
           <Popover>
             <PopoverTrigger>
               <div
                 className={cn(
                   buttonVariants({ variant: "ghost", size: "sm" }),
-                  "h-9 w-8 px-0 cursor-pointer",
+                  "h-9 w-8 cursor-pointer px-0",
                 )}
               >
                 <Menu />
@@ -92,7 +92,7 @@ const InfoBar: React.FC<InfoBarProps> = ({ children }): React.ReactNode => {
             </PopoverContent>
           </Popover>
         </div>
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden items-center gap-2 md:flex">
           <NavLinks />
         </div>
       </div>
@@ -107,7 +107,7 @@ const NavLinks = (): React.ReactNode => {
         href="https://docs.bluetick.khainguyen.dev/en"
         target="_blank"
         rel="noreferrer"
-        className="hover:text-foreground flex items-center gap-1 transition-all duration-300 ease-in-out"
+        className="flex items-center gap-1 transition-all duration-300 ease-in-out hover:text-foreground"
       >
         Docs
         <ExternalLink size={16} />

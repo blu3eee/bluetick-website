@@ -51,7 +51,7 @@ const RolesMultiSelect: React.FC<Props> = ({
       <PopoverTrigger asChild>
         <div
           aria-expanded={open}
-          className="flex items-center justify-between w-full px-4 py-2 border rounded-lg cursor-pointer hover:bg-background border-foreground/50 text-foreground/70"
+          className="flex w-full cursor-pointer items-center justify-between rounded-lg border border-foreground/50 px-4 py-2 text-foreground/70 hover:bg-background"
         >
           Select roles...
           <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-80" />
@@ -66,7 +66,7 @@ const RolesMultiSelect: React.FC<Props> = ({
           return (
             <div
               key={index}
-              className="flex items-center gap-2 bg-blue-500 rounded-md px-2 py-1 text-white text-sm"
+              className="flex items-center gap-2 rounded-md bg-blue-500 px-2 py-1 text-sm text-white"
             >
               {selectedValue?.name ?? "Unknown"}
               <Icons.close
@@ -87,7 +87,7 @@ const RolesMultiSelect: React.FC<Props> = ({
             className="h-9 w-full"
           />
           <CommandEmpty>No role found.</CommandEmpty>
-          <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+          <CommandGroup className="max-h-[300px] w-full overflow-y-auto">
             {options.map((RolesMultiSelect) => (
               <CommandItem
                 key={RolesMultiSelect.id}

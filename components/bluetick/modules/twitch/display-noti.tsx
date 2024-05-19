@@ -21,7 +21,7 @@ const DisplayNotificationMessage: React.FC<Props> = ({
     here: "@here",
   };
   return (
-    <div className="text-white bg-discord py-2 rounded-md">
+    <div className="rounded-md bg-discord py-2 text-white">
       <DiscordMessage
         author={{
           name: "Bluetick",

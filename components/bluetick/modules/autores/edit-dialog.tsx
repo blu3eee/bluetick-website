@@ -58,16 +58,16 @@ const EditResponseDialog: React.FC<Props> = ({
       <DialogTrigger>
         {editTrigger ?? <Button size={"sm"}>Edit response</Button>}
       </DialogTrigger>
-      <DialogContent className="max-w-[1024px] h-3/4  overflow-y-auto">
+      <DialogContent className="h-3/4 max-w-[1024px]  overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Edit Response</DialogTitle>
           <DialogDescription>
             Edit your existing auto-response
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-2 flex w-full">
+        <div className="flex flex w-full flex-col gap-2">
           <div className="flex w-full gap-2">
-            <div className="w-full bg-secondary rounded-lg px-2 py-3 flex flex-col gap-2">
+            <div className="flex w-full flex-col gap-2 rounded-lg bg-secondary px-2 py-3">
               <Label htmlFor="trigger">Trigger</Label>
               <Input
                 id="trigger"
@@ -79,7 +79,7 @@ const EditResponseDialog: React.FC<Props> = ({
                 }}
               />
             </div>
-            <div className="w-full bg-secondary rounded-lg px-2 py-3 flex flex-col gap-2">
+            <div className="flex w-full flex-col gap-2 rounded-lg bg-secondary px-2 py-3">
               <Label htmlFor="message-type">Message Type</Label>
               <div className="px-2">
                 <MessageTypesRadioGroup
@@ -94,7 +94,7 @@ const EditResponseDialog: React.FC<Props> = ({
               </div>
             </div>
           </div>
-          <div className="w-full bg-secondary rounded-lg px-4 py-3 flex flex-col gap-2">
+          <div className="flex w-full flex-col gap-2 rounded-lg bg-secondary px-4 py-3">
             <MessageForm
               type={response.type ?? "Message"}
               initialMessage={response}

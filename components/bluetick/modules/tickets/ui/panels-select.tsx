@@ -69,7 +69,7 @@ const MultiSelectPanels: React.FC<MultiSelectPanelsProps> = ({
       <PopoverTrigger asChild>
         <div
           ref={triggerRef}
-          className="border bg-background justify-start p-2 rounded-md truncate text-sm cursor-pointer flex flex-wrap gap-2 w-full min-h-10"
+          className="flex min-h-10 w-full cursor-pointer flex-wrap justify-start gap-2 truncate rounded-md border bg-background p-2 text-sm"
         >
           {selectedMentions.length > 0 ? (
             selectedMentions.map((roleId) => {
@@ -77,7 +77,7 @@ const MultiSelectPanels: React.FC<MultiSelectPanelsProps> = ({
               return (
                 <Badge
                   key={roleId}
-                  className="flex items-center gap-1 bg-blue-500 hover:bg-blue-500/60 focus:bg-blue-500/50 text-white text-xs"
+                  className="flex items-center gap-1 bg-blue-500 text-xs text-white hover:bg-blue-500/60 focus:bg-blue-500/50"
                 >
                   {name}
                   <Icons.close
@@ -100,12 +100,12 @@ const MultiSelectPanels: React.FC<MultiSelectPanelsProps> = ({
         className="p-2"
       >
         <Command>
-          <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+          <CommandGroup className="max-h-[300px] w-full overflow-y-auto">
             {options.length > 0 ? (
               options.map((panel) => (
                 <CommandItem
                   key={panel.id}
-                  className="flex aria-selected:bg-accent/50 items-center gap-2"
+                  className="flex items-center gap-2 aria-selected:bg-accent/50"
                   onSelect={() => {
                     togglePanel(String(panel.id));
                   }}

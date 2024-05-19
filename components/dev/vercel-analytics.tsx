@@ -60,7 +60,7 @@ const VercelData = (): JSX.Element => {
 
   return (
     <div className="flex flex-col gap-4">
-      <Label className="text-info uppercase">Vercel Data</Label>
+      <Label className="uppercase text-info">Vercel Data</Label>
       <div className="flex items-center gap-2">
         <DatePickerWithRange
           fromDate={dateRange?.from}
@@ -78,7 +78,7 @@ const VercelData = (): JSX.Element => {
           Load data
         </Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-6">
         {dataCategories.map((dataCategory, i) => (
           <div
             key={i}

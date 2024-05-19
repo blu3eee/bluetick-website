@@ -64,7 +64,7 @@ const TypeAndChannel: React.FC<{
 
   return (
     <div className="flex gap-2">
-      <div className="bg-secondary rounded-lg p-4 w-4/5">
+      <div className="w-4/5 rounded-lg bg-secondary p-4">
         <Label className="uppercase">Message type</Label>
         <RadioGroup
           onValueChange={(val) => {
@@ -73,7 +73,7 @@ const TypeAndChannel: React.FC<{
             });
           }}
           defaultValue={initType}
-          className="flex flex-wrap gap-4 mt-4 justify-between"
+          className="mt-4 flex flex-wrap justify-between gap-4"
         >
           <div className="flex items-center space-x-2">
             <RadioGroupItem
@@ -93,10 +93,10 @@ const TypeAndChannel: React.FC<{
           </div>
         </RadioGroup>
       </div>
-      <div className="bg-secondary rounded-lg p-4 w-full ">
+      <div className="w-full rounded-lg bg-secondary p-4 ">
         <Label className="uppercase">Welcome Channel</Label>
         {isLoadingChannels || !channels ? (
-          <Skeleton className="w-full h-12" />
+          <Skeleton className="h-12 w-full" />
         ) : (
           <div className="mt-2">
             <ChannelSelect

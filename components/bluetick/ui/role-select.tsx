@@ -75,10 +75,10 @@ const RoleSelect: React.FC<Props> = ({
       <PopoverTrigger asChild>
         <div
           ref={triggerRef}
-          className="border bg-background justify-start p-2 rounded-md truncate text-sm cursor-pointer flex flex-wrap gap-2 w-full min-h-10"
+          className="flex min-h-10 w-full cursor-pointer flex-wrap justify-start gap-2 truncate rounded-md border bg-background p-2 text-sm"
         >
           {value ? (
-            <div className="flex gap-2 items-center w-full justify-between">
+            <div className="flex w-full items-center justify-between gap-2">
               {getRoleNameById(value)}
               <Icons.close
                 size="12"
@@ -106,13 +106,13 @@ const RoleSelect: React.FC<Props> = ({
             }}
             placeholder="Search roles..."
           />
-          <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+          <CommandGroup className="max-h-[300px] w-full overflow-y-auto">
             {filteredRoles.length > 0 ? (
               filteredRoles.map((role) => (
                 <CommandItem
                   key={role.id}
                   className={cn(
-                    "flex aria-selected:bg-accent/50 items-center gap-2",
+                    "flex items-center gap-2 aria-selected:bg-accent/50",
                     value === role.id ? `bg-secondary/50` : ``,
                   )}
                   onSelect={() => {

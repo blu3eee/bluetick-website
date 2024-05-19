@@ -101,8 +101,8 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-4">
-      <div className="bg-secondary rounded-lg p-4 flex flex-col gap-4 w-full md:w-1/2">
+    <div className="flex flex-col gap-4 md:flex-row">
+      <div className="flex w-full flex-col gap-4 rounded-lg bg-secondary p-4 md:w-1/2">
         <Label className="uppercase">Add/Remove role</Label>
         <span className="text-xs text-foreground/60">
           Autoroles will be given (or removed) to members when joining the
@@ -111,7 +111,7 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
         <div className="flex flex-col gap-2">
           <Label className="uppercase text-foreground/50">Select Role</Label>
           {isLoading ? (
-            <Skeleton className="w-full h-10" />
+            <Skeleton className="h-10 w-full" />
           ) : discordGuild ? (
             <RoleSelect
               roles={discordGuild?.roles}
@@ -147,7 +147,7 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
           <RadioGroup
             onValueChange={setRoleActionType}
             value={roleActionType}
-            className="flex flex-wrap gap-4 ml-2"
+            className="ml-2 flex flex-wrap gap-4"
           >
             <div className="flex items-center gap-2 text-foreground/60">
               <RadioGroupItem value="add" />
@@ -169,10 +169,10 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
           Add
         </Button>
       </div>
-      <div className="bg-secondary rounded-lg p-4 flex flex-col gap-4 w-full md:w-1/2">
+      <div className="flex w-full flex-col gap-4 rounded-lg bg-secondary p-4 md:w-1/2">
         <Label className="uppercase">Autorole List</Label>
         {status !== "success" ? (
-          <Skeleton className="w-full h-10" />
+          <Skeleton className="h-10 w-full" />
         ) : (
           <div className="w-full">
             <Table>
@@ -195,9 +195,9 @@ const AutoRolesComponent: React.FC<ServerIdProps> = ({ serverId }) => {
                     <TableCell>{row.type}</TableCell>
                     <TableCell>{getRoleNameById(row.roleID)}</TableCell>
                     <TableCell>{row.delay}</TableCell>
-                    <TableCell className="flex justify-end items-center gap-2">
+                    <TableCell className="flex items-center justify-end gap-2">
                       <div
-                        className="text-white px-2 py-1 rounded-md font-semibold bg-destructive cursor-pointer"
+                        className="cursor-pointer rounded-md bg-destructive px-2 py-1 font-semibold text-white"
                         onClick={() => {
                           handleDeleteAutoRole(row.id).catch((e) => {
                             console.log(e);

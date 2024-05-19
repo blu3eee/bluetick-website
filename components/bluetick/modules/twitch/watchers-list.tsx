@@ -135,14 +135,14 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
   return (
     <div className="flex flex-col gap-2">
       <div className={cn(secondaryStyle)}>
-        <Label className="uppercase text-twitch text-sm">
+        <Label className="text-twitch text-sm uppercase">
           LIST OF WATCHERS
         </Label>
 
         {watchers === undefined ||
         isLoadingTwitchUsers ||
         twitchUsers === null ? (
-          <Skeleton className="w-full h-10" />
+          <Skeleton className="h-10 w-full" />
         ) : watchUsers.length === 0 ? (
           <div className="text-sm font-medium text-info">
             Empty list, add notification below...
@@ -157,7 +157,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
                     ? "default"
                     : "outline"
                 }
-                className="cursor-pointer border-twitch"
+                className="border-twitch cursor-pointer"
                 onClick={() => {
                   setSelectedWatcher(watchUser);
                 }}
@@ -169,11 +169,11 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
         )}
       </div>
       {selectedWatcher && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+        <div className="grid grid-cols-1 gap-2 lg:grid-cols-3">
           <div className="flex flex-col gap-2">
-            <div className={cn(secondaryStyle, "flex flex-col gap-2 h-fit")}>
-              <div className="flex flex-wrap justify-between gap-2 items-center">
-                <Label className="text-twitch uppercase font-semibold">
+            <div className={cn(secondaryStyle, "flex h-fit flex-col gap-2")}>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <Label className="text-twitch font-semibold uppercase">
                   Twitch Watcher
                 </Label>
                 <Button
@@ -191,12 +191,12 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
                 showBgImage={false}
               />
             </div>
-            <div className={cn(secondaryStyle, "flex flex-col gap-2 h-fit")}>
-              <Label className="text-twitch uppercase font-semibold">
+            <div className={cn(secondaryStyle, "flex h-fit flex-col gap-2")}>
+              <Label className="text-twitch font-semibold uppercase">
                 Live Notification Channel
               </Label>
               {!channels || isLoadingChannels ? (
-                <Skeleton className="w-full h-10" />
+                <Skeleton className="h-10 w-full" />
               ) : (
                 <ChannelSelect
                   initChannelId={selectedWatcher.watcher.postChannelId}
@@ -210,8 +210,8 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
               )}
             </div>
           </div>
-          <div className={cn(secondaryStyle, "flex flex-col gap-2 col-span-2")}>
-            <Label className="text-twitch uppercase font-semibold">
+          <div className={cn(secondaryStyle, "col-span-2 flex flex-col gap-2")}>
+            <Label className="text-twitch font-semibold uppercase">
               Live Notification Message
             </Label>
             <div>
@@ -226,7 +226,7 @@ const WatchersList: React.FC<Props> = ({ watchers, refetch }) => {
               />
             </div>
             {isLoading || !botDetails ? (
-              <Skeleton className="w-full h-24" />
+              <Skeleton className="h-24 w-full" />
             ) : (
               <DisplayNotificationMessage
                 botDetails={botDetails}

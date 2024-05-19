@@ -22,7 +22,7 @@ export const CollapsibleFields: React.FC<{
     >
       <div className="flex items-center justify-between">
         <CollapsibleTrigger asChild>
-          <div className="gap-2 flex items-center mt-2 cursor-pointer transition-colors hover:text-foreground/50">
+          <div className="mt-2 flex cursor-pointer items-center gap-2 transition-colors hover:text-foreground/50">
             <span className="sr-only">Toggle</span>
             {isOpen ? (
               <ChevronUp className="h-4 w-4" />

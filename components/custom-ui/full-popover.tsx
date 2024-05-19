@@ -37,7 +37,7 @@ const FullScreenPopover: React.FC<Props> = ({
   return ReactDOM.createPortal(
     <div
       className={cn(
-        "fixed inset-0 bg-secondary z-50 flex justify-center items-center transition-opacity duration-300 ease-in-out",
+        "fixed inset-0 z-50 flex items-center justify-center bg-secondary transition-opacity duration-300 ease-in-out",
         active ? "opacity-100" : "opacity-0",
         className,
       )}

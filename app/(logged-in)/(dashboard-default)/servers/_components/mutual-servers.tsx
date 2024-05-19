@@ -25,12 +25,12 @@ export const MutualServers = (): React.ReactNode => {
 
   if (loadingState !== "completed") {
     return (
-      <div className="flex flex-wrap w-full h-full gap-4 p-8 items-center justify-center">
-        <Skeleton className="rounded-lg w-60 h-60" />
-        <Skeleton className="rounded-lg w-60 h-60" />
-        <Skeleton className="rounded-lg w-60 h-60" />
-        <Skeleton className="rounded-lg w-60 h-60" />
-        <Skeleton className="rounded-lg w-60 h-60" />
+      <div className="flex h-full w-full flex-wrap items-center justify-center gap-4 p-8">
+        <Skeleton className="h-60 w-60 rounded-lg" />
+        <Skeleton className="h-60 w-60 rounded-lg" />
+        <Skeleton className="h-60 w-60 rounded-lg" />
+        <Skeleton className="h-60 w-60 rounded-lg" />
+        <Skeleton className="h-60 w-60 rounded-lg" />
       </div>
     );
   }
@@ -48,7 +48,7 @@ export const MutualServers = (): React.ReactNode => {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full gap-3 place-items-center justify-evenly">
+    <div className="grid w-full grid-cols-1 place-items-center justify-evenly gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {mutualGuilds.map((guild) => {
         return <GuildCard key={guild.id} guild={guild} />;
       })}
@@ -70,32 +70,32 @@ const GuildCard: React.FC<GuildCardProps> = ({ guild }) => {
   const { data: session } = useSession();
   return (
     <div
-      className="border w-full bg-secondary rounded-md p-3 md:p-4 transition-all duration-300 ease-in-out flex flex-col gap-2 hover:border-foreground cursor-pointer"
+      className="flex w-full cursor-pointer flex-col gap-2 rounded-md border bg-secondary p-3 transition-all duration-300 ease-in-out hover:border-foreground md:p-4"
       onClick={() => {
         handleServerClick(guild.id);
       }}
     >
-      <div className="flex items-center gap-2 justify-between">
+      <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <ImageWithFallback
-            className="rounded-full h-[40px] w-auto object-contain border"
+            className="h-[40px] w-auto rounded-full border object-contain"
             src={getGuildIconURL(guild)}
             alt="server icon"
             width={150}
             height={150}
             fallbackSrc="/discord/discord.png"
           />
-          <div className="text-md font-medium text-center line-clamp-1 hover:underline underline-offset-2">
+          <div className="text-md line-clamp-1 text-center font-medium underline-offset-2 hover:underline">
             {guild.name}
           </div>
         </div>
-        <div className="flex items-center-gap-1 text-foreground/70">
+        <div className="items-center-gap-1 flex text-foreground/70">
           <Popover open={isOptionsOpen} onOpenChange={setIsOptionsOpen}>
             <PopoverTrigger>
               <div
                 className={cn(
                   buttonVariants({ variant: "ghost" }),
-                  "rounded-md cursor-pointer",
+                  "cursor-pointer rounded-md",
                 )}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -112,12 +112,12 @@ const GuildCard: React.FC<GuildCardProps> = ({ guild }) => {
                 e.stopPropagation();
               }}
             >
-              <div className="flex flex-col gap-1 w-full text-sm font-medium">
+              <div className="flex w-full flex-col gap-1 text-sm font-medium">
                 <div
                   className={cn(
                     "cursor-pointer",
                     !session?.developerMode &&
-                      "text-popover-foreground/50 cursor-not-allowed",
+                      "cursor-not-allowed text-popover-foreground/50",
                   )}
                 >
                   Kick bot
@@ -127,7 +127,7 @@ const GuildCard: React.FC<GuildCardProps> = ({ guild }) => {
           </Popover>
         </div>
       </div>
-      <div className="flex items-center flex-wrap gap-2 text-sm font-medium text-foreground/70">
+      <div className="flex flex-wrap items-center gap-2 text-sm font-medium text-foreground/70">
         <div className="flex items-center gap-2">
           <UserRound size={16} />
           {guild.approximate_member_count} members
@@ -138,7 +138,7 @@ const GuildCard: React.FC<GuildCardProps> = ({ guild }) => {
         </div>
       </div>
       {guild.description && (
-        <div className="text-foreground/50 font-medium text-xs line-clamp-2">
+        <div className="line-clamp-2 text-xs font-medium text-foreground/50">
           {guild.description}
         </div>
       )}

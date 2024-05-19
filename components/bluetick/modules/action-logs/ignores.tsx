@@ -114,13 +114,13 @@ const Ignores: React.FC<ServerIdProps & { logSettingId: number }> = ({
 
   return (
     <>
-      <div className="bg-secondary rounded-lg p-4 flex flex-col gap-2">
-        <Label className="uppercase font-semibold">Ignored Channels</Label>
+      <div className="flex flex-col gap-2 rounded-lg bg-secondary p-4">
+        <Label className="font-semibold uppercase">Ignored Channels</Label>
         <span className="text-sm text-foreground/80">
           Events will not be logged for these channels.
         </span>
         {isLoadingChannels || !channels ? (
-          <Skeleton className="w-full h-10" />
+          <Skeleton className="h-10 w-full" />
         ) : (
           <ChannelsMultiSelect
             options={channels.textChannels}
@@ -139,13 +139,13 @@ const Ignores: React.FC<ServerIdProps & { logSettingId: number }> = ({
           Save
         </Button>
       </div>
-      <div className="bg-secondary rounded-lg p-4 flex flex-col gap-2">
-        <Label className="uppercase font-semibold">Ignored Roles</Label>
+      <div className="flex flex-col gap-2 rounded-lg bg-secondary p-4">
+        <Label className="font-semibold uppercase">Ignored Roles</Label>
         <span className="text-sm text-foreground/80">
           Deleted messages will not be logged for these roles.
         </span>
         {isLoading || !discordGuild ? (
-          <Skeleton className="w-full h-10" />
+          <Skeleton className="h-10 w-full" />
         ) : (
           <RolesMultiSelect
             options={discordGuild.roles}

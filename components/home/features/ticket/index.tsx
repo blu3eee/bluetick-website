@@ -33,15 +33,15 @@ const TicketFeature = (): JSX.Element => {
   >({});
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4">
+    <div className="m-4 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
       <div className="block md:hidden">
         <Description />
         <ChannelsDisplay channels={channels} />
       </div>
-      <div className="w-full rounded-lg bg-discord p-4 text-white h-fit">
+      <div className="h-fit w-full rounded-lg bg-discord p-4 text-white">
         <div
           className={cn(
-            "text-warning uppercase font-semibold",
+            "font-semibold uppercase text-warning",
             poppinsFont.className,
           )}
         >
@@ -183,9 +183,9 @@ const TicketDemo: React.FC<TicketDemoProps> = ({
         }}
         users={users}
       />
-      <div className="mt-2 ml-12 flex items-center gap-2">
+      <div className="ml-12 mt-2 flex items-center gap-2">
         <Button
-          className="text-white bg-success-dark hover:bg-success gap-2"
+          className="gap-2 bg-success-dark text-white hover:bg-success"
           size={"sm"}
           variant={"success"}
           onClick={() => {
@@ -262,9 +262,9 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
   );
 
   return (
-    <div className="flex flex-col mt-4 gap-2">
+    <div className="mt-4 flex flex-col gap-2">
       <div className="flex items-center gap-2">
-        <Label className="uppercase font-semibold text-info">
+        <Label className="font-semibold uppercase text-info">
           Ticket Channel Mode
         </Label>
         <Switch
@@ -276,18 +276,18 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
         />
         <span>{isThread ? `Thread Channel` : "Text Channel"}</span>
       </div>
-      <div className="bg-discord text-white rounded-lg px-3 py-4 max-h-[320px] overflow-auto">
+      <div className="max-h-[320px] overflow-auto rounded-lg bg-discord px-3 py-4 text-white">
         {/* category */}
-        <div className="flex items-center gap-2 text-xs font-bold text-[#99aab5] uppercase">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#99aab5]">
           <ChevronDown size={14} />
           Ticket Category
         </div>
         <div className="ml-4 mt-1 ">
-          <div className="font-semibold text-md flex items-center gap-1 rounded-lg px-2 py-1 bg-[#99aab522]">
+          <div className="text-md flex items-center gap-1 rounded-lg bg-[#99aab522] px-2 py-1 font-semibold">
             <Hash size={16} />
             ticket-panel-channel
           </div>
-          <div className="ml-3 text-[#99aab5] flex items-center gap-1 font-semibold text-md flex items-center">
+          <div className="text-md ml-3 flex flex items-center items-center gap-1 font-semibold text-[#99aab5]">
             <CornerDownRight size={16} />
             ticket-support-0
           </div>
@@ -305,7 +305,7 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
                 initial="hidden"
                 animate="visible"
                 className={
-                  "ml-3 text-discord-gray flex items-center gap-1 font-semibold text-md flex items-center"
+                  "text-md ml-3 flex flex items-center items-center gap-1 font-semibold text-discord-gray"
                 }
               >
                 <CornerDownRight size={16} />
@@ -326,7 +326,7 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
                 }}
                 initial="hidden"
                 animate="visible"
-                className="ml-2 font-semibold text-md flex items-center text-discord-gray gap-1"
+                className="text-md ml-2 flex items-center gap-1 font-semibold text-discord-gray"
               >
                 <Hash size={16} />
                 {channel.name}
@@ -342,14 +342,14 @@ const Description = (): JSX.Element => {
   const router = useRouter();
   const { data, status } = useSession();
   return (
-    <div className="w-full text-sm px-2 text-start md:text-end">
+    <div className="w-full px-2 text-start text-sm md:text-end">
       <FeatureLabel text="Ticket System 🎟️" />
-      <p className="text-foreground/80 mt-4">
+      <p className="mt-4 text-foreground/80">
         Customize our slick Ticket System for seamless support! Create dedicated
         topic channels - members open tickets with ease. Built for reliability &
         scalability. 🚀 Streamline communication, boost engagement!
       </p>
-      <div className="flex items-center justify-start gap-2 mt-2">
+      <div className="mt-2 flex items-center justify-start gap-2">
         <Button
           size={"sm"}
           variant={"warning"}

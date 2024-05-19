@@ -25,7 +25,7 @@ const ModeMenuItem: React.FC<ModeMenuItemProps> = ({ mode, icon }) => {
   return (
     <div
       className={cn(
-        `flex items-center px-2 py-1 rounded-md cursor-pointer hover:bg-primary/15 transition-all duration-300 ease-in-out w-full`,
+        `flex w-full cursor-pointer items-center rounded-md px-2 py-1 transition-all duration-300 ease-in-out hover:bg-primary/15`,
         theme === mode && "bg-primary/10",
       )}
       onClick={() => {
@@ -64,7 +64,7 @@ export function ModeToggle(): JSX.Element {
         </div>
       </PopoverTrigger>
       <PopoverContent align="end" className="w-full min-w-[150px] ">
-        <div className="flex flex-col gap-1 w-full">
+        <div className="flex w-full flex-col gap-1">
           <ModeMenuItem mode="light" icon={<Icons.sun className="h-4 w-4" />} />
           <ModeMenuItem mode="dark" icon={<Icons.moon className="h-4 w-4" />} />
           <ModeMenuItem

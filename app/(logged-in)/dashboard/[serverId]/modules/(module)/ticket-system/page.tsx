@@ -18,7 +18,7 @@ const TicketSystem = ({
   return (
     <ModulePageTemplate flag={GUILD_MODULES.TICKET} label="Ticket System">
       <Tabs defaultValue="settings">
-        <TabsList className="flex flex-wrap h-fit w-fit mb-2">
+        <TabsList className="mb-2 flex h-fit w-fit flex-wrap">
           <TabsTrigger value="tickets">Tickets</TabsTrigger>
           <TabsTrigger value="settings">General Settings</TabsTrigger>
           <TabsTrigger value="panels">Reaction Panels</TabsTrigger>

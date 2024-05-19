@@ -83,16 +83,16 @@ const WelcomeFeature = (): JSX.Element => {
   const router = useRouter();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4">
-      <div className="w-full text-sm  px-2">
+    <div className="m-4 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
+      <div className="w-full px-2  text-sm">
         <FeatureLabel text="Welcome New Members 👋" />
-        <p className="text-foreground/80  mt-4">
+        <p className="mt-4  text-foreground/80">
           Welcome newbies with our custom greeting! As server admin, personalize
           the message to introduce rules, activities & vibe. Roll out the 🚀 red
           carpet with a warm hello tailored to your unique community. Keep it
           fresh - update anytime!
         </p>
-        <div className="flex justify-end gap-2 mt-2">
+        <div className="mt-2 flex justify-end gap-2">
           <AnimatedButton
             size={"sm"}
             variant={"info"}
@@ -127,7 +127,7 @@ const WelcomeFeature = (): JSX.Element => {
       <div className="w-full rounded-lg bg-discord p-4">
         <div
           className={cn(
-            "text-warning uppercase font-semibold",
+            "font-semibold uppercase text-warning",
             poppinsFont.className,
           )}
         >
@@ -135,7 +135,7 @@ const WelcomeFeature = (): JSX.Element => {
         </div>
         <div className="max-h-[300px] overflow-auto">
           {isLoading || !botDetails ? (
-            <Skeleton className="w-full h-12" />
+            <Skeleton className="h-12 w-full" />
           ) : (
             <div className="flex flex-col gap-1 text-white">
               {messages

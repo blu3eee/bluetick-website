@@ -35,11 +35,11 @@ const EditNotificationDialog: React.FC<Props> = ({
           Edit Notification Message
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[1024px] h-3/4">
+      <DialogContent className="h-3/4 max-w-[1024px]">
         <DialogHeader>
           <DialogTitle>Edit Twitch Live Notification</DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-2 flex w-full justify-start overflow-y-auto">
+        <div className="flex flex w-full flex-col justify-start gap-2 overflow-y-auto">
           <div className="pl-6">
             <MessageForm
               type={message.type ?? "Embed and Text"}

@@ -18,8 +18,8 @@ const TwitchUserDisplay: React.FC<TwitchUser & { showBgImage?: boolean }> = ({
           height={100}
           fallbackSrc="/twitch/twitch-bg.jpg"
         />
-        <div className="flex flex-col grow gap-2">
-          <div className="text-sm font-medium flex flex-wrap justify-between">
+        <div className="flex grow flex-col gap-2">
+          <div className="flex flex-wrap justify-between text-sm font-medium">
             <span className="text-info">User</span>
             <a
               className="text-twitch border-b"
@@ -28,11 +28,11 @@ const TwitchUserDisplay: React.FC<TwitchUser & { showBgImage?: boolean }> = ({
               {user.displayName}
             </a>
           </div>
-          <div className="text-sm font-medium flex flex-wrap justify-between">
+          <div className="flex flex-wrap justify-between text-sm font-medium">
             <span className="text-info">ID</span>
             <span>{user.id}</span>
           </div>
-          <div className="text-sm font-medium flex flex-wrap justify-between">
+          <div className="flex flex-wrap justify-between text-sm font-medium">
             <span className="text-info">Creation Date</span>
             <span>
               {new Date(Date.parse(user.creationDate)).toLocaleString()}

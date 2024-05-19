@@ -31,7 +31,7 @@ const BotsPage = (): JSX.Element => {
 
   if (status === "loading") {
     <div className="flex h-fit w-full items-center justify-center">
-      <Skeleton className="w-full h-12" />
+      <Skeleton className="h-12 w-full" />
     </div>;
   }
 
@@ -45,7 +45,7 @@ const BotsPage = (): JSX.Element => {
     } else {
       return (
         <div className="flex h-fit w-full items-center justify-center">
-          <Skeleton className="w-full h-12" />
+          <Skeleton className="h-12 w-full" />
         </div>
       );
     }
@@ -66,10 +66,10 @@ const BotsPage = (): JSX.Element => {
 
   const { user: discordUser } = session;
   return (
-    <div className="container flex flex-col gap-3 items-center">
-      <div className="flex items-center gap-4 w-full rounded-lg border px-4 md:px-12 py-4">
+    <div className="container flex flex-col items-center gap-3">
+      <div className="flex w-full items-center gap-4 rounded-lg border px-4 py-4 md:px-12">
         <Image
-          className="rounded-full object-cover border-spacing-0"
+          className="border-spacing-0 rounded-full object-cover"
           src={
             discordUser.avatar
               ? getUserAvatarURL(discordUser)
@@ -79,17 +79,17 @@ const BotsPage = (): JSX.Element => {
           height={75}
           width={75}
         />
-        <div className="flex flex-col w-full gap-2">
-          <div className="flex flex-col md:flex-row w-full items-start md:items-center justify-between gap-2">
-            <div className="flex flex-col w-full">
-              <div className={`font-bold text-2xl ${rubikFont.className}`}>
+        <div className="flex w-full flex-col gap-2">
+          <div className="flex w-full flex-col items-start justify-between gap-2 md:flex-row md:items-center">
+            <div className="flex w-full flex-col">
+              <div className={`text-2xl font-bold ${rubikFont.className}`}>
                 {discordUser.global_name ?? discordUser.username}
               </div>
-              <div className="font-bold text-sm text-blue-500 flex items-center justify-between w-full flex-wrap gap-2">
+              <div className="flex w-full flex-wrap items-center justify-between gap-2 text-sm font-bold text-blue-500">
                 @{discordUser.username}
                 <Button
                   variant="link"
-                  className="gap-2 text-red-400 text-xs hover:text-red-400/70"
+                  className="gap-2 text-xs text-red-400 hover:text-red-400/70"
                   size={"sm"}
                   onClick={() => {
                     copyToClipboard();

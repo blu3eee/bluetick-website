@@ -63,7 +63,7 @@ export default function GuildLayout({
         <>
           <span
             className={cn(
-              "text-foreground/20 font-bold text-xl hidden sm:block",
+              "hidden text-xl font-bold text-foreground/20 sm:block",
               rubikFont.className,
             )}
           >
@@ -72,7 +72,7 @@ export default function GuildLayout({
           <UserInfoHeader />
           <span
             className={cn(
-              "text-foreground/20 font-bold text-xl",
+              "text-xl font-bold text-foreground/20",
               rubikFont.className,
             )}
           >
@@ -82,7 +82,7 @@ export default function GuildLayout({
         </>
       </DashboardHeader>
       <TopNavBar items={navItems} id={serverId} />
-      <div className="py-6 min-h-screen container">{children}</div>
+      <div className="container min-h-screen py-6">{children}</div>
     </GuildContextProvider>
   );
 }

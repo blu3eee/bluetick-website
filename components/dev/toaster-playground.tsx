@@ -56,7 +56,7 @@ const ToasterPlayground = (): JSX.Element => {
       </div>
       <div className="flex flex-wrap gap-4">
         <div className="flex flex-col gap-2">
-          <Label className="text-sm text-foreground/80 font-medium">
+          <Label className="text-sm font-medium text-foreground/80">
             toast type
           </Label>
           <Select
@@ -65,7 +65,7 @@ const ToasterPlayground = (): JSX.Element => {
               setToastType(value as ToastTypes);
             }}
           >
-            <SelectTrigger className="min-w-[180px] w-fit">
+            <SelectTrigger className="w-fit min-w-[180px]">
               <SelectValue placeholder="toaster type" />
             </SelectTrigger>
             <SelectContent>
@@ -91,7 +91,7 @@ const ToasterPlayground = (): JSX.Element => {
           </Button>
         </div>
         <div className="flex flex-col gap-2">
-          <Label className="text-sm text-foreground/80 font-medium">
+          <Label className="text-sm font-medium text-foreground/80">
             toast loading
           </Label>
 

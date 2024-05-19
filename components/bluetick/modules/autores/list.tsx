@@ -144,7 +144,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
             List of Auto-responses (
             <span className="text-blue-500"> {list.length} </span>/ 20 )
           </Label>
-          <div className="p-2 hover:text-blue-500 focus:text-blue-500/90 cursor-pointer">
+          <div className="cursor-pointer p-2 hover:text-blue-500 focus:text-blue-500/90">
             <RefreshCcw size={16} />
           </div>
         </div>
@@ -155,7 +155,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
             onClick={() => {
               setSelectMode(!selectMode);
             }}
-            className="px-2 rounded-lg border"
+            className="rounded-lg border px-2"
           >
             Select
           </Button>
@@ -173,7 +173,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
                 size={"sm"}
                 variant={"outline"}
                 onClick={handleSelectAll}
-                className="px-2 rounded-lg"
+                className="rounded-lg px-2"
               >
                 {selected.length === list.length ? "Unselect" : "Select"} All
               </Button>
@@ -188,7 +188,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
             />
           )}
         </div>
-        <Label className="text-gray-500 text-xs">
+        <Label className="text-xs text-gray-500">
           Select item(s) to perform action
         </Label>
       </div>
@@ -198,7 +198,7 @@ const AutoResList: React.FC<AutoResListProps> = ({ serverId }) => {
           <div
             key={autores.id}
             className={cn(
-              "rounded-[12px] text-sm border w-fit px-2 py-1 text-blue-500 border-blue-500 cursor-pointer transition-color duration-500 hover:text-white hover:bg-blue-500",
+              "transition-color w-fit cursor-pointer rounded-[12px] border border-blue-500 px-2 py-1 text-sm text-blue-500 duration-500 hover:bg-blue-500 hover:text-white",
               selected.includes(autores)
                 ? "bg-blue-500 text-white hover:bg-blue-500/60"
                 : "",

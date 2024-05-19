@@ -22,20 +22,20 @@ const DevPage = (): JSX.Element => {
   return (
     <div className="flex flex-col gap-4">
       {isLoadingGuilds || !guilds ? (
-        <Skeleton className="w-full h-36" />
+        <Skeleton className="h-36 w-full" />
       ) : (
         <div className="flex flex-col gap-2 rounded-lg bg-secondary p-4">
           <Label className="uppercase text-red-400">Guilds Stat</Label>
           <div className="flex flex-wrap gap-4">
-            <div className="flex gap-2 items-center">
+            <div className="flex items-center gap-2">
               <Label>Total guilds:</Label>
-              <span className="text-blue-500 text-sm font-semibold">
+              <span className="text-sm font-semibold text-blue-500">
                 {guilds.length}
               </span>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex items-center gap-2">
               <Label>Total members:</Label>
-              <span className="text-blue-500 text-sm font-semibold">
+              <span className="text-sm font-semibold text-blue-500">
                 {guilds.reduce(
                   (acc, guild) => acc + guild.approximate_member_count,
                   0,
@@ -54,7 +54,7 @@ const DevPage = (): JSX.Element => {
         <a href="/dev/twitch">
           <Button
             size={"sm"}
-            className="bg-twitch text-twitch-foreground hover:bg-twitch-secondary focus:bg-twitch-secondary transition ease-in-out duration-200"
+            className="bg-twitch text-twitch-foreground hover:bg-twitch-secondary focus:bg-twitch-secondary transition duration-200 ease-in-out"
           >
             Twitch
           </Button>

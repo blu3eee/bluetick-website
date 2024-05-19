@@ -212,7 +212,7 @@ const SearchAndAdd: React.FC<Props> = ({ refetch }) => {
               This is where the notification messages are sent
             </span>
             {isLoadingChannels || !channels ? (
-              <Skeleton className="w-full h-10" />
+              <Skeleton className="h-10 w-full" />
             ) : (
               <ChannelSelect
                 initChannelId={postChannelId}
@@ -222,7 +222,7 @@ const SearchAndAdd: React.FC<Props> = ({ refetch }) => {
             )}
           </div>
           {botDetails && (
-            <div className="text-white bg-discord py-2 rounded-md">
+            <div className="rounded-md bg-discord py-2 text-white">
               <DisplayNotificationMessage
                 botDetails={botDetails}
                 message={message}

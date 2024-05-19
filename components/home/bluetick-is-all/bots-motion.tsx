@@ -22,7 +22,7 @@ const BotsMotion = (): JSX.Element => {
 
   return (
     <AnimatePresence mode="wait" initial={false}>
-      <section className="flex flex-col items-center justify-center w-full">
+      <section className="flex w-full flex-col items-center justify-center">
         <motion.div
           className={cn(
             "flex flex-col items-center justify-center text-3xl font-bold",

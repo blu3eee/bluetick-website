@@ -148,7 +148,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
         <div>
           <Label
             htmlFor="content"
-            className="uppercase font-semibold text-red-400"
+            className="font-semibold uppercase text-red-400"
           >
             Message Content
           </Label>
@@ -165,12 +165,12 @@ const MessageForm: React.FC<MessageFormProps> = ({
         <div>
           <Label
             htmlFor="embed"
-            className="uppercase font-semibold text-red-400"
+            className="font-semibold uppercase text-red-400"
           >
             Embed
           </Label>
           {!disabledEmbedFields.includes("title") && (
-            <div className="flex gap-2 items-center flex-col md:flex-row">
+            <div className="flex flex-col items-center gap-2 md:flex-row">
               <div className="w-full">
                 <Label htmlFor="title">Title</Label>
                 <Input
@@ -208,7 +208,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
           )}
           {!disabledEmbedFields.includes("author") && (
             <CollapsibleFields label="Author">
-              <div className="flex gap-2 items-center flex-col md:flex-row">
+              <div className="flex flex-col items-center gap-2 md:flex-row">
                 <div className="w-full">
                   <Label htmlFor="author">Author</Label>
                   <Input
@@ -234,7 +234,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
           )}
           {!disabledEmbedFields.includes("footer") && (
             <CollapsibleFields label="Footer">
-              <div className="flex gap-2 items-center flex-col md:flex-row">
+              <div className="flex flex-col items-center gap-2 md:flex-row">
                 <div className="w-full">
                   <Label htmlFor="footer">Footer</Label>
                   <Input
@@ -260,7 +260,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
           )}
           {!disabledEmbedFields.includes("images") && (
             <CollapsibleFields label="Images">
-              <div className="flex gap-2 items-center flex-col md:flex-row">
+              <div className="flex flex-col items-center gap-2 md:flex-row">
                 <div className="w-full">
                   <Label htmlFor="image">Image URL</Label>
                   <Input
@@ -306,13 +306,13 @@ const MessageForm: React.FC<MessageFormProps> = ({
       )}
       {initButton && (
         <div className="flex flex-col gap-2">
-          <Label className="uppercase font-semibold text-red-400">Button</Label>
-          <div className="flex flex-wrap gap-4 items-center">
-            <div className="flex flex-col gap-2 w-fit">
+          <Label className="font-semibold uppercase text-red-400">Button</Label>
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex w-fit flex-col gap-2">
               <Label htmlFor="button_color">Color</Label>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <div className="text-sm px-3 py-2 border rounded-md bg-background w-fit font-semibold flex items-center gap-2 cursor-pointer">
+                  <div className="flex w-fit cursor-pointer items-center gap-2 rounded-md border bg-background px-3 py-2 text-sm font-semibold">
                     {button.color}
                     <ChevronsUpDown size={16} />
                   </div>
@@ -326,7 +326,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                       key={index}
                       className={`flex items-center focus:bg-accent/60 ${
                         button.color === text
-                          ? "bg-secondary/80 focus:bg-accent:50"
+                          ? "focus:bg-accent:50 bg-secondary/80"
                           : ""
                       }`}
                       onClick={() => {
@@ -339,7 +339,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <div className="w-fit flex flex-col gap-2">
+            <div className="flex w-fit flex-col gap-2">
               <Label htmlFor="button_text">Text</Label>
               <Input
                 id="button_text"
@@ -349,7 +349,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
                 onChange={handleButtonChange}
               />
             </div>
-            <div className="w-fit flex flex-col gap-2">
+            <div className="flex w-fit flex-col gap-2">
               <Label htmlFor="button_text">Emoji</Label>
               <CustomEmojiPicker
                 defaultEmoji={button.emoji}
@@ -367,7 +367,7 @@ const MessageForm: React.FC<MessageFormProps> = ({
           onClick={handleSave}
           variant={"outline"}
           size={"sm"}
-          className="mt-4 text-red-400 border-[2px] font-semibold border-red-400 hover:bg-red-400 focus:bg-red-400/50 w-fit"
+          className="mt-4 w-fit border-[2px] border-red-400 font-semibold text-red-400 hover:bg-red-400 focus:bg-red-400/50"
         >
           Save
         </Button>

@@ -26,15 +26,15 @@ export const HexColorPicker: React.FC<HexColorPickerProps> = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className="w-fit flex items-center gap-2">
+        <div className="flex w-fit items-center gap-2">
           <div
-            className="w-8 h-8 border-2 rounded-lg p-[2px] border"
+            className="h-8 w-8 rounded-lg border border-2 p-[2px]"
             style={{
               borderColor: color.hex,
             }}
           >
             <div
-              className={`w-full h-full p-[2px] rounded-md`}
+              className={`h-full w-full rounded-md p-[2px]`}
               style={{
                 backgroundColor: color.hex,
               }}

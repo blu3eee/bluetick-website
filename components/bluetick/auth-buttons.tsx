@@ -59,7 +59,7 @@ export const LogoutButton: React.FC<LogoutButtonProps & ButtonProps> = ({
       }}
       variant={variant ?? "outline"}
       className={cn(
-        "text-red-600 border-red-600 hover:bg-red-600 focus:bg-red-600",
+        "border-red-600 text-red-600 hover:bg-red-600 focus:bg-red-600",
         className,
       )}
       {...props}

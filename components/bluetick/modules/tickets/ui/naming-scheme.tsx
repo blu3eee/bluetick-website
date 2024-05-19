@@ -69,7 +69,7 @@ export const NamingScheme: React.FC<NamingSchemeProps> = ({
             </PopoverTrigger>
             <PopoverContent>
               <div className="flex flex-col">
-                <span className="uppercase font-bold">Naming helper</span>
+                <span className="font-bold uppercase">Naming helper</span>
                 <div>
                   <span className="text-red-400">{"{id}"}</span> - Ticker ID
                 </div>

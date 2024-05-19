@@ -219,10 +219,10 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-lg bg-secondary p-4 flex flex-col gap-2 w-full">
+      <div className="flex w-full flex-col gap-2 rounded-lg bg-secondary p-4">
         <Label
           id="new-team-input"
-          className="uppercase text-red-400 font-semibold"
+          className="font-semibold uppercase text-red-400"
         >
           Add a new staff team
         </Label>
@@ -246,17 +246,17 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
           </Button>
         </div>
       </div>
-      <div className="rounded-lg bg-secondary p-4 flex flex-col gap-2 w-full">
-        <Label className="uppercase text-red-400 font-semibold">
+      <div className="flex w-full flex-col gap-2 rounded-lg bg-secondary p-4">
+        <Label className="font-semibold uppercase text-red-400">
           Manage teams
         </Label>
-        <div className="flex gap-2 items-center w-full">
+        <div className="flex w-full items-center gap-2">
           {isLoadingTeams || !data || !selectedTeam ? (
-            <Skeleton className="w-full h-8 bg-background" />
+            <Skeleton className="h-8 w-full bg-background" />
           ) : (
             <Popover>
               <PopoverTrigger asChild>
-                <div className="min-h-10 min-w-[200px] flex items-center justify-between rounded-md border py-2 px-4 bg-background/80 cursor-pointer">
+                <div className="flex min-h-10 min-w-[200px] cursor-pointer items-center justify-between rounded-md border bg-background/80 px-4 py-2">
                   {selectedTeam?.name}
                   <ChevronsUpDown size={16} />
                 </div>
@@ -268,7 +268,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                     className="h-9 w-full"
                   />
                   <CommandEmpty>No team found</CommandEmpty>
-                  <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+                  <CommandGroup className="max-h-[300px] w-full overflow-y-auto">
                     {teams.map((team) => (
                       <CommandItem
                         key={team.id}
@@ -300,16 +300,16 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
             Delete
           </Button>
         </div>
-        <div className="flex flex-col md:flex-row items-start w-full gap-4">
+        <div className="flex w-full flex-col items-start gap-4 md:flex-row">
           <div className="flex flex-col gap-2">
             <Label className="text-gray-500">Roles</Label>
             <div className="flex items-center gap-2">
               {isLoading || !discordGuild ? (
-                <Skeleton className="w-[200px] h-8 bg-background" />
+                <Skeleton className="h-8 w-[200px] bg-background" />
               ) : (
                 <Popover>
                   <PopoverTrigger asChild>
-                    <div className="min-h-10 min-w-[200px] flex items-center justify-between rounded-md border py-2 px-4 bg-background/80 cursor-pointer w-full">
+                    <div className="flex min-h-10 w-full min-w-[200px] cursor-pointer items-center justify-between rounded-md border bg-background/80 px-4 py-2">
                       {selectedRole ? (
                         selectedRole.name
                       ) : (
@@ -325,7 +325,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                         className="h-9 w-full"
                       />
                       <CommandEmpty>No role found</CommandEmpty>
-                      <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+                      <CommandGroup className="max-h-[300px] w-full overflow-y-auto">
                         {discordGuild.roles
                           .filter(
                             (role) => !selectedTeam?.roles.includes(role.id),
@@ -383,18 +383,18 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
               </Button>
             </div>
             {selectedTeam && (
-              <div className="flex flex-wrap gap-1 items-center">
+              <div className="flex flex-wrap items-center gap-1">
                 {selectedTeam.roles.map((roleId, index) => {
                   const role = discordGuild?.roles.find((r) => r.id === roleId);
                   return (
                     <div
                       key={index}
-                      className="px-2 py-1 rounded-lg bg-background flex items-center gap-2"
+                      className="flex items-center gap-2 rounded-lg bg-background px-2 py-1"
                     >
                       {role ? `@${role.name}` : roleId}
                       <Icons.close
                         size={24}
-                        className="rounded-lg hover:bg-secondary p-1 cursor-pointer"
+                        className="cursor-pointer rounded-lg p-1 hover:bg-secondary"
                         onClick={() => {
                           handleDeleteRole(roleId).catch(() => {});
                         }}
@@ -405,15 +405,15 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
               </div>
             )}
           </div>
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex w-full flex-col gap-2">
             <Label className="text-gray-500">Members</Label>
             <div className="flex items-center gap-2">
               {isLoadingMembers || !members ? (
-                <Skeleton className="w-[200px] h-8 bg-background" />
+                <Skeleton className="h-8 w-[200px] bg-background" />
               ) : (
                 <Popover>
                   <PopoverTrigger asChild>
-                    <div className="min-h-10 min-w-[200px] flex items-center justify-between rounded-md border py-2 px-4 bg-background/80 cursor-pointer">
+                    <div className="flex min-h-10 min-w-[200px] cursor-pointer items-center justify-between rounded-md border bg-background/80 px-4 py-2">
                       {selectedMember ? (
                         `${
                           selectedMember.user.global_name ??
@@ -432,7 +432,7 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
                         className="h-9 w-full"
                       />
                       <CommandEmpty>No user found</CommandEmpty>
-                      <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+                      <CommandGroup className="max-h-[300px] w-full overflow-y-auto">
                         {members.map((mem) => (
                           <CommandItem
                             key={mem.user.id}
@@ -489,18 +489,18 @@ const SupportTeams: React.FC<ServerIdProps> = ({ serverId }) => {
               </Button>
             </div>
             {selectedTeam && (
-              <div className="flex flex-wrap gap-1 items-center">
+              <div className="flex flex-wrap items-center gap-1">
                 {selectedTeam.users.map((userId, index) => {
                   const mem = members?.find((m) => m.user.id === userId);
                   return (
                     <div
                       key={index}
-                      className="px-2 py-1 rounded-lg bg-background flex items-center gap-2"
+                      className="flex items-center gap-2 rounded-lg bg-background px-2 py-1"
                     >
                       {mem ? `@${mem.user.username}` : `<@${userId}>`}
                       <Icons.close
                         size={24}
-                        className="rounded-lg hover:bg-secondary p-1 cursor-pointer"
+                        className="cursor-pointer rounded-lg p-1 hover:bg-secondary"
                         onClick={() => {
                           handleDeleteUser(userId).catch(() => {});
                         }}

@@ -24,21 +24,21 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
 }) => {
   return (
     <div>
-      <Label htmlFor="preview" className="uppercase font-semibold text-red-400">
+      <Label htmlFor="preview" className="font-semibold uppercase text-red-400">
         Preview
       </Label>
-      <div className="w-full p-4 bg-[#38343c] rounded-lg mt-2 text-white">
-        <div className="flex items-center gap-2 mb-2">
+      <div className="mt-2 w-full rounded-lg bg-[#38343c] p-4 text-white">
+        <div className="mb-2 flex items-center gap-2">
           <span className="font-semibold">{"Bluetick"}</span>
-          <span className="text-[10px] font-bold px-[4px] py-[1px] bg-blue-400 rounded-md">
+          <span className="rounded-md bg-blue-400 px-[4px] py-[1px] text-[10px] font-bold">
             BOT
           </span>
-          <span className="font-semibold text-xs text-gray-500">
+          <span className="text-xs font-semibold text-gray-500">
             Today at 01:01 AM
           </span>
         </div>
         {type !== "Embed" && message.content && (
-          <div className="flex my-1 text-sm flex flex-col">
+          <div className="my-1 flex flex flex-col text-sm">
             {replacePlaceholders(message.content, placeholders)
               .split("\n")
               .map((line, index) => {
@@ -53,19 +53,19 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
         {/* whole embed */}
         {type !== "Message" && message.embed && (
           <div
-            className="rounded-md w-fit min-w-[256px] max-w-[720px] min-h-8"
+            className="min-h-8 w-fit min-w-[256px] max-w-[720px] rounded-md"
             style={{ backgroundColor: message.embed.color ?? `#ffffff` }}
           >
-            <div className="bg-[#2B2D31] ml-1 px-3 py-2 rounded-tr-sm rounded-br-sm flex flex-col justify-between min-h-8">
-              <div className="flex justify-between w-full">
+            <div className="ml-1 flex min-h-8 flex-col justify-between rounded-br-sm rounded-tr-sm bg-[#2B2D31] px-3 py-2">
+              <div className="flex w-full justify-between">
                 {/* left part */}
-                <div className="flex-1 flex flex-col">
+                <div className="flex flex-1 flex-col">
                   {/* author */}
                   {message.embed.author && (
-                    <div className="flex gap-2 items-center">
+                    <div className="flex items-center gap-2">
                       {message.embed.authorURL &&
                         isValidImageUrl(message.embed.authorURL) && (
-                          <div className="w-[25px] h-[25px]">
+                          <div className="h-[25px] w-[25px]">
                             <Image
                               src={replacePlaceholders(
                                 message.embed.authorURL,
@@ -91,9 +91,9 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                   {message.embed.title && (
                     <Link
                       className={cn(
-                        "flex items-center font-bold my-1",
+                        "my-1 flex items-center font-bold",
                         message.embed.url
-                          ? "underline cursor-pointer hover:text-foreground/80"
+                          ? "cursor-pointer underline hover:text-foreground/80"
                           : "",
                       )}
                       href={replacePlaceholders(
@@ -115,7 +115,7 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
 
                   {/* description */}
                   {message.embed?.description && (
-                    <div className="flex my-1 text-sm flex flex-col">
+                    <div className="my-1 flex flex flex-col text-sm">
                       {replacePlaceholders(
                         message.embed.description,
                         placeholders,
@@ -141,7 +141,7 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                         alt="thumbnail"
                         height={100}
                         width={150}
-                        className="rounded-md max-w-[72px] max-h-[72px] w-auto h-auto object-cover"
+                        className="h-auto max-h-[72px] w-auto max-w-[72px] rounded-md object-cover"
                       />
                     </div>
                   )}
@@ -151,7 +151,7 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                 isValidImageUrl(
                   replacePlaceholders(message.embed.image, placeholders),
                 ) && (
-                  <div className="w-full my-1 overflow-hidden">
+                  <div className="my-1 w-full overflow-hidden">
                     <Image
                       src={replacePlaceholders(
                         message.embed.image,
@@ -160,12 +160,12 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                       alt="image"
                       height={250}
                       width={250}
-                      className="w-full h-auto rounded-md object-cover max-h-[256px] w-auto"
+                      className="h-auto max-h-[256px] w-auto w-full rounded-md object-cover"
                     />
                   </div>
                 )}
               {message.embed.footer && (
-                <div className="flex items-center gap-2 my-1">
+                <div className="my-1 flex items-center gap-2">
                   {message.embed.footerURL &&
                     isValidImageUrl(
                       replacePlaceholders(
@@ -173,7 +173,7 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
                         placeholders,
                       ),
                     ) && (
-                      <div className="w-[24px] h-[24px]">
+                      <div className="h-[24px] w-[24px]">
                         <Image
                           src={replacePlaceholders(
                             message.embed.footerURL,
@@ -192,12 +192,12 @@ const MessagePreview: React.FC<MessagePreviewProps> = ({
             </div>
           </div>
         )}
-        <div className="mt-2 flex flex-wrap items-center gap-2 w-fit">
+        <div className="mt-2 flex w-fit flex-wrap items-center gap-2">
           {buttons
             ? buttons.map((button, index) => (
                 <Button
                   key={index}
-                  className="gap-3 px-3 items-center"
+                  className="items-center gap-3 px-3"
                   style={{
                     backgroundColor: getButtonColor(button.color),
                   }}

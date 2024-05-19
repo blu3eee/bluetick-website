@@ -23,12 +23,12 @@ const BluetickHeader = (): JSX.Element => {
 
   return (
     <header className="z-40 bg-secondary px-8 md:px-12">
-      <div className="flex h-20 items-center justify-between py-6 gap-6">
+      <div className="flex h-20 items-center justify-between gap-6 py-6">
         <MainNav items={bluetickConfig.mainNav} config={bluetickConfig}>
           <SidebarContent />
         </MainNav>
         {status === "loading" ? (
-          <Skeleton className="rounded-lg w-24 h-10" />
+          <Skeleton className="h-10 w-24 rounded-lg" />
         ) : session && session.user ? (
           <>
             <Popover>
@@ -37,7 +37,7 @@ const BluetickHeader = (): JSX.Element => {
                   src={getUserAvatarURL(session.user)}
                   width={1024}
                   height={1024}
-                  className="object-cover rounded-full aspect-square h-[45px] w-auto border-2 border-foreground/50"
+                  className="aspect-square h-[45px] w-auto rounded-full border-2 border-foreground/50 object-cover"
                   alt="user avt"
                 />
               </PopoverTrigger>

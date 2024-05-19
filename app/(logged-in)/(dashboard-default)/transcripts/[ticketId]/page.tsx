@@ -71,13 +71,13 @@ const Page = ({
   );
 
   if (status === "loading") {
-    return <Skeleton className="w-full h-36" />;
+    return <Skeleton className="h-36 w-full" />;
   }
 
   if (!isLoggedIn) {
     return (
-      <div className="flex w-full h-[70vh] items-center justify-center">
-        <div className="flex flex-row h-24 gap-8 items-center justify-center">
+      <div className="flex h-[70vh] w-full items-center justify-center">
+        <div className="flex h-24 flex-row items-center justify-center gap-8">
           <h2 className="text-3xl font-bold">401</h2>
           <Separator orientation="vertical" />
           <div className="flex flex-col items-center justify-center gap-3">
@@ -102,16 +102,16 @@ const Page = ({
   return (
     <div className="p-4">
       {transcriptStatus === "loading" ? (
-        <Skeleton className="w-full h-36" />
+        <Skeleton className="h-36 w-full" />
       ) : !ticketData ? (
         <div>Loading...</div>
       ) : (
         <div className="flex flex-col gap-2">
-          <div className="rounded-lg bg-secondary p-4 flex items-center gap-4 font-semibold text-sm">
+          <div className="flex items-center gap-4 rounded-lg bg-secondary p-4 text-sm font-semibold">
             This transcript was generated at{" "}
             {new Date(ticketData.generated * 1000).toLocaleString()}
           </div>
-          <div className="rounded-lg bg-secondary p-4 flex items-center gap-4">
+          <div className="flex items-center gap-4 rounded-lg bg-secondary p-4">
             <Image
               src={ticketData.guildInfo.iconURL}
               alt={"server-icon"}
@@ -149,7 +149,7 @@ const Discord: React.FC<{ transcript: TicketTranscriptDetails }> = ({
     useQueryGuildChannels(BLUETICK_BOT_ID, transcript.guildInfo.guildID);
 
   return (
-    <div className="flex flex-col gap-2 bg-[#38343c] rounded-lg text-white">
+    <div className="flex flex-col gap-2 rounded-lg bg-[#38343c] text-white">
       <div className="p-2">
         <span className={cn("text-3xl font-bold", rubikFont.className)}>
           Welcome to #{transcript.threadInfo.name}
@@ -170,7 +170,7 @@ const Discord: React.FC<{ transcript: TicketTranscriptDetails }> = ({
       </div>
       <Separator className="bg-white/70" />
       {isLoading || !guild || isLoadingChannels || !channels ? (
-        <Skeleton className="w-full h-36" />
+        <Skeleton className="h-36 w-full" />
       ) : (
         <Messages
           messages={transcript.messagesInfo}

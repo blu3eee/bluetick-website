@@ -34,7 +34,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
   return (
     <ResponsiveModal open={open} onOpenChange={setOpen}>
       <ResponsiveModalTrigger>
-        <Button size={"sm"} variant={"destructive"} className="px-2 rounded-lg">
+        <Button size={"sm"} variant={"destructive"} className="rounded-lg px-2">
           Delete
         </Button>
       </ResponsiveModalTrigger>
@@ -58,7 +58,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
               <Button
                 size={"sm"}
                 variant={"secondary"}
-                className="px-2 rounded-lg"
+                className="rounded-lg px-2"
                 onClick={onCancel}
               >
                 Cancel
@@ -67,7 +67,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
             <Button
               size={"sm"}
               variant={"destructive"}
-              className="px-2 rounded-lg"
+              className="rounded-lg px-2"
               onClick={onDelete}
             >
               Confirm

@@ -24,22 +24,22 @@ const UserInfoHeader: React.FC<Props> = ({ className }): React.ReactNode => {
   if (status === "loading" || !session?.user) {
     return (
       <div className="flex w-fit items-center gap-3">
-        <Skeleton className="w-[30px] h-[30px] rounded-full bg-secondary-foreground/10" />
+        <Skeleton className="h-[30px] w-[30px] rounded-full bg-secondary-foreground/10" />
         <Skeleton className="h-[30px] w-[100px] rounded-sm bg-secondary-foreground/10" />
       </div>
     );
   }
   return (
-    <Link className="flex gap-2 items-center" href={"/servers"}>
+    <Link className="flex items-center gap-2" href={"/servers"}>
       <Image
         src={getUserAvatarURL(session.user)}
         height={30}
         width={30}
-        className="object-cover aspect-square rounded-full"
+        className="aspect-square rounded-full object-cover"
         alt="user avt"
         priority
       />
-      <span className={cn("text-sm font-semibold hidden md:block", className)}>
+      <span className={cn("hidden text-sm font-semibold md:block", className)}>
         {session.user.username}
       </span>
     </Link>

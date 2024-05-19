@@ -64,7 +64,7 @@ export function MainNav({
 
   return (
     <>
-      <div className="flex gap-2 items-center md:hidden">
+      <div className="flex items-center gap-2 md:hidden">
         <Button
           variant={"ghost"}
           className="relative h-9 w-8 px-0 hover:bg-primary/50"
@@ -85,22 +85,22 @@ export function MainNav({
           {children}
         </MobileNav>
       )}
-      <div className="flex gap-6 md:gap-10 justify-between items-center w-fit md:w-full">
-        <div className="flex gap-6 items-center">
+      <div className="flex w-fit items-center justify-between gap-6 md:w-full md:gap-10">
+        <div className="flex items-center gap-6">
           <Link
             className="flex items-center"
             href={config ? config.href : bluetickConfig.href}
           >
             <Icons.logo size={32} />
             <span
-              className={`ml-6 font-bold text-2xl uppercase tracking-widest hidden md:block ${rubikFont.className}`}
+              className={`ml-6 hidden text-2xl font-bold uppercase tracking-widest md:block ${rubikFont.className}`}
             >
               {config ? config.name : bluetickConfig.name}
             </span>
           </Link>
 
           {items?.length ? (
-            <NavigationMenu className="hidden md:flex w-full">
+            <NavigationMenu className="hidden w-full md:flex">
               <NavigationMenuList>
                 {items.map((item, index) => {
                   if (isNavMenu(item)) {
@@ -202,7 +202,7 @@ const NavMenuListItem: React.FC<{
                           alt={activeItem.title}
                           width={150}
                           height={150}
-                          className="w-full h-auto rounded-md"
+                          className="h-auto w-full rounded-md"
                         />
                       )}
                       <div className="mb-2 mt-4 text-lg font-medium">

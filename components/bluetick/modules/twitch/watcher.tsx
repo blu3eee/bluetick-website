@@ -13,8 +13,8 @@ interface Props {
 const TwitchWatcher: React.FC<Props> = ({ user, unwatch = false, refetch }) => {
   return (
     user && (
-      <div className="flex flex-col gap-2 bg-secondary rounded-lg p-4 max-w-[520px]">
-        <Label className="text-twitch uppercase font-semibold">Watching</Label>
+      <div className="flex max-w-[520px] flex-col gap-2 rounded-lg bg-secondary p-4">
+        <Label className="text-twitch font-semibold uppercase">Watching</Label>
         {unwatch && refetch && (
           <div className="flex flex-wrap items-center">
             <Button variant={"error"} size={"sm"}>

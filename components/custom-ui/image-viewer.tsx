@@ -26,7 +26,7 @@ const ImageViewer: React.FC<Props> = ({ src }) => {
       <Image
         src={src}
         alt=""
-        className="h-auto max-w-full rounded-lg cursor-pointer max-h-[400px]" // Add max-height here
+        className="h-auto max-h-[400px] max-w-full cursor-pointer rounded-lg" // Add max-height here
         onClick={handleImageClick}
         width={200}
         height={200}
@@ -36,7 +36,7 @@ const ImageViewer: React.FC<Props> = ({ src }) => {
         <a href={src} target="_blank" rel="noreferrer">
           <button
             // onClick={handleDownload}
-            className="absolute top-0 right-0 m-2 bg-secondary text-white p-2 rounded"
+            className="absolute right-0 top-0 m-2 rounded bg-secondary p-2 text-white"
           >
             <Icons.download />
           </button>
@@ -44,7 +44,7 @@ const ImageViewer: React.FC<Props> = ({ src }) => {
       )}
       {isViewerOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
           onClick={() => {
             setIsViewerOpen(false);
           }}

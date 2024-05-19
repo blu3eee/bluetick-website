@@ -95,8 +95,8 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
       <CollapsibleFields label="Ticket properties" defaultOpen={true}>
         <div className="flex flex-col gap-4 pl-6">
           <div className="flex flex-wrap gap-4">
-            <div className="flex flex-col gap-2 w-fit">
-              <Label className="uppercase font-semibold text-gray-500 text-xs">
+            <div className="flex w-fit flex-col gap-2">
+              <Label className="text-xs font-semibold uppercase text-gray-500">
                 Ticket Panel Channel
               </Label>
               {!isLoadingChannels && channels ? (
@@ -111,11 +111,11 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
                   }}
                 />
               ) : (
-                <Skeleton className="w-full h-10" />
+                <Skeleton className="h-10 w-full" />
               )}
             </div>
-            <div className="flex flex-col gap-2 w-fit">
-              <Label className="uppercase font-semibold text-gray-500 text-xs">
+            <div className="flex w-fit flex-col gap-2">
+              <Label className="text-xs font-semibold uppercase text-gray-500">
                 Ticket Category
               </Label>
               {!isLoadingChannels && channels ? (
@@ -130,15 +130,15 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
                   }}
                 />
               ) : (
-                <Skeleton className="w-full h-10" />
+                <Skeleton className="h-10 w-full" />
               )}
             </div>
-            <div className="flex flex-col gap-2 w-fit">
-              <Label className="uppercase font-semibold text-gray-500 text-xs">
+            <div className="flex w-fit flex-col gap-2">
+              <Label className="text-xs font-semibold uppercase text-gray-500">
                 Support Team
               </Label>
               {isLoadingTeams || !supportTeams ? (
-                <Skeleton className="w-full h-10" />
+                <Skeleton className="h-10 w-full" />
               ) : (
                 <SupportTeamSelect
                   options={supportTeams}
@@ -153,12 +153,12 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
               )}
             </div>
 
-            <div className="flex flex-col gap-2 w-full md:w-fit md:min-w-[250px]">
-              <Label className="uppercase font-semibold text-gray-500 text-xs">
+            <div className="flex w-full flex-col gap-2 md:w-fit md:min-w-[250px]">
+              <Label className="text-xs font-semibold uppercase text-gray-500">
                 Mention on open
               </Label>
               {isLoading || !discordGuild ? (
-                <Skeleton className="w-full h-10" />
+                <Skeleton className="h-10 w-full" />
               ) : (
                 <SelectMentions
                   roles={discordGuild.roles ?? []}
@@ -175,7 +175,7 @@ const CreatePanelForm: React.FC<CreatePanelFormProps> = ({
           </div>
           <div className="flex flex-wrap gap-4">
             <div className="flex flex-col gap-2">
-              <Label className="uppercase font-semibold text-gray-500 text-xs">
+              <Label className="text-xs font-semibold uppercase text-gray-500">
                 Naming scheme
               </Label>
               <NamingScheme

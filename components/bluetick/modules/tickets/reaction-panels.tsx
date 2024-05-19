@@ -91,14 +91,14 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-4 rounded-lg bg-secondary p-4">
-        <Label className="uppercase font-bold text-gray-500">
+        <Label className="font-bold uppercase text-gray-500">
           Your Reaction Panels ( <span>{panels.length}</span> / 3)
         </Label>
         {isLoading ? (
-          <div className="w-full h-fit">
-            <Skeleton className="w-full h-8" />
-            <Skeleton className="w-full h-8" />
-            <Skeleton className="w-full h-8" />
+          <div className="h-fit w-full">
+            <Skeleton className="h-8 w-full" />
+            <Skeleton className="h-8 w-full" />
+            <Skeleton className="h-8 w-full" />
           </div>
         ) : !data ? (
           <div>error fetching reaction panels</div>
@@ -126,7 +126,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                     <TableCell className="font-medium">
                       <a
                         href={`https://discord.com/channels/${serverId}/${panel.channelID}`}
-                        className="px-2 py-1 bg-discord/70 text-white rounded-md"
+                        className="rounded-md bg-discord/70 px-2 py-1 text-white"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -147,7 +147,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
                       {panel.message?.embed?.title ?? "empty title"}
                     </TableCell>
                     <TableCell>{panel.button.text ?? "[none]"}</TableCell>
-                    <TableCell className="flex justify-end items-center gap-2">
+                    <TableCell className="flex items-center justify-end gap-2">
                       <Button
                         size={"xs"}
                         variant={"warning"}
@@ -192,7 +192,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
         )}
       </div>
       <div className="flex flex-col gap-4 rounded-lg bg-secondary p-4 ">
-        <Label className="uppercase font-bold text-gray-500">
+        <Label className="font-bold uppercase text-gray-500">
           Create Panel
         </Label>
         {panels.length < 3 ? (
@@ -208,7 +208,7 @@ const ReactionPanels: React.FC<ServerIdProps> = ({ serverId }) => {
         ) : (
           <div className="text-md text-gray-500">
             Your server reached limit{" "}
-            <span className="text-blue-500 font-bold">{panels.length}</span> /
+            <span className="font-bold text-blue-500">{panels.length}</span> /
             3. You can delete existing panel(s) to create new ones.
           </div>
         )}

@@ -68,7 +68,7 @@ export const SidebarContent = (): JSX.Element => {
 
   if (status === "loading") {
     return (
-      <div className="w-full flex flex-col gap-4 p-4">
+      <div className="flex w-full flex-col gap-4 p-4">
         <Skeleton className="h-12 w-full" />
         <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-3/4" />
@@ -86,11 +86,11 @@ export const SidebarContent = (): JSX.Element => {
 
   const { user: discordUser } = session;
   return (
-    <div className="w-full flex flex-col gap-4 overflow-y-auto">
+    <div className="flex w-full flex-col gap-4 overflow-y-auto">
       {isLoadingBluetick ? (
         <Skeleton className="h-12 w-full" />
       ) : botDetails ? (
-        <div className="flex gap-2 px-2 py-4 items-center">
+        <div className="flex items-center gap-2 px-2 py-4">
           <Image
             width={50}
             height={50}
@@ -103,7 +103,7 @@ export const SidebarContent = (): JSX.Element => {
               {botDetails.username}#{botDetails.discriminator}
             </span>
             <a href={getBotInviteURL(botDetails.botID ?? BLUETICK_BOT_ID)}>
-              <span className="border rounded-lg mt-1 text-center hover:bg-gray-500/50 cursor-pointer w-fit px-4 py-1 font-semibold text-sm">
+              <span className="mt-1 w-fit cursor-pointer rounded-lg border px-4 py-1 text-center text-sm font-semibold hover:bg-gray-500/50">
                 Invite bot
               </span>
             </a>
@@ -117,7 +117,7 @@ export const SidebarContent = (): JSX.Element => {
             key={item.href}
             href={`/${item.href}`}
             className={cn(
-              "flex w-full items-center rounded-md p-2 hover:underline gap-4",
+              "flex w-full items-center gap-4 rounded-md p-2 hover:underline",
               {
                 "bg-muted": pathname === `/${item.href}`,
               },
@@ -130,7 +130,7 @@ export const SidebarContent = (): JSX.Element => {
       <Separator />
       <div className="flex flex-col gap-2">
         {discordUser && (
-          <div className="px-2 py-4 rounded-lg flex flex-row border gap-2 items-center">
+          <div className="flex flex-row items-center gap-2 rounded-lg border px-2 py-4">
             <Image
               width={50}
               height={50}
@@ -161,7 +161,7 @@ export const SidebarContent = (): JSX.Element => {
 
 export const SidebarWrapped = (): JSX.Element => {
   return (
-    <aside className="top-14 z-30 h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r py-4 px-2 hidden fixed md:sticky md:block ">
+    <aside className="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r px-2 py-4 md:sticky md:block ">
       <SidebarContent />
     </aside>
   );

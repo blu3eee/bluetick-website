@@ -101,9 +101,9 @@ const SpecifiedLogChannels: React.FC<ServerIdProps> = ({ serverId }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="bg-secondary rounded-lg p-4 flex flex-col gap-4">
-        <Label className="uppercase font-semibold">Log Channel</Label>
-        <span className="text-foreground/50 text-sm">
+      <div className="flex flex-col gap-4 rounded-lg bg-secondary p-4">
+        <Label className="font-semibold uppercase">Log Channel</Label>
+        <span className="text-sm text-foreground/50">
           Where the events selected below will be logged.
         </span>
         {logsCollection.map((category, i) => (
@@ -112,7 +112,7 @@ const SpecifiedLogChannels: React.FC<ServerIdProps> = ({ serverId }) => {
             label={`${category.category} Events`}
             defaultOpen={true}
           >
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-2">
+            <div className="grid grid-cols-2 gap-x-2 gap-y-2 md:grid-cols-3 lg:grid-cols-4">
               {category.events.map((e) => {
                 const eventName = e.event
                   .split("_")
@@ -133,7 +133,7 @@ const SpecifiedLogChannels: React.FC<ServerIdProps> = ({ serverId }) => {
                 return (
                   <div
                     key={index}
-                    className="text-foreground/50 flex flex-col gap-1"
+                    className="flex flex-col gap-1 text-foreground/50"
                   >
                     <Label
                       htmlFor={`${category.category}_${eventName}`}
@@ -142,7 +142,7 @@ const SpecifiedLogChannels: React.FC<ServerIdProps> = ({ serverId }) => {
                       {eventName}
                     </Label>
                     {!channels || isLoadingChannels ? (
-                      <Skeleton className="w-full h-10" />
+                      <Skeleton className="h-10 w-full" />
                     ) : (
                       <ChannelSelect
                         options={channels.textChannels}

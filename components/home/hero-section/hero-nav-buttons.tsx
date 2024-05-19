@@ -12,8 +12,8 @@ const NavButtons = (): JSX.Element => {
   if (status === "loading") {
     return (
       <>
-        <Skeleton className="w-24 h-10" />
-        <Skeleton className="w-24 h-10" />
+        <Skeleton className="h-10 w-24" />
+        <Skeleton className="h-10 w-24" />
       </>
     );
   }
@@ -38,7 +38,7 @@ const NavButtons = (): JSX.Element => {
 
 const HeroNavButtons = (): JSX.Element => {
   return (
-    <div className="flex justify-end md:justify-center gap-2">
+    <div className="flex justify-end gap-2 md:justify-center">
       <NavButtons />
     </div>
   );

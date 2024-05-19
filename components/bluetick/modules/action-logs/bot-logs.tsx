@@ -33,7 +33,7 @@ const BotLogs: React.FC<ServerIdProps> = ({ serverId }) => {
   return (
     <div className="flex flex-col gap-4">
       {isLoading || !setting ? (
-        <Skeleton className="w-full h-36" />
+        <Skeleton className="h-36 w-full" />
       ) : (
         <LogSetting
           setting={setting}
@@ -45,14 +45,14 @@ const BotLogs: React.FC<ServerIdProps> = ({ serverId }) => {
         />
       )}
       {isLoading || !setting || isUpdating ? (
-        <Skeleton className="w-full h-36" />
+        <Skeleton className="h-36 w-full" />
       ) : setting.specifyChannels ? (
         <SpecifiedLogChannels serverId={serverId} />
       ) : (
         <OneLogChannel serverId={serverId} />
       )}
       {isLoading || !setting ? (
-        <Skeleton className="w-full h-36" />
+        <Skeleton className="h-36 w-full" />
       ) : (
         <Ignores serverId={serverId} logSettingId={setting.id} />
       )}

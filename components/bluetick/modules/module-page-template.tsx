@@ -50,15 +50,15 @@ const ModulePageTemplate: React.FC<TemplateProps> = ({
 
   return (
     <div>
-      <div className="flex items-start md:items-center justify-between w-full max-w-[1024px] my-2 flex-col md:flex-row gap-2">
+      <div className="my-2 flex w-full max-w-[1024px] flex-col items-start justify-between gap-2 md:flex-row md:items-center">
         <div
           className={cn(
-            "flex items-center text-2xl font-bold gap-2 ",
+            "flex items-center gap-2 text-2xl font-bold ",
             rubikFont.className,
           )}
         >
           <a
-            className="flex gap-2 items-center text-red-400 hover:text-red-400/80 cursor-pointer "
+            className="flex cursor-pointer items-center gap-2 text-red-400 hover:text-red-400/80 "
             href={`/dashboard/${params.serverId}/modules`}
           >
             <LayoutPanelLeft />

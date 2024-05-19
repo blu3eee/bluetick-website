@@ -50,16 +50,16 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
       <DialogTrigger>
         <Button>Add response</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[1024px] h-3/4">
+      <DialogContent className="h-3/4 max-w-[1024px]">
         <DialogHeader>
           <DialogTitle>Add new response</DialogTitle>
           <DialogDescription>
             Add a new auto-response for your guild
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-2 flex w-full overflow-y-auto">
+        <div className="flex flex w-full flex-col gap-2 overflow-y-auto">
           <div className="flex w-full gap-2">
-            <div className="w-full bg-secondary rounded-lg px-2 py-3 flex flex-col gap-2">
+            <div className="flex w-full flex-col gap-2 rounded-lg bg-secondary px-2 py-3">
               <Label htmlFor="trigger">Trigger</Label>
               <Input
                 id="trigger"
@@ -71,7 +71,7 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
                 }}
               />
             </div>
-            <div className="w-full bg-secondary rounded-lg px-2 py-3 flex flex-col gap-2">
+            <div className="flex w-full flex-col gap-2 rounded-lg bg-secondary px-2 py-3">
               <Label htmlFor="message-type">Message Type</Label>
               <div className="px-2">
                 <MessageTypesRadioGroup
@@ -86,7 +86,7 @@ export const AddResponseDialog: React.FC<AddResponseDialogProps> = ({
               </div>
             </div>
           </div>
-          <div className="w-full bg-secondary rounded-lg px-4 py-3 flex flex-col gap-2">
+          <div className="flex w-full flex-col gap-2 rounded-lg bg-secondary px-4 py-3">
             <MessageForm
               type={response.type ?? "Message"}
               initialMessage={response}

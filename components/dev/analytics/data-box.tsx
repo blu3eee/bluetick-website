@@ -21,7 +21,7 @@ const DataBox: React.FC<{
     return (
       <div>
         Loading data for {label}...
-        <Skeleton className="w-full h-12" />
+        <Skeleton className="h-12 w-full" />
       </div>
     );
 
@@ -30,10 +30,10 @@ const DataBox: React.FC<{
   return (
     <div
       className={
-        "flex flex-col w-full max-h-[300px] md:max-h-[400px] border rounded-lg"
+        "flex max-h-[300px] w-full flex-col rounded-lg border md:max-h-[400px]"
       }
     >
-      <div className="px-4 py-6 border-b flex items-center justify-between">
+      <div className="flex items-center justify-between border-b px-4 py-6">
         <div className="flex items-center gap-2">
           <Label className="font-semibold">{label}</Label>
         </div>
@@ -44,7 +44,7 @@ const DataBox: React.FC<{
           {dataResponse.data.map((data, i) => (
             <div
               key={i}
-              className=" rounded-lg px-4 py-1 flex items-center justify-between text-sm gap-8"
+              className=" flex items-center justify-between gap-8 rounded-lg px-4 py-1 text-sm"
             >
               <span className="truncate">
                 {displayDataKey(category, data.key)}

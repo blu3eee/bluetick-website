@@ -48,14 +48,14 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
   }, [ticketSetting]);
 
   if (isLoading) {
-    <div className="flex flex-col w-full gap-4">
-      <Skeleton className="w-full h-12" />
-      <Skeleton className="w-full h-12" />
+    <div className="flex w-full flex-col gap-4">
+      <Skeleton className="h-12 w-full" />
+      <Skeleton className="h-12 w-full" />
     </div>;
   }
 
   if (!ticketSetting) {
-    <div className="flex flex-col w-full gap-4">
+    <div className="flex w-full flex-col gap-4">
       error fetching ticket setting
     </div>;
   }
@@ -91,12 +91,12 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-lg bg-secondary p-4 flex gap-4 flex-col max-w-[1024px]">
-        <div className="flex gap-4 md:gap-6 lg:gap-8 flex-wrap">
-          <div className="flex flex-col gap-4 w-fit">
+      <div className="flex max-w-[1024px] flex-col gap-4 rounded-lg bg-secondary p-4">
+        <div className="flex flex-wrap gap-4 md:gap-6 lg:gap-8">
+          <div className="flex w-fit flex-col gap-4">
             <Label
               htmlFor="threadTicket"
-              className="text-xs font-bold text-gray-500 uppercase"
+              className="text-xs font-bold uppercase text-gray-500"
             >
               THREAD MODE
             </Label>
@@ -115,10 +115,10 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
               <span>{setting.threadTicket ? "Yes" : "No"}</span>
             </div>
           </div>
-          <div className="flex flex-col gap-2 w-fit">
+          <div className="flex w-fit flex-col gap-2">
             <Label
               htmlFor="per-user-limit"
-              className="text-xs font-bold text-gray-500 uppercase"
+              className="text-xs font-bold uppercase text-gray-500"
             >
               PER USER SIMULTANEOUS TICKET LIMIT
             </Label>
@@ -133,10 +133,10 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
               className="w-fit min-w-[100px]"
             />
           </div>
-          <div className="flex flex-col gap-4 w-fit">
+          <div className="flex w-fit flex-col gap-4">
             <Label
               htmlFor="allowUserToCloseTickets"
-              className="text-xs font-bold text-gray-500 uppercase"
+              className="text-xs font-bold uppercase text-gray-500"
             >
               ALLOW USER TO CLOSE TICKETS
             </Label>
@@ -155,10 +155,10 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
               <span>{setting.allowUserToCloseTickets ? "Yes" : "No"}</span>
             </div>
           </div>
-          <div className="flex flex-col gap-4 w-fit">
+          <div className="flex w-fit flex-col gap-4">
             <Label
               htmlFor="ticketCloseConfirmation"
-              className="text-xs font-bold text-gray-500 uppercase"
+              className="text-xs font-bold uppercase text-gray-500"
             >
               TICKET CLOSE CONFIRMATION
             </Label>
@@ -179,15 +179,15 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
           </div>
           {isLoadingChannels ? (
             <>
-              <Skeleton className="w-full h-12" />
-              <Skeleton className="w-full h-12" />
+              <Skeleton className="h-12 w-full" />
+              <Skeleton className="h-12 w-full" />
             </>
           ) : (
             <>
-              <div className="w-fit flex flex-col gap-2">
+              <div className="flex w-fit flex-col gap-2">
                 <Label
                   htmlFor="ticketNotificationChannel"
-                  className="text-xs font-bold text-gray-500 uppercase"
+                  className="text-xs font-bold uppercase text-gray-500"
                 >
                   Ticket Notification Channel
                 </Label>
@@ -204,10 +204,10 @@ const GeneralSettings: React.FC<ServerIdProps> = ({ serverId }) => {
                   />
                 </div>
               </div>
-              <div className="w-fit flex flex-col gap-2">
+              <div className="flex w-fit flex-col gap-2">
                 <Label
                   htmlFor="transcriptsChannel"
-                  className="text-xs font-bold text-gray-500 uppercase"
+                  className="text-xs font-bold uppercase text-gray-500"
                 >
                   Transcript Channel
                 </Label>

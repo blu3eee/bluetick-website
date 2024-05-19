@@ -28,43 +28,43 @@ const GuildInfo = (): JSX.Element => {
   if (isLoading || !discordGuild)
     return (
       <div className="w-full">
-        <Skeleton className="rounded-full w-24 h-24" />
-        <div className="flex flex-wrap w-full gap-12 mt-8">
-          <Skeleton className="rounded-lg w-36 h-8" />
-          <Skeleton className="rounded-lg w-36 h-8" />
-          <Skeleton className="rounded-lg w-36 h-8" />
-          <Skeleton className="rounded-lg w-36 h-8" />
-          <Skeleton className="rounded-lg w-36 h-8" />
-          <Skeleton className="rounded-lg w-36 h-8" />
+        <Skeleton className="h-24 w-24 rounded-full" />
+        <div className="mt-8 flex w-full flex-wrap gap-12">
+          <Skeleton className="h-8 w-36 rounded-lg" />
+          <Skeleton className="h-8 w-36 rounded-lg" />
+          <Skeleton className="h-8 w-36 rounded-lg" />
+          <Skeleton className="h-8 w-36 rounded-lg" />
+          <Skeleton className="h-8 w-36 rounded-lg" />
+          <Skeleton className="h-8 w-36 rounded-lg" />
         </div>
       </div>
     );
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg border px-6 py-4 bg-secondary w-full max-w-[1024px]">
-      <div className="flex gap-4 md:gap-8 items-center w-full">
+    <div className="flex w-full max-w-[1024px] flex-col gap-4 rounded-lg border bg-secondary px-6 py-4">
+      <div className="flex w-full items-center gap-4 md:gap-8">
         <ImageWithFallback
-          className="rounded-lg w-[100px] md:w-[150px] h-auto"
+          className="h-auto w-[100px] rounded-lg md:w-[150px]"
           src={getGuildIconURL(discordGuild)}
           alt="guild avt"
           width={150}
           height={150}
           fallbackSrc="/discord/discord.png"
         />
-        <div className="flex flex-col gap-1 w-full">
+        <div className="flex w-full flex-col gap-1">
           <span
             className={`text-2xl font-medium ${rubikFont.className} line-clamp-1`}
           >
             {discordGuild.name}
           </span>
-          <div className="flex items-start md:items-center justify-between w-full flex-col md:flex-row">
-            <span className="text-sm font-semibold text-gray-500 line-clamp-1">
+          <div className="flex w-full flex-col items-start justify-between md:flex-row md:items-center">
+            <span className="line-clamp-1 text-sm font-semibold text-gray-500">
               ID: {discordGuild.id}
             </span>
             <Button
               variant={"ghost"}
               size={"sm"}
-              className="w-fit text-xs gap-2 font-semibold text-red-400 hover:text-red-400 focus:text-red-400"
+              className="w-fit gap-2 text-xs font-semibold text-red-400 hover:text-red-400 focus:text-red-400"
               onClick={() => {
                 copyToClipboard();
                 toast.info("Copied server ID");
@@ -75,7 +75,7 @@ const GuildInfo = (): JSX.Element => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 items-center w-full gap-4">
+      <div className="grid w-full grid-cols-2 items-center gap-4 md:grid-cols-3">
         <InfoItem
           label="Members"
           value={discordGuild.approximate_member_count}

@@ -81,17 +81,17 @@ const GuildConfig = (): JSX.Element => {
 
   if (isLoading || !config) {
     return (
-      <div className="w-full flex flex-col items-center h-36 gap-4">
-        <Skeleton className="w-full h-8" />
-        <Skeleton className="w-full h-8" />
+      <div className="flex h-36 w-full flex-col items-center gap-4">
+        <Skeleton className="h-8 w-full" />
+        <Skeleton className="h-8 w-full" />
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg border px-6 py-4 bg-secondary w-full">
-      <Label className="uppercase font-bold">Settings</Label>
-      <div className="flex flex-col md:flex-row gap-2 items-start md:items:center w-full">
+    <div className="flex w-full flex-col gap-2 rounded-lg border bg-secondary px-6 py-4">
+      <Label className="font-bold uppercase">Settings</Label>
+      <div className="md:items:center flex w-full flex-col items-start gap-2 md:flex-row">
         <div className="w-full">
           <Label>Command Prefix</Label>
           <Input
@@ -110,14 +110,14 @@ const GuildConfig = (): JSX.Element => {
             </Button>
           )}
         </div>
-        <div className="w-full flex flex-col gap-1">
+        <div className="flex w-full flex-col gap-1">
           <Label>Locale</Label>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant={"outline"}
                 size="sm"
-                className="relative h-10 mt-1 p-4 hover:bg-primary/50 text-start flex items-center justify-between w-fit gap-4"
+                className="relative mt-1 flex h-10 w-fit items-center justify-between gap-4 p-4 text-start hover:bg-primary/50"
               >
                 {ISO6391.getNativeName(locale)}
                 <Icons.select size={16} />

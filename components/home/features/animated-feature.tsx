@@ -25,7 +25,7 @@ const AnimatedElement: React.FC<{
     initial="hidden"
     whileInView="visible"
     id={id}
-    className={cn("max-w-[1400px] mx-auto", className)}
+    className={cn("mx-auto max-w-[1400px]", className)}
     {...animationConfig}
   >
     {children}

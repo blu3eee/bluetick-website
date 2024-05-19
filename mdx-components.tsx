@@ -109,7 +109,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         target="_blank"
         rel="noopener noreferrer"
         className={cn(
-          "font-medium underline underline-offset-4 text-blue-500",
+          "font-medium text-blue-500 underline underline-offset-4",
           className,
         )}
         {...props}

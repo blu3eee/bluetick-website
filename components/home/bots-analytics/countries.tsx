@@ -22,7 +22,7 @@ const BotCountries = (): JSX.Element => {
   if (isLoading)
     return (
       <div>
-        <Skeleton className="w-full h-12" />
+        <Skeleton className="h-12 w-full" />
       </div>
     );
 
@@ -34,17 +34,17 @@ const BotCountries = (): JSX.Element => {
   const secondRowData = dataResponse.data.slice(3);
 
   return (
-    <div className="flex flex-col items-center justify-center py-4 bg-secondary/70 px-2">
+    <div className="flex flex-col items-center justify-center bg-secondary/70 px-2 py-4">
       <span
         className={cn(
-          "text-lg uppercase font-bold text-info text-center",
+          "text-center text-lg font-bold uppercase text-info",
           poppinsFont.className,
         )}
       >
         SPECIAL THANKS TO OUR USERS FROM ALL AROUND THE WORLD
       </span>
       {/* First row */}
-      <div className="flex flex-wrap gap-2 items-center justify-center">
+      <div className="flex flex-wrap items-center justify-center gap-2">
         {firstRowData.map((data) => (
           <span key={data.key} className="text-4xl">
             {flag(data.key) ?? data.key}
@@ -52,7 +52,7 @@ const BotCountries = (): JSX.Element => {
         ))}
       </div>
       {/* Second row */}
-      <div className="flex flex-wrap gap-2 items-center justify-center">
+      <div className="flex flex-wrap items-center justify-center gap-2">
         {secondRowData.map((data) => (
           <span key={data.key} className="text-4xl">
             {flag(data.key) ?? data.key}

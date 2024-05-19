@@ -17,7 +17,7 @@ const MessageTypesRadioGroup: React.FC<MessageTypesRadioGroupProps> = ({
         onValueChange(value);
       }}
       defaultValue={initType}
-      className="flex flex-wrap gap-4 mt-4 justify-between"
+      className="mt-4 flex flex-wrap justify-between gap-4"
     >
       <div className="flex items-center space-x-2">
         <RadioGroupItem

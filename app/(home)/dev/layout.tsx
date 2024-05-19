@@ -29,7 +29,7 @@ const Layout = ({ children }: Props): JSX.Element => {
   );
 
   if (status === "loading" || !session) {
-    return <Skeleton className="w-full h-36" />;
+    return <Skeleton className="h-36 w-full" />;
   }
   return (
     <BluetickProvider>

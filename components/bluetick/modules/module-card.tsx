@@ -17,7 +17,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
   const { config, isLoading, updateConfig } = useContext(GuildContext);
 
   if (isLoading || !config)
-    return <Skeleton className="w-60 h-36 rounded-lg" />;
+    return <Skeleton className="h-36 w-60 rounded-lg" />;
 
   const isModuleEnabled = (): boolean =>
     (config.moduleFlags & props.flag) !== 0;
@@ -39,10 +39,10 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
   };
 
   return (
-    <div className="flex flex-col gap-2 bg-secondary p-4 rounded-lg justify-between border">
+    <div className="flex flex-col justify-between gap-2 rounded-lg border bg-secondary p-4">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row flex-wrap items-center justify-between gap-2">
-          <div className="text-lg font-semibold flex-grow">{props.name}</div>
+          <div className="flex-grow text-lg font-semibold">{props.name}</div>
           <Switch
             size="xs"
             checked={isModuleEnabled()}
@@ -55,14 +55,14 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
             className="flex-none"
           />
         </div>
-        <div className="text-gray-500 text-sm line-clamp-3">
+        <div className="line-clamp-3 text-sm text-gray-500">
           {props.description}
         </div>
       </div>
-      <div className="flex flex-wrap items-center gap-1 justify-end">
+      <div className="flex flex-wrap items-center justify-end gap-1">
         <a
           href={`https://docs.bluetick.khainguyen.dev/en/dashboard/${props.navigateTo}`}
-          className="bg-warning text-warning-foreground hover:bg-warning-light focus:bg-warning-light/80 px-2 py-1 w-fit rounded-lg border text-sm self-end flex gap-1 items-center font-medium"
+          className="flex w-fit items-center gap-1 self-end rounded-lg border bg-warning px-2 py-1 text-sm font-medium text-warning-foreground hover:bg-warning-light focus:bg-warning-light/80"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -71,7 +71,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
         </a>
         <Link
           href={`/dashboard/${config.guild.guildID}/modules/${props.navigateTo}`}
-          className="bg-info text-info-foreground hover:bg-info-light focus:bg-info-light/80 px-2 py-1 w-fit rounded-lg border text-sm self-end flex items-center gap-1 font-medium"
+          className="flex w-fit items-center gap-1 self-end rounded-lg border bg-info px-2 py-1 text-sm font-medium text-info-foreground hover:bg-info-light focus:bg-info-light/80"
         >
           <Icons.settings size={16} />
           Settings

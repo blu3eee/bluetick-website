@@ -124,13 +124,13 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="bg-secondary rounded-lg p-4 flex flex-col gap-4">
-        <Label className="uppercase font-semibold">Log Channel</Label>
-        <span className="text-foreground/50 text-sm">
+      <div className="flex flex-col gap-4 rounded-lg bg-secondary p-4">
+        <Label className="font-semibold uppercase">Log Channel</Label>
+        <span className="text-sm text-foreground/50">
           Where the events selected below will be logged.
         </span>
         {isLoadingChannels || !channels ? (
-          <Skeleton className="w-full h-10" />
+          <Skeleton className="h-10 w-full" />
         ) : (
           <ChannelSelect
             options={channels.textChannels}
@@ -141,8 +141,8 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
           />
         )}
       </div>
-      <div className="bg-secondary rounded-lg p-4 flex flex-col gap-4">
-        <span className="text-foreground/80 text-sm">
+      <div className="flex flex-col gap-4 rounded-lg bg-secondary p-4">
+        <span className="text-sm text-foreground/80">
           Choose which events will be logged.
         </span>
         {logsCollection.map((category, i) => (
@@ -151,7 +151,7 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
             label={`${category.category} Events`}
             defaultOpen={true}
           >
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 gap-x-2">
+            <div className="grid grid-cols-2 gap-x-2 gap-y-2 md:grid-cols-3 lg:grid-cols-4">
               {category.events.map((e) => {
                 const eventName = e.event
                   .split("_")
@@ -165,7 +165,7 @@ const OneLogChannel: React.FC<ServerIdProps> = ({ serverId }) => {
                 return (
                   <div
                     key={index}
-                    className="text-foreground/50 flex items-center gap-2"
+                    className="flex items-center gap-2 text-foreground/50"
                   >
                     <Checkbox
                       id={`${category.category}_${eventName}`}

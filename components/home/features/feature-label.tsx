@@ -7,7 +7,7 @@ const FeatureLabel: React.FC<{ text: string }> = ({ text }) => {
   return (
     <Label
       className={cn(
-        "text-info text-3xl font-semibold text-center",
+        "text-center text-3xl font-semibold text-info",
         poppinsFont.className,
       )}
     >

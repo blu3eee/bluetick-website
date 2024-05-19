@@ -85,19 +85,19 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{trigger ?? "Edit"}</DialogTrigger>
-      <DialogContent className="max-w-[1024px] h-3/4 overflow-y-auto">
+      <DialogContent className="h-3/4 max-w-[1024px] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             Edit ticket panel: (id){" "}
             <span className="text-blue-500">{panel.id}</span>
           </DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-2 flex w-full h-fit justify-start">
+        <div className="flex flex h-fit w-full flex-col justify-start gap-2">
           <CollapsibleFields label="Ticket properties" defaultOpen={true}>
             <div className="flex flex-col gap-4 pl-6">
-              <div className="flex flex-col lg:flex-row gap-4">
-                <div className="flex flex-col gap-2 w-fit">
-                  <Label className="uppercase font-semibold text-gray-500 text-xs">
+              <div className="flex flex-col gap-4 lg:flex-row">
+                <div className="flex w-fit flex-col gap-2">
+                  <Label className="text-xs font-semibold uppercase text-gray-500">
                     Ticket Panel Channel
                   </Label>
                   {!isLoadingChannels && channels ? (
@@ -112,11 +112,11 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
                       }}
                     />
                   ) : (
-                    <Skeleton className="w-full h-10" />
+                    <Skeleton className="h-10 w-full" />
                   )}
                 </div>
-                <div className="flex flex-col gap-2 w-fit">
-                  <Label className="uppercase font-semibold text-gray-500 text-xs">
+                <div className="flex w-fit flex-col gap-2">
+                  <Label className="text-xs font-semibold uppercase text-gray-500">
                     Ticket Category
                   </Label>
                   {!isLoadingChannels && channels ? (
@@ -131,15 +131,15 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
                       }}
                     />
                   ) : (
-                    <Skeleton className="w-full h-10" />
+                    <Skeleton className="h-10 w-full" />
                   )}
                 </div>
-                <div className="flex flex-col gap-2 w-fit">
-                  <Label className="uppercase font-semibold text-gray-500 text-xs">
+                <div className="flex w-fit flex-col gap-2">
+                  <Label className="text-xs font-semibold uppercase text-gray-500">
                     Support Team
                   </Label>
                   {isLoadingTeams || !supportTeams ? (
-                    <Skeleton className="w-full h-10" />
+                    <Skeleton className="h-10 w-full" />
                   ) : (
                     <SupportTeamSelect
                       options={supportTeams}
@@ -154,12 +154,12 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
                   )}
                 </div>
 
-                <div className="flex flex-col gap-2 w-full md:w-fit md:min-w-[250px]">
-                  <Label className="uppercase font-semibold text-gray-500 text-xs">
+                <div className="flex w-full flex-col gap-2 md:w-fit md:min-w-[250px]">
+                  <Label className="text-xs font-semibold uppercase text-gray-500">
                     Mention on open
                   </Label>
                   {isLoading || !discordGuild ? (
-                    <Skeleton className="w-full h-10" />
+                    <Skeleton className="h-10 w-full" />
                   ) : (
                     <SelectMentions
                       roles={discordGuild.roles ?? []}
@@ -176,7 +176,7 @@ const EditPanelDialog: React.FC<EditPanelDialogProps> = ({
               </div>
               <div className="flex flex-wrap gap-4">
                 <div className="flex flex-col gap-2">
-                  <Label className="uppercase font-semibold text-gray-500 text-xs">
+                  <Label className="text-xs font-semibold uppercase text-gray-500">
                     Naming scheme
                   </Label>
                   <NamingScheme

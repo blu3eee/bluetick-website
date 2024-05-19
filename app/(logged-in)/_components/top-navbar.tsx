@@ -41,13 +41,13 @@ const TopNavBar: React.FC<TopNavBarProps> = ({ id, items }) => {
   const isDesktop = useMediaQuery("(min-width: 640px)");
 
   return (
-    <nav className="sticky top-0 flex border-b bg-secondary text-sm items-center justify-between px-6 md:px-10 text-foreground/70 font-medium gap-4">
+    <nav className="sticky top-0 flex items-center justify-between gap-4 border-b bg-secondary px-6 text-sm font-medium text-foreground/70 md:px-10">
       <ol
         style={{
           transform: isDesktop ? `translateX(${navX}px)` : ``,
         }}
         className={cn(
-          "relative flex gap-4 h-fit overflow-x-scroll no-scrollbar",
+          "no-scrollbar relative flex h-fit gap-4 overflow-x-scroll",
         )}
       >
         {items.map(({ title, href, condition, disabled }, index) => (
@@ -59,9 +59,9 @@ const TopNavBar: React.FC<TopNavBarProps> = ({ id, items }) => {
               }
             }}
             className={cn(
-              "h-full relative transition-all duration-300 ease-in-out cursor-pointer",
+              "relative h-full cursor-pointer transition-all duration-300 ease-in-out",
               disabled
-                ? "text-foreground/30 cursor-not-allowed"
+                ? "cursor-not-allowed text-foreground/30"
                 : "hover:text-foreground/90",
               (condition && condition === "startsWith"
                 ? pathname.startsWith(href)
@@ -79,7 +79,7 @@ const TopNavBar: React.FC<TopNavBarProps> = ({ id, items }) => {
                 layoutId={`nav-border-bar${id}`}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="absolute left-0 right-0 bottom-0 rounded-md bg-foreground h-[2px]"
+                className="absolute bottom-0 left-0 right-0 h-[2px] rounded-md bg-foreground"
               />
             )}
           </div>
@@ -92,14 +92,14 @@ const TopNavBar: React.FC<TopNavBarProps> = ({ id, items }) => {
           target="_blank"
           rel="noreferrer"
           className={cn(
-            "flex-none  h-full relative transition-all duration-300 ease-in-out hover:text-info cursor-pointer flex items-center gap-1 text-foreground",
+            "relative  flex h-full flex-none cursor-pointer items-center gap-1 text-foreground transition-all duration-300 ease-in-out hover:text-info",
           )}
           style={{
             padding: `${itemPaddingTop}px 0px ${itemPaddingBottom}px 0px`,
           }}
         >
           Invite bot <ExternalLink size={16} />
-          <div className="absolute left-0 right-0 bottom-0 rounded-md bg-info h-[2px]" />
+          <div className="absolute bottom-0 left-0 right-0 h-[2px] rounded-md bg-info" />
         </a>
       )}
     </nav>

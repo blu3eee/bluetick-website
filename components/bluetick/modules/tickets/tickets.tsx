@@ -57,14 +57,14 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
 
   if (isLoading || !tickets) {
     return (
-      <div className="flex flex-col gap-4 w-full">
-        <span className={cn("text-lg font bold", rubikFont.className)}>
+      <div className="flex w-full flex-col gap-4">
+        <span className={cn("font bold text-lg", rubikFont.className)}>
           Loading tickets...
         </span>
         {[0, 1, 2, 3, 4].map((i) => (
           <Skeleton
             key={i}
-            className={cn("w-full h-12", i % 2 === 0 ?? `w-3/4`)}
+            className={cn("h-12 w-full", i % 2 === 0 ?? `w-3/4`)}
           />
         ))}
       </div>
@@ -130,18 +130,18 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="bg-secondary p-4 rounded-lg grid grid-cols-3 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-3 gap-4 rounded-lg bg-secondary p-4 md:grid-cols-4">
         {info.map((field, i) => (
           <div key={i} className="flex items-center gap-2 text-sm">
             <Label className="uppercase text-foreground/70">
               {field.label}:
             </Label>
-            <span className="text-blue-500 font-semibold">{field.value}</span>
+            <span className="font-semibold text-blue-500">{field.value}</span>
           </div>
         ))}
       </div>
-      <div className="bg-secondary p-2 rounded-lg flex flex-col gap-2">
-        <Label className="uppercase text-red-500 font-bold text-lg">
+      <div className="flex flex-col gap-2 rounded-lg bg-secondary p-2">
+        <Label className="text-lg font-bold uppercase text-red-500">
           TICKETS
         </Label>
         <Label className="uppercase text-foreground/70">Filters</Label>
@@ -152,7 +152,7 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
               onValueChange={handleRadioValueChange}
               // Removed defaultValue to rely on filterStatus for controlling the selection
               value={filterStatus} // Assuming RadioGroup supports controlled value
-              className="flex flex-wrap gap-4 w-fit "
+              className="flex w-fit flex-wrap gap-4 "
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem
@@ -221,19 +221,19 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
                   <TableCell className="font-medium">{ticket.id}</TableCell>
                   <TableCell>{ticket.userID}</TableCell>
                   <TableCell>{ticket.status}</TableCell>
-                  <TableCell className="flex justify-end items-center gap-2">
+                  <TableCell className="flex items-center justify-end gap-2">
                     {ticket.status === TICKET_STATUS.CLOSED &&
                       ticket.transcriptMessageID && (
                         <a
                           target="_blank"
                           rel="noreferrer"
                           href={`/transcripts/${ticket.id}`}
-                          className="bg-blue-500 text-white rounded-md hover:bg-blue-400"
+                          className="rounded-md bg-blue-500 text-white hover:bg-blue-400"
                         >
                           <Button
                             size={"sm"}
                             variant={"blue"}
-                            className="w-fit p-1 h-fit"
+                            className="h-fit w-fit p-1"
                           >
                             Transcript
                           </Button>
@@ -248,7 +248,7 @@ const TicketsView: React.FC<ServerIdProps> = ({ serverId }) => {
                             handleCloseTicket(ticket.id).catch((e) => {});
                           }}
                           disabled={closingTicketId === ticket.id} // Disable button for the ticket being processed
-                          className="w-fit p-1  h-fit"
+                          className="h-fit w-fit  p-1"
                         >
                           {closingTicketId === ticket.id ? (
                             "Closing..."

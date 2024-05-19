@@ -46,7 +46,7 @@ const SupportTeamSelect: React.FC<SupportTeamSelectProps> = ({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="justify-between w-full"
+          className="w-full justify-between"
         >
           {value
             ? options.find((c) => `${c.id}_${c.name.toLowerCase()}` === value)
@@ -62,7 +62,7 @@ const SupportTeamSelect: React.FC<SupportTeamSelectProps> = ({
             className="h-9 w-full"
           />
           <CommandEmpty>No team found.</CommandEmpty>
-          <CommandGroup className="max-h-[300px] overflow-y-auto w-full">
+          <CommandGroup className="max-h-[300px] w-full overflow-y-auto">
             {options.map((channel) => (
               <CommandItem
                 key={channel.id}

@@ -84,9 +84,9 @@ const CreateMultiPanelForm: React.FC<CreateMultiPanelProps> = ({
           disabledEmbedFields={["footer"]}
         />
       </div>
-      <div className="flex flex-col md:flex-row gap-2 items-start md:items:center ">
-        <div className="flex flex-col gap-2 w-fit">
-          <Label className="uppercase font-semibold text-gray-500 text-xs">
+      <div className="md:items:center flex flex-col items-start gap-2 md:flex-row ">
+        <div className="flex w-fit flex-col gap-2">
+          <Label className="text-xs font-semibold uppercase text-gray-500">
             Panel Channel
           </Label>
           {!isLoadingChannels && channels ? (
@@ -101,11 +101,11 @@ const CreateMultiPanelForm: React.FC<CreateMultiPanelProps> = ({
               }}
             />
           ) : (
-            <Skeleton className="w-full h-10" />
+            <Skeleton className="h-10 w-full" />
           )}
         </div>
-        <div className="flex flex-col gap-2 w-full">
-          <Label className="uppercase font-semibold text-gray-500 text-xs">
+        <div className="flex w-full flex-col gap-2">
+          <Label className="text-xs font-semibold uppercase text-gray-500">
             Selected Panels
           </Label>
           {!isLoadingPanels && panels ? (
@@ -120,7 +120,7 @@ const CreateMultiPanelForm: React.FC<CreateMultiPanelProps> = ({
               }}
             />
           ) : (
-            <Skeleton className="w-full h-10" />
+            <Skeleton className="h-10 w-full" />
           )}
         </div>
       </div>

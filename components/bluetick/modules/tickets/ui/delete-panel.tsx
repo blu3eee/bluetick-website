@@ -28,7 +28,7 @@ const DeletePanelDialog: React.FC<Props> = ({ panelId, trigger, onSubmit }) => {
             Confirming that you want to delete reaction panel with ID {panelId}
           </ResponsiveModalDescription>
         </ResponsiveModalHeader>
-        <div className="text-foreground text-sm font-medium ml-4 md:ml-0">
+        <div className="ml-4 text-sm font-medium text-foreground md:ml-0">
           This action will result in deleting related multi-reactions panels if:
           <div className="ml-4 text-foreground/70">
             <span>

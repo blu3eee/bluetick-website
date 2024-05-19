@@ -48,11 +48,11 @@ const CustomEmojiPicker: React.FC<CustomEmojiPickerProps> = ({
   );
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex items-center gap-2">
       {isDefault ? (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <div className="px-3 min-h-10 border rounded-md bg-background cursor-pointer items-center flex">
+            <div className="flex min-h-10 cursor-pointer items-center rounded-md border bg-background px-3">
               {emoji}
             </div>
           </PopoverTrigger>
@@ -68,12 +68,12 @@ const CustomEmojiPicker: React.FC<CustomEmojiPickerProps> = ({
       ) : (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <div className="px-3 py-1 border rounded-md bg-background cursor-pointer min-h-10 flex items-center">
+            <div className="flex min-h-10 cursor-pointer items-center rounded-md border bg-background px-3 py-1">
               <DisplayCustomEmoji id={emoji} />
             </div>
           </PopoverTrigger>
           <PopoverContent>
-            <div className="grid grid-cols-7 p-2 gap-1 rounded-lg bg-white max-h-[200px] overflow-y-auto ">
+            <div className="grid max-h-[200px] grid-cols-7 gap-1 overflow-y-auto rounded-lg bg-white p-2 ">
               {discordEmojis?.map((e) => (
                 <div
                   key={e.id}
@@ -84,7 +84,7 @@ const CustomEmojiPicker: React.FC<CustomEmojiPickerProps> = ({
                 >
                   <DisplayCustomEmoji
                     id={e.id}
-                    className="cursor-pointer hover:bg-gray-200 h-8 w-8 p-[2px] rounded-md "
+                    className="h-8 w-8 cursor-pointer rounded-md p-[2px] hover:bg-gray-200 "
                   />
                 </div>
               ))}

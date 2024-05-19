@@ -33,7 +33,7 @@ export default function Layout({
         <>
           <span
             className={cn(
-              "text-foreground/20 font-bold text-xl hidden sm:block",
+              "hidden text-xl font-bold text-foreground/20 sm:block",
               rubikFont.className,
             )}
           >
@@ -43,7 +43,7 @@ export default function Layout({
         </>
       </DashboardHeader>
       <TopNavBar items={navItems} />
-      <div className="py-4 min-h-screen">{children}</div>
+      <div className="min-h-screen py-4">{children}</div>
     </>
   );
 }

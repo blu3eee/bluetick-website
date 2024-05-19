@@ -83,17 +83,17 @@ const EditMultiPanelDialog: React.FC<EditPanelDialogProps> = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>{trigger ?? "Edit"}</DialogTrigger>
-      <DialogContent className="max-w-[1024px] h-3/4 overflow-y-auto">
+      <DialogContent className="h-3/4 max-w-[1024px] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
             Edit multi-reactions ticket panel: (id){" "}
             <span className="text-blue-500">{panel.id}</span>
           </DialogTitle>
         </DialogHeader>
-        <div className="flex flex-col gap-2 flex w-full h-fit justify-start">
-          <div className="flex flex-col md:flex-row gap-2 items-start md:items:center ">
-            <div className="flex flex-col gap-2 w-fit">
-              <Label className="uppercase font-semibold text-gray-500 text-xs">
+        <div className="flex flex h-fit w-full flex-col justify-start gap-2">
+          <div className="md:items:center flex flex-col items-start gap-2 md:flex-row ">
+            <div className="flex w-fit flex-col gap-2">
+              <Label className="text-xs font-semibold uppercase text-gray-500">
                 Panel Channel
               </Label>
               {!isLoadingChannels && channels ? (
@@ -108,11 +108,11 @@ const EditMultiPanelDialog: React.FC<EditPanelDialogProps> = ({
                   }}
                 />
               ) : (
-                <Skeleton className="w-full h-10" />
+                <Skeleton className="h-10 w-full" />
               )}
             </div>
-            <div className="flex flex-col gap-2 w-full">
-              <Label className="uppercase font-semibold text-gray-500 text-xs">
+            <div className="flex w-full flex-col gap-2">
+              <Label className="text-xs font-semibold uppercase text-gray-500">
                 Selected Panels
               </Label>
               {!isLoadingPanels && panels ? (
@@ -127,7 +127,7 @@ const EditMultiPanelDialog: React.FC<EditPanelDialogProps> = ({
                   }}
                 />
               ) : (
-                <Skeleton className="w-full h-10" />
+                <Skeleton className="h-10 w-full" />
               )}
             </div>
           </div>

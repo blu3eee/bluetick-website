@@ -145,12 +145,12 @@ const TwitchDev = (): JSX.Element => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-2 bg-secondary rounded-lg p-4">
-        <Label className="text-twitch uppercase font-semibold">
+      <div className="flex flex-col gap-2 rounded-lg bg-secondary p-4">
+        <Label className="text-twitch font-semibold uppercase">
           Stream Watchers
         </Label>
         {status === "loading" ? (
-          <Skeleton className="w-full h-12" />
+          <Skeleton className="h-12 w-full" />
         ) : status === "error" ? (
           <div>Error: {error.message}</div>
         ) : status === "idle" ? (
@@ -174,7 +174,7 @@ const TwitchDev = (): JSX.Element => {
           </div>
         )}
       </div>
-      <div className="flex flex-wrap items-center gap-2 bg-secondary rounded-lg p-4">
+      <div className="flex flex-wrap items-center gap-2 rounded-lg bg-secondary p-4">
         <Button
           size={"sm"}
           variant={"twitch"}
@@ -199,10 +199,10 @@ const TwitchDev = (): JSX.Element => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 place-items-center gap-4">
+      <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
         {foundUser && (
-          <div className="flex flex-col gap-2 bg-secondary rounded-lg p-4 max-w-[520px]">
-            <Label className="text-twitch uppercase font-semibold">
+          <div className="flex max-w-[520px] flex-col gap-2 rounded-lg bg-secondary p-4">
+            <Label className="text-twitch font-semibold uppercase">
               Twitch User
             </Label>
             <div className="flex flex-wrap items-center">
@@ -225,8 +225,8 @@ const TwitchDev = (): JSX.Element => {
           </div>
         )}
         {selected && (
-          <div className="flex flex-col gap-2 bg-secondary rounded-lg p-4 max-w-[520px]">
-            <Label className="text-twitch uppercase font-semibold">
+          <div className="flex max-w-[520px] flex-col gap-2 rounded-lg bg-secondary p-4">
+            <Label className="text-twitch font-semibold uppercase">
               Watching
             </Label>
             <div className="flex flex-wrap items-center gap-2">

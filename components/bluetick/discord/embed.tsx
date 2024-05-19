@@ -22,19 +22,19 @@ const DiscordEmbed: React.FC<DiscordEmbedProps> = ({
 }) => {
   return (
     <div
-      className="rounded-md w-fit min-w-[256px] max-w-[720px] min-h-8"
+      className="min-h-8 w-fit min-w-[256px] max-w-[720px] rounded-md"
       style={{ backgroundColor: embed.color ?? `#ffffff` }}
     >
-      <div className="bg-[#2B2D31] ml-1 px-3 py-2 rounded-tr-sm rounded-br-sm flex flex-col justify-between min-h-8">
-        <div className="flex justify-between w-full">
+      <div className="ml-1 flex min-h-8 flex-col justify-between rounded-br-sm rounded-tr-sm bg-[#2B2D31] px-3 py-2">
+        <div className="flex w-full justify-between">
           {/* left column */}
-          <div className="flex-1 flex flex-col">
+          <div className="flex flex-1 flex-col">
             {/* author */}
             {embed.author && (
-              <div className="flex gap-2 items-center">
+              <div className="flex items-center gap-2">
                 {embed.author.iconURL &&
                   isValidImageUrl(embed.author.iconURL) && (
-                    <div className="w-[25px] h-[25px]">
+                    <div className="h-[25px] w-[25px]">
                       <Image
                         src={embed.author.iconURL}
                         alt="thumbnail"
@@ -52,9 +52,9 @@ const DiscordEmbed: React.FC<DiscordEmbedProps> = ({
             {embed.title && (
               <Link
                 className={cn(
-                  "flex items-center font-bold my-1",
+                  "my-1 flex items-center font-bold",
                   embed.url
-                    ? "underline cursor-pointer hover:text-foreground/80"
+                    ? "cursor-pointer underline hover:text-foreground/80"
                     : "",
                 )}
                 href={embed.url && isValidUrl(embed.url) ? embed.url : ""}
@@ -65,7 +65,7 @@ const DiscordEmbed: React.FC<DiscordEmbedProps> = ({
 
             {/* description */}
             {embed?.description && (
-              <div className="flex my-1 text-sm flex flex-col">
+              <div className="my-1 flex flex flex-col text-sm">
                 <RenderHtmlContent
                   text={replaceIds(embed.description, users, roles, channels)}
                 />
@@ -80,27 +80,27 @@ const DiscordEmbed: React.FC<DiscordEmbedProps> = ({
                 alt="thumbnail"
                 height={100}
                 width={150}
-                className="rounded-md max-w-[72px] max-h-[72px] w-auto h-auto object-cover"
+                className="h-auto max-h-[72px] w-auto max-w-[72px] rounded-md object-cover"
               />
             </div>
           )}
         </div>
 
         {embed.imageURL && isValidImageUrl(embed.imageURL) && (
-          <div className="w-full my-1 overflow-hidden">
+          <div className="my-1 w-full overflow-hidden">
             <Image
               src={embed.imageURL}
               alt="image"
               height={250}
               width={250}
-              className="w-full h-auto rounded-md object-cover max-h-[256px] w-auto"
+              className="h-auto max-h-[256px] w-auto w-full rounded-md object-cover"
             />
           </div>
         )}
         {embed.footer?.text && (
-          <div className="flex items-center gap-2 my-1">
+          <div className="my-1 flex items-center gap-2">
             {embed.footer.iconURL && isValidImageUrl(embed.footer.iconURL) && (
-              <div className="w-[24px] h-[24px]">
+              <div className="h-[24px] w-[24px]">
                 <Image
                   src={embed.footer.iconURL}
                   alt="footer icon"

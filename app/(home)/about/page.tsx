@@ -12,7 +12,7 @@ import Content from "@/content/about.mdx";
  */
 export default function Page(): JSX.Element {
   return (
-    <div className="px-6 xs:px-8 sm:px-12 md:px-[15%] py-8">
+    <div className="xs:px-8 px-6 py-8 sm:px-12 md:px-[15%]">
       <Content />
     </div>
   );

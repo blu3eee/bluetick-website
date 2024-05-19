@@ -35,7 +35,7 @@ const ServerSelectComboBox: React.FC<Props> = ({ serverId }) => {
   if (loadingState !== "completed" || error || isLoadingGuild) {
     return (
       <div className="flex w-fit items-center gap-3">
-        <Skeleton className="w-[30px] h-[30px] rounded-full bg-secondary-foreground/10" />
+        <Skeleton className="h-[30px] w-[30px] rounded-full bg-secondary-foreground/10" />
         <Skeleton className="h-[30px] w-[100px] rounded-sm bg-secondary-foreground/10" />
       </div>
     );
@@ -55,14 +55,14 @@ const ServerSelectComboBox: React.FC<Props> = ({ serverId }) => {
           }
           height={30}
           width={30}
-          className="object-cover aspect-square rounded-full"
+          className="aspect-square rounded-full object-cover"
           alt="guild icon"
           priority
         />
         <span>{discordGuild?.name ?? "unknown"}</span>
       </Link>
       <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger className="flex items-center gap-2 font-semibold px-1 py-2 rounded-md hover:bg-foreground/10">
+        <PopoverTrigger className="flex items-center gap-2 rounded-md px-1 py-2 font-semibold hover:bg-foreground/10">
           <ChevronsUpDown size={17} className="text-foreground/70" />
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
