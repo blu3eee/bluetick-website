@@ -29,5 +29,5 @@
       "version": "detect"
     }
   },
-  "ignorePatterns": ["build/**/*"]
+  "ignorePatterns": ["build/**/*", "components/motions/**"]
 }

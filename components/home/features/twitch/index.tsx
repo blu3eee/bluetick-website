@@ -24,17 +24,17 @@ const TwitchFeature = (): JSX.Element => {
   const router = useRouter();
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 m-4">
-      <div className="w-full text-sm px-2">
+    <div className="m-4 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
+      <div className="w-full px-2 text-sm">
         <FeatureLabel text="Twitch Watcher 📺" />
-        <div className="text-foreground/70 mt-4">
+        <div className="mt-4 text-foreground/70">
           <p className="text-foreground/90">
             Twitch Watchers allows servers to follow Twitch Streamers/Users
             streams and get notifications as they go online, offline, or if
             there is any updates with the streams.
           </p>
         </div>
-        <div className="flex flex-col justify-end gap-2 mt-2">
+        <div className="mt-2 flex flex-col justify-end gap-2">
           <div className="flex gap-2">
             <AnimatedButton
               size={"sm"}
@@ -65,11 +65,11 @@ const TwitchFeature = (): JSX.Element => {
         </div>
       </div>
 
-      <div className="w-full rounded-lg bg-discord p-4 min-h-[400px] flex flex-col justify-between">
+      <div className="flex min-h-[400px] w-full flex-col justify-between rounded-lg bg-discord p-4">
         <DiscordDemo />
 
-        <div className="flex flex-col gap-1 mt-2 border-t border-discord-gray pt-1">
-          <div className="mt-1 bg-discord-gray/20 text-discord-gray rounded-lg px-3 py-2 cursor-not-allowed flex justify-between">
+        <div className="mt-2 flex flex-col gap-1 border-t border-white/50 pt-1">
+          <div className="mt-1 flex cursor-not-allowed justify-between rounded-lg bg-discord-gray-dark px-3 py-2 text-white/50">
             <div className="flex items-center gap-2 truncate">
               <PlusCircle />
               Send a message
@@ -153,10 +153,10 @@ const DiscordDemo = (): JSX.Element => {
 
   return (
     <div>
-      <div className="flex justify-between items-center gap-2">
+      <div className="flex items-center justify-between gap-2">
         <div
           className={cn(
-            "text-warning uppercase font-semibold",
+            "font-semibold uppercase text-warning",
             poppinsFont.className,
           )}
         >
@@ -164,7 +164,7 @@ const DiscordDemo = (): JSX.Element => {
         </div>
         <div
           className={
-            "rounded-md bg-discord/60 p-1 flex items-center gap-1 cursor-pointer hover:bg-discord-gray/20 bg-discord-gray/10"
+            "flex cursor-pointer items-center gap-1 rounded-md bg-discord-gray-dark px-2 py-1 text-white hover:bg-discord-gray-dark"
           }
         >
           <Hash size={16} />
@@ -173,7 +173,7 @@ const DiscordDemo = (): JSX.Element => {
       </div>
       <div className="max-h-[400px] overflow-auto">
         {isLoading || !botDetails ? (
-          <Skeleton className="w-full h-12" />
+          <Skeleton className="h-12 w-full" />
         ) : (
           <div className="flex flex-col gap-1 text-white">
             {messages.map((msg, index) => {

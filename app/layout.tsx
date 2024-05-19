@@ -24,7 +24,8 @@ const fontSans = FontSans({
 
 export const metadata: Metadata = {
   title: "Bluetick",
-  description: "All in one discord bot",
+  description:
+    "An all-in-one website offering versatile Discord bot solutions. From server moderation to ticket systems, auto-responses, welcome messages, and more, manage your Discord with ease and anticipate even greater features on the horizon.",
 };
 
 interface RootLayoutProps {
@@ -51,7 +52,7 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
           fontSans.variable,
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <NextAuthProvider>
             <BluetickProvider>
               <QueryProvider>
