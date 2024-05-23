@@ -41,7 +41,7 @@ const TopNavBar: React.FC<TopNavBarProps> = ({ id, items }) => {
   const isDesktop = useMediaQuery("(min-width: 640px)");
 
   return (
-    <nav className="sticky top-0 flex items-center justify-between gap-4 border-b bg-secondary px-6 text-sm font-medium text-foreground/70 md:px-10">
+    <nav className="sticky top-0 z-50 flex items-center justify-between gap-4 border-b bg-secondary px-6 text-sm font-medium text-foreground/70 md:px-10">
       <ol
         style={{
           transform: isDesktop ? `translateX(${navX}px)` : ``,

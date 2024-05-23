@@ -25,12 +25,12 @@ export const MutualServers = (): React.ReactNode => {
 
   if (loadingState !== "completed") {
     return (
-      <div className="flex h-full w-full flex-wrap items-center justify-center gap-4 p-8">
-        <Skeleton className="h-60 w-60 rounded-lg" />
-        <Skeleton className="h-60 w-60 rounded-lg" />
-        <Skeleton className="h-60 w-60 rounded-lg" />
-        <Skeleton className="h-60 w-60 rounded-lg" />
-        <Skeleton className="h-60 w-60 rounded-lg" />
+      <div className="grid w-full grid-cols-1 place-items-center justify-evenly gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {Array(5)
+          .fill(null)
+          .map((_, index) => (
+            <Skeleton key={index} className="h-20 w-full rounded-md" />
+          ))}
       </div>
     );
   }
@@ -68,6 +68,7 @@ const GuildCard: React.FC<GuildCardProps> = ({ guild }) => {
 
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
   const { data: session } = useSession();
+
   return (
     <div
       className="flex w-full cursor-pointer flex-col gap-2 rounded-md border bg-secondary p-3 transition-all duration-300 ease-in-out hover:border-foreground md:p-4"

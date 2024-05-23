@@ -4,25 +4,23 @@ import type { TicketDetails } from "@/types/bluetick/db/tickets";
 
 const fetchUserTickets = async (
   botID: string,
-  guildID: string,
   requestedUserID: string,
 ): Promise<TicketDetails[]> => {
   const response = await apiInstance.get(
-    `/${ROUTES.TICKETS}/${botID}/${guildID}/${requestedUserID}`,
+    `/${ROUTES.TICKETS}?botID=${botID}&userID=${requestedUserID}`,
   );
   return response.data.data;
 };
 
 export const useFetchUserTickets = (
   botID: string,
-  guildID: string,
   requestedUserID: string,
 ): UseQueryResult<TicketDetails[], Error> => {
   return useQuery<TicketDetails[], Error>(
-    ["tickets", botID, guildID, requestedUserID],
-    async () => await fetchUserTickets(botID, guildID, requestedUserID),
+    ["tickets", botID, requestedUserID],
+    async () => await fetchUserTickets(botID, requestedUserID),
     {
-      enabled: !!botID && !!guildID && !!requestedUserID, // This ensures the query only runs when botID and guildID are available
+      enabled: !!botID && !!requestedUserID, // This ensures the query only runs when botID and guildID are available
     },
   );
 };
@@ -32,7 +30,7 @@ const fetchGuildTickets = async (
   guildID: string,
 ): Promise<TicketDetails[]> => {
   const response = await apiInstance.get(
-    `/${ROUTES.TICKETS}/${botID}/${guildID}`,
+    `/${ROUTES.TICKETS}?botID=${botID}&guildID=${guildID}`,
   );
   return response.data.data;
 };
