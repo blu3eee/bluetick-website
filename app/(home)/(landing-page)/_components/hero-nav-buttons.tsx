@@ -1,10 +1,10 @@
 "use client";
 import { useSession } from "next-auth/react";
 import React from "react";
-import { Skeleton } from "../../ui/skeleton";
+import { Skeleton } from "../../../../components/ui/skeleton";
 import { useRouter } from "next/navigation";
-import { LoginButton } from "../../bluetick/auth-buttons";
-import AnimatedButton from "../../motions/animated-button";
+import { LoginButton } from "../../../../components/bluetick/auth-buttons";
+import AnimatedButton from "../../../../components/motions/animated-button";
 
 const NavButtons = (): JSX.Element => {
   const { data: session, status } = useSession();
@@ -50,7 +50,7 @@ const AddBotButton = (): JSX.Element => {
   const router = useRouter();
   return (
     <AnimatedButton
-      variant={"blue"}
+      variant={"secondary"}
       onClick={() => {
         router.push("/servers");
       }}

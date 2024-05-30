@@ -278,7 +278,7 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
       </div>
       <div className="max-h-[320px] overflow-auto rounded-lg bg-discord px-3 py-4 text-white">
         {/* category */}
-        <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#99aab5]">
+        <div className="flex items-center gap-2 text-xs font-bold uppercase">
           <ChevronDown size={14} />
           Ticket Category
         </div>
@@ -287,7 +287,7 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
             <Hash size={16} />
             ticket-panel-channel
           </div>
-          <div className="text-md ml-3 flex flex items-center items-center gap-1 font-semibold text-[#99aab5]">
+          <div className="text-md ml-3 flex items-center gap-1 font-semibold">
             <CornerDownRight size={16} />
             ticket-support-0
           </div>
@@ -304,9 +304,7 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
                 }}
                 initial="hidden"
                 animate="visible"
-                className={
-                  "text-md ml-3 flex flex items-center items-center gap-1 font-semibold text-discord-gray"
-                }
+                className={"text-md ml-3 flex items-center gap-1 font-semibold"}
               >
                 <CornerDownRight size={16} />
                 {channel.name}
@@ -326,7 +324,7 @@ const ChannelsDisplay: React.FC<ChannelsDisplayProps> = ({
                 }}
                 initial="hidden"
                 animate="visible"
-                className="text-md ml-2 flex items-center gap-1 font-semibold text-discord-gray"
+                className="text-md ml-2 flex items-center gap-1 font-semibold"
               >
                 <Hash size={16} />
                 {channel.name}

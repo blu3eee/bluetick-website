@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { poppinsFont, rubikFont } from "@/styles/fonts";
-import HeroNavButtons from "./hero-nav-buttons";
+import HeroNavButtons from "../../../app/(home)/(landing-page)/_components/hero-nav-buttons";
 import { AuroraBackground } from "@/components/motions/aurora-bg";
 import usePerformanceMeasure from "@/hooks/use-performance";
 
