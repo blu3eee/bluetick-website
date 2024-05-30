@@ -67,11 +67,18 @@ const WelcomeFeature = (): JSX.Element => {
     });
   };
 
+  const { data, status } = useSession();
+
   const lastMessageRef = React.useRef<HTMLDivElement | null>(null);
 
-  const { data, status } = useSession();
+  const [mounted, setMounted] = React.useState(false);
+
   React.useEffect(() => {
-    if (lastMessageRef.current) {
+    setMounted(true);
+  }, []);
+
+  React.useEffect(() => {
+    if (lastMessageRef.current && mounted) {
       lastMessageRef.current.scrollIntoView({
         behavior: "smooth",
         block: "nearest",

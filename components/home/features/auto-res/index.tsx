@@ -94,8 +94,15 @@ const AutoResFeature = (): JSX.Element => {
   const lastMessageRef = React.useRef<HTMLDivElement | null>(null);
 
   const { data, status } = useSession();
+
+  const [mounted, setMounted] = React.useState(false);
+
   React.useEffect(() => {
-    if (lastMessageRef.current) {
+    setMounted(true);
+  }, []);
+
+  React.useEffect(() => {
+    if (lastMessageRef.current && mounted) {
       lastMessageRef.current.scrollIntoView({
         behavior: "smooth",
         block: "nearest",
@@ -215,9 +222,9 @@ const AutoResFeature = (): JSX.Element => {
             )}
           </div>
         </div>
-        <div className="mt-2 flex flex-col gap-1 border-t border-discord-gray pt-1">
+        <div className="mt-2 flex flex-col gap-1 border-t border-white/20 pt-1">
           <div className="flex flex-col items-center justify-center gap-1">
-            <span className="text-sm font-semibold uppercase text-discord-gray">
+            <span className="text-sm font-semibold uppercase text-white">
               send a trigger!
             </span>
             <div className="flex flex-wrap gap-1">
