@@ -34,7 +34,7 @@ const FeaturesDemo = (): JSX.Element => {
   return (
     <section className="relative flex w-full flex-col gap-4 px-2 py-4 sm:px-4 md:gap-8 md:px-6 lg:gap-12 lg:px-12 xl:gap-24 xl:px-24">
       <motion.div
-        className={"fixed left-20 top-40 -z-50 text-gray-500 opacity-70"}
+        className={"fixed left-20 top-[50dvh] -z-50 text-gray-500 opacity-70"}
       >
         <MoonSvg
           width={70}
@@ -44,7 +44,7 @@ const FeaturesDemo = (): JSX.Element => {
           transition={{ repeat: Infinity, duration: 16, ease: "linear" }}
           style={{
             translateX: useParallaxSpring(300),
-            translateY: useParallaxSpring(300),
+            translateY: useParallaxSpring(100),
           }}
         />
       </motion.div>

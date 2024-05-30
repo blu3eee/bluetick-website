@@ -91,7 +91,7 @@ const NewHeroSection = (): React.ReactNode => {
           variants={cloudVariants({ duration: 70, scale: 0.8 })}
           className="absolute right-0 top-20 text-white/90"
           style={{
-            translateY: useParallaxSpring(800),
+            translateY: useParallaxSpring(1400),
           }}
         />
         <motion.div
@@ -127,7 +127,7 @@ const NewHeroSection = (): React.ReactNode => {
           className={"absolute bottom-0 left-10 text-blue-200"}
           transition={{ delay: 1, duration: 1 }}
           style={{
-            translateY: useParallaxSpring(500),
+            translateY: useParallaxSpring(700),
             translateX: useParallaxSpring(-100),
           }}
         />
@@ -135,10 +135,19 @@ const NewHeroSection = (): React.ReactNode => {
           variants={cloudVariants({ duration: 55 })}
           className="absolute right-10 top-36 text-white/90"
           style={{
-            translateY: useParallaxSpring(750),
+            translateY: useParallaxSpring(1250),
           }}
         />
-
+        <MotionTriangleSvg
+          initial={{ y: "100%", scale: 3 }}
+          animate={{ y: 0, scale: 3 }}
+          className={"absolute -left-10 bottom-0 text-blue-300"}
+          transition={{ delay: 1, duration: 1 }}
+          style={{
+            translateY: useParallaxSpring(450),
+            translateX: useParallaxSpring(-50),
+          }}
+        />
         <motion.div
           className="absolute bottom-0 right-0 top-0 flex flex-col justify-center gap-3 px-8 text-right font-medium text-black"
           variants={{
@@ -199,16 +208,7 @@ const NewHeroSection = (): React.ReactNode => {
             <HeroNavButtons />
           </motion.div>
         </motion.div>
-        <MotionTriangleSvg
-          initial={{ y: "100%", scale: 3 }}
-          animate={{ y: 0, scale: 3 }}
-          className={"absolute -left-10 bottom-0 text-blue-300"}
-          transition={{ delay: 1, duration: 1 }}
-          style={{
-            translateY: useParallaxSpring(350),
-            translateX: useParallaxSpring(-50),
-          }}
-        />
+
         <MotionCloudSvg
           variants={cloudVariants({ scale: 1.2 })}
           className="absolute right-0 top-[200px] text-white"
