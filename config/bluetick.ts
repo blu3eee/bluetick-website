@@ -12,7 +12,7 @@ export const bluetickConfig: SiteConfig = {
     },
     {
       title: "Help",
-      href: "https://docs.bluetick.khainguyen.dev/en",
+      href: "https://docs-bluetick.khainguyen.dev/en",
     },
     {
       title: "Discord Support",

@@ -61,7 +61,7 @@ export const ModuleCard: React.FC<ModuleCardProps> = (props) => {
       </div>
       <div className="flex flex-wrap items-center justify-end gap-1">
         <a
-          href={`https://docs.bluetick.khainguyen.dev/en/dashboard/${props.navigateTo}`}
+          href={`https://docs-bluetick.khainguyen.dev/en/dashboard/${props.navigateTo}`}
           className="flex w-fit items-center gap-1 self-end rounded-lg border bg-warning px-2 py-1 text-sm font-medium text-warning-foreground hover:bg-warning-light focus:bg-warning-light/80"
           target="_blank"
           rel="noopener noreferrer"

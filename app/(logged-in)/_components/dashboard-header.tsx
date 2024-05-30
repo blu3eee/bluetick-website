@@ -104,7 +104,7 @@ const NavLinks = (): React.ReactNode => {
   return (
     <>
       <a
-        href="https://docs.bluetick.khainguyen.dev/en"
+        href="https://docs-bluetick.khainguyen.dev/en"
         target="_blank"
         rel="noreferrer"
         className="flex items-center gap-1 transition-all duration-300 ease-in-out hover:text-foreground"
