@@ -35,7 +35,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   return (
     <>
       <header className="flex gap-4 bg-secondary px-6 py-4 text-sm transition-all duration-1000 sm:pl-[70px]">
-        <Link href={"/"} className="fixed left-6 top-3 z-10 hidden sm:block">
+        <Link href={"/"} className="fixed left-6 top-3 z-50 hidden sm:block">
           <Icons.logo
             size={36}
             style={{
