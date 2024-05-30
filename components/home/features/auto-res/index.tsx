@@ -13,14 +13,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { poppinsFont } from "@/styles/fonts";
-import {
-  ArrowDown,
-  ArrowRight,
-  Gift,
-  PlusCircle,
-  Smile,
-  Sticker,
-} from "lucide-react";
+import { ArrowDown, Gift, PlusCircle, Smile, Sticker } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Icons } from "@/components/icons";
 
@@ -101,21 +94,25 @@ const AutoResFeature = (): JSX.Element => {
     setMounted(true);
   }, []);
 
-  React.useEffect(() => {
-    if (lastMessageRef.current && mounted) {
-      lastMessageRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "start",
-      });
-    }
-  }, [messages]);
+  React.useEffect(
+    () => {
+      if (lastMessageRef.current && mounted) {
+        lastMessageRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start",
+        });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [messages],
+  );
 
   const router = useRouter();
 
   return (
-    <div className="m-4 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
-      <div className="w-full px-2 text-sm">
+    <div className="m-4 flex flex-col gap-6 md:flex-row-reverse md:gap-10">
+      <div className="px-2 text-start text-sm md:w-1/2 md:text-end">
         <FeatureLabel text="Auto Responders ✨" />
         <div className="mt-4 text-foreground/70">
           <p className="text-foreground/90">
@@ -137,7 +134,11 @@ const AutoResFeature = (): JSX.Element => {
             </div>
           </div>
         </div>
-        <div className="mt-2 flex justify-end gap-2">
+        <div className="mt-2 flex justify-start gap-2">
+          <Button size={"sm"} variant={"warning"} className="gap-2" disabled>
+            <ArrowDown className="rotate-0 md:rotate-90" size={16} />
+            Send a message
+          </Button>
           <AnimatedButton
             size={"sm"}
             variant={"info"}
@@ -157,15 +158,10 @@ const AutoResFeature = (): JSX.Element => {
           >
             Set this up
           </AnimatedButton>
-          <Button size={"sm"} variant={"warning"} className="gap-2" disabled>
-            Send a message
-            <ArrowRight className="hidden md:block" size={16} />
-            <ArrowDown className="block md:hidden" size={16} />
-          </Button>
         </div>
       </div>
 
-      <div className="flex min-h-[400px] w-full flex-col justify-between rounded-lg bg-discord p-4">
+      <div className="flex min-h-[400px] w-full flex-col justify-between rounded-lg bg-discord p-4 md:w-1/2">
         <div>
           <div
             className={cn(

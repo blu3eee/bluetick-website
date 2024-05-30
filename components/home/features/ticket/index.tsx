@@ -17,7 +17,6 @@ import type { TranscriptMessage } from "@/types/bluetick/db/tickets";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
-  ArrowLeft,
   Bug,
   ChevronDown,
   CornerDownRight,
@@ -33,8 +32,8 @@ const TicketFeature = (): JSX.Element => {
   >({});
 
   return (
-    <div className="m-4 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
-      <div className="block md:hidden">
+    <div className="m-4 flex flex-col gap-6 md:flex-row-reverse md:gap-10">
+      <div className="block">
         <Description />
         <ChannelsDisplay channels={channels} />
       </div>
@@ -48,10 +47,6 @@ const TicketFeature = (): JSX.Element => {
           Ticket Panel Channel
         </div>
         <TicketDemo channels={channels} setChannels={setChannels} />
-      </div>
-      <div className="hidden md:block">
-        <Description />
-        <ChannelsDisplay channels={channels} />
       </div>
     </div>
   );
@@ -354,8 +349,7 @@ const Description = (): JSX.Element => {
           disabled
           className="w-fit gap-2"
         >
-          <ArrowLeft className="hidden md:block" />
-          <ArrowDown className="block md:hidden" />
+          <ArrowDown className="rotate-0 md:rotate-90" size={16} />
           See how it works
         </Button>
         <AnimatedButton

@@ -35,7 +35,7 @@ const TwitchFeature = (): JSX.Element => {
           </p>
         </div>
         <div className="mt-2 flex flex-col justify-end gap-2">
-          <div className="flex gap-2">
+          <div className="flex justify-end gap-2">
             <AnimatedButton
               size={"sm"}
               variant={"info"}
@@ -139,15 +139,19 @@ const DiscordDemo = (): JSX.Element => {
     setMounted(true);
   }, []);
 
-  React.useEffect(() => {
-    if (lastMessageRef.current && mounted) {
-      lastMessageRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "start",
-      });
-    }
-  }, [messages]);
+  React.useEffect(
+    () => {
+      if (lastMessageRef.current && mounted) {
+        lastMessageRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start",
+        });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [messages],
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSendTriggerMessage = (trigger: string): void => {

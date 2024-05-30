@@ -48,17 +48,20 @@ const FeaturesDemo = (): JSX.Element => {
           }}
         />
       </motion.div>
-      <AnimatedElement id="welcome-demo">
-        <WelcomeFeature />
-      </AnimatedElement>
-      <AnimatedElement id="twitch-watcher-demo">
-        <TwitchFeature />
-      </AnimatedElement>
       <AnimatedElement id="ticket-demo">
         <TicketFeature />
       </AnimatedElement>
+
+      <AnimatedElement id="welcome-demo">
+        <WelcomeFeature />
+      </AnimatedElement>
+
       <AnimatedElement id="autores-demo">
         <AutoResFeature />
+      </AnimatedElement>
+
+      <AnimatedElement id="twitch-watcher-demo">
+        <TwitchFeature />
       </AnimatedElement>
     </section>
   );

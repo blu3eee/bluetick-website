@@ -77,20 +77,24 @@ const WelcomeFeature = (): JSX.Element => {
     setMounted(true);
   }, []);
 
-  React.useEffect(() => {
-    if (lastMessageRef.current && mounted) {
-      lastMessageRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "start",
-      });
-    }
-  }, [messages]);
+  React.useEffect(
+    () => {
+      if (lastMessageRef.current && mounted) {
+        lastMessageRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start",
+        });
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [messages],
+  );
 
   const router = useRouter();
 
   return (
-    <div className="m-4 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-10">
+    <div className="m-4 flex flex-col gap-6 md:flex-row md:gap-10">
       <div className="w-full px-2  text-sm">
         <FeatureLabel text="Welcome New Members 👋" />
         <p className="mt-4  text-foreground/80">
