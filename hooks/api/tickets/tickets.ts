@@ -2,7 +2,7 @@ import { type UseQueryResult, useQuery } from "react-query";
 import { ROUTES, apiInstance } from "@/config/bluetick";
 import type { TicketDetails } from "@/types/bluetick/db/tickets";
 
-const fetchUserTickets = async (
+export const fetchUserTickets = async (
   botID: string,
   requestedUserID: string,
 ): Promise<TicketDetails[]> => {

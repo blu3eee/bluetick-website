@@ -1,15 +1,17 @@
 "use client";
+import TicketsTable from "@/components/bluetick/modules/tickets/ui/tickets-table";
 import { Callout } from "@/components/callout";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BLUETICK_BOT_ID } from "@/config/bluetick";
 import { useFetchUserTickets } from "@/hooks/api/tickets/tickets";
+
 import { useSession } from "next-auth/react";
 import React from "react";
 
 const TranscriptsDashboard = (): React.ReactNode => {
   return (
     <div className="container flex w-full flex-col gap-4 px-4">
-      <Callout>Coming soon...</Callout>
+      {/* <Callout>Coming soon...</Callout> */}
       <UserTickets />
     </div>
   );
@@ -20,10 +22,11 @@ export default TranscriptsDashboard;
 const UserTickets = (): React.ReactNode => {
   const { data: session, status } = useSession();
 
-  const { data: tickets, isLoading } = useFetchUserTickets(
-    BLUETICK_BOT_ID,
-    session?.user?.id ?? "",
-  );
+  const {
+    data: tickets,
+    isLoading,
+    refetch,
+  } = useFetchUserTickets(BLUETICK_BOT_ID, session?.user?.id ?? "");
 
   if (status === "loading" || isLoading) {
     return (
@@ -48,9 +51,13 @@ const UserTickets = (): React.ReactNode => {
 
   return (
     <div className="flex flex-col gap-2">
-      {tickets.map((ticket, index) => (
-        <div key={index}>{ticket.id}</div>
-      ))}
+      <TicketsTable
+        tickets={tickets}
+        refetchTickets={async () => {
+          refetch().catch((e) => {});
+        }}
+        fields={["guild", "status"]}
+      />
     </div>
   );
 };

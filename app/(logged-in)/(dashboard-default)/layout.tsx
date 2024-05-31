@@ -13,7 +13,8 @@ const navItems: NavItemProps[] = [
   {
     title: "Transcripts",
     href: "/transcripts",
-    disabled: true,
+    condition: "startsWith",
+    // disabled: true,
   },
 ];
 
